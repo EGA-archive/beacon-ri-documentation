@@ -192,7 +192,7 @@ const PiAutomatedDeployment = () => {
             <ul>
               <li>
                 Edit your instance’s{" "}
-                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration#editing-beacon-info">
+                <a href="https://beacon-documentation-demo.ega-archive.org/configuration#editing-beacon-info">
                   metadata
                 </a>
                 . Update the <em>/info</em> endpoint with your organization's
@@ -200,21 +200,21 @@ const PiAutomatedDeployment = () => {
               </li>
               <li>
                 Manage dataset{" "}
-                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions">
+                <a href="https://beacon-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions">
                   permissions
                 </a>
                 . Control which datasets are public or require authentication.
               </li>
               <li>
                 Enable advanced{" "}
-                <a href="https://b2ri-documentation-demo.ega-archive.org/filtering-terms#extract-terms">
+                <a href="https://beacon-documentation-demo.ega-archive.org/filtering-terms#extract-terms">
                   {" "}
                   filtering
                 </a>
               </li>
               <li>
                 Found more setting options in{" "}
-                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration">
+                <a href="https://beacon-documentation-demo.ega-archive.org/configuration">
                   Configuration
                 </a>
               </li>

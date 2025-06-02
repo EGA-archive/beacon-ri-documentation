@@ -266,7 +266,7 @@ const TestData: React.FC = () => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
+                  <a href="https://beacon-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
                     {" "}
                     Dataset model creation section
                   </a>
@@ -285,7 +285,7 @@ const TestData: React.FC = () => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
+                  <a href="https://beacon-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
                     {" "}
                     Dataset model creation section
                   </a>
@@ -304,7 +304,7 @@ const TestData: React.FC = () => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#run-model-creation">
+                  <a href="https://beacon-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#run-model-creation">
                     Run model from VCF section
                   </a>
                 </td>
@@ -322,7 +322,7 @@ const TestData: React.FC = () => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#Analysis-model-creation">
+                  <a href="https://beacon-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#Analysis-model-creation">
                     Analysis model creation section
                   </a>
                 </td>
@@ -364,7 +364,7 @@ const TestData: React.FC = () => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#genomicVariations-model-from-VCF">
+                  <a href="https://beacon-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#genomicVariations-model-from-VCF">
                     genomicVariations model from VCF creation section
                   </a>
                 </td>

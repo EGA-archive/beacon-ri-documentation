@@ -485,7 +485,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             <div>
               Before continuing with this tutorial, please make sure you've
               reviewed{" "}
-              <a href="https://b2ri-documentation-demo.ega-archive.org/create-your-beacon">
+              <a href="https://beacon-documentation-demo.ega-archive.org/create-your-beacon">
                 10 steps to create your first beacon
               </a>
               . In that tutorial you'll find important information that will
@@ -2003,7 +2003,7 @@ A total of 0 variants were skipped`}</code>
           </p>
           <p>
             To know about further settings, please visit the{" "}
-            <a href="https://b2ri-documentation-demo.ega-archive.org/configuration">
+            <a href="https://beacon-documentation-demo.ega-archive.org/configuration">
               {" "}
               Configuration section.
             </a>
@@ -2222,7 +2222,7 @@ update_datetime = ''`}</code>
                If you want to add new filtering terms manually or enhance
               ontology filtering with descendants and semantic similarities,
               please visit the{" "}
-              <a href="https://b2ri-documentation-demo.ega-archive.org/filtering-terms">
+              <a href="https://beacon-documentation-demo.ega-archive.org/filtering-terms">
                 Filtering Terms
               </a>{" "}
               section.

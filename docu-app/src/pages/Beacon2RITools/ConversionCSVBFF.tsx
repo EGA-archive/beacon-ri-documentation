@@ -449,7 +449,7 @@ labelForHG00001|labelForHG00002`
               csv folder
             </a>{" "}
             (refer to the{" "}
-            <a href="https://b2ri-documentation-demo.ega-archive.org/api-configuration">
+            <a href="https://beacon-documentation-demo.ega-archive.org/api-configuration">
               Configuration File
             </a>{" "}
             section for details).

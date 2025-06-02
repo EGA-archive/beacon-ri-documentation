@@ -12,14 +12,21 @@ const FilteringTerms = () => {
     const textToCopy: { [key: string]: string } = {
       "extract-terms": `docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`,
       "manual-filtering-terms": `db.filtering_terms.insertMany([
-  {
-    "type": "alphanumeric",
-    "id": "libraryStrategy",
-    "scope": ["runs"]
-  }
-])`,
+    {
+      "type": "alphanumeric",
+      "id": "libraryStrategy",
+      "scope": ["runs"]
+    }
+  ])`,
       "get-descendant-terms": `docker exec beaconprod python beacon/connections/mongo/get_descendants.py`,
+      "mongo-shell": `docker exec -it mongoprod mongosh`,
+      "auth-admin": `use admin
+  db.auth("root", "example")  // Default credentials if unchanged`,
+      "insert-synonyms": `db.synonyms.insertMany([
+    { "id": "DOID:9256", "synonym": "MONDO:0005575" }
+  ])`,
     };
+
     if (textToCopy[snippetId]) {
       navigator.clipboard
         .writeText(textToCopy[snippetId])
@@ -38,6 +45,7 @@ const FilteringTerms = () => {
         .catch(console.error);
     }
   };
+
   return (
     <div className="apiConfigContainer">
       <h2 className="user-path">
@@ -238,6 +246,125 @@ const FilteringTerms = () => {
               </li>
             </ul>
           </p>
+          <h2 id="manually-add-synonyms-to-ontologies">
+            Manually Add Synonyms to Ontologies{" "}
+            <span className="optional">(optional)</span>
+          </h2>
+          <p>
+            In some cases, you may want to enhance filtering capabilities by
+            adding specific synonyms for ontology terms. This enables filtering
+            using alternative ontology identifiers that are not explicitly
+            present in the dataset but are semantically equivalent (i.e.,
+            represent the same concept).
+          </p>
+          <p>
+            For example, if your dataset uses DOID:9256 but a query uses
+            MONDO:0005575, you can map these terms so the query still returns
+            the expected results.
+          </p>
+          <h2>Steps to add a synonym: </h2>
+          <ol>
+            <li>
+              Connect to the MongoDB instance running inside your Beacon
+              deployment:
+            </li>
+            <div className="codeSnippet">
+              <pre>
+                <code>docker exec -it mongoprod mongosh</code>
+                <button
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("mongo-shell")}
+                >
+                  {copySuccess["mongo-shell"] ? (
+                    "Copied!"
+                  ) : (
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  )}
+                </button>
+              </pre>
+            </div>
+
+            <li>Switch to the admin database and authenticate:</li>
+            <div className="codeSnippet">
+              <pre>
+                <code>
+                  use admin
+                  {"\n"}db.auth("root", "example") {"\n"}// Default credentials
+                  if unchanged
+                </code>
+                <button
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("auth-admin")}
+                >
+                  {copySuccess["auth-admin"] ? (
+                    "Copied!"
+                  ) : (
+                    <img
+                      className="copySymbol copySymbol-custom"
+                      src={copyIcon}
+                      alt="Copy"
+                    />
+                  )}
+                </button>
+              </pre>
+            </div>
+            <p className="note">
+              <img
+                className="note-symbol"
+                src="/note-symbol.png"
+                alt="Note symbol"
+              />
+              <div>
+                If you’ve configured authorised users in{" "}
+                <code>docker-compose.yaml</code>, use your own username and
+                password instead of "root" and "example". Using secure,
+                personalized credentials is strongly recommended for production
+                environments.
+              </div>
+            </p>
+            <li>Insert the synonym into the synonyms collection:</li>
+            <div className="codeSnippet">
+              <pre>
+                <code>
+                  {`db.synonyms.insertMany([
+  { "id": "DOID:9256", "synonym": "MONDO:0005575" }
+])`}
+                </code>
+                <button
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("insert-synonyms")}
+                >
+                  {copySuccess["insert-synonyms"] ? (
+                    "Copied!"
+                  ) : (
+                    <img
+                      className="copySymbol copySymbol-custom"
+                      src={copyIcon}
+                      alt="Copy"
+                    />
+                  )}
+                </button>
+              </pre>
+            </div>
+            <ul>
+              <li>
+                {" "}
+                <em>id</em>: the ontology term currently used in your Beacon
+                dataset.
+              </li>
+              <li>
+                {" "}
+                <em>synonym</em>: the alternative ontology term that will now
+                also be recognized as equivalent during filtering.
+              </li>
+              <li>
+                {" "}
+                You can add as many mappings as needed by extending the{" "}
+                <em>insertMany</em> array.
+              </li>
+            </ul>
+          </ol>
+
           <br></br>
           <br></br>
         </div>

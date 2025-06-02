@@ -999,7 +999,7 @@ genomicVariations.json`}</code>
           <p>
             To deploy your first beacon we’ll use the{" "}
             <a
-              href="https://b2ri-documentation-demo.ega-archive.org/pi-automated-deployment"
+              href="https://beacon-documentation-demo.ega-archive.org/pi-automated-deployment"
               target="_blank"
               rel="noopener noreferrer"
             >
