@@ -433,7 +433,7 @@ docker exec -it ri-tools python convert_csvTObff.py
 In the folder ./output_docs/use_case_RD_output/ will find two json. These files contain our run and dataset information in Beacon Friendly Format. 
 
 Conversion from Phenopacket
-Let’s save the Case1C_phenopacket.json in./beacon2-ri-tools-v2/phenopackets-to-BFF folder and then run:
+Let’s save the Case1C.json in./beacon2-ri-tools-v2/phenopackets-to-BFF folder and then run:
 
 docker exec phenopackets-to-BFF python working-w-phenopackets.py /usr/src/app/examples/case1c.json EGAD00001008392
 

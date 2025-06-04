@@ -1828,7 +1828,7 @@ verbosity=False # This variable, if True, will make the program run slower but g
           </p>
           <h6 className="sub-title">Conversion from Phenopacket</h6>
           <p>
-            Let’s save the <em>Case1C_phenopacket.json</em> in
+            Let’s save the <em>Case1C.json</em> in
             <em>./beacon2-ri-tools-v2/phenopackets-to-BFF</em> folder and then
             run:
           </p>
