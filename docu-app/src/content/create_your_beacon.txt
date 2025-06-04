@@ -1,4 +1,4 @@
-Documentationarrow rightTutorialsarrow rightCreate your Beacon
+Documentation Tutorials Create your Beacon
 10 steps to create your first beacon
 Introduction
 This guide will walk you through setting up a GA4GH Beacon v2 instance using the Production Implementation API. You’ll deploy your own Beacon, load example data in Beacon Friendly Format (BFF), and explore how to query it through the API.
@@ -8,6 +8,7 @@ As defined by the Global Alliance for Genomics and Health (GA4GH), a Beacon v2 i
 If you are here it means you are interested in creating your own beacon!
 
 
+pin
 This will be the steps you'll need to follow:
 
 Installing Beacon 2 Production Implementation API
@@ -82,13 +83,13 @@ If you are interested in using them, make sure to include the datasets model int
 
 
 3. Converting VCF to Genomic Variations Model beacon2-ri-tools-v2
-The most simple way of converting variant information into the genomicVariations model is directly reading a VCF into Beacon Friendly Format (BFF). To convert directly from a VCF, copy all the files into the files_to_read folder and follow the instructions below to correctly fill in the conf.py.
+The most simple way of converting variant information into the genomicVariations model is directly reading a VCF into Beacon Friendly Format (BFF). To convert directly from a VCF,  all the files into the files_to_read folder and follow the instructions below to correctly fill in the conf.py.
 
 
 Bear in mind that if your variant information is not in a VCF format you can also fill in the Genomic Variations CSV.
 
 4. Filling in the CSV Templates
-Now, let’s see how to fill in the CSV that will be converted by the beacon r.i tools into the models.
+Now, let’s see how to fill in the CSV that will be converted by the Beacon RI Tools into the models.
 
 Here you’ll find the CSV templates for all the models.
 

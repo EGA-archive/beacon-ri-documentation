@@ -1,5 +1,4 @@
-Documentationarrow rightTutorialsarrow rightUse Case: Rare Diseases Data
-Use Case : Inserting Rare Disease Synthetic Dataset into a beacon.
+Documentation Tutorials Example Beacon: Rare Disease Use Case
 Introduction
 For this example we are going to use the synthetic dataset, hosted at the European Genome-Phenome Archive, EGAD00001008392.
 
@@ -584,4 +583,3 @@ docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.p
 
 Acknowledgments
 We acknowledge the use of data from the RD-Connect Genome-Phenome Analysis Platform. This work was supported by the European Commission H2020 projects EJP-RD (grant number 825575) and B1MG (grant number 951724), as well as the Generalitat de Catalunya VEIS project (grant number 001-P-001647).
-

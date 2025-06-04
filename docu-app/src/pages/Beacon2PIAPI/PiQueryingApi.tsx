@@ -1177,7 +1177,6 @@ const PiQueryingAPI = () => {
     "meta": { "apiVersion": "2.0" },
     "query": {
       "requestParameters": {"alternateBases": "G", "referenceBases": "A", "referenceName": "22", "start": [16050074], "end": [16050568], "variantType": "SNP", "assemblyId": "GRCh37"},
-      "filters": [],
       "includeResultsetResponses": "HIT",
       "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
@@ -1197,7 +1196,6 @@ const PiQueryingAPI = () => {
     "meta": { "apiVersion": "2.0" },
     "query": {
       "requestParameters": {"alternateBases": "G", "referenceBases": "A", "referenceName": "22", "start": [16050074], "end": [16050568], "variantType": "SNP", "assemblyId": "GRCh37"},
-      "filters": [],
       "includeResultsetResponses": "HIT",
       "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
@@ -1212,7 +1210,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["genomic-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1228,7 +1230,6 @@ const PiQueryingAPI = () => {
   -d '{
     "meta": { "apiVersion": "2.0" },
     "query": {
-      "requestParameters": {},
       "filters": [ { "id": "NCIT:C20197", "scope": "individual" }, { "id": "NCIT:C42331", "scope": "individual" } ],
       "includeResultsetResponses": "HIT",
       "pagination": { "skip": 0, "limit": 10 },
@@ -1248,7 +1249,6 @@ const PiQueryingAPI = () => {
   -d '{
     "meta": { "apiVersion": "2.0" },
     "query": {
-      "requestParameters": {},
       "filters": [ { "id": "NCIT:C20197", "scope": "individual" }, { "id": "NCIT:C42331", "scope": "individual" } ],
       "includeResultsetResponses": "HIT",
       "pagination": { "skip": 0, "limit": 10 },
@@ -1264,7 +1264,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["curie-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1326,7 +1330,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["numerical-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1388,7 +1396,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["exact-value-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1450,7 +1462,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["exact-value-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1512,7 +1528,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["not-value-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1572,7 +1592,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["similarity-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1622,7 +1646,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["custom-filter-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1696,7 +1724,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["join-genomic-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1770,7 +1802,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["join-individuals-query"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -1787,7 +1823,6 @@ const PiQueryingAPI = () => {
   -d '{
   "meta": { "apiVersion": "2.0" },
   "query": {
-    "requestParameters": {},
     "filters": [
       { "id": "geographicOrigin", "operator": "=", "value": "%land%" }
     ],
@@ -1810,7 +1845,6 @@ const PiQueryingAPI = () => {
   -d '{
   "meta": { "apiVersion": "2.0" },
   "query": {
-    "requestParameters": {},
     "filters": [
       { "id": "geographicOrigin", "operator": "=", "value": "%land%" }
     ],
@@ -1828,7 +1862,11 @@ const PiQueryingAPI = () => {
                 {copySuccess["query-with-token"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

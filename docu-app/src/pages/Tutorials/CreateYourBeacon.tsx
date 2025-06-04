@@ -603,7 +603,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </h1>
           <p>
             Now, let’s see how to fill in the CSV that will be converted by the
-            beacon r.i tools into the models.
+            Beacon RI Tools into the models.
           </p>
           <p>
             Here you’ll find the{" "}

@@ -1,11 +1,9 @@
-Documentation
-
+Documentation Resources
 Resources
-
 Explore more about Beacon v2 with the following resources:
-
-- Beacon v2 webpage: https://genomebeacons.org/
-- Beacon v2 specification documentation: https://docs.genomebeacons.org/
-- Beacon v2 API on GitHub: https://github.com/ga4gh-beacon/beacon-v2/
-- Beacon Verifier (verify the configuration of your implementation): https://beacon-verifier-demo.ega-archive.org/
-- Add your Beacon implementation to our Beacon registry: https://docs.google.com/forms/d/e/1FAIpQLScORwEVRAlsa8qe9SerKZLGy6qjphApjsHXC8-EcaOrUpW8tw/viewform
+Beacon webpage: https://genomebeacons.org/
+Beacon specification documentation: https://docs.genomebeacons.org/
+Beacon specification on GitHub: https://github.com/ga4gh-beacon/beacon-v2/
+PI GitHub: Beacon v2 Production Implementation on GitHub: https://github.com/EGA-archive/beacon2-pi-api
+Beacon Verifier (verify the configuration of your implementation): https://beacon-verifier-demo.ega-archive.org/
+Let us know of you Beacon instance! https://docs.google.com/forms/d/e/1FAIpQLScORwEVRAlsa8qe9SerKZLGy6qjphApjsHXC8-EcaOrUpW8tw/viewform

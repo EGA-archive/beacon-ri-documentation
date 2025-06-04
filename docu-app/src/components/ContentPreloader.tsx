@@ -17,10 +17,11 @@ import ConfigurationRiText from "../content/configuration_ri.txt";
 // Beacon 2 RI API Tools v2
 import StartingGuideText from "../content/starting_guide.txt";
 import ConfigurationFile from "../content/configuration_file.txt";
-import CreatingCSVFilesText from "../content/creating_csv_files.txt";
 import ConversionCSVBFFText from "../content/conversion_csvbff.txt";
 import ConversionVCFBFFText from "../content/conversion_vcfbff.txt";
 import ConversionPhenopacketsBFFText from "../content/ConversionPhenopacketsBFFText.txt";
+import CommonErrorsText from "../content/CommonErrorsText.txt";
+import TestDataText from "../content/TestDataText.txt";
 // Beacon UI
 import QueryingUIText from "../content/querying_ui.txt";
 import DeploymentUIText from "../content/deployment_ui.txt";
@@ -106,6 +107,7 @@ const ContentPreloader = () => {
   //   CreatingCSVFilesText,
   //   "Creating the CSV files"
   // );
+
   useRegisterTextContent(
     "/conversion-from-csv-to-bff",
     ConversionCSVBFFText,
@@ -122,6 +124,12 @@ const ContentPreloader = () => {
     ConversionPhenopacketsBFFText,
     "Conversion from Phenopackets to BFF"
   );
+
+  // Here
+  useRegisterTextContent("/common-errors", CommonErrorsText, "Common Errors");
+
+  // Here
+  useRegisterTextContent("/test-data", TestDataText, "Test Data");
 
   // Beacon UI
   useRegisterTextContent("/deployment", DeploymentUIText, "Deployment");
@@ -155,9 +163,9 @@ const ContentPreloader = () => {
 
   // Tutorials
   useRegisterTextContent(
-    "/use-case:-rare-diseases-data",
+    "/example-beacon:-rare-disease-use-case",
     UseCaseText,
-    "Use Case: Rare Disease Data"
+    "Example Beacon: Rare Disease Use Case"
   );
   useRegisterTextContent(
     "/create-your-beacon",

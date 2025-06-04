@@ -215,7 +215,7 @@ dataUseConditions.duoDataUse.description
           <div className="codeSnippet error">
             <pre>
               <code id="jsondecode-error">
-                {`json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 54 (char 53)`}
+                {`json.decoder.JSONDecodeError: "Expecting property name enclosed in double quotes": line 1 column 54 (char 53)`}
               </code>
               <button
                 className="copyButtonCode"
@@ -309,7 +309,7 @@ dataUseConditions.duoDataUse.description
           <p>
             It’s caused by incorrectly mixing two alternative JSON structures
             defined, in our example, under the <em>measurementValue</em>{" "}
-            property. Simplified error:
+            property.
           </p>
           <p>Simplified error:</p>
           <div className="codeSnippet error">

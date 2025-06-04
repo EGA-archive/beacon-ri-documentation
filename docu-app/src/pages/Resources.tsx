@@ -25,7 +25,7 @@ const Resources: React.FC = () => {
           <h2>Explore more about Beacon v2 with the following resources:</h2>
           <ul>
             <li>
-              Beacon v2 webpage:{" "}
+              Beacon webpage:{" "}
               <a
                 href="https://genomebeacons.org/"
                 target="_blank"
@@ -35,7 +35,7 @@ const Resources: React.FC = () => {
               </a>
             </li>
             <li>
-              Beacon v2 specification documentation:{" "}
+              Beacon specification documentation:{" "}
               <a
                 href="https://docs.genomebeacons.org/"
                 target="_blank"
@@ -45,13 +45,23 @@ const Resources: React.FC = () => {
               </a>
             </li>
             <li>
-              Beacon v2 API on GitHub:{" "}
+              Beacon specification on GitHub:{" "}
               <a
                 href="https://github.com/ga4gh-beacon/beacon-v2/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 https://github.com/ga4gh-beacon/beacon-v2/
+              </a>
+            </li>
+            <li>
+              PI GitHub: Beacon v2 Production Implementation on GitHub:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon2-pi-api"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://github.com/EGA-archive/beacon2-pi-api
               </a>
             </li>
             <li>
@@ -65,7 +75,7 @@ const Resources: React.FC = () => {
               </a>
             </li>
             <li>
-              Add your Beacon implementation to our Beacon registry:{" "}
+              Let us know of you Beacon instance!{" "}
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLScORwEVRAlsa8qe9SerKZLGy6qjphApjsHXC8-EcaOrUpW8tw/viewform"
                 target="_blank"

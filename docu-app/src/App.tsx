@@ -13,7 +13,6 @@ import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
 import QueryingApi from "./pages/Beacon2RIAPI/QueryingApi";
 import StartingGuide from "./pages/Beacon2RITools/StartingGuide";
 import ConfigFileTools from "./pages/Beacon2RITools/ConfigFileTools";
-import CreatingCSVs from "./pages/Beacon2RITools/CreatingCSVs";
 import ConversionCSVBFF from "./pages/Beacon2RITools/ConversionCSVBFF";
 import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
@@ -108,7 +107,7 @@ function App() {
       "Network Configuration UI",
       "Network Querying the UI",
     ],
-    Tutorials: ["Create your Beacon", "Use Case: Rare Diseases Data"],
+    Tutorials: ["Create your Beacon", "Example Beacon: Rare Disease Use Case"],
   };
 
   return (
@@ -221,7 +220,7 @@ function App() {
                   element={<CreateYourBeacon />}
                 />
                 <Route
-                  path="/use-case:-rare-diseases-data"
+                  path="/example-beacon:-rare-disease-use-case"
                   element={<UseCase />}
                 />
                 <Route path="/resources" element={<Resources />} />

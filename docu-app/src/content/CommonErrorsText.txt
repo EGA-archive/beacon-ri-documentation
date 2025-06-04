@@ -1,0 +1,151 @@
+Documentation Beacon RI Tools v2 Common Errors
+Beacon RI Tools v2
+Common Errors
+Case 1: Value Error
+0%                                                
+ | 0/20 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/usr/src/app/biosamples_csv.py", line 358, in <module>
+    dict_generado, total_i = generate(dict_properties, list_of_headers)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/biosamples_csv.py", line 343, in generate
+    Biosamples(**definitivedict)
+  File "/usr/src/app/validators/biosamples.py", line 171, in __init__
+    super().__init__(**data)
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 171, in __init__
+    self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Biosamples
+histologicalDiagnosis.id
+  Value error, id must be CURIE, e.g. NCIT:C42331 [type=value_error, input_value='NCIT_C4194', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.6/v/value_error
+
+This error is triggered during validation of the Biosamples model. It specifically points to the id property within the histologicalDiagnosis field.
+
+Let’s break it down:
+histologicalDiagnosis is the term being validated.
+.id is the property within it that’s incorrect.
+
+The error says that the value 'NCIT_C4194' is not a valid CURIE (Compact URI Expression). A CURIE must follow the format: PREFIX:ID.
+
+How to fix it
+In the CSV search for the field histologicalDiagnosis|id and ensure it’s filled in with the correct CURIE structure. 
+
+Case 2: Required field missing
+Traceback (most recent call last):
+  File "/usr/src/app/datasets_csv.py", line 417, in <module>
+    dict_generado, total_i = generate(dict_properties,list_of_headers)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/datasets_csv.py", line 401, in generate
+    Datasets(**definitivedict)
+  File "/usr/src/app/validators/datasets.py", line 61, in __init__
+    super().__init__(**data)
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 171, in __init__
+    self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Datasets
+dataUseConditions.duoDataUse.description
+  Field required [type=missing, input_value={'id': 'DUO:0000019,DUO:0...rsion': '7-1-19,7-1-19'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.6/v/missing
+
+0%
+
+This validation error occurs when you're providing values for the dataUseConditions.duoDataUse object but omitting one of its required properties: description.
+
+In the JSON Schema for the duoDataUse object, the description field is mandatory. This field should provide a human-readable explanation of the data use conditions associated with the DUO (Data Use Ontology) terms provided in id.
+
+Because dataUseConditions was included in your dataset entry, the nested structure under duoDataUse must include all required fields—including description.
+
+How to fix it
+Property	Value
+dataUseConditions | duoDataUse | id	DUO:0000019
+dataUseConditions | duoDataUse | version	7-1-19
+dataUseConditions | duoDataUse | description	Health/Medical/Biomedical use only
+This will satisfy the schema and resolve the error.
+
+
+Reminder: Even if duoDataUse appears to be optional overall, any time you provide an object, you must also provide its required fields, as defined in the Beacon schema.
+
+Case 3: JSONDecodeError
+json.decoder.JSONDecodeError: "Expecting property name enclosed in double quotes": line 1 column 54 (char 53)
+
+This error is not directly caused by the Beacon RI tools but instead comes from Python’s built-in json library, which fails to parse a malformed JSON string. It typically occurs during the conversion of CSV fields into JSON structures.
+
+The message Expecting property name enclosed in double quotes suggests that the parser encountered invalid syntax—usually due to improper formatting of keys, quotes, or punctuation.
+
+Some common causes are: 
+Wrong quotation marks: All JSON keys and string values must use standard double quotes ("). Smart quotes or typographic quotes (like “ or ‘) will trigger this error.
+Malformed fields where JSON is expected: info and distribution fields must be filled in as JSON type data. If it contains plain text the conversion will fail. Ensure that info and distribution fields have this structure:
+
+{"info": "Your information "}
+{"datatypes": {"OGMS:0000015": 20, "OMIABIS:0001032": 20, “OGMS:0000073”:20}}
+
+Now, let’s take a look to the headers of the CSV for measurementValue and how we have filled them in:
+
+How to fix it
+Open the CSV file in plain text editor and check if all the double quotes are the same and correct.
+
+Case 4: Incorrect use of OneOf
+It’s caused by incorrectly mixing two alternative JSON structures defined, in our example, under the measurementValue property.
+
+Simplified error:
+
+measurements.measurementValue.Quantity.unit
+  Field required [type=missing]
+
+measurements.measurementValue.Quantity.id
+  Extra inputs are not permitted
+
+measurements.measurementValue.Quantity.label
+  Extra inputs are not permitted
+
+measurements.measurementValue.OntologyTerm.value
+  Extra inputs are not permitted
+
+The root of the problem is how the measurementValue property is defined in the JSON schema.
+
+"measurementValue": {
+  "description": "The result of the measurement",
+  "oneOf": [
+    { "$ref": "./value.json" },
+    { "$ref": "./complexValue.json" }
+  ]
+}
+
+The key detail here is oneOf. This means: Only one of these two structures (value.json or complexValue.json) can be used — not both.
+
+If you choose to use value.json, the structure looks like this (quantity.json):
+
+referenceRange
+unit [REQUIRED]
+value [REQUIRED]
+Now, let’s take a look to the structure of complexValue.json:
+
+Quantity – referenceRange, unit, value [REQUIRED]
+QuantityType – ontologyTerm [REQUIRED]
+Now, let’s take a look to the headers of the CSV for measurementValue and how we have filled them in:
+
+Property	Value	Schema
+measurements | measurementValue | id	LOINC:26515-7	value.json
+measurements | measurementValue | label	Platelets [#/volume] in Blood	value.json
+measurements | measurementValue | referenceRange | high		value.json
+measurements | measurementValue | referenceRange | low	10	value.json
+measurements | measurementValue | referenceRange | unit | id	NCIT:C8253	value.json
+measurements | measurementValue | referenceRange | unit | label	Milligram	value.json
+measurements | measurementValue | typedQuantities | quantity | referenceRange | high		complexValue.json
+measurements | measurementValue | typedQuantities | quantity | referenceRange | low		complexValue.json
+measurements | measurementValue | typedQuantities | quantity | referenceRange | unit		complexValue.json
+measurements | measurementValue | typedQuantities | quantity | unit | id	-	complexValue.json
+measurements | measurementValue | typedQuantities | quantity | unit | label		complexValue.json
+measurements | measurementValue | typedQuantities | quantity | value		complexValue.json
+measurements | measurementValue | unit | id		complexValue.json
+measurements | measurementValue | unit | label		complexValue.json
+measurements | measurementValue | value	5	complexValue.json
+Since measurementValue only accepts one schema (value.json or complexValue.json), combining fields from both leads to:
+
+Extra input errors → You added fields from the wrong schema
+Missing required field → You didn't complete the schema you intended to use
+How to fix it
+Decide whether you're using:
+Simple Quantity (value.json) → Use only value and unit
+Complex Quantity (complexValue.json) → Use only typedQuantities, quantityType, and related nested fields
+
+Then, ensure all required fields for that choice are included, and remove any fields from the other structure.
+

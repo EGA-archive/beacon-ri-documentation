@@ -349,7 +349,10 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/use-case:-rare-diseases-data" className="no-undeline">
+        <a
+          href="/example-beacon:-rare-disease-use-case"
+          className="no-undeline"
+        >
           Tutorials
         </a>
         <img
@@ -357,15 +360,18 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/use-case:-rare-diseases-data" className="no-undeline">
-          <span className="user-path-title">Use Case: Rare Diseases Data </span>
+        <a
+          href="/example-beacon:-rare-disease-use-case"
+          className="no-undeline"
+        >
+          <span className="user-path-title">
+            Example Beacon: Rare Disease Use Case
+          </span>
         </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>
-            Use Case : Inserting Rare Disease Synthetic Dataset into a beacon.{" "}
-          </h3>
+          <h3></h3>
           <h1 id="introduction">Introduction</h1>
           <p>
             For this example we are going to use the synthetic dataset, hosted

@@ -1,0 +1,73 @@
+Documentation Beacon RI Tools v2 Test Data
+Beacon RI Tools v2
+Test Data
+This section contains test datasets you can use to explore and validate the functionalities of the Beacon v2 Implementation.
+
+Dataset 1: CINECA Synthetic Cohort EUROPE UK1
+Dataset name: CINECA_synthetic_cohort_EUROPE_UK1
+Origin: Derived from EGAD00001006673 (EGA) and a raw file with phenoclinic data kindly donated to us from our CINECA-EU partners.
+Study size: 2504 samples with genetic data (low coverage WGS) based on 1000 Genomes data (phase3 and Geuvadis), and 76 synthetic subject attributes and phenotypic data derived from UKBiobank.
+
+In support of FAIRness in data sharing, this dataset is made freely available under the Creative Commons Licence (CC-BY). Please ensure this preamble is included with this dataset and that the CINECA project (funding: EC H2020 grant 825775) is acknowledged.
+
+Included files
+File/Folder	Description	Where to find
+uk1.tsv	Raw metadata and phenotypic data for 2,504 synthetic individuals	uk1.tsv
+chr22.Test.1000G.phas
+e3.joint.vcf.gz	VCF file consisting of WGS for chr22 – input used for genomicVariations	$ wget ftp://
+FTPuser:FTPusersPassword@xfer13
+.crg.eu:221/external_files/
+CINECA_synthetic_cohort_EUROPE_
+UK1/vcf/
+chr22.Test.1000G.phase3.joint.vcf
+.gz
+CSV models	CSV filled in with the data and metadata from the dataset files, ready to convert to Beacon Friendly Format (BFF)	Input folder
+BFF output	Output BFF files obtained by converting the CSV models using the beacon2 ri tools v2	CINECA_synthetic_cohort_EUROPE_
+UK1
+
+ If you want to download the full original dataset metadata please follow the Live Distribution or the pyEGA3 instructions. Notice that these datasets are free access.
+
+
+Dataset 2: Rare Disease Synthetic Dataset
+Dataset name: Rare Disease Synthetic Dataset
+Origin: Derived from EGAD00001008392 (EGA).
+Study size: 18 whole genome samples (6 index cases with their parents) created with public human genomic background combined with in-silico insertion of real disease-causing variants.
+
+When using this dataset, please acknowledge the following contributors and funding sources: the RD-Connect GPAP (https://platform.rd-connect.eu/), EC H2020 project EJP-RD (grant # 825575), EC H2020 project B1MG (grant # 951724) and Generalitat de Catalunya VEIS project (grant # 001-P-001647).
+
+File/Folder	Description	Where to find
+EGAD00001008392	Rare Disease Synthetic Dataset	See Use Case: Inserting Rare Disease Synthetic Dataset into a beacon → Dataset model creation section
+EGAN00003364605	case1_index – Male sample with Central core disease.	See Use Case: Inserting Rare Disease Synthetic Dataset into a beacon → Dataset model creation section
+EGAR00003021166	case1_index fastq	See Use Case: Inserting Rare Disease Synthetic Dataset into a beacon → Run model from VCF section
+EGAZ00001744017	Information about the creation of the chromosome 21 VCF	See Use Case: Inserting Rare Disease Synthetic Dataset into a beacon → Analysis model creation section
+EGAZ00001744003	Phenopacket with individual information from case1_index sample	phenopacket
+EGAF00005572743	5 variants subset of the chromosome 21 VCF from case1_index	See Use Case: Inserting Rare Disease Synthetic Dataset into a beacon → genomicVariations model from VCF creation section
+Rare disease use case folder	Folder with the CSVs for dataset and run creation, phenopacket for individuals model and the subset VCF for genomicVariations.	Input folder
+Rare disease use case output folder	Output BFF files obtained by converting the CSV models, phenopacket and VCF using the beacon2 ri tools v2	Output folder
+
+ If you want to download the full original dataset metadata please follow the Live Distribution or the pyEGA3 instructions. Notice that these datasets are free access.
+
+
+Dataset 3: Example CSV with all the fields filled in
+Dataset name: Dataset with synthetic data for beacon testing
+Origin: All the metadata inserted is synthetic.
+Study size: 20 female samples with breast carcinoma.
+Included files
+File/Folder	Description	Where to find
+CSV folder	Example CSVs with all the possible fields filled in for analysis, datasets, cohorts, individuals, runs and biosamples model.	Input folder
+BFF output	Folder with the BFFs obtained by converting the VCF and the CSV using beacon2-ri-tools-v2	Output folder
+Dataset 4: Example CSV with only the mandatory fields filled in
+Included files
+File/Folder	Description	Where to find
+CSV folder	Example CSVs with all the possible fields filled in for analysis, datasets, cohorts, individuals, runs and biosamples model.	Input folder
+Dataset 5: genomicVariations CSVs
+You can load genomicVariations data into Beacon using either a VCF file or a CSV. Here you’ll find two genomicVariations CSVs examples, one representing variants with caseLevelData information and the second one with variantLevelData.
+caseLevelData: Describes which biosamples carry which variants. This is sample-level information based on individual analyses.
+variantLevelData: Describes the variants themselves, without linking them to specific individuals. This is aggregate-level information, such as genomic position, alleles, frequency or phenotype associated.
+
+Included files
+File/Folder	Description	Where to find
+caseLevelData folder	genomicVariations CSV with the mandatory fields of the model and the caseLevelData properties.	caseLevelData
+variantLevelData folder	genomicVariations CSV with the mandatory fields of the model and the variantLevelData properties.	variantLevelData
+
+Note: You can include either or both blocks in your Beacon instance. Combining both gives you a richer model that supports individual-level queries and population-level insights.
