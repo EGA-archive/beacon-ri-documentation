@@ -17,7 +17,7 @@ const UseCase = () => {
 
       "beacon-ri-metadata": `beacon_id = 'org.ega-archive.beacon-ri-demo'
 
-beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case’
+beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case'
 
 api_version = 'v2.0.0'
 
@@ -53,7 +53,7 @@ create_datetime = '2025-05-12T12:00:00.000000'
 
 update_datetime = ''`,
       "convert-all": "docker exec -it ri-tools python convert_csvTObff.py",
-      "mongoexport-genomicVariations": `docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`,
+      "mongoexport-genomicVariations": `docker exec mongoprod mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`,
       "vcf-file-path": `./beacon2-pi-api/ri-tools/files/vcf/files_to_read/case1C_subset.vcf.gz`,
       "vcf-import-output": `files/vcf/files_to_read/case1C_subset.vcf.gz
 100% | 5/5 [00:00<00:00, 6603.12it/s]
@@ -1967,7 +1967,16 @@ A total of 0 variants were skipped`}</code>
             <div>
               If the conversion of the variants is not working as expected
               modify the conf.py and set verbosity = True, this will give you
-              information about which variants are being included and why.
+              information about which variants are being included and why. If
+              your VCF doesn't have allele frequency information and all your
+              variants were skipped because none of the populations had allele
+              frequency greater than 0 go to
+              ri-tools/pipelines/default/templates and ensure in
+              populations.json the numberOfPopulations is set to 0. If your VCF
+              does contain allele frequency fields but they are still being
+              ignored, the issue may be due to mismatched field names. Make sure
+              the field names in your VCF <b>exactly match</b> those defined in
+              ri-tools/pipelines/default/templates/populations.json.
             </div>
           </p>
           <p>
@@ -1976,7 +1985,7 @@ A total of 0 variants were skipped`}</code>
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>{`docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`}</code>
+              <code>{`docker exec mongoprod mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`}</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("mongoexport-genomicVariations")}
@@ -2029,7 +2038,7 @@ A total of 0 variants were skipped`}</code>
             <pre>
               <code>{`beacon_id = 'org.ega-archive.beacon-ri-demo'
 
-beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case’
+beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case'
 
 api_version = 'v2.0.0'
 

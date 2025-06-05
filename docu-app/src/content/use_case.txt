@@ -473,11 +473,11 @@ A total of 5 variants were processed
 A total of 0 variants were skipped
 
 
-If the conversion of the variants is not working as expected modify the conf.py and set verbosity = True, this will give you information about which variants are being included and why.
+If the conversion of the variants is not working as expected modify the conf.py and set verbosity = True, this will give you information about which variants are being included and why. If your VCF doesn't have allele frequency information and all your variants were skipped because none of the populations had allele frequency greater than 0 go to ri-tools/pipelines/default/templates and ensure in populations.json the numberOfPopulations is set to 0. If your VCF does contain allele frequency fields but they are still being ignored, the issue may be due to mismatched field names. Make sure the field names in your VCF exactly match those defined in ri-tools/pipelines/default/templates/populations.json.
 
 The VCF was converted into BFF and saved in a MongoDB. Let’s extract the variants to insert them into our beacon:
 
-docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json
+docker exec mongoprod mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json
 
 Modify the output path so it works on your computer. In this case, we’ve saved it with the BFFs converted from CSV.
 
@@ -498,7 +498,7 @@ Our conf.py would look something like:
 
 beacon_id = 'org.ega-archive.beacon-ri-demo'
 
-beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case’
+beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case'
 
 api_version = 'v2.0.0'
 
