@@ -11,7 +11,7 @@ const UseCase = () => {
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
       "bash-mongostart": `bash mongostart.sh`,
-      "extract-filtering-terms": `docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`,
+      "extract-filtering-terms": `docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms`,
       "public-datasets": `public_datasets:
 - EGAD00001008392`,
 
@@ -2214,7 +2214,7 @@ update_datetime = ''`}</code>
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>{`docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`}</code>
+              <code>{`docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms`}</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("extract-filtering-terms")}

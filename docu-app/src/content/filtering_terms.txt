@@ -1,4 +1,4 @@
-Documentationat Beacon 2 PI API Filtering Terms
+Documentation Beacon 2 PI API Filtering Terms
 Beacon 2 Production Implementation API
 Filtering Terms
 Filtering terms are metadata fields that allow users to query your Beacon more precisely — for example, by filtering results based on sequencing strategy (libraryStrategy), tissue type, disease, or other structured attributes. These terms often rely on ontologies to ensure consistent vocabulary across datasets.
@@ -9,7 +9,7 @@ Automatically Extract Filtering Terms
 If your data collections (e.g., runs, biosamples, etc.) already contain structured metadata using ontology terms (like NCIT, UBERON, EFO...), you can extract filtering terms automatically.
 This will populate the /filteringTerms endpoint of your Beacon, enabling more advanced queries.
 
-docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py
+docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms
 
 Manually Add Filtering Terms (optional)
 If you want to enable filtering for fields that aren’t auto-detected or don’t use ontologies (e.g., simple alphanumeric fields like libraryStrategy), you can add them manually.
@@ -43,7 +43,7 @@ Add your .obo ontology files
 Place ontology files into the ontologies/ folder in your Beacon instance. The filename must match the ontology prefix in lowercase (e.g., ncit.obo, uberon.obo, etc.).
 
 Run the script to enhance filtering terms
-docker exec beaconprod python beacon/connections/mongo/get_descendants.py
+docker exec beaconprod python -m beacon.connections.mongo.get_descendants
 
 This script:
 Adds descendant terms from the ontologies to each filtering term.

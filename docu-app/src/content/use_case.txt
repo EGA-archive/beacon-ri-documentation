@@ -576,7 +576,7 @@ Filtering terms are metadata fields that allow users to query your Beacon more p
 
 As we have some ontology fields, let’s create the filtering terms for our beacon. We’ll populate the /filteringTerms endpoint automatically by running:
 
-docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py
+docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms
 
 
  If you want to add new filtering terms manually or enhance ontology filtering with descendants and semantic similarities, please visit the Filtering Terms section.
