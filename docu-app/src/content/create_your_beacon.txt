@@ -258,4 +258,4 @@ Note that you will only need to run the command for the collections that you hav
 
 Each time data is imported into the beacon, indexes need to be created for the queries to run smoothly. Do it by running:
 
-docker exec beaconprod python /beacon/connections/mongo/reindex.py
+docker exec beaconprod python -m beacon.connections.mongo.reindex

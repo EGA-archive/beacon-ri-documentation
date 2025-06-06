@@ -38,7 +38,7 @@ const CreateYourBeacon = () => {
       exact_heterozygosity=False
       num_rows=1500000
       verbosity=False`,
-      "connections-mongo-reinde-py": `docker exec beaconprod python /beacon/connections/mongo/reindex.py`,
+      "connections-mongo-reinde-py": `docker exec beaconprod python -m beacon.connections.mongo.reindex`,
       "python-convert-csvTObff-py": `docker exec -it ri-tools python convert_csvTObff.py`,
       "python-genomicVariations-vcf-py": `docker exec -it ri-tools python genomicVariations_vcf.py`,
       "mongo-export-snippet": `docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
@@ -1248,8 +1248,8 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <div className="codeSnippet">
             <pre>
               <code>
-                docker exec beaconprod python
-                /beacon/connections/mongo/reindex.py
+                docker exec beaconprod python -m
+                beacon.connections.mongo.reindex
               </code>
               <button
                 className="copyButtonCode"

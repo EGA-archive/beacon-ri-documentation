@@ -299,7 +299,6 @@ verbosity=False # This variable, if True, will make the program run slower but g
       exact_heterozygosity=False
       num_rows=1500000
       verbosity=False`,
-      "connections-mongo-reinde-py": `docker exec beaconprod python /beacon/connections/mongo/reindex.py`,
       "python-convert-csvTObff-py": `docker exec -it ri-tools python convert_csvTObff.py`,
       "python-genomicVariations-vcf-py": `docker exec -it ri-tools python genomicVariations_vcf.py`,
       "mongo-export-snippet": `docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
