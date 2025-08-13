@@ -41,3 +41,10 @@
   width: 19px;
   height: 19px;
 }
+
+.lessPadding {
+  padding-top: 110px !important;
+}
+.customh2 {
+  margin-bottom: 0;
+}
