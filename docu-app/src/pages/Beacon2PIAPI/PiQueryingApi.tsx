@@ -1,12 +1,20 @@
 import "../Beacon2RIAPI/QueryingAPI.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const PiQueryingAPI = () => {
+interface PiQueryingAPIProps {
+  searchTerm: string;
+}
+
+const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard
@@ -50,7 +58,7 @@ const PiQueryingAPI = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Querying the API</h1>
           <p>Beacon PI accepts two types of request methods: GET and POST.</p>

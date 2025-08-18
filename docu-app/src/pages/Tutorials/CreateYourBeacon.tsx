@@ -1,13 +1,21 @@
-import { useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
-import OnThisPage from "../../components/OnThisPage";
 import pin from "../../pin.svg";
+import React, { useRef, useState } from "react";
+import copyIcon from "../../assets/copy-symbol.svg";
+import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const CreateYourBeacon = () => {
+interface CreateYourBeaconProps {
+  searchTerm: string;
+}
+
+const CreateYourBeacon: React.FC<CreateYourBeaconProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
@@ -101,7 +109,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>10 steps to create your first beacon </h3>
           <h1>Introduction</h1>
           <p>

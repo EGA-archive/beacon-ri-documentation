@@ -1,12 +1,20 @@
-import React, { useState } from "react";
 import "./ConfigFileTools.css";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const ConfigFileTools: React.FC = () => {
+interface ConfigFileToolsProps {
+  searchTerm: string;
+}
+
+const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -46,7 +54,7 @@ const ConfigFileTools: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <p className="note">
             <img

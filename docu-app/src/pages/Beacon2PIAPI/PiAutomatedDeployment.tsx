@@ -1,12 +1,22 @@
 import "../Beacon2RIAPI/AutomatedDeployment.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const PiAutomatedDeployment = () => {
+interface PiAutomatedDeploymentProps {
+  searchTerm: string;
+}
+
+const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
+  searchTerm,
+}) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy =
@@ -57,7 +67,7 @@ const PiAutomatedDeployment = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
 
           <h2 id="prerequisites">Prerequisites</h2>

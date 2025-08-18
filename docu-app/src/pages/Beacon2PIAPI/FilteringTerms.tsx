@@ -1,12 +1,19 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const FilteringTerms = () => {
+interface FilteringTermsProps {
+  searchTerm: string;
+}
+const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
@@ -70,7 +77,7 @@ const FilteringTerms = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Filtering Terms</h1>
           <p>

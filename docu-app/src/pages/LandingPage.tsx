@@ -1,7 +1,16 @@
 import "./LandingPage.css";
-function LandingPage() {
+import { useRef } from "react";
+import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
+
+interface LandingPageProps {
+  searchTerm: string;
+}
+
+function LandingPage({ searchTerm }: LandingPageProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  useHighlightAndScroll(contentRef, searchTerm);
   return (
-    <div className="landingPage">
+    <div className="landingPage" ref={contentRef}>
       <div>
         {" "}
         <a href="/" className="no-undeline">

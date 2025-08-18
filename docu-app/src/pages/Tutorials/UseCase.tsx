@@ -1,12 +1,20 @@
-import { useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
+import React, { useRef, useState } from "react";
+import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const UseCase = () => {
+interface UseCaseProps {
+  searchTerm: string;
+}
+
+const UseCase: React.FC<UseCaseProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
@@ -369,7 +377,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3></h3>
           <h1 id="introduction">Introduction</h1>
           <p>

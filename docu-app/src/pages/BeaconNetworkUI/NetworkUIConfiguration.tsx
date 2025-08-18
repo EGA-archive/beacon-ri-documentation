@@ -1,12 +1,22 @@
-import React, { useState } from "react";
 import "./NetworkUIConfiguration.css";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const NetworkUIConfiguration: React.FC = () => {
+interface NetworkUIConfigurationProps {
+  searchTerm: string;
+}
+
+const NetworkUIConfiguration: React.FC<NetworkUIConfigurationProps> = ({
+  searchTerm,
+}) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -45,7 +55,7 @@ const NetworkUIConfiguration: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Network UI</h3>
           <h1>Configuration</h1>
 

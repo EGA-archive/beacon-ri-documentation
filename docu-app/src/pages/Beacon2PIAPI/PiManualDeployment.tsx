@@ -1,12 +1,22 @@
 import "../Beacon2RIAPI/ManualDeployment.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const PiManualDeployment = () => {
+interface PiManualDeploymentProps {
+  searchTerm: string;
+}
+
+const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
+  searchTerm,
+}) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -74,7 +84,7 @@ const PiManualDeployment = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Manual Deployment</h1>
           <h2 id="cloning-repository">Cloning the repository</h2>

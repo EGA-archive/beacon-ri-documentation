@@ -1,8 +1,20 @@
-import React from "react";
 import "./NetworkUIQueries.css";
+import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const NetworkUIQueries: React.FC = () => {
+interface NetworkUIQueriesProps {
+  searchTerm: string;
+}
+
+const NetworkUIQueries: React.FC<NetworkUIQueriesProps> = ({ searchTerm }) => {
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   return (
     <div className="networkUIQueriesContainer">
       <h2 className="user-path">
@@ -28,7 +40,7 @@ const NetworkUIQueries: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Network UI</h3>
           <h1>Queries</h1>
           <h4>Coming soon...</h4>

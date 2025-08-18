@@ -1,13 +1,21 @@
-import React, { useState } from "react";
 import "./ConfigFileTools.css";
+import model from "../../assets/medal.svg";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
-import model from "../../assets/medal.svg";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const TestData: React.FC = () => {
+interface TestDataProps {
+  searchTerm: string;
+}
+
+const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -45,7 +53,7 @@ const TestData: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Test Data</h1>
           <p>

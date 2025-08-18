@@ -1,13 +1,21 @@
-import React, { useState } from "react";
 import "./ConfigFileTools.css";
-import copyIcon from "../../assets/copy-symbol.svg";
 import copyIconError from "../../assets/copyIconError.svg";
+import React, { useRef, useState } from "react";
+import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const CommonErrors: React.FC = () => {
+interface CommonErrorsProps {
+  searchTerm: string;
+}
+
+const CommonErrors: React.FC<CommonErrorsProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -45,7 +53,7 @@ const CommonErrors: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Common Errors</h1>
           <h2 id="value-error">Case 1: Value Error</h2>

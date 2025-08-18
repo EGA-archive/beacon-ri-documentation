@@ -130,46 +130,64 @@ function App() {
               }`}
             >
               <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route
+                  path="/"
+                  element={<LandingPage searchTerm={searchTerm} />}
+                />
 
                 {/* Beacon 2 PI API Routes */}
                 <Route
                   path="/pi-automated-deployment"
-                  element={<PiAutomatedDeployment />}
+                  element={<PiAutomatedDeployment searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/pi-manual-deployment"
-                  element={<PiManualDeployment />}
+                  element={<PiManualDeployment searchTerm={searchTerm} />}
                 />
-                <Route path="/filtering-terms" element={<FilteringTerms />} />
-                <Route path="/configuration" element={<PiApiConfiguration />} />
+                <Route
+                  path="/filtering-terms"
+                  element={<FilteringTerms searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/configuration"
+                  element={<PiApiConfiguration searchTerm={searchTerm} />}
+                />
                 <Route
                   path="/pi-querying-the-api"
-                  element={<PiQueryingAPI />}
+                  element={<PiQueryingAPI searchTerm={searchTerm} />}
                 />
 
                 {/* Beacon 2 RI API Routes */}
                 <Route
                   path="/automated-deployment"
-                  element={<AutomatedDeployment />}
+                  element={<AutomatedDeployment searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/manual-deployment"
-                  element={<ManualDeployment />}
+                  element={<ManualDeployment searchTerm={searchTerm} />}
                 />
-                <Route path="/data-linking" element={<DataLinking />} />
+                <Route
+                  path="/data-linking"
+                  element={<DataLinking searchTerm={searchTerm} />}
+                />
 
                 <Route
                   path="/api-configuration"
-                  element={<ApiConfiguration />}
+                  element={<ApiConfiguration searchTerm={searchTerm} />}
                 />
-                <Route path="/querying-the-api" element={<QueryingApi />} />
+                <Route
+                  path="/querying-the-api"
+                  element={<QueryingApi searchTerm={searchTerm} />}
+                />
 
                 {/* Beacon RI Tools v2 Routes */}
-                <Route path="/starting-guide" element={<StartingGuide />} />
+                <Route
+                  path="/starting-guide"
+                  element={<StartingGuide searchTerm={searchTerm} />}
+                />
                 <Route
                   path="/configuration-file"
-                  element={<ConfigFileTools />}
+                  element={<ConfigFileTools searchTerm={searchTerm} />}
                 />
                 {/* <Route
                   path="/creating-the-csv-files"
@@ -177,53 +195,70 @@ function App() {
                 /> */}
                 <Route
                   path="/conversion-from-csv-to-bff"
-                  element={<ConversionCSVBFF />}
+                  element={<ConversionCSVBFF searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/conversion-from-vcf-to-bff"
-                  element={<ConversionVCFBFF />}
+                  element={<ConversionVCFBFF searchTerm={searchTerm} />}
                 />
 
                 <Route
                   path="/conversion-from-phenopackets-to-bff"
-                  element={<ConversionPhenopacketsBFF />}
+                  element={
+                    <ConversionPhenopacketsBFF searchTerm={searchTerm} />
+                  }
                 />
-                <Route path="/common-errors" element={<CommonErrors />} />
-                <Route path="/test-data" element={<TestData />} />
+                <Route
+                  path="/common-errors"
+                  element={<CommonErrors searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/test-data"
+                  element={<TestData searchTerm={searchTerm} />}
+                />
 
                 {/* Beacon UI */}
-                <Route path="/deployment" element={<BeaconUIDeployment />} />
+                <Route
+                  path="/deployment"
+                  element={<BeaconUIDeployment searchTerm={searchTerm} />}
+                />
                 <Route
                   path="/configuration-ui"
-                  element={<BeaconUIConfiguration />}
+                  element={<BeaconUIConfiguration searchTerm={searchTerm} />}
                 />
-                <Route path="/querying-the-ui" element={<BeaconUIQueries />} />
+                <Route
+                  path="/querying-the-ui"
+                  element={<BeaconUIQueries searchTerm={searchTerm} />}
+                />
 
                 {/* Beacon Network UI */}
                 <Route
                   path="/network-deployment"
-                  element={<NetworkUIDeployment />}
+                  element={<NetworkUIDeployment searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/network-configuration-ui"
-                  element={<NetworkUIConfiguration />}
+                  element={<NetworkUIConfiguration searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/network-querying-the-ui"
-                  element={<NetworkUIQueries />}
+                  element={<NetworkUIQueries searchTerm={searchTerm} />}
                 />
 
                 {/* Tutorials */}
                 {/* <Route path="/tutorials" element={<Tutorials />} /> */}
                 <Route
                   path="/create-your-beacon"
-                  element={<CreateYourBeacon />}
+                  element={<CreateYourBeacon searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/example-beacon:-rare-disease-use-case"
-                  element={<UseCase />}
+                  element={<UseCase searchTerm={searchTerm} />}
                 />
-                <Route path="/resources" element={<Resources />} />
+                <Route
+                  path="/resources"
+                  element={<Resources searchTerm={searchTerm} />}
+                />
               </Routes>
             </div>
           </div>

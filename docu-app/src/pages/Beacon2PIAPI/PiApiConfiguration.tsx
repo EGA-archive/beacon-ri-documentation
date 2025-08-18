@@ -1,12 +1,22 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const PiApiConfiguration = () => {
+interface PiApiConfigurationProps {
+  searchTerm: string;
+}
+
+const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
+  searchTerm,
+}) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -98,7 +108,7 @@ const PiApiConfiguration = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Configuration</h1>
           <p>

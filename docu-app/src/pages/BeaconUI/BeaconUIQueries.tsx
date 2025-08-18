@@ -1,8 +1,20 @@
-import React from "react";
 import "./BeaconUIQueries.css";
+import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const BeaconUIQueries: React.FC = () => {
+interface BeaconUIQueriesProps {
+  searchTerm: string;
+}
+
+const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   return (
     <div className="beaconUIQueriesContainer">
       <h2 className="user-path">
@@ -28,7 +40,7 @@ const BeaconUIQueries: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon UI</h3>
           <h1>Queries</h1>
           <h4>Coming soon...</h4>

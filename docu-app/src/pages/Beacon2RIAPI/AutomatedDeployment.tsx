@@ -1,12 +1,22 @@
 import "./AutomatedDeployment.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const AutomatedDeployment = () => {
+interface AutomatedDeploymentProps {
+  searchTerm: string;
+}
+
+const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
+  searchTerm,
+}) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy =
@@ -57,7 +67,7 @@ const AutomatedDeployment = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 RI API</h3>
           <h1>Automated Deployment</h1>
           <p>

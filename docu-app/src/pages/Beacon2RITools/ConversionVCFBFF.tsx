@@ -1,12 +1,19 @@
-import "./ConversionVCFBFF.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const ConversionVCFBFF = () => {
+interface ConversionVCFBFFProps {
+  searchTerm: string;
+}
+
+const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string, textToCopy: string) => {
     navigator.clipboard
@@ -53,7 +60,7 @@ const ConversionVCFBFF = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Conversion from VCF to BFF</h1>
           <h2 id="reading-VCF">Reading your VCF</h2>

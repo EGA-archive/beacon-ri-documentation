@@ -1,12 +1,20 @@
 import "./ManualDeployment.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const ManualDeployment = () => {
+interface ManualDeploymentProps {
+  searchTerm: string;
+}
+
+const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -80,7 +88,7 @@ const ManualDeployment = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 RI API</h3>
           <h1>Manual Deployment</h1>
 

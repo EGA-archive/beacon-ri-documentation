@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "./StartingGuide.css";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const StartingGuide: React.FC = () => {
+interface StartingGuideProps {
+  searchTerm: string;
+}
+
+const StartingGuide: React.FC<StartingGuideProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, id: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -29,7 +37,6 @@ const StartingGuide: React.FC = () => {
         <a href="/starting-guide" className="no-undeline">
           Beacon RI Tools v2
         </a>
-
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
@@ -40,12 +47,12 @@ const StartingGuide: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Tools Introduction</h1>
           <p>
             The Beacon RI Tools v2 are a set of tools written in Python
-            available in the following 
+            available in the following{" "}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools"
               target="_blank"
@@ -61,7 +68,6 @@ const StartingGuide: React.FC = () => {
             all the features that are needed for generating Beacon v2 PI API
             compatible data.
           </p>
-
           <p>
             The main goal of Beacon RI Tools v2 is to obtain the{" "}
             <b>Beacon Friendly Format (BFF) files </b>, which are JSON files
@@ -93,14 +99,14 @@ const StartingGuide: React.FC = () => {
           <p>
             The Beacon data model consists of 7 collections:
             <ul>
-              <li> Analyses</li>
-              <li> Biosamples</li>
-              <li> Cohorts</li>
-              <li> Datasets</li>
-              <li> GenomicVariations</li>
-              <li> Individuals</li>
-              <li> Runs</li>
-            </ul>{" "}
+              <li>Analyses</li>
+              <li>Biosamples</li>
+              <li>Cohorts</li>
+              <li>Datasets</li>
+              <li>GenomicVariations</li>
+              <li>Individuals</li>
+              <li>Runs</li>
+            </ul>
           </p>
           <p>
             Therefore the Beacon RI Tools v2 allow the user to create the
@@ -117,15 +123,15 @@ const StartingGuide: React.FC = () => {
             from any source, is to populate the CSV templates that are built
             following the 7 collections of the Beacon data model. This enables
             the Beacon RI Tools v2 to convert from CSV to BFF. Note that you can
-            find the CSV templates in the {""}
+            find the CSV templates in the{" "}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
               target="_blank"
               rel="noopener noreferrer"
             >
               templates folder
-            </a>
-            {""} of the same repository.
+            </a>{" "}
+            of the same repository.
           </p>
 
           <h2 id="installation-guide">Installation Guide</h2>

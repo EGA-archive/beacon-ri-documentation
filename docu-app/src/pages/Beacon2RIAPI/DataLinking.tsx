@@ -1,12 +1,20 @@
 import "./DataLinking.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const DataLinking = () => {
+interface DataLinkingProps {
+  searchTerm: string;
+}
+
+const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -65,7 +73,7 @@ const DataLinking = () => {
       </h2>
 
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 RI API</h3>
           <h1>Data Linking</h1>
 

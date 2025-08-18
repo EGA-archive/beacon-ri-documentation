@@ -1,8 +1,22 @@
-import React from "react";
 import "./BeaconUIDeployment.css";
+import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const BeaconUIDeployment: React.FC = () => {
+interface BeaconUIDeploymentProps {
+  searchTerm: string;
+}
+
+const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
+  searchTerm,
+}) => {
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   return (
     <div className="beaconUIDeploymentContainer">
       <h2 className="user-path">
@@ -28,7 +42,7 @@ const BeaconUIDeployment: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon UI</h3>
           <h1>Deployment</h1>
           <p>

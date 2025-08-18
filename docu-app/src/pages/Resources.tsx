@@ -1,9 +1,22 @@
-import React from "react";
 import "./BeaconNetworkUI/NetworkUIQueries.css";
-import OnThisPage from "../components/OnThisPage";
 import qrcode from "../pages/../assets/qrcode.png";
+import React, { useRef, useState } from "react";
+import copyIcon from "../../assets/copy-symbol.svg";
+import OnThisPage from "../components/OnThisPage";
+import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
 
-const Resources: React.FC = () => {
+interface ResourcesProps {
+  searchTerm: string;
+}
+
+const Resources: React.FC<ResourcesProps> = ({ searchTerm }) => {
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   return (
     <div className="networkUIQueriesContainer">
       <h2 className="user-path">
@@ -20,7 +33,7 @@ const Resources: React.FC = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h1>Resources</h1>
           <h2>Explore more about Beacon v2 with the following resources:</h2>
           <ul>

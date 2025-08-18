@@ -1,12 +1,21 @@
 import "./ConversionCSVBFF.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const ConversionCSVBFF = () => {
+interface ConversionCSVBFFProps {
+  searchTerm: string;
+}
+
+const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   const copyToClipboard = (snippetId: string, textToCopy: string) => {
     navigator.clipboard
       .writeText(textToCopy)
@@ -53,7 +62,7 @@ const ConversionCSVBFF = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Conversion from CSV to BFF</h1>
           <h1 id="choosing-column-headers">Choosing Column Headers</h1>

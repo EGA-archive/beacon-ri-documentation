@@ -1,12 +1,21 @@
 import "./QueryingAPI.css";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 
-const QueryingAPI = () => {
+interface QueryingAPIProps {
+  searchTerm: string;
+}
+
+const QueryingAPI: React.FC<QueryingAPIProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useHighlightAndScroll(contentRef, searchTerm);
+
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
       .writeText(text)
@@ -45,7 +54,7 @@ const QueryingAPI = () => {
         </a>
       </h2>
       <div className="contentWrapper">
-        <div className="contentColumn">
+        <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 RI API</h3>
           <h1>Querying the API</h1>
           <p>Beacon RI accepts two types of request methods: GET and POST.</p>
