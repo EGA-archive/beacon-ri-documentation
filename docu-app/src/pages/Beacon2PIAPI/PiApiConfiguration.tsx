@@ -127,6 +127,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/conf.py"
               target="_blank"
+              rel="noopener noreferrer"
             >
               conf.py
             </a>{" "}
@@ -248,6 +249,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/conf.py"
               target="_blank"
+              rel="noopener noreferrer"
             >
               conf.py
             </a>
@@ -309,6 +311,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/conf.py"
               target="_blank"
+              rel="noopener noreferrer"
             >
               conf.py
             </a>{" "}
@@ -375,6 +378,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/analysis.py"
               target="_blank"
+              rel="noopener noreferrer"
             >
               analysis.py
             </a>
@@ -596,62 +600,48 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             Managing dataset permissions
           </h2>
           <p>
-            There are 3 possible levels of beacon security for a dataset:
-            public, registered and controlled.
+            There are <b>3 possible levels</b> of beacon security for a dataset:{" "}
+            <b>public</b>, <b>registered</b> and <b>controlled</b>.
           </p>
           <ul>
             <li>
-              A public dataset is a dataset that will be returned in a beacon
-              query without an authentication token. 
+              A <b>public</b> dataset is a dataset that will be returned in a
+              beacon query without an authentication token. 
             </li>
             <li>
-              A registered dataset is a dataset that will be shown after a user
-              sends a valid token (in other words, is logged in).
+              A <b>registered</b> dataset is a dataset that will be shown after
+              a user sends a valid token (in other words, is logged in).
             </li>
             <li>
-              A controlled dataset is a dataset that needs a user to send a
-              valid token for authentication and the user needs to be allowed to
-              query that dataset.
+              A <b>controlled</b> dataset is a dataset that needs a user to send
+              a valid token for authentication and the user needs to be allowed
+              to query that dataset.
             </li>
           </ul>
-          <br></br>
-          <h4 id="edit-yml-files">
+          <h2 id="edit-yml-files">
             Edit the .yml files inside permissions/datasets
-          </h4>
+          </h2>
           <p>
             In order to assign the security level for a dataset in your beacon,
             please go to{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/permissions/datasets/datasets_permissions.yml"
               target="_blank"
+              rel="noopener noreferrer"
             >
               datasets_permissions.yml
             </a>{" "}
             and add your dataset you wish to assign the permissions for it.
-            <br></br>
-            The 3 possible options to allow for the dataset are <b>public</b>,
-            <b>registered</b> or <b>controlled</b>, which needs to be in the
-            first item under the dataset name.
-            <ul>
-              <li>
-                <b>Public</b> means that authentication is not required
-              </li>
-              <li>
-                <b>Registered</b> means authentication required
-              </li>
-              <li>
-                <b>Controlled</b> means authentication required and with
-                specific permissions for the authenticated user.{" "}
-              </li>
-            </ul>
-            After that, depending on the security level you assigned to the
-            dataset, you can set a <b>default_entry_types_granularity</b>, which
-            will set which is the maximum granularity allowed for this dataset,
-            except for the <b>entry_types_exceptions</b>, that can assign a
-            particular granularity for a particular entry type. Beware that the
-            entry type needs to match the entry type id you set for each of the
-            entry type files in their respective <code>conf</code> file: id of
-            analysis, individual, etc.
+            <br></br>The security level (public, registered, or controlled)
+            needs to be the first item under the dataset name. <br></br>After
+            that, depending on the security level you assigned to the dataset,
+            you can set a <b>default_entry_types_granularity</b>, which will set
+            which is the maximum granularity allowed for this dataset, except
+            for the <b>entry_types_exceptions</b>, that can assign a particular
+            granularity for a particular entry type. Beware that the entry type
+            needs to match the entry type id you set for each of the entry type
+            files in their respective <code>conf</code> file: id of analysis,
+            individual, etc.
           </p>
           <div className="codeSnippet">
             <pre>
@@ -1105,6 +1095,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/datasets/datasets_conf.yml"
               target="_blank"
+              rel="noopener noreferrer"
             >
               datasets_conf.yml
             </a>{" "}
