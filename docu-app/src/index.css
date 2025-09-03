@@ -22,7 +22,6 @@ body {
   box-sizing: border-box;
   padding-bottom: 40px;
   min-height: 100vh;
-  overflow-y: auto;
 }
 
 code {
@@ -327,32 +326,33 @@ p.lessMargin {
   max-width: 250px;
   flex-shrink: 0;
   height: auto;
+  position: relative;
 }
+
+/* .onThisPageContainer {
+  background: rgb(104, 79, 79);
+  padding: 10px;
+  border-left: 1px solid #ddd;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  font-size: 14px;
+  position: fixed;
+  top: 289px;
+  overflow-y: auto;
+  background-color: #119bff;
+} */
 
 .onThisPageContainer {
   background: white;
   padding: 10px;
   border-left: 1px solid #ddd;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
   font-size: 14px;
-  position: fixed;
-  /* top: 289px; */
   overflow-y: auto;
+  position: sticky;
+  top: 240px;
+  white-space: wrap;
 }
-
-/* .onThisPageContainer {
-  background: white;
-  padding: 10px;
-  border-left: 1px solid #ddd;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  font-size: 14px;
-  position: fixed;
-  overflow-y: auto; 
-} */
 
 .onThisPageTitle {
   font-weight: bold;

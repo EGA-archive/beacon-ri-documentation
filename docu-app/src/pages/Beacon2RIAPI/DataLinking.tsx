@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface DataLinkingProps {
   searchTerm: string;
@@ -13,7 +14,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -49,7 +50,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
   };
 
   return (
-    <div className="dataLinkingContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -230,7 +231,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
           </div>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

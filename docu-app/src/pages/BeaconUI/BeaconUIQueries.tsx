@@ -2,6 +2,7 @@ import "./BeaconUIQueries.css";
 import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIQueriesProps {
   searchTerm: string;
@@ -12,11 +13,11 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
   useHighlightAndScroll(contentRef, searchTerm);
+  const { activeId } = useDocScrollSpy(contentRef);
 
   return (
-    <div className="beaconUIQueriesContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -46,7 +47,7 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <h4>Coming soon...</h4>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

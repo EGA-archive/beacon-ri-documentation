@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface NetworkUIConfigurationProps {
   searchTerm: string;
@@ -15,8 +16,8 @@ const NetworkUIConfiguration: React.FC<NetworkUIConfigurationProps> = ({
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
   useHighlightAndScroll(contentRef, searchTerm);
+  const { activeId } = useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -31,7 +32,7 @@ const NetworkUIConfiguration: React.FC<NetworkUIConfigurationProps> = ({
   };
 
   return (
-    <div className="networkUIConfigurationContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -177,7 +178,7 @@ const NetworkUIConfiguration: React.FC<NetworkUIConfigurationProps> = ({
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

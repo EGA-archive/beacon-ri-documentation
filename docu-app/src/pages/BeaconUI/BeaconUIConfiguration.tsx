@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIConfigurationProps {
   searchTerm: string;
@@ -14,9 +15,10 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
-  const contentRef = useRef<HTMLDivElement>(null);
 
+  const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  const { activeId } = useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -31,7 +33,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
   };
 
   return (
-    <div className="beaconUIConfigurationContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -177,7 +179,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

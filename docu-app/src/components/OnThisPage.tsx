@@ -1,52 +1,83 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../index.css";
 import "../App.css";
 
-const OnThisPage = () => {
+type OnThisPageProps = {
+  activeId?: string;
+  root?: HTMLElement | null;
+  selector?: string;
+};
+
+type HeadingItem = {
+  id: string;
+  text: string;
+  depth: number;
+};
+
+const DEFAULT_SELECTOR = "h1[id],h2[id],h3[id]";
+
+const OnThisPage: React.FC<OnThisPageProps> = ({
+  activeId,
+  root,
+  selector = DEFAULT_SELECTOR,
+}) => {
   const location = useLocation();
-  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [headings, setHeadings] = useState<HeadingItem[]>([]);
+  const [clickedId, setClickedId] = useState<string | null>(null);
 
   useEffect(() => {
-    const headingElements = Array.from(
-      document.querySelectorAll("h1[id],h2[id], h3[id], h4[id]")
-    );
+    const scope: ParentNode = root ?? document;
+    const nodes = Array.from(scope.querySelectorAll<HTMLElement>(selector));
 
-    const headingsArray = headingElements.map((heading) => ({
-      id: heading.id,
-      text: heading.textContent || "",
-    }));
+    const items: HeadingItem[] = nodes.map((h) => {
+      const tag = h.tagName.toLowerCase();
+      const depth = Number(tag.replace("h", "")) || 1;
+      const txt = (h.textContent || h.innerText || h.id || "").trim();
+      return { id: h.id, text: txt, depth };
+    });
 
-    setHeadings(headingsArray);
-  }, [location.pathname]);
+    setHeadings(items);
+  }, [location.pathname, root, selector]);
+
+  const currentId = useMemo(() => activeId ?? clickedId, [activeId, clickedId]);
 
   const handleClick = (id: string) => {
-    setActiveId(id);
+    setClickedId(id);
   };
-  if (headings.length === 0) {
-    return null;
-  }
+
+  if (!headings.length) return null;
 
   return (
-    <div className="onThisPageContainer sidebarColumn">
+    <nav
+      className="onThisPageContainer sidebarColumn"
+      aria-label="On this page"
+    >
       <h3 className="onThisPageTitle">On this page</h3>
-      <ul>
-        {headings.map((heading) => (
-          <li key={heading.id}>
-            <a
-              href={`#${heading.id}`}
-              className={`onThisPageLink ${
-                activeId === heading.id ? "active" : ""
+      <ul className="onThisPageList">
+        {headings.map((h) => {
+          const isActive = currentId === h.id;
+          return (
+            <li
+              key={h.id}
+              className={`onThisPageItem depth-${h.depth} ${
+                isActive ? "active" : ""
               }`}
-              onClick={() => handleClick(heading.id)}
             >
-              {heading.text}
-            </a>
-          </li>
-        ))}
+              <a
+                href={`#${h.id}`}
+                className="onThisPageLink"
+                aria-current={isActive ? "location" : undefined}
+                onClick={() => handleClick(h.id)}
+                title={h.text}
+              >
+                {h.text}
+              </a>
+            </li>
+          );
+        })}
       </ul>
-    </div>
+    </nav>
   );
 };
 

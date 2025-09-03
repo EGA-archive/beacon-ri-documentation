@@ -2,6 +2,7 @@ import "./NetworkUIQueries.css";
 import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface NetworkUIQueriesProps {
   searchTerm: string;
@@ -12,11 +13,11 @@ const NetworkUIQueries: React.FC<NetworkUIQueriesProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   return (
-    <div className="networkUIQueriesContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -46,7 +47,7 @@ const NetworkUIQueries: React.FC<NetworkUIQueriesProps> = ({ searchTerm }) => {
           <h4>Coming soon...</h4>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface PiApiConfigurationProps {
   searchTerm: string;
@@ -15,7 +16,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -84,7 +85,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
   };
 
   return (
-    <div className="apiConfigContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -1135,7 +1136,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <br></br>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

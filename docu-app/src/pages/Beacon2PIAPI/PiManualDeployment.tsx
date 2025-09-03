@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface PiManualDeploymentProps {
   searchTerm: string;
@@ -15,7 +16,7 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -304,7 +305,7 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

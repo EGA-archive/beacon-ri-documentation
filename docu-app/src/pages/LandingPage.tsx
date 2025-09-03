@@ -8,6 +8,7 @@ interface LandingPageProps {
 
 function LandingPage({ searchTerm }: LandingPageProps) {
   const contentRef = useRef<HTMLDivElement>(null);
+
   useHighlightAndScroll(contentRef, searchTerm);
   return (
     <div className="landingPage" ref={contentRef}>
@@ -152,7 +153,6 @@ function LandingPage({ searchTerm }: LandingPageProps) {
           />
         </div>
       </div>
-
       <footer className="footer">
         <span className="footer-text">
           © Copyright 2025, B2RI/PI Documentation Contributors

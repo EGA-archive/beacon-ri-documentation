@@ -3,6 +3,7 @@ import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface FilteringTermsProps {
   searchTerm: string;
@@ -12,7 +13,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -54,7 +55,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
   };
 
   return (
-    <div className="apiConfigContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -91,8 +92,6 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
             This section explains how to extract, add, and enhance filtering
             terms for your Beacon instance.
           </p>
-
-          {/* FINISHED HERE */}
           <h2 id="automatically-extract-filtering-terms">
             Automatically Extract Filtering Terms
           </h2>
@@ -377,7 +376,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
         </div>
 
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>

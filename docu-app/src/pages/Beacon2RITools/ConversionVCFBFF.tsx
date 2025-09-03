@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface ConversionVCFBFFProps {
   searchTerm: string;
@@ -12,7 +13,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string, textToCopy: string) => {
@@ -36,7 +37,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
   };
 
   return (
-    <div className="conversionContainer">
+    <div className="deploymentContainer">
       <h2 className="user-path">
         <a href="/" className="no-undeline">
           Documentation
@@ -553,7 +554,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage />
+          <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>
       </div>
     </div>
