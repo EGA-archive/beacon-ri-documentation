@@ -1349,6 +1349,91 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             </pre>
           </div>
 
+          <h5 className="cursive">Numerical Measurement Query</h5>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": { "apiVersion": "2.0" },
+    "query": {
+      "filters": [
+        {
+          "id": "anatomical entity",
+          "operator": ">",
+          "value": "49"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": { "skip": 0, "limit": 10 },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
+  http://localhost:5050/api/individuals`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    `curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": { "apiVersion": "2.0" },
+    "query": {
+      "filters": [
+        {
+          "id": "anatomical entity",
+          "operator": ">",
+          "value": "49"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": { "skip": 0, "limit": 10 },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
+  http://localhost:5050/api/individuals`,
+                    "numerical-query"
+                  )
+                }
+              >
+                {copySuccess["numerical-query"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+
+            <p className="note">
+              <img
+                className="note-symbol"
+                src="/note-symbol.png"
+                alt="Note symbol"
+              />
+              <div>
+                You are hitting a special alphanumeric corner case. In such
+                cases, we make the <i>id</i> to be the label of the{" "}
+                <i>assayCode</i>, and then give the value for it. If we follow
+                the "usual" mechanics, the query wouldn't work, as there is no
+                direct relationship between field and value, because as you have
+                been figuring out, this is an array that can have multiple
+                values, so we need a guide for where to assign the value from
+                the filters thrown in the queries to, and we use{" "}
+                <i>assayCode</i> label for that.
+              </div>
+            </p>
+          </div>
+
           <h5 className="cursive">Alphanumerical Value Query (Exact Value)</h5>
           <div className="codeSnippet">
             <pre>

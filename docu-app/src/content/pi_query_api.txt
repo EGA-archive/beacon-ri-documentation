@@ -235,6 +235,32 @@ curl \
   }' \
   http://localhost:5050/api/individuals
 
+  Numerical Measurement Query
+  curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "meta": {
+        "apiVersion": "2.0"
+    },
+    "query": {
+        "filters": [
+{"id": "anatomical entity",
+        "operator": ">",
+        "value": "49"}],
+        "includeResultsetResponses": "HIT",
+        "pagination": {
+            "skip": 0,
+            "limit": 10
+        },
+        "testMode": false,
+        "requestedGranularity": "record"
+    }
+}' \
+  http://localhost:5050/api/individuals
+Note: You are hitting a special alphanumeric corner case. In such cases, we make the id to be the label of the assayCode, and then give the value for it. If we follow the "usual" mechanics, the query wouldn't work, as there is no direct relationship between field and value, because as you have been figuring out, this is an array that can have multiple values, so we need a guide for where to assign the value from the filters thrown in the queries to, and we use assayCode label for that.
+
+
 Alphanumerical Value Query (Exact Value)
 curl \
   -H 'Content-Type: application/json' \
