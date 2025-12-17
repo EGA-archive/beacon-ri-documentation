@@ -1,0 +1,18 @@
+Beacon RI Tools v2
+Updating Record(s)
+
+After having set the configuration parameters for record_type and collection_name in conf.py (see configuration above), you need to have a file in the json records to update folder:
+
+https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/files/updated_json
+
+called update.json.
+
+Inside this file, you can have one record or more (remember to place them inside a list) with a valid Beacon v2 JSON containing an id and datasetId that match an existing id and datasetId already stored in the database.
+
+The existing record in MongoDB will be updated with all the fields provided in the updated JSON and will keep the remaining fields even if they are not included in the update file.
+
+After that, execute the following command to update all records inside the file:
+
+docker exec ri-tools python update_record.py
+
+Note: If the JSON does not match the Beacon v2 specification, the execution will fail.

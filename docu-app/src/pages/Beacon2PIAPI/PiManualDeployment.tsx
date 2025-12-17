@@ -36,6 +36,17 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
         'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets',
         'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData',
       ].join("\n"),
+      "data-injection-alternative": [
+        "gunzip --stdout genomicVariations.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection genomicVariations'",
+        "gunzip --stdout analyses.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection analyses'",
+        "gunzip --stdout biosamples.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection biosamples'",
+        "gunzip --stdout datasets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection datasets'",
+        "gunzip --stdout cohorts.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection cohorts'",
+        "gunzip --stdout runs.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection runs'",
+        "gunzip --stdout individuals.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection individuals'",
+        "gunzip --stdout targets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection targets'",
+        "gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri \"mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin\" --collection caseLevelData'",
+      ].join("\n"),
       "data-indexing":
         "docker exec beaconprod python -m beacon.connections.mongo.reindex",
     }[snippetId];
@@ -256,6 +267,40 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
                 onClick={() => copyToClipboard("data-injection")}
               >
                 {copySuccess["data-injection"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Alternatively, now also you can have your json gzipped and insert
+            them in a one step injection with the next commands:
+          </p>
+
+          <div className="codeSnippet codeSnippet-mongodb">
+            <pre>
+              <code>
+                {`gunzip --stdout genomicVariations.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations'
+gunzip --stdout analyses.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection analyses'
+gunzip --stdout biosamples.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection biosamples'
+gunzip --stdout datasets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection datasets'
+gunzip --stdout cohorts.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection cohorts'
+gunzip --stdout runs.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection runs'
+gunzip --stdout individuals.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection individuals'
+gunzip --stdout targets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection targets'
+gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection caseLevelData'`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("data-injection-alternative")}
+              >
+                {copySuccess["data-injection-alternative"] ? (
                   "Copied!"
                 ) : (
                   <img

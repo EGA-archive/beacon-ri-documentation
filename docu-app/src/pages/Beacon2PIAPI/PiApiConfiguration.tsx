@@ -38,10 +38,14 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
 
       "method-1-public":
         "CINECA_synthetic_cohort_EUROPE_UK1:\n  public:\n    default_entry_types_granularity: record\n    entry_types_exceptions:\n      - cohort: boolean\n\nrandom_dataset:\n  registered:\n    default_entry_types_granularity: count\n    entry_types_exceptions:\n      - individual: boolean",
+
       "method-1-registered":
         "AV_Dataset:\n  controlled:\n    default_entry_types_granularity: record\n    entry_types_exceptions:\n      - individual: boolean\n    user-list:\n      - user_e-mail: jane.smith@beacon.ga4gh\n        default_entry_types_granularity: count\n        entry_types_exceptions:\n          - individual: record",
+
       "method-1-controlled": "username:\n- dataset_id",
+
       "method-2-env": `SECRET_KEY="your_permissions_ui_secret_key"\nOIDC_RP_CLIENT_ID='your_client_id'\nOIDC_RP_CLIENT_SECRET='your_client_secret'`,
+
       "method-2-start":
         "docker exec beacon-permissions bash permissions/permissions-ui/start.sh",
       "aai-env": `LSAAI_CLIENT_ID='your_lsaai_client_id'\nLSAAI_CLIENT_SECRET='your_lsaai_client_secret'\nKEYCLOAK_CLIENT_ID='your_keycloak_client_id'\nKEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'`,
@@ -50,17 +54,120 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
       "cors-routes": `for route in list(beacon.router.routes()):\n        cors.add(route, {\n        "your_URL":\n            aiohttp_cors.ResourceOptions(allow_credentials=True,\n            expose_headers="*",\n            allow_methods=("POST", "PATCH", "GET", "OPTIONS"),\n            allow_headers=DEFAULT_ALLOW_HEADERS)`,
       "beacon-info": `beacon_id = 'org.ega-archive.beacon-ri-demo'\nbeacon_name = 'Beacon Reference Implementation demo'\napi_version = 'v2.0.0'\nuri = 'https://beacon-apis-demo.ega-archive.org/api/'\norg_id = 'EGA'\norg_name = 'European Genome-Phenome Archive (EGA)'\norg_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'\norg_adress = 'C/ Dr. Aiguader, 88\nPRBB Building\n08003 Barcelona, Spain'\norg_welcome_url = 'https://ega-archive.org/'\norg_contact_url = 'mailto:beacon.ega@crg.eu'\norg_logo_url = 'https://legacy.ega-archive.org/images/logo.png'\norg_info = ''\ndescription = "This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."\nversion = 'v2.0'\nwelcome_url = 'https://beacon.ega-archive.org/'\nalternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'\ncreate_datetime = '2021-11-29T12:00:00.000000'\nupdate_datetime = ''`,
       "granularity-conf": `default_beacon_granularity = "record"\nmax_beacon_granularity = "record"`,
+      "log-level-config": `level=logging.NOTSET`,
+      "log-file-config": `log_file=None`,
+      "entry-types-yml": `analysis:
+  entry_type_enabled: True
+  max_granularity: record
+  endpoint_name: analyses
+  open_api_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
+  allow_queries_without_filters: True
+  allow_id_query: True # endpoint_name/{id}
+  response_type: non_collection
+  connection:
+    name: mongo
+    database: beacon
+    table: analyses
+    functions:
+      function_name_assigned: get_phenotypic_endpoint
+      id_query_function_name_assigned: get_phenotypic_endpoint_with_id
+  info:
+    name: Bioinformatics analysis
+    ontology_id: edam:operation_2945
+    ontology_name: Analysis
+    description: Apply analytical methods to existing data of a specific type.
+  schema:
+    specification: Beacon v2
+    default_schema_id: beacon-analysis-v2.0.0
+    default_schema_name: Default schema for a bioinformatics analysis
+    reference_to_default_schema_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
+    default_schema_version: v2.0.0
+    supported_schemas:
+      - beacon-analysis-v2.0.0
+      - beacon-analysis-v2.0.1
+      - beacon-analysis-v2.1.0
+      - beacon-analysis-v2.1.1
+      - beacon-analysis-v2.1.2
+      - beacon-analysis-v2.2.0
+  lookups:
+    biosample:
+      endpoint_name: analyses/{id}/biosamples
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: biosamples
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    cohort:
+      endpoint_name: analyses/{id}/cohorts
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: cohorts
+        functions:
+          function_name_assigned: get_cross_collections
+    dataset:
+      endpoint_name: analyses/{id}/datasets
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: datasets
+        functions:
+          function_name_assigned: get_cross_collections
+    genomicVariant:
+      endpoint_name: analyses/{id}/g_variants
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: genomicVariations
+        functions:
+          function_name_assigned: get_variants_of_phenotypic_endpoint
+    individual:
+      endpoint_name: analyses/{id}/individuals
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: individuals
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    run:
+      endpoint_name: analyses/{id}/runs
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: runs
+        functions:
+          function_name_assigned: get_phenotypic_cross_query`,
       "granularity-response": `dummy_user:\n- record`,
-      "beacon-handovers": `beacon_handovers = [
-    {
-        handoverType: {
-            id: 'CUSTOM:000001',
-            label: 'Project description'
-        },
-        note: 'Project description',
-        url: 'https://www.nist.gov/programs-projects/genome-bottle'
-    }
-]`,
+      "handover-definition-object": `handover_1 = {
+  "note": "Description of the handover",
+  "url": "Link for the handover",
+  "handoverType": {
+    "id": "NCIT:C189151",
+    "label": "Study Data Repository"
+  }
+}`,
+
+      "handover-general-list": `list_of_handovers = [handover_1]`,
+
+      "handover-dataset-object": `dataset1_handover = {
+  "dataset": dataset1_id,
+  "handover": handover_1
+}`,
+
+      "handover-dataset-list": `list_of_handovers_per_dataset = [dataset1_handover]`,
     }[snippetId];
 
     if (textToCopy) {
@@ -868,9 +975,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               </code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("beacon-handovers")}
+                onClick={() => copyToClipboard("handover-definition-object")}
               >
-                {copySuccess["beacon-handovers"] ? (
+                {copySuccess["handover-definition-object"] ? (
                   "Copied!"
                 ) : (
                   <img
@@ -893,9 +1000,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               <code>list_of_handovers=[handover_1]</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("beacon-handovers")}
+                onClick={() => copyToClipboard("handover-general-list")}
               >
-                {copySuccess["beacon-handovers"] ? (
+                {copySuccess["handover-general-list"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -916,9 +1023,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               </code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("beacon-handovers")}
+                onClick={() => copyToClipboard("handover-dataset-object")}
               >
-                {copySuccess["beacon-handovers"] ? (
+                {copySuccess["handover-dataset-object"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -932,9 +1039,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               <code>list_of_handovers_per_dataset=[dataset1_handover]</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("beacon-handovers")}
+                onClick={() => copyToClipboard("handover-dataset-list")}
               >
-                {copySuccess["beacon-handovers"] ? (
+                {copySuccess["handover-dataset-list"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -944,33 +1051,117 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           </div>
           <h2 id="configuring-entry-types">Configuring your entry types</h2>
           <p>
-            If you go to the source folder inside beacon folder, you will find a
-            file called <b>manage.py</b> that you will need to edit in order to
-            tell the API what is implemented in your beacon for each entry type
-            and in what database you have the data related to each entry_type.{" "}
-            <br />
-            <br />
-            In order to do this, you will just need to put a True or False
-            response to what granularity you have implemented per each
-            entryType. See the next example:
+            The entry types configuration now works with <b>yml files</b> inside
+            each model.
+            <br></br>
+            You can edit the values of the parameters below (the values after
+            the : ).
+            <br></br>
+            The keys have to remain the same as shown below.
           </p>
           <div className="codeSnippet">
             <pre>
               <code>
-                {`g_variants={ 'granularity': {
-                  'boolean': True,
-                  'count': True,
-                  'record': True },
-          'singleEntryUrl': True,
-          'endpoints': {'analysis': True, 'biosample': True, 'individual': True, 'run': True },
-          'testMode': True,
-          'database': 'mongo' }`}
+                {`analysis:
+  entry_type_enabled: True
+  max_granularity: record
+  endpoint_name: analyses
+  open_api_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
+  allow_queries_without_filters: True
+  allow_id_query: True # endpoint_name/{id}
+  response_type: non_collection
+  connection:
+    name: mongo
+    database: beacon
+    table: analyses
+    functions:
+      function_name_assigned: get_phenotypic_endpoint
+      id_query_function_name_assigned: get_phenotypic_endpoint_with_id
+  info:
+    name: Bioinformatics analysis
+    ontology_id: edam:operation_2945
+    ontology_name: Analysis
+    description: Apply analytical methods to existing data of a specific type.
+  schema:
+    specification: Beacon v2
+    default_schema_id: beacon-analysis-v2.0.0
+    default_schema_name: Default schema for a bioinformatics analysis
+    reference_to_default_schema_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
+    default_schema_version: v2.0.0
+    supported_schemas:
+      - beacon-analysis-v2.0.0
+      - beacon-analysis-v2.0.1
+      - beacon-analysis-v2.1.0
+      - beacon-analysis-v2.1.1
+      - beacon-analysis-v2.1.2
+      - beacon-analysis-v2.2.0
+  lookups:
+    biosample:
+      endpoint_name: analyses/{id}/biosamples
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: biosamples
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    cohort:
+      endpoint_name: analyses/{id}/cohorts
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: cohorts
+        functions:
+          function_name_assigned: get_cross_collections
+    dataset:
+      endpoint_name: analyses/{id}/datasets
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: datasets
+        functions:
+          function_name_assigned: get_cross_collections
+    genomicVariant:
+      endpoint_name: analyses/{id}/g_variants
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: genomicVariations
+        functions:
+          function_name_assigned: get_variants_of_phenotypic_endpoint
+    individual:
+      endpoint_name: analyses/{id}/individuals
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: individuals
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    run:
+      endpoint_name: analyses/{id}/runs
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: runs
+        functions:
+          function_name_assigned: get_phenotypic_cross_query`}
               </code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("granularity-conf")}
+                onClick={() => copyToClipboard("entry-types-yml")}
               >
-                {copySuccess["granularity-conf"] ? (
+                {copySuccess["entry-types-yml"] ? (
                   "Copied!"
                 ) : (
                   <img
@@ -983,15 +1174,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            If none of the granularities are True, then beacon will not look at
-            the other variables (as entryType will be programmed as not
-            implemented). If some of the granularities are True, then,
-            singleEntryUrl will tell if a beacon has the id queries implemented
-            for this entryType and for each endpoint inside endpoints, which
-            cross query with this entryType and the id parameter is implemented
-            as well. The <b>testMode</b> is to point if the entryType can be
-            queried using testMode and the database field will tell the users
-            which database has the data for that particular entryType.
+            These files are located in their respective folder
+            (beacon/models/conf/entry_types).
           </p>
           <p className="note">
             <img
@@ -1023,9 +1207,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               <code>level=logging.NOTSET</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("granularity-conf")}
+                onClick={() => copyToClipboard("log-level-config")}
               >
-                {copySuccess["granularity-conf"] ? (
+                {copySuccess["log-level-config"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -1042,9 +1226,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               <code>log_file=None</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("granularity-conf")}
+                onClick={() => copyToClipboard("log-file-config")}
               >
-                {copySuccess["granularity-conf"] ? (
+                {copySuccess["log-file-config"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />

@@ -35,7 +35,7 @@ If the containers are built correctly:
 Data Injection
 Copy all the available BFF files you have to the [data folder for mongo database](https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data).
 
-**Note:** A beacon can run without data or data for a single collection (e.g., only individuals).
+Tip: A beacon can run without data or data for a single collection (e.g., only individuals).
 
 Now execute the insertion of the files copied into the mongo database.
 
@@ -49,6 +49,20 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
 docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/runs.json --collection runs
 docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets
 docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData
+```
+
+Alternatively, now also you can have your json gzipped and insert them in a one step injection with the next commands:
+
+```bash
+gunzip --stdout genomicVariations.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations'
+gunzip --stdout analyses.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection analyses'
+gunzip --stdout biosamples.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection biosamples'
+gunzip --stdout datasets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection datasets'
+gunzip --stdout cohorts.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection cohorts'
+gunzip --stdout runs.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection runs'
+gunzip --stdout individuals.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection individuals'
+gunzip --stdout targets.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection targets'
+gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection caseLevelData'
 ```
 
 Data Indexing

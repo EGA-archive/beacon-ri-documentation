@@ -1068,25 +1068,6 @@ genomicVariations.json`}</code>
             .
           </p>
           <p>This is what you should be seeing:</p>
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec -it ri-tools python genomicVariations_vcf.py
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard("python-genomicVariations-vcf-py")
-                }
-              >
-                {copySuccess["python-genomicVariations-vcf-py"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
           <img
             className="relationship-elements"
             alt="Relationship-elements"

@@ -219,8 +219,6 @@ If the operation is successful, you will have a beacon up and running at http://
 
 This is what you should be seeing:
 
-docker exec -it ri-tools python genomicVariations_vcf.py
-
 Relationship-elements
 When searching http://localhost:5050/api we land at the /info entrypoint of the API. To make your own landing page please visit Editing your beacon information webpage and modify the required files before deploying.
 

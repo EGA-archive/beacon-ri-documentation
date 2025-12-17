@@ -17,7 +17,7 @@ function LandingPage({ searchTerm }: LandingPageProps) {
         <a href="/" className="no-undeline">
           <h2>Documentation</h2>
         </a>
-        <h3>Beacon v2 Reference/Production Implementation Documentation</h3>
+        <h3>CRG Beacon Documentation</h3>
         <p>
           <b>Beacon v2 Reference Implementation (B2RI) </b>and{" "}
           <b>Beacon v2 Production Implementation (B2PI) </b> are tools that
@@ -155,7 +155,7 @@ function LandingPage({ searchTerm }: LandingPageProps) {
       </div>
       <footer className="footer">
         <span className="footer-text">
-          © Copyright 2025, B2RI/PI Documentation Contributors
+          © Copyright 2025, CRG Beacon Documentation Contributors
         </span>
       </footer>
       <br></br>

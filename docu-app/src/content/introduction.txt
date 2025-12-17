@@ -1,6 +1,5 @@
 Documentation
-Beacon v2 Reference/Production Implementation Documentation
-
+CRG Beacon Documentation
 
 Beacon v2 Reference Implementation (B2RI) and Beacon v2 Production Implementation (B2PI) are tools that provide a REST API and enable queries of genomic and phenotypic data in compliance with Beacon v2 standard.
 
@@ -37,4 +36,4 @@ EGA
 CRG
 ELIXIR
 EMBL-EBI
-© Copyright 2025, B2RI Documentation Contributors
+© Copyright 2025, CRG Beacon Documentation Contributors

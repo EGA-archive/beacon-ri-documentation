@@ -1,0 +1,114 @@
+Documentation
+
+Beacon 2 PI API
+
+Beacon 2 Production Implementation API
+Models
+
+Enable / Disable Models
+
+Beacon PI admits different models to be plugged in. By default, two models come with Beacon PI:
+
+EUCAIM
+
+ga4gh/beacon_v2_default_model
+
+In order to enable or disable a model, you need to edit the file:
+
+conf/models/models_conf.yml
+
+Set the enabled values to True or False as preferred.
+
+Example configuration:
+
+ga4gh/beacon_v2_default_model:
+model_enabled: True
+
+EUCAIM:
+model_enabled: True
+
+Add a New Model
+
+To add a new model, create a new folder with the name of your model. Inside this folder, you must add three subfolders with the following exact names:
+
+conf
+
+connections
+
+validator
+
+Inside the conf folder, add the YAML files for each entity of the model inside a folder called entry_types.
+The name of each file must match the ID of the entity. For example, analysis.yml will expose analysis as the main key.
+
+The content of each YAML file must follow the structure shown below.
+
+Example entry type configuration:
+
+analysis:
+entry_type_enabled: True
+max_granularity: record
+endpoint_name: analyses
+open_api_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
+
+allow_queries_without_filters: True
+allow_id_query: True (endpoint_name/{id})
+response_type: non_collection
+connection:
+name: mongo
+database: beacon
+table: analyses
+functions:
+function_name_assigned: get_phenotypic_endpoint
+id_query_function_name_assigned: get_phenotypic_endpoint_with_id
+info:
+name: Bioinformatics analysis
+ontology_id: edam:operation_2945
+ontology_name: Analysis
+description: Apply analytical methods to existing data of a specific type.
+schema:
+specification: Beacon v2
+default_schema_id: beacon-analysis-v2.0.0
+default_schema_name: Default schema for a bioinformatics analysis
+reference_to_default_schema_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
+
+default_schema_version: v2.0.0
+supported_schemas:
+- beacon-analysis-v2.0.0
+- beacon-analysis-v2.0.1
+- beacon-analysis-v2.1.0
+- beacon-analysis-v2.1.1
+- beacon-analysis-v2.1.2
+- beacon-analysis-v2.2.0
+lookups:
+biosample:
+endpoint_name: analyses/{id}/biosamples
+response_type: non_collection
+endpoint_enabled: True
+cohort:
+endpoint_name: analyses/{id}/cohorts
+response_type: collection
+endpoint_enabled: True
+dataset:
+endpoint_name: analyses/{id}/datasets
+response_type: collection
+endpoint_enabled: True
+genomicVariant:
+endpoint_name: analyses/{id}/g_variants
+response_type: non_collection
+endpoint_enabled: True
+individual:
+endpoint_name: analyses/{id}/individuals
+response_type: non_collection
+endpoint_enabled: True
+run:
+endpoint_name: analyses/{id}/runs
+response_type: non_collection
+endpoint_enabled: True
+
+Note
+
+Lookup entries may vary depending on the entities available in the model.
+
+Additionally, the connections folder must contain a subfolder named after the connection type used by the model (currently only mongo is supported). This folder must include the required files (collections.py and non_collections.py) implementing the functions referenced in the YAML configuration.
+
+Finally, the validator folder must contain Pydantic classes for each entity and for collection and non-collection responses. These classes must reference the correct schema and define all properties and values supported by each entity.

@@ -23,6 +23,7 @@ import NetworkUIConfiguration from "./pages/BeaconNetworkUI/NetworkUIConfigurati
 import NetworkUIQueries from "./pages/BeaconNetworkUI/NetworkUIQueries";
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
+import Models from "./pages/Beacon2PIAPI/Models";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
@@ -33,6 +34,7 @@ import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
 import ScrollToTop from "./ScrollToTop";
 import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
 import TestData from "./pages/Beacon2RITools/TestData";
+import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -83,6 +85,7 @@ function App() {
       "Filtering Terms",
       "Configuration",
       "Querying the API",
+      "Models",
     ],
     "Beacon 2 RI API": [
       "Automated Deployment",
@@ -100,6 +103,7 @@ function App() {
       "Conversion from Phenopackets to BFF",
       "Common Errors",
       "Test Data",
+      "Updating Records",
     ],
     "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
     "Beacon Network UI": [
@@ -157,6 +161,10 @@ function App() {
                   element={<PiQueryingAPI searchTerm={searchTerm} />}
                 />
 
+                <Route
+                  path="/models"
+                  element={<Models searchTerm={searchTerm} />}
+                />
                 {/* Beacon 2 RI API Routes */}
                 <Route
                   path="/automated-deployment"
@@ -215,6 +223,10 @@ function App() {
                 <Route
                   path="/test-data"
                   element={<TestData searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/updating-records"
+                  element={<UpdatingRecords searchTerm={searchTerm} />}
                 />
 
                 {/* Beacon UI */}

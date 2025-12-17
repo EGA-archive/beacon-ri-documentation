@@ -78,7 +78,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
   return (
     <div className="containerNav">
-      <h1 className="main-title">Beacon v2 RI / PI Documentation</h1>
+      <h1 className="main-title">CRG Beacon Documentation</h1>
       <div className="divOptionsInput">
         <div className="inputContainer">
           <div className="inputDiv">

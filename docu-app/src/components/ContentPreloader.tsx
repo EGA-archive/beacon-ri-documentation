@@ -8,6 +8,8 @@ import PiManualDeploymentText from "../content/pi_manual_deployment.txt";
 import FilteringTermsText from "../content/filtering_terms.txt";
 import ConfigurationPiText from "../content/configuration_pi.txt";
 import PiQueryingApiText from "../content/pi_query_api.txt";
+import ModelsText from "../content/models.txt";
+
 // Beacon 2 RI API
 import AutomatedDeploymentText from "../content/automated_deployment.txt";
 import ManualDeploymentText from "../content/manual_deployment.txt";
@@ -22,6 +24,7 @@ import ConversionVCFBFFText from "../content/conversion_vcfbff.txt";
 import ConversionPhenopacketsBFFText from "../content/ConversionPhenopacketsBFFText.txt";
 import CommonErrorsText from "../content/CommonErrorsText.txt";
 import TestDataText from "../content/TestDataText.txt";
+import UpdatingRecordsText from "../content/updating_records.txt";
 // Beacon UI
 import QueryingUIText from "../content/querying_ui.txt";
 import DeploymentUIText from "../content/deployment_ui.txt";
@@ -91,6 +94,8 @@ const ContentPreloader = () => {
     "Querying the API"
   );
 
+  useRegisterTextContent("/models", ModelsText, "Models");
+
   // Beacon 2 RI API Tools v2
   useRegisterTextContent(
     "/starting-guide",
@@ -130,6 +135,12 @@ const ContentPreloader = () => {
 
   // Here
   useRegisterTextContent("/test-data", TestDataText, "Test Data");
+
+  useRegisterTextContent(
+    "/updating-records",
+    UpdatingRecordsText,
+    "Updating Records"
+  );
 
   // Beacon UI
   useRegisterTextContent("/deployment", DeploymentUIText, "Deployment");
