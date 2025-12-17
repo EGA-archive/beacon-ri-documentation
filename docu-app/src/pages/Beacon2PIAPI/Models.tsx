@@ -234,19 +234,27 @@ EUCAIM:
 
           <h2 id="add-new-model">Add a new model</h2>
           <p>
-            On the other hand, to add a new model, you need to create a new
-            folder with the name of your model and add three folders within the
-            new model: conf, connections, validator, with these exact same
-            names.
-            <br></br>
-            In the folder conf you need to add the yml files of each entity of
-            the model inside a folder called entry_types. The name of the files
-            need to match the id of the entity (e.g. analysis.yml will show
-            analysis as the main key).
-            <br></br>
-            The info inside needs to have the same parameters shown here:
+            On the other hand, to add a new model, you need to create a new{" "}
+            <strong>folder</strong> with the name of your model and add three
+            folders within the new model: <strong>conf</strong>,{" "}
+            <strong>connections</strong>, <strong> validator</strong>, using
+            these exact names.
           </p>
 
+          <p>
+            Inside the <strong>conf</strong> folder, you must add the{" "}
+            <em>YAML files</em>
+            for each entity of the model inside a folder called{" "}
+            <strong>entry_types</strong>. The name of each file must match the
+            <em>id of the entity</em> (for example,{" "}
+            <strong>analysis.yml</strong> will expose <em>analysis</em> as the
+            main key).
+          </p>
+
+          <p>
+            The content of each file must follow the same parameters shown
+            below.
+          </p>
           <div className="codeSnippet">
             <pre>
               <code>
@@ -370,15 +378,20 @@ EUCAIM:
               alt="Note symbol"
             />
             <div>
-              Note: lookups entries can vary depending on the entities available
-              for the model. Also, the connections folder needs to have a folder
-              with the name of the connection for the model (only mongo
-              available now) and then have the minimum files (collections.py and
-              non_collections.py) with the functions that are shown in the yml
-              conf file for each entity. Lastly, in validator, pydantic classes
-              per entity and collection/non_collection type need to be added,
-              with the name of the schema they belong to and with the different
-              properties and values that each of the entity carries in them.
+              <strong>Note:</strong> <em>lookups entries</em> can vary depending
+              on the entities available for the model. Also, the{" "}
+              <strong>connections folder</strong>
+              must contain a subfolder named after the connection used by the
+              model (<em>only mongo is available at the moment</em>). This
+              folder must include at least the <strong>collections.py</strong>{" "}
+              and
+              <strong>non_collections.py</strong> files, implementing the
+              functions referenced in the YAML configuration for each entity.
+              Lastly, the <strong>validator</strong> folder must include
+              <em>pydantic classes</em> for each entity and for
+              <em>collection</em> and <em>non_collection</em> response types.
+              These classes must reference the correct <em>schema</em> and
+              define the properties and values supported by each entity.
             </div>
           </p>
         </div>

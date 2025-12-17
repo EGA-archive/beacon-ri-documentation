@@ -16,6 +16,7 @@ import ManualDeploymentText from "../content/manual_deployment.txt";
 import DataLinkingText from "../content/data_linking.txt";
 import QueryingApiText from "../content/query_api.txt";
 import ConfigurationRiText from "../content/configuration_ri.txt";
+
 // Beacon 2 RI API Tools v2
 import StartingGuideText from "../content/starting_guide.txt";
 import ConfigurationFile from "../content/configuration_file.txt";
@@ -25,14 +26,17 @@ import ConversionPhenopacketsBFFText from "../content/ConversionPhenopacketsBFFT
 import CommonErrorsText from "../content/CommonErrorsText.txt";
 import TestDataText from "../content/TestDataText.txt";
 import UpdatingRecordsText from "../content/updating_records.txt";
+
 // Beacon UI
 import QueryingUIText from "../content/querying_ui.txt";
 import DeploymentUIText from "../content/deployment_ui.txt";
 import ConfigurationUIText from "../content/configuration_ui.txt";
+
 // Beacon Network UI
 import NetworkQueryingTheUIText from "../content/network_querying_ui.txt";
 import NetworkDeploymentUIText from "../content/deployment_networkui.txt";
 import NetworkConfigurationUIText from "../content/configuration_networkui.txt";
+
 // Tutorials
 import UseCaseText from "../content/use_case.txt";
 import CreateYourBeaconText from "../content/create_your_beacon.txt";
@@ -130,10 +134,8 @@ const ContentPreloader = () => {
     "Conversion from Phenopackets to BFF"
   );
 
-  // Here
   useRegisterTextContent("/common-errors", CommonErrorsText, "Common Errors");
 
-  // Here
   useRegisterTextContent("/test-data", TestDataText, "Test Data");
 
   useRegisterTextContent(
