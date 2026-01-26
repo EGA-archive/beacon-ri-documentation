@@ -28,6 +28,11 @@ interface MenuProps {
   toggleSubmenu: () => void;
 }
 
+const ROUTES: Record<string, string> = {
+  LANDING_INTRO: "/",
+  RI_INTRO: "/introduction",
+};
+
 export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,10 +45,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   };
 
   const handleMainMenuClick = (menuItem: string) => {
-    // console.log("🖇️ Clicked main menu:", menuItem);
-
     if (menuItem === "Introduction") {
-      // console.log("➡ Navigating to: /");
       navigate("/");
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
@@ -55,13 +57,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
 
     if (!subMenus) {
       const path = `/${menuItem.toLowerCase().replace(/ /g, "-")}`;
-      // console.log(`🚀 Navigating to (no submenus): ${path}`);
       navigate(path);
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
     } else if (activeMenu === menuItem) {
-      // console.log(`📂 Closing submenu for: ${menuItem}`);
       setActiveMenu(null);
       setActiveMenuItem(null);
     } else {
@@ -74,16 +74,12 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
         path = "/pi-automated-deployment";
       }
       if (
-        menuItem === "Beacon 2 RI API" &&
+        menuItem === "Reference Implementation" &&
         firstSubMenuItem === "Automated Deployment"
       ) {
         path = "/automated-deployment";
       }
 
-      // console.log(
-      //   `📂 Expanding ${menuItem}, default subpage: ${firstSubMenuItem}`
-      // );
-      // console.log(`➡ Navigating to: ${path}`);
       navigate(path);
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenu(menuItem);
@@ -92,11 +88,21 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   };
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
+    if (
+      subItem === "Introduction" &&
+      parentMenu === "Reference Implementation"
+    ) {
+      navigate("/introduction");
+      setActiveMenu("Reference Implementation");
+      setActiveMenuItem("Introduction");
+      return;
+    }
+
     let path = subItem.toLowerCase().replace(/ /g, "-");
 
     if (subItem === "Configuration") {
       path =
-        parentMenu === "Beacon 2 RI API"
+        parentMenu === "Reference Implementation"
           ? "api-configuration"
           : "configuration";
     }

@@ -34,9 +34,10 @@ function LandingPage({ searchTerm }: LandingPageProps) {
         <li>
           <b>Beacon RI Tools v2.</b> This tool enables conversion of .csv/.vcf
           files to .json files in a Beacon Friendly Format (BFF). Note that
-          Beacon RI Tools v2 are designed to work with both Beacon 2 RI API or
-          Beacon 2 PI API. Specifically, it includes all the features that are
-          needed for generating Beacon v2 PI API compatible data.
+          Beacon RI Tools v2 are designed to work with both Reference
+          Implementation or Beacon 2 PI API. Specifically, it includes all the
+          features that are needed for generating Beacon v2 PI API compatible
+          data.
         </li>
         <li>
           <b>Beacon RI API / PI API.</b> The API connects to a MongoDB database
@@ -50,10 +51,10 @@ function LandingPage({ searchTerm }: LandingPageProps) {
           is compliant with Beacon v2 and provides a verification report.
         </li>
         <li>
-          <b>Beacon User Interface.</b> The user-friendly interface for querying
-          the API without needing to worry about the underlying standards. It
-          supports intuitive queries and enables authentication through
-          LifeScience or Keycloak.
+          <b>Beacon Template User Interface.</b> The user-friendly interface for
+          querying the API without needing to worry about the underlying
+          standards. It supports intuitive queries and enables authentication
+          through LifeScience or Keycloak.
         </li>
         <p>
           Regarding security, the API always validates authentication through
@@ -155,7 +156,7 @@ function LandingPage({ searchTerm }: LandingPageProps) {
       </div>
       <footer className="footer">
         <span className="footer-text">
-          © Copyright 2025, CRG Beacon Documentation Contributors
+          © Copyright 2026, CRG Beacon Documentation Contributors
         </span>
       </footer>
       <br></br>

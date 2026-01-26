@@ -76,7 +76,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
           className="arrow-icon"
         />
         <a href="/manual-deployment" className="no-undeline">
-          Beacon 2 RI API
+          Reference Implementation
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -89,7 +89,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon 2 RI API</h3>
+          <h3>Reference Implementation</h3>
           <h1>Manual Deployment</h1>
 
           <h2 id="cloning-repository">Cloning the repository</h2>

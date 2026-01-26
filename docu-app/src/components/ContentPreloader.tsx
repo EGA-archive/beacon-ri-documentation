@@ -10,7 +10,8 @@ import ConfigurationPiText from "../content/configuration_pi.txt";
 import PiQueryingApiText from "../content/pi_query_api.txt";
 import ModelsText from "../content/models.txt";
 
-// Beacon 2 RI API
+// Referenece Implementation (Beacon 2 RI API)
+import IntroductionReferenceImplementationText from "../content/introduction_reference_implementation.txt";
 import AutomatedDeploymentText from "../content/automated_deployment.txt";
 import ManualDeploymentText from "../content/manual_deployment.txt";
 import DataLinkingText from "../content/data_linking.txt";
@@ -75,29 +76,6 @@ const ContentPreloader = () => {
     "Querying the API"
   );
 
-  // Beacon 2 RI API
-  useRegisterTextContent(
-    "/automated-deployment",
-    AutomatedDeploymentText,
-    "Automated Deployment"
-  );
-  useRegisterTextContent(
-    "/manual-deployment",
-    ManualDeploymentText,
-    "Manual Deployment"
-  );
-  useRegisterTextContent("/data-linking", DataLinkingText, "Data Linking");
-  useRegisterTextContent(
-    "/api-configuration",
-    ConfigurationRiText,
-    "Configuration"
-  );
-  useRegisterTextContent(
-    "/querying-the-api",
-    QueryingApiText,
-    "Querying the API"
-  );
-
   useRegisterTextContent("/models", ModelsText, "Models");
 
   // Beacon 2 RI API Tools v2
@@ -111,11 +89,6 @@ const ContentPreloader = () => {
     ConfigurationFile,
     "Configuration File"
   );
-  // useRegisterTextContent(
-  //   "/creating-the-csv-files",
-  //   CreatingCSVFilesText,
-  //   "Creating the CSV files"
-  // );
 
   useRegisterTextContent(
     "/conversion-from-csv-to-bff",
@@ -184,6 +157,36 @@ const ContentPreloader = () => {
     "/create-your-beacon",
     CreateYourBeaconText,
     "Create Your Beacon"
+  );
+
+  // Reference Implementation (Beacon 2 RI API)
+
+  useRegisterTextContent(
+    "/introduction",
+    IntroductionReferenceImplementationText,
+    "Introduction"
+  );
+
+  useRegisterTextContent(
+    "/automated-deployment",
+    AutomatedDeploymentText,
+    "Automated Deployment"
+  );
+  useRegisterTextContent(
+    "/manual-deployment",
+    ManualDeploymentText,
+    "Manual Deployment"
+  );
+  useRegisterTextContent("/data-linking", DataLinkingText, "Data Linking");
+  useRegisterTextContent(
+    "/api-configuration",
+    ConfigurationRiText,
+    "Configuration"
+  );
+  useRegisterTextContent(
+    "/querying-the-api",
+    QueryingApiText,
+    "Querying the API"
   );
 
   // Resources

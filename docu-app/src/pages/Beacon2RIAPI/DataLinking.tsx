@@ -61,7 +61,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
           className="arrow-icon"
         />
         <a href="/data-linking" className="no-undeline">
-          Beacon 2 RI API
+          Reference Implementation
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -75,7 +75,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
 
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon 2 RI API</h3>
+          <h3>Reference Implementation</h3>
           <h1>Data Linking</h1>
 
           <h2 id="linking-ids">Linking ids to dataset and cohort</h2>

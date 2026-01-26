@@ -56,7 +56,7 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
           className="arrow-icon"
         />
         <a href="/automated-deployment" className="no-undeline">
-          Beacon 2 RI API
+          Reference Implementation
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -69,7 +69,7 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon 2 RI API</h3>
+          <h3>Reference Implementation</h3>
           <h1>Automated Deployment</h1>
           <p>
             This deployment relies on a Bash script and a Makefile, which won’t

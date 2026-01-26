@@ -76,7 +76,7 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
           className="arrow-icon"
         />
         <a href="/api-configuration" className="no-undeline">
-          Beacon 2 RI API
+          Reference Implementation
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -89,7 +89,7 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon 2 RI API</h3>
+          <h3>Reference Implementation</h3>
           <h1>Configuration</h1>
 
           <h2 id="managing-dataset-permissions">

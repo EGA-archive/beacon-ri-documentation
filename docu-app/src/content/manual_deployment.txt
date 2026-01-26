@@ -1,6 +1,6 @@
 Documentation
 
-Beacon 2 RI API
+Reference Implementation
 
 Manual Deployment
 

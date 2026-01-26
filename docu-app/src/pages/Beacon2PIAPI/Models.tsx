@@ -380,15 +380,15 @@ EUCAIM:
             <div>
               <strong>Note:</strong> <em>lookups entries</em> can vary depending
               on the entities available for the model. Also, the{" "}
-              <strong>connections folder</strong>
+              <strong>connections folder </strong>
               must contain a subfolder named after the connection used by the
               model (<em>only mongo is available at the moment</em>). This
               folder must include at least the <strong>collections.py</strong>{" "}
               and
-              <strong>non_collections.py</strong> files, implementing the
+              <strong>non_collections.py </strong> files, implementing the
               functions referenced in the YAML configuration for each entity.
               Lastly, the <strong>validator</strong> folder must include
-              <em>pydantic classes</em> for each entity and for
+              <em> pydantic classes</em> for each entity and for
               <em>collection</em> and <em>non_collection</em> response types.
               These classes must reference the correct <em>schema</em> and
               define the properties and values supported by each entity.

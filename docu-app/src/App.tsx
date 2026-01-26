@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import { SearchableContentProvider } from "./context/SearchableContentContext";
 import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
 import ContentPreloader from "./components/ContentPreloader";
+import Introduction from "./pages/Beacon2RIAPI/Introduction";
 import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
 import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
 import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
@@ -18,9 +19,6 @@ import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
 import BeaconUIConfiguration from "./pages/BeaconUI/BeaconUIConfiguration";
 import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
-import NetworkUIDeployment from "./pages/BeaconNetworkUI/NetworkUIDeployment";
-import NetworkUIConfiguration from "./pages/BeaconNetworkUI/NetworkUIConfiguration";
-import NetworkUIQueries from "./pages/BeaconNetworkUI/NetworkUIQueries";
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import Models from "./pages/Beacon2PIAPI/Models";
@@ -68,13 +66,12 @@ function App() {
   const menuItems = [
     "Introduction",
     "Beacon 2 PI API",
-    "Beacon 2 RI API",
     "Beacon RI Tools v2",
     // "Beacon Verifier",
     "Beacon UI",
-    "Beacon Network UI",
     "Tutorials",
     // "FAQs",
+    "Reference Implementation",
     "Resources",
   ];
 
@@ -87,7 +84,8 @@ function App() {
       "Querying the API",
       "Models",
     ],
-    "Beacon 2 RI API": [
+    "Reference Implementation": [
+      "Introduction",
       "Automated Deployment",
       "Manual Deployment",
       "Data Linking",
@@ -106,11 +104,7 @@ function App() {
       "Updating Records",
     ],
     "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
-    "Beacon Network UI": [
-      "Network Deployment",
-      "Network Configuration UI",
-      "Network Querying the UI",
-    ],
+
     Tutorials: ["Create your Beacon", "Example Beacon: Rare Disease Use Case"],
   };
 
@@ -165,7 +159,12 @@ function App() {
                   path="/models"
                   element={<Models searchTerm={searchTerm} />}
                 />
-                {/* Beacon 2 RI API Routes */}
+                {/* Reference Implementation (Beacon 2 RI API) Routes */}
+
+                <Route
+                  path="/introduction"
+                  element={<Introduction searchTerm={searchTerm} />}
+                />
                 <Route
                   path="/automated-deployment"
                   element={<AutomatedDeployment searchTerm={searchTerm} />}
@@ -241,20 +240,6 @@ function App() {
                 <Route
                   path="/querying-the-ui"
                   element={<BeaconUIQueries searchTerm={searchTerm} />}
-                />
-
-                {/* Beacon Network UI */}
-                <Route
-                  path="/network-deployment"
-                  element={<NetworkUIDeployment searchTerm={searchTerm} />}
-                />
-                <Route
-                  path="/network-configuration-ui"
-                  element={<NetworkUIConfiguration searchTerm={searchTerm} />}
-                />
-                <Route
-                  path="/network-querying-the-ui"
-                  element={<NetworkUIQueries searchTerm={searchTerm} />}
                 />
 
                 {/* Tutorials */}

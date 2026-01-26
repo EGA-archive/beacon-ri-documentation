@@ -1,5 +1,5 @@
-Documentation Beacon 2 RI API Querying the API
-Beacon 2 RI API
+Documentation Reference Implementation Querying the API
+Reference Implementation
 Querying the API
 Beacon RI accepts two types of request methods: GET and POST.
 

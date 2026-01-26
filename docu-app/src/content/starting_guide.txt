@@ -6,7 +6,7 @@ Starting Guide
 The Beacon RI Tools v2 is a set of tools written in Python available in the following GitHub repository:
 https://github.com/EGA-archive/beacon-data-tools
 
-Notice that Beacon RI Tools v2 are meant to work with either Beacon 2 RI API or Beacon 2 PI API. Furthermore, it specifically comes with all the features that are needed for generating Beacon v2 PI API compatible data.
+Notice that Beacon RI Tools v2 are meant to work with either Reference Implementation or Beacon 2 PI API. Furthermore, it specifically comes with all the features that are needed for generating Beacon v2 PI API compatible data.
 
 The main goal of Beacon RI Tools v2 is to obtain the Beacon Friendly Format (BFF) files, which are JSON files following Beacon v2 official specifications. These files have the correct format and structure to be injected into a Beacon v2 MongoDB database.
 

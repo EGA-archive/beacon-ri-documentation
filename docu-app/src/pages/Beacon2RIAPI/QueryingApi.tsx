@@ -42,7 +42,7 @@ const QueryingAPI: React.FC<QueryingAPIProps> = ({ searchTerm }) => {
         />
         <a href="/querying-the-api" className="no-undeline">
           {" "}
-          Beacon 2 RI API
+          Reference Implementation
         </a>
 
         <img
@@ -56,7 +56,7 @@ const QueryingAPI: React.FC<QueryingAPIProps> = ({ searchTerm }) => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon 2 RI API</h3>
+          <h3>Reference Implementation</h3>
           <h1>Querying the API</h1>
           <p>Beacon RI accepts two types of request methods: GET and POST.</p>
           <div className="note">
