@@ -30,7 +30,7 @@ The num_variants is the variable you need to write in case you are executing the
 
 The allele_frequency field lets you set a threshold for the allele frequency (AF) of the variants you want to convert from the VCF file. If you set it at 0.5, all the variants with 0.5 or less AF will be converted to BFF. 1 is the default value (all variants will be converted).
 
-The allele_counts now is not implemented yet, just leave it as False.
+The allele_counts is a variable that, in case populations.json file is active, will read the allele frequencies per allele (if True) or per Genotype (if False).
 
 The reference_genome is the reference genome the tool will use to map the position of the chromosomes. Make sure to select the same version as the one used to generate your data.
 

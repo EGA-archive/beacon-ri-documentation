@@ -193,8 +193,9 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           </p>
 
           <p>
-            The <i>allele_counts</i> now is not implemented yet, just leave it
-            as False.
+            The <i>allele_counts</i> is a variable that, in case
+            populations.json file is active, will read the allele frequencies
+            per allele (if True) or per Genotype (if False).
           </p>
           <p>
             The <i>reference_genome</i> is the reference genome the tool will

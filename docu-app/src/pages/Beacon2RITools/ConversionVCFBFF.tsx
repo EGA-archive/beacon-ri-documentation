@@ -100,7 +100,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             By default, Beacon RI Tools v2 supports <b>VEP annotation</b>, in
             case your VCF has the designated VEP row in the VCF header:
           </p>
-
           <div className="codeSnippet">
             <pre>
               <code>
@@ -120,12 +119,15 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["vcfInfo"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
           </div>
-
           <p>
             Some of the fields will be parsed into BFF. Right now, the fields
             that will be read are:
@@ -136,7 +138,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             <li>HGVSp → molecularAttributes|aminoacidChanges</li>
             <li>Consequence → molecularAttributes|molecularEffects|label</li>
           </ul>
-
           <p>
             Additionally, for filling in the required fields, the INFO column
             will read the next entries:
@@ -161,7 +162,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
               column is not filled in)
             </li>
           </ul>
-
           <p>
             On the other hand, if your VCF doesn’t have VEP annotations or you
             want to use your own customized annotations, you can do that by
@@ -177,23 +177,35 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             <strong>populations.json</strong> and
             <strong> template.json</strong>. <br />
             The <strong>populations.json</strong> will allow you to add how you
-            annotated all the allele frequency related entries:
+            annotated all the allele frequency related entries. The allele
+            frequencies can be read per the whole genotype or per a single
+            allele.
+            <br />
+            <br />
+            <b>Example 1: Population with Genotype reads</b>
+            <br />
+            For VCF files containing aggregated data (e.g., total population
+            only), your populations.json should look like:
           </p>
           <div className="codeSnippet">
             <pre>
               <code>
-                {`{ 
+                {`{
   "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
-  "sourceReference": "gnomad.broadinstitute.org/",
-  "populations": [{
-            "population": "Total",
-            "alleleFrequency": "AF",
-            "alleleCount": "AC",
-            "alleleCountHomozygous": "AC_hom",
-            "alleleCountHeterozygous": "AC_het",
-            "alleleNumber": "AN" }]
-  }`}
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Total",
+      "alleleFrequency": "AF",
+      "alleleCount": "AC",
+      "genotypeHomozygous": "AC_hom",
+      "genotypeHeterozygous": "AC_het",
+      "genotypeHemizygous": "AC_hemi",
+      "alleleNumber": "AN"
+    }
+  ]
+}`}
               </code>
               <button
                 className="copyButtonCode"
@@ -201,19 +213,20 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                   copyToClipboard(
                     "genomic-data-extraction",
                     `{
-    "numberOfPopulations": 1,
-    "source": "The Genome Aggregation Database (gnomAD)",
-    "sourceReference": "gnomad.broadinstitute.org/",
-    "populations": [
-        {
-            "population": "Total",
-            "alleleFrequency": "AF",
-            "alleleCount": "AC",
-            "alleleCountHomozygous": "AC_hom",
-            "alleleCountHeterozygous": "AC_het",
-            "alleleNumber": "AN"
-        }
-    ]
+  "numberOfPopulations": 1,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Total",
+      "alleleFrequency": "AF",
+      "alleleCount": "AC",
+      "genotypeHomozygous": "AC_hom",
+      "genotypeHeterozygous": "AC_het",
+      "genotypeHemizygous": "AC_hemi",
+      "alleleNumber": "AN"
+    }
+  ]
 }`
                   )
                 }
@@ -221,12 +234,198 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["genomic-data-extraction"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
           </div>
-
+          <p>
+            <b>Example 2: Population with single allele reads</b>
+            <br />
+            For VCF files containing aggregated data (e.g., total population
+            only), your populations.json should look like:{" "}
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`{
+  "numberOfPopulations": 1,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Total",
+      "alleleFrequency": "AF",
+      "alleleCount": "AC",
+      "alleleCountHomozygous": "AC_hom",
+      "alleleCountHeterozygous": "AC_het",
+      "alleleCountHemizygous": "AC_hemi",
+      "alleleNumber": "AN"
+    }
+  ]
+}`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "genomic-data-extraction-allele-count",
+                    `{
+  "numberOfPopulations": 1,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Total",
+      "alleleFrequency": "AF",
+      "alleleCount": "AC",
+      "alleleCountHomozygous": "AC_hom",
+      "alleleCountHeterozygous": "AC_het",
+      "alleleCountHemizygous": "AC_hemi",
+      "alleleNumber": "AN"
+    }
+  ]
+}`
+                  )
+                }
+              >
+                {copySuccess["genomic-data-extraction-allele-count"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            <b>
+              Example 3: Multiple Populations (e.g., by sex) with genotype reads
+            </b>
+            <br />
+            For VCFs containing population-stratified annotations:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`{
+  "numberOfPopulations": 2,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Males",
+      "alleleFrequency": "AF_male",
+      "alleleCount": "AC_male",
+      "genotypetHomozygous": "AC_hom_male",
+      "genotypeHeterozygous": "AC_het_male",
+      "genotypeHemizygous": "AC_hemi_male",
+      "alleleNumber": "AN_male"
+    },
+    {
+      "population": "Females",
+      "alleleFrequency": "AF_female",
+      "alleleCount": "AC_female",
+      "genotypeHomozygous": "AC_hom_female",
+      "genotypeHeterozygous": "AC_het_female",
+      "genotypeHemizygous": "AC_hemi_female",
+      "alleleNumber": "AN_female"
+    }
+  ]
+}`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "genomic-data-extraction-multiple-populations",
+                    `{
+  "numberOfPopulations": 2,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "https://gnomad.broadinstitute.org/",
+  "populations": [
+    {
+      "population": "Males",
+      "alleleFrequency": "AF_male",
+      "alleleCount": "AC_male",
+      "genotypetHomozygous": "AC_hom_male",
+      "genotypeHeterozygous": "AC_het_male",
+      "genotypeHemizygous": "AC_hemi_male",
+      "alleleNumber": "AN_male"
+    },
+    {
+      "population": "Females",
+      "alleleFrequency": "AF_female",
+      "alleleCount": "AC_female",
+      "genotypeHomozygous": "AC_hom_female",
+      "genotypeHeterozygous": "AC_het_female",
+      "genotypeHemizygous": "AC_hemi_female",
+      "alleleNumber": "AN_female"
+    }
+  ]
+}`
+                  )
+                }
+              >
+                {copySuccess["genomic-data-extraction-multiple-populations"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            By properly configuring the populations.json file, you ensure that
+            Beacon can accurately report allele frequencies and related metrics
+            for each population in your dataset.
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Note: Double-check that the annotation keys (e.g., AF_male,
+              AC_female, etc.) correspond exactly to the field names in the INFO
+              column of your VCF.
+            </div>
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Note: For all the information to be correctly read, before
+              processing the VCF split the multiallelic variants.
+            </div>
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Note: If your VCF does not include a specific allele count field,
+              leave the corresponding entry empty. <b>Example</b>
+              : "alleleCountHeterozygous": "",
+            </div>
+          </p>
           <p className="note">
             <img
               className="note-symbol"
@@ -274,12 +473,15 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["variant-effects-json"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
           </div>
-
           <p className="note">
             <img
               className="note-symbol"
@@ -292,7 +494,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
               override the VEP annotations.
             </div>
           </p>
-
           <p className="note">
             <img
               className="note-symbol"
@@ -347,73 +548,94 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             </pre>
           </div>
           <p>
+            You can input some parameters with the execution of the script, to
+            set some of the values for the execution of the script. The
+            parameters are:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {"'-o', '--output', default=conf.output_docs_folder\n"}
+                {"'-d', '--datasetId', default=conf.datasetId\n"}
+                {"'-r', '--refGen', default=conf.reference_genome\n"}
+                {
+                  "'-c', '--caseLevelData', default=conf.case_level_data, action=argparse.BooleanOptionalAction\n"
+                }
+                {"'-n', '--numRows', default=conf.num_rows\n"}
+                {"'-v', '--verbosity', default=conf.verbosity\n"}
+                {
+                  "'-j', '--json', default=False, action=argparse.BooleanOptionalAction\n"
+                }
+                {
+                  "'-i', '--input', default=\"files/vcf/files_to_read/*.vcf.gz\""
+                }
+              </code>
+
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "genomicVariations_args",
+                    `'-o', '--output', default=conf.output_docs_folder
+'-d', '--datasetId', default=conf.datasetId
+'-r', '--refGen', default=conf.reference_genome
+'-c', '--caseLevelData', default=conf.case_level_data, action=argparse.BooleanOptionalAction
+'-n', '--numRows', default=conf.num_rows
+'-v', '--verbosity', default=conf.verbosity
+'-j', '--json', default=False, action=argparse.BooleanOptionalAction
+'-i', '--input', default="files/vcf/files_to_read/*.vcf.gz"`
+                  )
+                }
+              >
+                {copySuccess["genomicVariations_args"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
             This command will do the conversion from VCF to BFF and will load
             the final BFF documents into a mongoDB inside a container. This is
             done for memory size usage.
           </p>
           <p>
             After that, if needed, export your documents from the mongoDB to
-            your machine as a BFF file (json) using two possible commands.
+            your machine as a BFF file (json) using this command:
           </p>
-
-          <ul>
-            <li>
-              The first command will delete an internal <i>"_id"</i> for each
-              record that is generated by MongoDB:
-              <div className="codeSnippet">
-                <pre>
-                  <code>{`docker exec ri-tools mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations | sed '/"_id":/s/"_id":[^,]*,//g' > genomicVariations.json`}</code>
-                  <button
-                    className="copyButtonCode"
-                    onClick={() =>
-                      copyToClipboard(
-                        "exportWithoutId",
-                        `docker exec ri-tools mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations | sed '/"_id":/s/"_id":[^,]*,//g' > genomicVariations.json`
-                      )
-                    }
-                  >
-                    {copySuccess["exportWithoutId"] ? (
-                      "Copied!"
-                    ) : (
-                      <img className="copySymbol" src={copyIcon} alt="Copy" />
-                    )}
-                  </button>
-                </pre>
-              </div>
-            </li>
-            <br></br>
-            <li>
-              The second command will keep the <i>"_id"</i> entries generated by
-              MongoDB. Note that this ID is not part of the specifications of
-              the Beacon and will not affect your data and Beacon, you can keep
-              it if you want:
-              <div className="codeSnippet">
-                <pre>
-                  <code>
-                    docker exec ri-tools mongoexport --jsonArray --uri
-                    "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin"
-                    --collection genomicVariations &gt; genomicVariations.json
-                  </code>
-                  <button
-                    className="copyButtonCode"
-                    onClick={() =>
-                      copyToClipboard(
-                        "exportWithId",
-                        'docker exec ri-tools mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > genomicVariations.json'
-                      )
-                    }
-                  >
-                    {copySuccess["exportWithId"] ? (
-                      "Copied!"
-                    ) : (
-                      <img className="copySymbol" src={copyIcon} alt="Copy" />
-                    )}
-                  </button>
-                </pre>
-              </div>
-            </li>
-          </ul>
-
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec ri-tools mongoexport --jsonArray --uri
+                "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin"
+                --collection genomicVariations &gt; genomicVariations.json
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "exportWithId",
+                    'docker exec ri-tools mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > genomicVariations.json'
+                  )
+                }
+              >
+                {copySuccess["exportWithId"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
           <p>
             This will generate the final BFF file (json) for the{" "}
             <code>genomicVariations</code> collection using the VCF format as
@@ -506,7 +728,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-
           <div className="codeSnippet">
             <pre>
               <code>
@@ -531,7 +752,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-
           <p className="note">
             <img
               className="note-symbol"

@@ -30,8 +30,8 @@ import UpdatingRecordsText from "../content/updating_records.txt";
 
 // Beacon Template UI
 // Add intro text here
-import ConfigurationUIText from "../content/configuration_ui.txt";
-import DeploymentUIText from "../content/deployment_ui.txt";
+import ConfigurationUIText from "../content/ui_configuration.txt";
+import DeploymentUIText from "../content/ui_deployment.txt";
 import UIQueryingText from "../content/ui_query_logic_results.txt";
 import UIVersioningText from "../content/ui_versioning.txt";
 
@@ -115,13 +115,14 @@ const ContentPreloader = () => {
   );
 
   // Beacon Template UI
-  useRegisterTextContent("/ui-deployment", DeploymentUIText, "Deployment");
 
   useRegisterTextContent(
     "/ui-configuration",
     ConfigurationUIText,
     "UI Configuration"
   );
+
+  useRegisterTextContent("/ui-deployment", DeploymentUIText, "Deployment");
 
   useRegisterTextContent(
     "/ui-query-logic-&-results",
