@@ -100,6 +100,21 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
 
     let path = subItem.toLowerCase().replace(/ /g, "-");
 
+    if (subItem === "Versioning" && parentMenu === "Beacon Template UI") {
+      path = "ui-versioning";
+    }
+
+    if (
+      subItem === "Query Logic & Results" &&
+      parentMenu === "Beacon Template UI"
+    ) {
+      path = "ui-query-logic-&-results";
+    }
+
+    if (subItem === "UI Deployment" && parentMenu === "Beacon Template UI") {
+      path = "ui-deployment";
+    }
+
     if (subItem === "Configuration") {
       path =
         parentMenu === "Reference Implementation"

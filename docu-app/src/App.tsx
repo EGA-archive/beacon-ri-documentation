@@ -16,9 +16,14 @@ import StartingGuide from "./pages/Beacon2RITools/StartingGuide";
 import ConfigFileTools from "./pages/Beacon2RITools/ConfigFileTools";
 import ConversionCSVBFF from "./pages/Beacon2RITools/ConversionCSVBFF";
 import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
+
+// Beacon Template UI imports
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
 import BeaconUIConfiguration from "./pages/BeaconUI/BeaconUIConfiguration";
 import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
+import UIVersioning from "./pages/BeaconUI/UIVersioning";
+
+// Product Implemenration imports
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import Models from "./pages/Beacon2PIAPI/Models";
@@ -68,7 +73,7 @@ function App() {
     "Beacon 2 PI API",
     "Beacon RI Tools v2",
     // "Beacon Verifier",
-    "Beacon UI",
+    "Beacon Template UI",
     "Tutorials",
     // "FAQs",
     "Reference Implementation",
@@ -103,7 +108,13 @@ function App() {
       "Test Data",
       "Updating Records",
     ],
-    "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
+    "Beacon Template UI": [
+      "UI Introduction",
+      "UI Configuration",
+      "UI Deployment",
+      "Query Logic & Results",
+      "Versioning",
+    ],
 
     Tutorials: ["Create your Beacon", "Example Beacon: Rare Disease Use Case"],
   };
@@ -159,8 +170,8 @@ function App() {
                   path="/models"
                   element={<Models searchTerm={searchTerm} />}
                 />
-                {/* Reference Implementation (Beacon 2 RI API) Routes */}
 
+                {/* Reference Implementation (Beacon 2 RI API) Routes */}
                 <Route
                   path="/introduction"
                   element={<Introduction searchTerm={searchTerm} />}
@@ -196,10 +207,7 @@ function App() {
                   path="/configuration-file"
                   element={<ConfigFileTools searchTerm={searchTerm} />}
                 />
-                {/* <Route
-                  path="/creating-the-csv-files"
-                  element={<CreatingCSVs />}
-                /> */}
+
                 <Route
                   path="/conversion-from-csv-to-bff"
                   element={<ConversionCSVBFF searchTerm={searchTerm} />}
@@ -228,22 +236,30 @@ function App() {
                   element={<UpdatingRecords searchTerm={searchTerm} />}
                 />
 
-                {/* Beacon UI */}
+                {/* Beacon Template UI */}
                 <Route
-                  path="/deployment"
+                  path="/ui-introduction"
                   element={<BeaconUIDeployment searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/configuration-ui"
+                  path="/ui-configuration"
                   element={<BeaconUIConfiguration searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/querying-the-ui"
+                  path="/ui-deployment"
+                  element={<BeaconUIDeployment searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/ui-query-logic-&-results"
                   element={<BeaconUIQueries searchTerm={searchTerm} />}
                 />
 
+                <Route
+                  path="/ui-versioning"
+                  element={<UIVersioning searchTerm={searchTerm} />}
+                />
+
                 {/* Tutorials */}
-                {/* <Route path="/tutorials" element={<Tutorials />} /> */}
                 <Route
                   path="/create-your-beacon"
                   element={<CreateYourBeacon searchTerm={searchTerm} />}

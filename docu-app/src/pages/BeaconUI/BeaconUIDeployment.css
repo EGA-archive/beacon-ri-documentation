@@ -23,6 +23,16 @@
   color: #185177;
 }
 
+.list-more-margin {
+  margin-top: 35px;
+}
+
+.noBullets {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 @media (max-width: 800px) {
   .beaconUIDeploymentContainer {
     padding-right: 16px;

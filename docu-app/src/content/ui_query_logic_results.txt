@@ -1,0 +1,13 @@
+Documentation Beacon Template UI Query Logic & Results
+
+Beacon Template UI
+
+Query Logic & Results
+
+Coming soon...
+
+Result Display Limits
+
+When a Beacon is deployed following Production Implementation (PI), it enforces a maximum limit of 100 records per dataset in the query response. This implies that, although a dataset may contain more than 100 matching records, only the first 100 are returned and displayed in the Results detailed table.
+To make this clear to users, an informative message is shown in the modal: This message is displayed only when the dataset returns more records than the limit configured by the Beacon.
+If the total number of matching records is within the configured limit, then all records are displayed.

@@ -28,15 +28,12 @@ import CommonErrorsText from "../content/CommonErrorsText.txt";
 import TestDataText from "../content/TestDataText.txt";
 import UpdatingRecordsText from "../content/updating_records.txt";
 
-// Beacon UI
-import QueryingUIText from "../content/querying_ui.txt";
-import DeploymentUIText from "../content/deployment_ui.txt";
+// Beacon Template UI
+// Add intro text here
 import ConfigurationUIText from "../content/configuration_ui.txt";
-
-// Beacon Network UI
-import NetworkQueryingTheUIText from "../content/network_querying_ui.txt";
-import NetworkDeploymentUIText from "../content/deployment_networkui.txt";
-import NetworkConfigurationUIText from "../content/configuration_networkui.txt";
+import DeploymentUIText from "../content/deployment_ui.txt";
+import UIQueryingText from "../content/ui_query_logic_results.txt";
+import UIVersioningText from "../content/ui_versioning.txt";
 
 // Tutorials
 import UseCaseText from "../content/use_case.txt";
@@ -117,35 +114,22 @@ const ContentPreloader = () => {
     "Updating Records"
   );
 
-  // Beacon UI
-  useRegisterTextContent("/deployment", DeploymentUIText, "Deployment");
+  // Beacon Template UI
+  useRegisterTextContent("/ui-deployment", DeploymentUIText, "Deployment");
 
   useRegisterTextContent(
-    "/configuration-ui",
+    "/ui-configuration",
     ConfigurationUIText,
-    "Configuration UI"
-  );
-
-  useRegisterTextContent("/querying-the-ui", QueryingUIText, "Querying the UI");
-
-  // Beacon Network UI
-  useRegisterTextContent(
-    "/network-deployment",
-    NetworkDeploymentUIText,
-    "Network Deployment"
+    "UI Configuration"
   );
 
   useRegisterTextContent(
-    "/network-configuration-ui",
-    NetworkConfigurationUIText,
-    "Network Configuration UI"
+    "/ui-query-logic-&-results",
+    UIQueryingText,
+    "Query Logic & Results"
   );
 
-  useRegisterTextContent(
-    "/network-querying-the-ui",
-    NetworkQueryingTheUIText,
-    "Network Querying the UI"
-  );
+  useRegisterTextContent("/ui-versioning", UIVersioningText, "Versioning");
 
   // Tutorials
   useRegisterTextContent(

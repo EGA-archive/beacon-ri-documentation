@@ -44,7 +44,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           className="arrow-icon"
         />
         <a href="/configuration-ui" className="no-undeline">
-          Beacon UI
+          Beacon Template UI
         </a>
 
         <img
@@ -58,7 +58,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3>Beacon UI</h3>
+          <h3>Beacon Template UI</h3>
           <h1>Configuration</h1>
           <p>
             Please first create a <code>.env</code> file inside the frontend

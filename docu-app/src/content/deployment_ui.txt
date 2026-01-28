@@ -1,5 +1,5 @@
-Documentation > Beacon UI > Deployment
-Beacon UI
+Documentation > Beacon Template UI > Deployment
+Beacon Template UI
 Deployment
 Use the deployment documentation (https://github.com/EGA-archive/beacon2-ri-api/blob/master/deploy/README.md)
 for all the containers for Beacon to also deploy the user interface.

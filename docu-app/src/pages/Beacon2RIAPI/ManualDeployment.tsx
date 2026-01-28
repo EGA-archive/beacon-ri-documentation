@@ -148,7 +148,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
             <li>8010 → permissions UI</li>
             <li>8080 → Keycloak</li>
             <li>9991 → Keycloak SSL</li>
-            <li>3000 → Beacon UI</li>
+            <li>3000 → Beacon Template UI</li>
           </ul>
 
           <p>Light up the containers from the deploy folder.</p>
@@ -181,7 +181,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
               .
             </li>
             <li>
-              The Beacon UI will run in{" "}
+              The Beacon Template UI will run in{" "}
               <a
                 href="http://localhost:3000"
                 target="_blank"

@@ -23,6 +23,18 @@
   color: #185177;
 }
 
+.list-description {
+  margin-top: 0px;
+}
+
+.results-detailed-table {
+  width: 100%;
+  max-width: 724px;
+  margin: 14px auto 0 auto;
+  display: block;
+  overflow: visible;
+}
+
 @media (max-width: 800px) {
   .beaconUIQueriesContainer {
     padding-right: 16px;

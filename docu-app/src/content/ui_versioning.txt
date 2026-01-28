@@ -1,0 +1,11 @@
+Documentation Beacon Template UI Versioning
+Beacon Template UI
+Versioning
+First Release [date]: Template Beacon UI Version 1.0
+Add a description with the main features
+
+Upcoming Iterations
+It’s important to highlight that the Beacon Template UI is under active development. It evolves alongside updates to the Beacon specification and incorporates usability improvements based on feedback from deployers and users.
+Upcoming iterations of the UI will expand configuration options for key areas such as the contact form and privacy-related settings. These updates will allow deployers to customize form fields, submission behavior, and recipient information.
+
+The documentation is continuously updated to reflect new features and improvements.

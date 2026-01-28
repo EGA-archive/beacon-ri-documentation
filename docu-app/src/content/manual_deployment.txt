@@ -25,7 +25,7 @@ Make sure the next list of ports are free for use in your system:
 8010 → permissions UI
 8080 → Keycloak
 9991 → Keycloak SSL
-3000 → Beacon UI
+3000 → Beacon Template UI
 Light up the containers from the deploy folder.
 
 cd deploy && docker-compose up -d --build
@@ -33,7 +33,7 @@ cd deploy && docker-compose up -d --build
 If the containers are built correctly:
 
 The API will run in http://localhost:5050/api
-The Beacon UI will run in http://localhost:3000
+The Beacon Template UI will run in http://localhost:3000
 The mongo-express UI will run in http://localhost:8081
 The Keycloak UI will run in http://localhost:8080/auth
 Data injection
