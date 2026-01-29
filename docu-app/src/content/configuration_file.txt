@@ -61,3 +61,22 @@ If case_level_data is set to False, make sure to also setexact_zygosity to False
 The num_rows  are the aproximate calculation you expect for the total of variants in each vcf there are. Make sure this is greater than the total variants expected. It was automatically calculated before but it was very slow sometimes to calculate all the variants number in a VCF.
 
 The verbosity will give streaming logs with the reason why a variant has been skipped to be inserted. Recommendation is to leave this as False.
+
+Fix for MongoDB exploit (CVE-2025-14847)
+
+Beacon PI repository has been updated so the exploit for MongoDB (CVE-2025-14847) is not an issue anymore. In order to do that, the following points have been implemented:
+Removed exposing ports in docker-compose.yml file
+Built done from a mongod.conf file
+Mongo image for major version 5 adjusted to 5.0.32, not allowing prior versions with the vulnerability to be built.
+
+Please, make sure you update your mongoDB instance and rebuild the mongoDB container after this update.
+
+The steps to reproduce this exploit and check that your instance is not vulnerable anymore is to download this repo and insert it in beacon folder.
+Then build the beaconprod container and execute the next command:
+docker exec -it beaconprod python beacon/mongobleed-exploit-CVE-2025-14847-main/exploit/mongobleed.py --host mongoprod
+
+If the message is something like this, then it means your instance is safe.
+https://github.com/EGA-archive/beacon-production-prototype/blob/main/ri-tools/files/mongobleed_ok.png
+
+Otherwise, you would get a message similar to this one.
+https://github.com/EGA-archive/beacon2-pi-api/blob/main/ri-tools/files/mongobleed_vuln.png

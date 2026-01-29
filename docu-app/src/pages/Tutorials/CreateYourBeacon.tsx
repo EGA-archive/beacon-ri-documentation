@@ -48,7 +48,7 @@ const CreateYourBeacon: React.FC<CreateYourBeaconProps> = ({ searchTerm }) => {
       num_rows=1500000
       verbosity=False`,
       "connections-mongo-reinde-py": `docker exec beaconprod python -m beacon.connections.mongo.reindex`,
-      "python-convert-csvTObff-py": `docker exec -it ri-tools python convert_csvTObff.py`,
+      "python-convert-csvTObff-py": `docker exec -it ri-tools python csv_to_bff.py`,
       "python-genomicVariations-vcf-py": `docker exec -it ri-tools python genomicVariations_vcf.py`,
       "mongo-export-snippet": `docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
 root:example@127.0.0.1:27017/beacon?authSource=admin" --collection
@@ -919,7 +919,7 @@ verbosity=False`}
           <p>If this is done, then run:</p>
           <div className="codeSnippet">
             <pre>
-              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+              <code>docker exec -it ri-tools python csv_to_bff.py</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("python-convert-csvTObff-py")}
@@ -993,7 +993,7 @@ genomicVariations.json`}</code>
               </li>
               <li>Fill in CSV templates </li>
               <li>Set the correct paths in conf.py </li>
-              <li>Run: docker exec -it ri-tools python convert_csvTObff.py</li>
+              <li>Run: docker exec -it ri-tools python csv_to_bff.py</li>
               <li>
                 {" "}
                 If reading from a VCF, run: docker exec -it ri-tools python

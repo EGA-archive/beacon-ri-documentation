@@ -49,6 +49,11 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
       ].join("\n"),
       "data-indexing":
         "docker exec beaconprod python -m beacon.connections.mongo.reindex",
+      "rebuild-beaconprod-db": [
+        "docker stop beaconprod db",
+        "docker compose build --no-cache beaconprod db",
+        "docker compose up -d --force-recreate beaconprod db",
+      ].join("\n"),
     }[snippetId];
 
     if (textToCopy) {
@@ -127,15 +132,20 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
           <h2 id="creating-the-containers">Creating the containers</h2>
           <p>
             Make sure the next list of ports are free of use in your system:
+            <ul>
+              <li>8081 → mongo-express (optional)</li>
+              <li>5050 → beacon</li>
+              <li>8080 → Keycloak (optional)</li>
+              <li>9991 → Keycloak SSL (optional)</li>
+            </ul>
+            The containers that don’t have an external port, hence you don’t
+            need to free any external port, are:
+            <ul>
+              <li>mongo</li>
+              <li>beacon-ri-tools</li>
+              <li>phenopackets-to-bff</li>
+            </ul>
           </p>
-
-          <ul>
-            <li>27017 → mongo</li>
-            <li>8081 → mongo-express (optional)</li>
-            <li>5050 → beacon</li>
-            <li>8080 → Keycloak (optional)</li>
-            <li>9991 → Keycloak SSL (optional)</li>
-          </ul>
 
           <p>Light up the containers from the deploy folder.</p>
           <div className="codeSnippet">
@@ -348,7 +358,36 @@ gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimp
               new data.
             </div>
           </p>
+          <h2 id="updating-the-containers">Updating the containers</h2>
+          <p>
+            If you are updating the Beacon PI instance from a previous version,
+            it is recommended to use the next commands:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker stop beaconprod db
+                {"\n"}docker compose build --no-cache beaconprod db
+                {"\n"}docker compose up -d --force-recreate beaconprod db
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("rebuild-beaconprod-db")}
+              >
+                {copySuccess["rebuild-beaconprod-db"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
         </div>
+
         <div className="sidebarColumn">
           <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>

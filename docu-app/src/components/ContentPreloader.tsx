@@ -5,10 +5,10 @@ import IntroductionText from "../content/introduction.txt";
 // Beacon 2 PI API
 import PiAutomatedDeploymentText from "../content/pi_automated_deployment.txt";
 import PiManualDeploymentText from "../content/pi_manual_deployment.txt";
-import FilteringTermsText from "../content/filtering_terms.txt";
-import ConfigurationPiText from "../content/configuration_pi.txt";
+import FilteringTermsText from "../content/pi_filtering_terms.txt";
+import ConfigurationPiText from "../content/pi_configuration.txt";
 import PiQueryingApiText from "../content/pi_query_api.txt";
-import ModelsText from "../content/models.txt";
+import ModelsText from "../content/pi_models.txt";
 
 // Referenece Implementation (Beacon 2 RI API)
 import IntroductionReferenceImplementationText from "../content/introduction_reference_implementation.txt";

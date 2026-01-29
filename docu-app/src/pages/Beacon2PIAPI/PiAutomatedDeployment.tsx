@@ -70,7 +70,11 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
-
+          <p>
+            In case you want a quick and out of-the-box data Beacon PI instance
+            follow this deployment, which relies on a Bash script and a Makefile
+            and it is only compatible with MongoDB database deployments.
+          </p>
           <h2 id="prerequisites">Prerequisites</h2>
           <p>
             You should have installed:

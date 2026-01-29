@@ -7,13 +7,16 @@ First of all, start by cloning the GitHub repository in your system.
 git clone https://github.com/EGA-archive/beacon2-pi-api.git
 ```
 
-Creating the Containers
 Make sure the next list of ports are free of use in your system:
-- 27017 → mongo
-- 8081 → mongo-express (optional)
-- 5050 → beacon
-- 8080 → Keycloak (optional)
-- 9991 → Keycloak SSL (optional)
+8081 → mongo-express (optional)
+5050 → beacon
+8080 → Keycloak (optional)
+9991 → Keycloak SSL (optional)
+
+The containers that don’t have an external port, hence you don’t need to free any external port, are:
+mongo
+beacon-ri-tools
+phenopackets-to-bff
 
 Light up the containers from the deploy folder.
 
@@ -73,3 +76,11 @@ docker exec beaconprod python -m beacon.connections.mongo.reindex
 ```
 
 **Note:** You will need to run this script each time you inject new data.
+
+Updating the containers
+
+If you are updating the Beacon PI instance from a previous version, it is recommended to use the next commands:
+
+docker stop beaconprod db
+docker compose build --no-cache beaconprod db
+docker compose up -d --force-recreate beaconprod db

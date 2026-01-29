@@ -95,26 +95,24 @@ To convert all CSV files at once, make sure they are saved in the csv folder (re
 
 Then run the following command from the root of the project:
 
-docker exec -it ri-tools python convert_csvTObff.py
+docker exec -it ri-tools python csv_to_bff.py
 
 This script will process all available CSVs and generate one JSON file per collection in the output_docs folder.
 
 Convert a Specific Collection
-If you prefer to convert only one collection at a time, you can use one of the following commands depending on the type of data:
+If you want to convert only one type of record at a time, you can use the --entry_type parameter when executing the conversion script.
+For example, the following command converts only individual records:
 
-docker exec -it ri-tools python analyses_csv.py
+docker exec -it ri-tools python csv_to_bff.py -e individuals
 
-docker exec -it ri-tools python biosamples_csv.py
+You can also modify the input/output folder with the corresponding parameters and the id of the dataset that will be inserted in the records with the —datasetId parameter.
 
-docker exec -it ri-tools python cohorts_csv.py
+The available parameters for converting a single collection are:
 
-docker exec -it ri-tools python datasets_csv.py
-
-docker exec -it ri-tools python genomicVariations_csv.py
-
-docker exec -it ri-tools python individuals_csv.py
-
-docker exec -it ri-tools python runs_csv.py
+'-o', '--output', default=conf.output_docs_folder
+'-d', '--datasetId', default=conf.datasetId
+'-i', '--input', default=conf.csv_folder
+'-e', '--entry_type', default=conf.entry_type, choices=['analyses', 'biosamples', 'cohorts', 'datasets', 'genomicVariations', 'individuals', 'runs', 'all']
 
 Each script will generate a corresponding JSON file (e.g., cohorts.json) inside the output_docs folder.
 

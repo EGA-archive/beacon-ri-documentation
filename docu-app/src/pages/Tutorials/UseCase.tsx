@@ -61,7 +61,7 @@ alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
 create_datetime = '2025-05-12T12:00:00.000000'
 
 update_datetime = ''`,
-      "convert-all": "docker exec -it ri-tools python convert_csvTObff.py",
+      "convert-all": "docker exec -it ri-tools python csv_to_bff.py",
       "mongoexport-genomicVariations": `docker exec mongoprod mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`,
       "vcf-file-path": `./beacon2-pi-api/ri-tools/files/vcf/files_to_read/case1C_subset.vcf.gz`,
       "vcf-import-output": `files/vcf/files_to_read/case1C_subset.vcf.gz
@@ -308,7 +308,7 @@ verbosity=False # This variable, if True, will make the program run slower but g
       exact_heterozygosity=False
       num_rows=1500000
       verbosity=False`,
-      "python-convert-csvTObff-py": `docker exec -it ri-tools python convert_csvTObff.py`,
+      "python-convert-csvTObff-py": `docker exec -it ri-tools python csv_to_bff.py`,
       "python-genomicVariations-vcf-py": `docker exec -it ri-tools python genomicVariations_vcf.py`,
       "mongo-export-snippet": `docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
 root:example@127.0.0.1:27017/beacon?authSource=admin" --collection
@@ -1816,7 +1816,7 @@ verbosity=False # This variable, if True, will make the program run slower but g
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+              <code>docker exec -it ri-tools python csv_to_bff.py</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("convert-all")}

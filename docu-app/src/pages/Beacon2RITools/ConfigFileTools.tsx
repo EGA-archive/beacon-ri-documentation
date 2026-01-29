@@ -72,7 +72,6 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             </a>
             . Inside this file, you will find the following information:
           </p>
-
           <h2 id="input-output-files-config">
             Input and Output files config parameters
           </h2>
@@ -96,7 +95,11 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
                 {copySuccess["input-output-config"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -130,11 +133,9 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             only the subdirectory inside <i>output_docs</i>
             can be modified in this path.
           </p>
-
           <h2 id="VCF-conversion-config-parameters">
             VCF conversion config parameters
           </h2>
-
           <div className="codeSnippet">
             <pre>
               <code id="vcf-config">
@@ -176,14 +177,12 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             conversion. This only needs to be used in case you are using a VCF
             as a source for the genomic variants collection.
           </p>
-
           <p>
             The <i>num_variants</i> is the variable you need to write in case
             you are executing the VCF conversion{" "}
             <i>(genomicVariations_vcf.py)</i>. This will tell the script how
             many variants will be read and converted from the file(s).
           </p>
-
           <p>
             The <i>allele_frequency</i> field lets you set a threshold for the
             allele frequency (AF) of the variants you want to convert from the
@@ -191,7 +190,6 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             will be converted to BFF. 1 is the default value (all variants will
             be converted).
           </p>
-
           <p>
             The <i>allele_counts</i> is a variable that, in case
             populations.json file is active, will read the allele frequencies
@@ -202,7 +200,6 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             use to map the position of the chromosomes. Make sure to select the
             same version as the one used to generate your data.
           </p>
-
           <p>
             The <i>datasetId</i>, <i>case_level_data</i>, and{" "}
             <i>exact_zygosity</i> parameters are <b>only</b> applicable in the{" "}
@@ -282,7 +279,90 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             variant has been skipped to be inserted. Recommendation is to leave
             this as False.
           </p>
-
+          <h2 id="fix-for-MongoDB-exploit">
+            Fix for MongoDB exploit (CVE-2025-14847)
+          </h2>
+          <p>
+            Beacon PI repository has been updated so the exploit for MongoDB
+            (CVE-2025-14847) is not an issue anymore. In order to do that, the
+            following points have been implemented:
+            <ul>
+              <li>Removed exposing ports in docker-compose.yml file</li>
+              <li>Built done from a mongod.conf file</li>
+              <li>
+                Mongo image for major version 5 adjusted to 5.0.32, not allowing
+                prior versions with the vulnerability to be built.
+              </li>
+            </ul>
+            <p className="wider-note">
+              <img
+                className="note-symbol-wider"
+                src="/note-symbol.png"
+                alt="Note symbol"
+              />
+              <div>
+                Please, make sure you <b>update</b> your mongoDB instance and{" "}
+                <b>rebuild</b> the mongoDB container after this update.
+              </div>
+            </p>
+            The steps to reproduce this exploit and check that your instance is
+            not vulnerable anymore is to download this 
+            <a href="https://github.com/Security-Phoenix-demo/mongobleed-exploit-CVE-2025-14847">
+              repo
+            </a>
+             and insert it in beacon folder. <br />
+            Then build the beaconprod container and execute the next command:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code id="docker-mongo-exploit">
+                docker exec -it beaconprod python
+                beacon/mongobleed-exploit-CVE-2025-14847-main/exploit/mongobleed.py
+                --host mongoprod
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText = document.getElementById(
+                    "docker-mongo-exploit"
+                  )?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "docker-mongo-exploit");
+                  }
+                }}
+              >
+                {copySuccess["docker-mongo-exploit"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            If the message is something like{" "}
+            <a
+              href="https://github.com/EGA-archive/beacon-production-prototype/blob/main/ri-tools/files/mongobleed_ok.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              this
+            </a>
+            , then it means your instance is safe. <br />
+            Otherwise, you would get a message similar to{" "}
+            <a
+              href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/ri-tools/files/mongobleed_vuln.png"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              this{" "}
+            </a>{" "}
+            one.
+          </p>
           <br></br>
           <br></br>
         </div>

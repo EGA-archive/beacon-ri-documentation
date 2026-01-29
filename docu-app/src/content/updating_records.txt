@@ -16,3 +16,14 @@ After that, execute the following command to update all records inside the file:
 docker exec ri-tools python update_record.py
 
 Note: If the JSON does not match the Beacon v2 specification, the execution will fail.
+
+You can also add the next command line parameters to set the type of records, database collection and file to input by command line after the docker exec ri-tools python update_record.py.
+
+'-f', '--file', default=conf.output_docs_folder+'update.json'
+'-r', '--recordType', default=conf.record_type
+'-c', '--collection', default=conf.collection_name
+
+
+Example:
+
+docker exec ri-tools python update_record.py -r genomicVariation

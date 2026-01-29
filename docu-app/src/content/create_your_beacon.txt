@@ -177,7 +177,7 @@ All the VCFs to be converted are saved in./beacon2-pi-api/ri-tools/files/vcf/fil
 
 If this is done, then run:
 
-docker exec -it ri-tools python convert_csvTObff.py
+docker exec -it ri-tools python csv_to_bff.py
 
 The Beacon Friendly Format JSONs from CSVs will be generated in the output_docs folder, with the name of the collection followed by .json extension, e.g. biosamples.json.
 If you have VCFs to convert, then run too:
@@ -196,7 +196,7 @@ Before moving to the actual installation and population of the beacon, ensure al
 If reading from VCFs, move the necessary files to files_to_read folder
 Fill in CSV templates
 Set the correct paths in conf.py
-Run: docker exec -it ri-tools python convert_csvTObff.py
+Run: docker exec -it ri-tools python csv_to_bff.py
 If reading from a VCF, run: docker exec -it ri-tools python genomicVariations_vcf.py
 Find your BFFs in the output_docs
 

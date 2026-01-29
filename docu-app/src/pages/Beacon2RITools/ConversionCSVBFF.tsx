@@ -37,8 +37,6 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
       .catch((error) => console.log(error));
   };
 
-  // New merged page
-
   return (
     <div className="deploymentContainer">
       <h2 className="user-path">
@@ -70,7 +68,11 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
           <p>
             Each type of entry (e.g., analyses, biosamples, individuals, etc.)
             has its own corresponding CSV template located in the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               csv-templates folder
             </a>
             . These templates list all the valid column headers you can use.
@@ -231,7 +233,11 @@ EFO:0009655,abnormal sample`
             Each row in a CSV file represents a new and independent document in
             the final output. Templates and examples for each collection type
             can be found in the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               csv folder
             </a>{" "}
             of the repository.
@@ -406,11 +412,19 @@ labelForHG00001|labelForHG00002`
             />
             <div>
               For more information about each field, refer to the{" "}
-              <a href="https://github.com/ga4gh-beacon/beacon-v2/tree/main/models/json/beacon-v2-default-model">
+              <a
+                href="https://github.com/ga4gh-beacon/beacon-v2/tree/main/models/json/beacon-v2-default-model"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 default schemas
               </a>{" "}
               and the{" "}
-              <a href="https://github.com/ga4gh-beacon/beacon-v2">
+              <a
+                href="https://github.com/ga4gh-beacon/beacon-v2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Beacon v2 specification
               </a>
               .
@@ -442,11 +456,19 @@ labelForHG00001|labelForHG00002`
           <h1 id="conversion-from-csv-to-bff">Conversion from CSV to BFF</h1>
           <p>
             Before converting your CSV files, ensure that the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/conf/conf.py">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/conf/conf.py"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               conf.py
             </a>{" "}
             file (located in the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               conf folder
             </a>
             ) is correctly configured to read the appropriate input files and
@@ -455,11 +477,19 @@ labelForHG00001|labelForHG00002`
           <h6 className="underline">Convert All CSVs at Once</h6>
           <p>
             To convert all CSV files at once, make sure they are saved in the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               csv folder
             </a>{" "}
             (refer to the{" "}
-            <a href="https://beacon-documentation-demo.ega-archive.org/api-configuration">
+            <a
+              href="https://beacon-documentation-demo.ega-archive.org/api-configuration"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Configuration File
             </a>{" "}
             section for details).
@@ -467,13 +497,13 @@ labelForHG00001|labelForHG00002`
           <p>Then run the following command from the root of the project:</p>
           <div className="codeSnippet">
             <pre>
-              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+              <code>docker exec -it ri-tools python csv_to_bff.py</code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
                     "convertCSVtoBFF",
-                    "docker exec -it ri-tools python convert_csvTObff.py"
+                    "docker exec -it ri-tools python csv_to_bff.py"
                   )
                 }
               >
@@ -489,160 +519,88 @@ labelForHG00001|labelForHG00002`
           <p>
             This script will process all available CSVs and generate one JSON
             file per collection in the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               output_docs
             </a>{" "}
             folder.
           </p>
           <h6 className="underline">Convert a Specific Collection</h6>
           <p>
-            If you prefer to convert only one collection at a time, you can use
-            one of the following commands depending on the type of data:
+            If you want to convert only one type of record at a time, you can
+            use the <b>--entry_type</b> parameter when executing the conversion
+            script.
+            <br />
+            For example, the following command converts only individual records:
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker exec -it ri-tools python analyses_csv.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "analyses",
-                    "docker exec -it ri-tools python analyses_csv.py"
-                  )
-                }
-              >
-                {copySuccess["analyses"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
-          <div className="codeSnippet">
-            <pre>
-              <code>docker exec -it ri-tools python biosamples_csv.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "biosamples",
-                    "docker exec -it ri-tools python biosamples_csv.py"
-                  )
-                }
-              >
-                {copySuccess["biosamples"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
-          <div className="codeSnippet">
-            <pre>
-              <code>docker exec -it ri-tools python cohorts_csv.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "cohorts",
-                    "docker exec -it ri-tools python cohorts_csv.py"
-                  )
-                }
-              >
-                {copySuccess["cohorts"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
-          <div className="codeSnippet">
-            <pre>
-              <code>docker exec -it ri-tools python datasets_csv.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "datasets",
-                    "docker exec -it ri-tools python datasets_csv.py"
-                  )
-                }
-              >
-                {copySuccess["datasets"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec -it ri-tools python genomicVariations_csv.py
+              <code id="csv-to-bff-single-entry-command">
+                docker exec -it ri-tools python csv_to_bff.py -e individuals
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "genomicVariations",
-                    "docker exec -it ri-tools python genomicVariations_csv.py"
+                    "csv-to-bff-single-entry-command",
+                    "docker exec -it ri-tools python csv_to_bff.py -e individuals"
                   )
                 }
               >
-                {copySuccess["genomicVariations"] ? (
+                {copySuccess["csv-to-bff-single-entry-command"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
           </div>
 
+          <p>
+            You can also modify the input/output folder with the corresponding
+            parameters and the id of the dataset that will be inserted in the
+            records with the <b>—datasetId</b> parameter.
+          </p>
+          <p>
+            The available parameters for converting a single collection are:
+          </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker exec -it ri-tools python individuals_csv.py</code>
+              <code>
+                {"'-o', '--output', default=conf.output_docs_folder\n"}
+                {"'-d', '--datasetId', default=conf.datasetId\n"}
+                {"'-i', '--input', default=conf.csv_folder\n"}
+                {
+                  "'-e', '--entry_type', default=conf.entry_type, choices=['analyses', 'biosamples', 'cohorts', 'datasets', 'genomicVariations', 'individuals', 'runs', 'all']"
+                }
+              </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "individuals",
-                    "docker exec -it ri-tools python individuals_csv.py"
+                    "analyses-csv-args",
+                    `'-o', '--output', default=conf.output_docs_folder
+'-d', '--datasetId', default=conf.datasetId
+'-i', '--input', default=conf.csv_folder
+'-e', '--entry_type', default=conf.entry_type, choices=['analyses', 'biosamples', 'cohorts', 'datasets', 'genomicVariations', 'individuals', 'runs', 'all']`
                   )
                 }
               >
-                {copySuccess["individuals"] ? (
+                {copySuccess["analyses-csv-args"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
-          <div className="codeSnippet">
-            <pre>
-              <code>docker exec -it ri-tools python runs_csv.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "runs",
-                    "docker exec -it ri-tools python runs_csv.py"
-                  )
-                }
-              >
-                {copySuccess["runs"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -651,29 +609,42 @@ labelForHG00001|labelForHG00002`
           <p>
             Each script will generate a corresponding JSON file (e.g.,
             cohorts.json) inside the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               output_docs
             </a>{" "}
             folder.
-          </p>
-          <p>
+            <br />
+            <br />
             These JSON documents follow the Beacon File Format (BFF) and are
             ready to be imported into a MongoDB database for use with a GA4GH
-            Beacon v2 instance.
-          </p>
-          <p>
+            Beacon v2 instance. <br />
+            <br />
             To learn how to load these JSON files into your Beacon, refer to the
             documentation for the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-api">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Beacon v2 RI API
             </a>{" "}
             and the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-pi-api">
+            <a
+              href="https://github.com/EGA-archive/beacon2-pi-api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Beacon v2 PI API
             </a>
             .
           </p>
         </div>
+        <br />
+        <br />
         <div className="sidebarColumn">
           <OnThisPage activeId={activeId} root={contentRef.current} />
         </div>

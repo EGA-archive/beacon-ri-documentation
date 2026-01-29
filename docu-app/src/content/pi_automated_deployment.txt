@@ -1,5 +1,9 @@
 Documentation Beacon 2 PI API Automated Deployment
+
 Beacon 2 Production Implementation API
+
+In case you want a quick and out of-the-box data Beacon PI instance follow this deployment, which relies on a Bash script and a Makefile and it is only compatible with MongoDB database deployments.
+
 Prerequisites
 You should have installed:
 Docker

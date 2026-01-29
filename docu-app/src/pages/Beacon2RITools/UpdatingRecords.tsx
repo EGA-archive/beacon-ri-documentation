@@ -76,7 +76,6 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
             they are not in the updated json. After that, execute the next
             command to update all the records inside the file:
           </p>
-
           <div className="codeSnippet">
             <pre>
               <code>{`docker exec ri-tools python update_record.py`}</code>
@@ -97,7 +96,6 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-
           <p className="note">
             <img
               className="note-symbol"
@@ -111,7 +109,64 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
               </p>
             </div>
           </p>
-
+          <p>
+            You can also add the next command line parameters to set the type of
+            records, database collection and file to input by command line after
+            the docker exec ri-tools python update_record.py.
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {
+                  "'-f', '--file', default=conf.output_docs_folder+'update.json'\n"
+                }
+                {"'-r', '--recordType', default=conf.record_type\n"}
+                {"'-c', '--collection', default=conf.collection_name"}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    `'-f', '--file', default=conf.output_docs_folder+'update.json'
+'-r', '--recordType', default=conf.record_type
+'-c', '--collection', default=conf.collection_name`,
+                    "update-record-args"
+                  )
+                }
+              >
+                {copySuccess["update-record-args"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          Example:
+          <div className="codeSnippet">
+            <pre>
+              <code>{`docker exec ri-tools python update_record.py -r genomicVariation`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    `docker exec ri-tools python update_record.py -r genomicVariation`,
+                    "update-record-command"
+                  )
+                }
+              >
+                {copySuccess["update-record-command"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
           <br></br>
           <br></br>
         </div>
