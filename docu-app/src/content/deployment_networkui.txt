@@ -1,3 +1,0 @@
-Please run the following command in order to build the Docker images as defined in the docker-compose.yml file and to start the containers in detached mode (running in the background). The UI will be 
-
-docker-compose up -d –build
