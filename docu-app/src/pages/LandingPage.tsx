@@ -19,43 +19,59 @@ function LandingPage({ searchTerm }: LandingPageProps) {
         </a>
         <h3>CRG Beacon Documentation</h3>
         <p>
-          <b>Beacon v2 Reference Implementation (B2RI) </b>and{" "}
-          <b>Beacon v2 Production Implementation (B2PI) </b> are tools that
-          provide a REST API and enable queries of genomic and phenotypic data
-          in compliance with Beacon v2 standard.
+          The <b>Beacon v2 Production Implementation (B2PI)</b> is a tool that
+          provides a <b>REST API</b> that enables querying of{" "}
+          <b>genomic and phenotypic data</b> in compliance with the{" "}
+          <b>Beacon v2 standard</b>. It is designed specifically for{" "}
+          <b>production environments</b>, offering improved performance,
+          robustness, and full alignment with the Beacon v2 specification.
           <br />
-          Below is an overview of the schema process of B2RI/B2PI, which
-          involves transforming raw data into a Beacon v2-compliant .json
-          format, uploading it to the API and querying the API through a
-          user-friendly interface.
+          This documentation walks through <b>B2PI in detail</b>, including its{" "}
+          <b>data ingestion workflow, deployment, configuration,</b> and{" "}
+          <b>querying capabilities</b>. The process involves transforming raw
+          data into a <b>Beacon v2-compliant JSON format</b>, uploading it to
+          the API, and querying the data through a{" "}
+          <b>user-friendly interface</b>.
+          <br />
           <br />
           The process relies on the following four processes:
         </p>
         <li>
-          <b>Beacon RI Tools v2.</b> This tool enables conversion of .csv/.vcf
-          files to .json files in a Beacon Friendly Format (BFF). Note that
-          Beacon RI Tools v2 are designed to work with both Reference
-          Implementation or Beacon 2 PI API. Specifically, it includes all the
-          features that are needed for generating Beacon v2 PI API compatible
-          data.
+          <b>Beacon RI Tools v2.</b> This tool enables the conversion of .csv,
+          .vcf, and phenopacket (.pxf) files into .json files in a Beacon
+          Friendly Format (BFF). It includes all the features required to
+          generate data compatible with the Beacon v2 PI API.
         </li>
         <li>
-          <b>Beacon RI API / PI API.</b> The API connects to a MongoDB database
-          that stores the .json files, allowing one to query the data following
-          the Beacon v2 standards. Beacon v2 PI is an upgraded version of Beacon
-          v2 RI API, developed for production environments and recommended for
-          improved performance and user experience.
+          <b>Beacon PI API.</b> The API connects to a MongoDB database that
+          stores the .json files, allowing one to query the data following the
+          Beacon v2 standards. Beacon v2 PI is developed for production
+          environments and recommended for improved performance and user
+          experience.
         </li>
         <li>
           <b>Beacon Verifier v2.</b> A tool that checks that the data in the API
-          is compliant with Beacon v2 and provides a verification report.
+          is compliant with Beacon v2 and provides a verification report. Beacon
+          Verifier is compatible with any Beacon instance, independent of the
+          chosen implementation approach.
         </li>
         <li>
           <b>Beacon Template User Interface.</b> The user-friendly interface for
           querying the API without needing to worry about the underlying
           standards. It supports intuitive queries and enables authentication
-          through LifeScience or Keycloak.
+          through LifeScience or Keycloak. Template UI is easy to customize in
+          order to fit the needs of each individual Beacon.
         </li>
+        <p>
+          In addition to the Production Implementation,{" "}
+          <b>Beacon Reference Implementation (B2RI)</b> is also available and
+          compatible with the RI Tools v2. B2RI is provided as an{" "}
+          <b>example implementation</b> intended for understanding,
+          experimentation, and early prototyping. It is not designed for
+          production environments and it is <b>not actively maintained</b>. For
+          the most up-to-date implementation, the use of the Production
+          Implementation is advised instead.
+        </p>
         <p>
           Regarding security, the API always validates authentication through
           the chosen identity provider, following the globally accepted OIDC and

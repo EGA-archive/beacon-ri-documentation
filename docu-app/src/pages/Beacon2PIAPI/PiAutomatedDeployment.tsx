@@ -123,7 +123,11 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <pre>
               <code>
                 git clone{" "}
-                <a href="https://github.com/EGA-archive/beacon2-pi-api.git">
+                <a
+                  href="https://github.com/EGA-archive/beacon2-pi-api.git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   https://github.com/EGA-archive/beacon2-pi-api.git
                 </a>
               </code>
@@ -207,7 +211,11 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <ul>
               <li>
                 Edit your instance’s{" "}
-                <a href="https://beacon-documentation-demo.ega-archive.org/configuration#editing-beacon-info">
+                <a
+                  href="https://beacon-documentation-demo.ega-archive.org/configuration#editing-beacon-info"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   metadata
                 </a>
                 . Update the <em>/info</em> endpoint with your organization's
@@ -215,21 +223,33 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               </li>
               <li>
                 Manage dataset{" "}
-                <a href="https://beacon-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions">
+                <a
+                  href="https://beacon-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   permissions
                 </a>
                 . Control which datasets are public or require authentication.
               </li>
               <li>
                 Enable advanced{" "}
-                <a href="https://beacon-documentation-demo.ega-archive.org/filtering-terms#extract-terms">
+                <a
+                  href="https://beacon-documentation-demo.ega-archive.org/filtering-terms#extract-terms"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {" "}
                   filtering
                 </a>
               </li>
               <li>
                 Found more setting options in{" "}
-                <a href="https://beacon-documentation-demo.ega-archive.org/configuration">
+                <a
+                  href="https://beacon-documentation-demo.ega-archive.org/configuration"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Configuration
                 </a>
               </li>

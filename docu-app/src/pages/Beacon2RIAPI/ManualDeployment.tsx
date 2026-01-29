@@ -100,7 +100,11 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
             <pre>
               <code>
                 git clone{" "}
-                <a href="https://github.com/EGA-archive/beacon2-ri-api.git">
+                <a
+                  href="https://github.com/EGA-archive/beacon2-ri-api.git"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   https://github.com/EGA-archive/beacon2-ri-api.git
                 </a>
               </code>

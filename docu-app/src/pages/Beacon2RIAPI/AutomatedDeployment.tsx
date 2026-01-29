@@ -85,7 +85,11 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
             <pre>
               <code>
                 git clone{" "}
-                <a href="https://github.com/EGA-archive/beacon2-ri-api.git">
+                <a
+                  href="https://github.com/EGA-archive/beacon2-ri-api.git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   https://github.com/EGA-archive/beacon2-ri-api.git
                 </a>
               </code>

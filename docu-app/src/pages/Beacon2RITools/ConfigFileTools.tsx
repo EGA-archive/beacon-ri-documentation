@@ -307,7 +307,11 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             </p>
             The steps to reproduce this exploit and check that your instance is
             not vulnerable anymore is to download this 
-            <a href="https://github.com/Security-Phoenix-demo/mongobleed-exploit-CVE-2025-14847">
+            <a
+              href="https://github.com/Security-Phoenix-demo/mongobleed-exploit-CVE-2025-14847"
+              target="_blank"
+              rel="noreferrer"
+            >
               repo
             </a>
              and insert it in beacon folder. <br />

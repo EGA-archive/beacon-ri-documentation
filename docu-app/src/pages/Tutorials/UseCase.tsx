@@ -387,7 +387,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </p>
           <p>
             The Rare Disease Synthetic Dataset (
-            <a href="https://ega-archive.org/datasets/EGAD00001008392">
+            <a
+              href="https://ega-archive.org/datasets/EGAD00001008392"
+              target="_blank"
+              rel="noreferrer"
+            >
               EGAD00001008392
             </a>
             ), contains public human datasets for the study of rare diseases.
@@ -485,7 +489,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p>
             For further information about how to use the public metadata API
             please visit the{" "}
-            <a href="https://ega-archive.org/discovery/metadata/public-metadata-api/">
+            <a
+              href="https://ega-archive.org/discovery/metadata/public-metadata-api/"
+              target="_blank"
+              rel="noreferrer"
+            >
               EGA documentation
             </a>
             .
@@ -499,7 +507,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             <div>
               Before continuing with this tutorial, please make sure you've
               reviewed{" "}
-              <a href="https://beacon-documentation-demo.ega-archive.org/create-your-beacon">
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/create-your-beacon"
+                target="_blank"
+                rel="noreferrer"
+              >
                 10 steps to create your first beacon
               </a>
               . In that tutorial you'll find important information that will
@@ -515,7 +527,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p>
             Let’s start checking which information we’ve got and which one can
             be included in the{" "}
-            <a href="https://docs.genomebeacons.org/schemas-md/datasets_defaultSchema/">
+            <a
+              href="https://docs.genomebeacons.org/schemas-md/datasets_defaultSchema/"
+              target="_blank"
+              rel="noreferrer"
+            >
               dataset model
             </a>
             .
@@ -591,7 +607,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </table>
           <p>
             Now, let’s take a look at the{" "}
-            <a href="https://docs.genomebeacons.org/schemas-md/datasets_defaultSchema/">
+            <a
+              href="https://docs.genomebeacons.org/schemas-md/datasets_defaultSchema/"
+              target="_blank"
+              rel="noreferrer"
+            >
               dataset beacon model
             </a>
             . 
@@ -705,7 +725,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             The first thing we should check it’s if we have the mandatory
             information for the Dataset model, which is id and name. As we have,
             we can now{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/templates/datasets.csv">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/templates/datasets.csv"
+              target="_blank"
+              rel="noreferrer"
+            >
               fill in the CSV
             </a>{" "}
             with all the information. 
@@ -714,11 +738,19 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             We can see that most of the metadata and properties have a direct
             match, except the dataUseConditions property. <br></br> In our
             metadata we have string but the property type is{" "}
-            <a href="https://docs.genomebeacons.org/schemas-md/obj/duoDataUse/">
+            <a
+              href="https://docs.genomebeacons.org/schemas-md/obj/duoDataUse/"
+              target="_blank"
+              rel="noreferrer"
+            >
               duoDataUse
             </a>
             , so we’ll have to find the{" "}
-            <a href="https://ega-archive.org/access/data-access-committee/data-use-ontology/">
+            <a
+              href="https://ega-archive.org/access/data-access-committee/data-use-ontology/"
+              target="_blank"
+              rel="noreferrer"
+            >
               DUO code
             </a>{" "}
             that means Data may be used freely for non-commercial research and
@@ -778,7 +810,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p>
             {" "}
             Take a look to our final{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/examples/Rare-diseases/datasets.csv">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/examples/Rare-diseases/datasets.csv"
+              target="_blank"
+              rel="noreferrer"
+            >
               CSV
             </a>
             .
@@ -840,7 +876,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </table>
           <p>
             And let’s try to match as much as possible to the{" "}
-            <a href="https://docs.genomebeacons.org/schemas-md/analyses_defaultSchema/">
+            <a
+              href="https://docs.genomebeacons.org/schemas-md/analyses_defaultSchema/"
+              target="_blank"
+              rel="noreferrer"
+            >
               analysis model
             </a>
             :
@@ -947,7 +987,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </table>
           <p>
             To fill in{" "}
-            <a href="https://docs.genomebeacons.org/schemas-md/runs_defaultSchema/">
+            <a
+              href="https://docs.genomebeacons.org/schemas-md/runs_defaultSchema/"
+              target="_blank"
+              rel="noreferrer"
+            >
               {" "}
               Run model
             </a>{" "}
@@ -1066,7 +1110,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </table>
           <p>
             Take a look at the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/examples/Rare-diseases/runs.csv">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/examples/Rare-diseases/runs.csv"
+              target="_blank"
+              rel="noreferrer"
+            >
               {" "}
               CSV
             </a>{" "}
@@ -1077,13 +1125,21 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </h1>
           <p>
             In{" "}
-            <a href="https://metadata.ega-archive.org/analyses/EGAZ00001744003">
+            <a
+              href="https://metadata.ega-archive.org/analyses/EGAZ00001744003"
+              target="_blank"
+              rel="noreferrer"
+            >
               {" "}
               EGAZ00001744003
             </a>{" "}
             we have a phenopacket with the following information: <br></br>{" "}
             Please save it to a file named{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/phenopackets-to-BFF/rare-disease/case1c.json">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/phenopackets-to-BFF/rare-disease/case1c.json"
+              target="_blank"
+              rel="noreferrer"
+            >
               {" "}
               Case1C.json.
             </a>
@@ -1248,7 +1304,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           </h1>
           <p>
             Below, you’ll find a subset of 5 variants from{" "}
-            <a href="https://metadata.ega-archive.org/analyses/EGAZ00001744017">
+            <a
+              href="https://metadata.ega-archive.org/analyses/EGAZ00001744017"
+              target="_blank"
+              rel="noreferrer"
+            >
               EGAZ00001744017.
             </a>
             <br></br>
@@ -1445,7 +1505,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             By cloning and building the Beacon 2 Production Implementation
             repository we have downloaded the tools that will deploy our beacon
             and the{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2"
+              target="_blank"
+              rel="noreferrer"
+            >
               beacon2-ri-tools-v2
             </a>
             , a toolkit that will allow you to populate your own beacon in the
@@ -1909,7 +1973,11 @@ Mandatory properties for Individual schema (id and sex) present in the phenopack
           </div>
           <p>
             You’ll find your phenopacket in  
-            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF">
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF"
+              target="_blank"
+              rel="noreferrer"
+            >
               phenopackets-to-BFF.
             </a>
           </p>
@@ -2026,7 +2094,11 @@ A total of 0 variants were skipped`}</code>
           </p>
           <p>
             To know about further settings, please visit the{" "}
-            <a href="https://beacon-documentation-demo.ega-archive.org/configuration">
+            <a
+              href="https://beacon-documentation-demo.ega-archive.org/configuration"
+              target="_blank"
+              rel="noreferrer"
+            >
               {" "}
               Configuration section.
             </a>
@@ -2034,7 +2106,14 @@ A total of 0 variants were skipped`}</code>
           <h6 className="sub-title">Personalize info entry point</h6>
           <p>
             The info entry point will be the landing page of your beacon, found
-            at <a href="http://localhost:5050/api">http://localhost:5050/api</a>
+            at{" "}
+            <a
+              href="http://localhost:5050/api"
+              target="_blank"
+              rel="noreferrer"
+            >
+              http://localhost:5050/api
+            </a>
             .
           </p>
           <p>
@@ -2245,7 +2324,11 @@ update_datetime = ''`}</code>
                If you want to add new filtering terms manually or enhance
               ontology filtering with descendants and semantic similarities,
               please visit the{" "}
-              <a href="https://beacon-documentation-demo.ega-archive.org/filtering-terms">
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/filtering-terms"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Filtering Terms
               </a>{" "}
               section.
@@ -2255,7 +2338,11 @@ update_datetime = ''`}</code>
           <h1>Acknowledgments</h1>
           <p>
             We acknowledge the use of data from the{" "}
-            <a href="https://platform.rd-connect.eu/#/">
+            <a
+              href="https://platform.rd-connect.eu/#/"
+              target="_blank"
+              rel="noreferrer"
+            >
               RD-Connect Genome-Phenome Analysis Platform
             </a>
             . This work was supported by the European Commission H2020 projects

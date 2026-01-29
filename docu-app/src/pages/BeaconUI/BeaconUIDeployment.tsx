@@ -130,7 +130,11 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
               </li>
             </ul>
             You will need a code editor (e.g.{" "}
-            <a href="https://code.visualstudio.com/download">
+            <a
+              href="https://code.visualstudio.com/download"
+              target="_blank"
+              rel="noreferrer"
+            >
               Visual Studio Code
             </a>
             ) to:
@@ -208,7 +212,11 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           </h2>
           <p>
             There is an extended section that you will find by navigating to the{" "}
-            <a href="https://beacon-documentation-demo.ega-archive.org/ui-configuration">
+            <a
+              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration"
+              target="_blank"
+              rel="noreferrer"
+            >
               Configuration File paragraph
             </a>
             . <br />
@@ -314,7 +322,9 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
               </pre>
             </div>
             If it’s visible, the UI is running locally at:{" "}
-            <a href="http://localhost:3000">http://localhost:3000</a>
+            <a href="http://localhost:3000" target="_blank" rel="noreferrer">
+              http://localhost:3000
+            </a>
           </p>
           <h2 id="6.-stop-or-restart-the-application">
             6. Stop or Restart the Application

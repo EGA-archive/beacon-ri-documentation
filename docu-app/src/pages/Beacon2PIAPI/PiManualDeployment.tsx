@@ -112,7 +112,11 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
             <pre>
               <code>
                 git clone{" "}
-                <a href="https://github.com/EGA-archive/beacon2-pi-api.git">
+                <a
+                  href="https://github.com/EGA-archive/beacon2-pi-api.git"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   https://github.com/EGA-archive/beacon2-pi-api.git
                 </a>
               </code>

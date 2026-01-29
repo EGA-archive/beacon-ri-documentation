@@ -72,6 +72,8 @@ const Introduction: React.FC<IntroductionProps> = ({ searchTerm }) => {
             <br></br>Detailed instructions for deploying B2PI can be found{" "}
             <a
               href="https://beacon-documentation-demo.ega-archive.org/pi-automated-deployment"
+              target="_blank"
+              rel="noreferrer"
               className="no-undeline"
             >
               {" "}

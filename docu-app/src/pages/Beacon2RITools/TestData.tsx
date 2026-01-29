@@ -200,11 +200,19 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
               <p className="note-paragraph">
                  If you want to download the full original dataset metadata
                 please follow the{" "}
-                <a href="https://ega-archive.org/access/download/files/live-outbox/">
+                <a
+                  href="https://ega-archive.org/access/download/files/live-outbox/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Live Distribution
                 </a>{" "}
                 or the{" "}
-                <a href="https://ega-archive.org/access/download/files/pyega3/">
+                <a
+                  href="https://ega-archive.org/access/download/files/pyega3/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   pyEGA3
                 </a>{" "}
                 instructions. Notice that these datasets are free access.
@@ -267,6 +275,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/datasets/EGAD00001008392"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAD00001008392
                   </a>
@@ -275,7 +284,11 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#dataset-model-creation%C2%A0">
+                  <a
+                    href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#dataset-model-creation%C2%A0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Dataset model creation section
                   </a>
@@ -286,6 +299,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/samples/EGAN00003364605"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAN00003364605
                   </a>
@@ -294,7 +308,11 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#dataset-model-creation%C2%A0">
+                  <a
+                    href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#dataset-model-creation%C2%A0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {" "}
                     Dataset model creation section
                   </a>
@@ -305,6 +323,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/runs/EGAR00003021166"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAR00003021166
                   </a>
@@ -313,7 +332,11 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#run-model-creation">
+                  <a
+                    href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#run-model-creation"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Run model from VCF section
                   </a>
                 </td>
@@ -323,6 +346,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/analyses/EGAZ00001744017"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAZ00001744017
                   </a>
@@ -331,7 +355,11 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#Analysis-model-creation">
+                  <a
+                    href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#Analysis-model-creation"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Analysis model creation section
                   </a>
                 </td>
@@ -341,6 +369,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/analyses/EGAZ00001744003"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAZ00001744003
                   </a>
@@ -363,6 +392,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://metadata.ega-archive.org/files/EGAF00005572743"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAF00005572743
                   </a>
@@ -373,7 +403,11 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                 <td>
                   See Use Case: Inserting Rare Disease Synthetic Dataset into a
                   beacon →{" "}
-                  <a href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#genomicVariations-model-from-VCF">
+                  <a
+                    href="https://beacon-documentation-demo.ega-archive.org/example-beacon:-rare-disease-use-case#genomicVariations-model-from-VCF"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     genomicVariations model from VCF creation section
                   </a>
                 </td>
@@ -389,6 +423,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/Rare-diseases"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Input folder
                   </a>
@@ -404,6 +439,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs/Rare-diseases"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Output folder
                   </a>
@@ -421,11 +457,19 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
               <p className="note-paragraph">
                  If you want to download the full original dataset metadata
                 please follow the{" "}
-                <a href="https://ega-archive.org/access/download/files/live-outbox/">
+                <a
+                  href="https://ega-archive.org/access/download/files/live-outbox/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Live Distribution
                 </a>{" "}
                 or the{" "}
-                <a href="https://ega-archive.org/access/download/files/pyega3/">
+                <a
+                  href="https://ega-archive.org/access/download/files/pyega3/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   pyEGA3
                 </a>{" "}
                 instructions. Notice that these datasets are free access.
