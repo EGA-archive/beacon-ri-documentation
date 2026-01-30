@@ -15,7 +15,9 @@ In addition to the Production Implementation, Beacon Reference Implementation (B
 
 Regarding security, the API always validates authentication through the chosen identity provider, following the globally accepted OIDC and Oauth protocols.
 
-As stated before, Beacon v2 PI API is a beacon instance for production environments. The steps that this production instance follows are the next ones shown in the next flowchart:
+What does the Beacon v2 Production Implementation provide?
+
+The Beacon v2 Production Implementation (PI API) is designed for use in production environments. The main processing steps it follows are outlined in the flowchart below.
 
 The process to deploy and inject data is the same than in Beacon v2 RI API (data comes from Beacon RI Tools v2) but this instance is optimized and tested, having the next upgrades from Beacon v2 RI API:
 

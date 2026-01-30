@@ -4,7 +4,6 @@ Beacon Template UI
 
 Query Logic & Results
 
-Coming soon...
 
 Result Display Limits
 

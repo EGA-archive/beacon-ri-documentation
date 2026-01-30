@@ -42,7 +42,6 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
         <div className="contentColumn" ref={contentRef}>
           <h3>Beacon Template UI</h3>
           <h1>Query Logic & Results</h1>
-          <h4>Coming soon...</h4>
 
           <h2 id="result-display-limits">Result Display Limits</h2>
           <p>
@@ -54,8 +53,9 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             To make this clear to users, an informative message is shown in the
             modal: This message is displayed only when the dataset returns more
             records than the limit configured by the Beacon.
-            <img src={results_detailed_table} className="ui-beacon-images" />
             <br></br>
+            <img src={results_detailed_table} className="ui-beacon-images" />
+            <p></p>
             If the total number of matching records is within the configured
             limit, then all records are displayed.
           </p>

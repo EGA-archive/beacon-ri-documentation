@@ -84,12 +84,12 @@ function LandingPage({ searchTerm }: LandingPageProps) {
         src="/scheme_RI.svg"
       />
       <h2 className="h2-subtitle">
-        What brings the new Beacon v2 Production Implementation?
+        What does the Beacon v2 Production Implementation provide?
       </h2>
       <p>
-        As stated before, Beacon v2 PI API is a beacon instance for production
-        environments. The steps that this production instance follows are the
-        next ones shown in the next flowchart:
+        The Beacon v2 Production Implementation (PI API) is designed for use in
+        production environments. The main processing steps it follows are
+        outlined in the flowchart below.
       </p>
       <img
         className="relationship-elements"

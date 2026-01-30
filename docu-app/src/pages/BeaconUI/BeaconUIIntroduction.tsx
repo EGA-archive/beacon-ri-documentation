@@ -66,8 +66,8 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </a>{" "}
             (Framework + default Models). Note that the Template UI is not a
             single-page application (SPA), which means that each Template UI
-            instance can be connected to an independent Beacon backend. <br />
-            It can be deployed with the{" "}
+            instance can be connected to an independent Beacon backend. It can
+            be deployed with the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api"
               target="_blank"

@@ -475,14 +475,15 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            The variable <b>imprecise_count</b> will override all the others and
-            will tell beacon to round the counts to a number equal or greater
-            than the one assigned to this variable. After that, the{" "}
-            <b>round_to_tens</b> is the variable that will have priority if
-            true, and will round a count to the immediate superior tenth. The
-            last one
-            <b>round_to_hundreds</b> will do the same as the one before but
-            rounding to the immedate superior hundredth.
+            The variable <span className="custom-code">imprecise_count</span>{" "}
+            will override all the others and will tell the Beacon to round the
+            counts to a number equal to or greater than the one assigned to this
+            variable. After that,{" "}
+            <span className="custom-code">round_to_tens</span> will take
+            priority if set to true and will round a count to the nearest higher
+            multiple of ten. Finally,{" "}
+            <span className="custom-code">round_to_hundreds</span> behaves in
+            the same way, rounding counts up to the nearest higher hundred.
           </p>
           <h2 className="lessPadding customh2" id="entry-types-configuration">
             Entry types configuration
@@ -612,25 +613,31 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            The most importants are the variable <b>endpoint_name</b>, which
-            will change the name of the endpoint that will show the response for
-            analysis type of records, the <b>granularity</b>, which will change
+            The most importants are the variable{" "}
+            <span className="custom-code">endpoint_name</span>, which will
+            change the name of the endpoint that will show the response for
+            analysis type of records, the{" "}
+            <span className="custom-code">granularity</span>, which will change
             the maximum granularity allowed for this particular entry type, the{" "}
-            <b>allow_queries_without_filters</b>, which will allow queries
-            without filters if <code>True</code> to that particular endpoint.
-            Also, <b>defaultSchema_id</b> says which is the version of the
-            schema of the records that are stored in this entry type and when
-            receiving a <code>requestedSchema</code> different than this id, the
-            beacon will respond with a bad request, as other schemas are not
-            supported. The variables that are below{" "}
-            <code>Map configuration</code> which will activate or deactivate the
-            different endpoints related to this entry type. See explanation next
-            to each of the variables to know more.
+            <span className="custom-code">allow_queries_without_filters</span>,
+            which will allow queries without filters if{" "}
+            <span className="custom-code">True</span> to that particular
+            endpoint. Also,{" "}
+            <span className="custom-code">defaultSchema_id</span> says which is
+            the version of the schema of the records that are stored in this
+            entry type and when receiving a{" "}
+            <span className="custom-code">requestedSchema</span> different than
+            this id, the beacon will respond with a bad request, as other
+            schemas are not supported. The variables that are below{" "}
+            <span className="custom-code">Map configuration</span> which will
+            activate or deactivate the different endpoints related to this entry
+            type. See explanation next to each of the variables to know more.
           </p>
-          {/* Old code */}
           <p>
             To show correctly your beacon’s information you will need to edit
-            both conf.py files from beacon and deploy folders.
+            both <span className="custom-code">conf.py</span> files from{" "}
+            <span className="custom-code">beacon</span> and{" "}
+            <span className="custom-code">deploy</span> folders.
             <br />
             To do so, edit the following variables:
           </p>
@@ -707,8 +714,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
                 alt="Note symbol"
               />
               <div>
-                Note that this is the info that will be shown in the /info
-                endpoint for your beacon.
+                Note that this is the info that will be shown in the
+                <span className="custom-code">/info </span> endpoint for your
+                beacon.
               </div>
             </p>
           </div>
@@ -717,21 +725,25 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           </h2>
           <p>
             There are <b>3 possible levels</b> of beacon security for a dataset:{" "}
-            <b>public</b>, <b>registered</b> and <b>controlled</b>.
+            <span className="custom-code">public</span>,{" "}
+            <span className="custom-code">registered</span> and{" "}
+            <span className="custom-code">controlled</span>.
           </p>
           <ul>
             <li>
-              A <b>public</b> dataset is a dataset that will be returned in a
-              beacon query without an authentication token. 
+              A <span className="custom-code">public</span> dataset is a dataset
+              that will be returned in a beacon query without an authentication
+              token.
             </li>
             <li>
-              A <b>registered</b> dataset is a dataset that will be shown after
-              a user sends a valid token (in other words, is logged in).
+              A <span className="custom-code">registered</span> dataset is a
+              dataset that will be shown after a user sends a valid token (in
+              other words, is logged in).
             </li>
             <li>
-              A <b>controlled</b> dataset is a dataset that needs a user to send
-              a valid token for authentication and the user needs to be allowed
-              to query that dataset.
+              A <span className="custom-code">controlled</span> dataset is a
+              dataset that needs a user to send a valid token for authentication
+              and the user needs to be allowed to query that dataset.
             </li>
           </ul>
           <h2 id="edit-yml-files">
