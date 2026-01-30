@@ -368,6 +368,15 @@ p.lessMargin {
   text-decoration: underline;
 }
 
+.onThisPageItem.active .onThisPageLink {
+  font-weight: 700;
+  color: #185177;
+}
+
+.onThisPageLink {
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
 .qrcode {
   margin-top: 20px;
   width: 150px;

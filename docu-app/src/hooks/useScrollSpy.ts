@@ -61,7 +61,7 @@ export default function useScrollSpy(
 
     const scrollToId = (rawId: string) => {
       const id = decodeURIComponent(rawId.replace(/^#/, ""));
-      if (!id) return; // ⛔ skip if ID is empty
+      if (!id) return;
 
       const esc =
         (window as any).CSS?.escape ??

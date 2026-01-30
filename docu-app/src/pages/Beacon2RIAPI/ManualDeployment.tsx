@@ -324,7 +324,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

@@ -43,7 +43,8 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
           <h1>Versioning</h1>
           <ul>
             <li>
-              <b>First Release [date]</b>: Template Beacon UI Version 1.0
+              <b>First Release (5 February 2026)</b>: Template Beacon UI Version
+              1.0
               {/*
 <p className="list-description">
   Add a description with the main features
@@ -70,7 +71,7 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

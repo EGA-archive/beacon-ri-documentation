@@ -646,7 +646,7 @@ labelForHG00001|labelForHG00002`
         <br />
         <br />
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

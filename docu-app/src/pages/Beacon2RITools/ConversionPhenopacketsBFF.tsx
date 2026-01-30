@@ -215,7 +215,7 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           <br></br>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

@@ -774,7 +774,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

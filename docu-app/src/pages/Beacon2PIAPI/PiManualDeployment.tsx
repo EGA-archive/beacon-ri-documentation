@@ -170,8 +170,11 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
 
           <p>
             If you wish to light up only some of the services, not all, just
-            write the name of the services in the <b>docker-compose.yml</b> file
-            right after the command (e.g. for having the mandatory services
+            write the name of the services in the{" "}
+            <b>
+              <span className="custom-code">docker-compose.yml</span>
+            </b>{" "}
+            file right after the command (e.g. for having the mandatory services
             only):
           </p>
 
@@ -230,7 +233,7 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
 
           <h2 id="data-injection">Data injection</h2>
           <p>
-            Copy all the available BFF files you have to the{" "}
+            Copy all the available <b>BFF files</b> you have to the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data"
               target="_blank"
@@ -252,7 +255,7 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
             </div>
           </p>
           <p>
-            Now execute the insertion of the files copied into the mongo
+            Now execute the <b>insertion</b> of the files copied into the mongo
             database.
           </p>
           <div className="codeSnippet codeSnippet-mongodb">
@@ -293,8 +296,8 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
             </pre>
           </div>
           <p>
-            Alternatively, now also you can have your json gzipped and insert
-            them in a one step injection with the next commands:
+            Alternatively, <b>JSON files</b> can be <b>gzipped</b> and ingested
+            in a <b>single step</b> using the following commands:
           </p>
 
           <div className="codeSnippet codeSnippet-mongodb">
@@ -329,9 +332,9 @@ gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimp
 
           <h2 id="data-indexing">Data indexing</h2>
           <p>
-            For the API to respond fast to the queries, you have to index your
-            database. You can create the necessary indexes by running the next
-            script:
+            For the API to respond fast to the queries, you have to <b>index</b>{" "}
+            your database. <br></br>You can create the necessary indexes by
+            running the next script:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -364,8 +367,8 @@ gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimp
           </p>
           <h2 id="updating-the-containers">Updating the containers</h2>
           <p>
-            If you are updating the Beacon PI instance from a previous version,
-            it is recommended to use the next commands:
+            If you are <b>updating</b> the Beacon PI instance from a previous
+            version, it is recommended to use the next commands:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -393,7 +396,7 @@ gunzip --stdout caseLevelData.json.gz | docker exec -i mongoprod sh -c 'mongoimp
         </div>
 
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

@@ -220,18 +220,20 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Configuration</h1>
           <p>
-            Beacon2 PI API has two folders where a user can configure their
-            beacons: conf for general configuration of the beacon and source for
-            configuring the model of the beacon: e.g. entry types and the
-            databases related to each entry type.
+            Beacon2 PI API has <b>two folders</b> where a user can{" "}
+            <b>configure</b> their beacons:{" "}
+            <span className="custom-code">conf</span> for general configuration
+            of the beacon and <span className="custom-code">source</span> for
+            configuring the model of the beacon (e.g. entry types and the
+            databases related to each entry type).
           </p>
           <h2 id="generic-configuration" className="lessPadding customh2">
             Generic configuration
           </h2>
           <p>
             The beacon needs some configuration in order to show the correct
-            mappings or information. In order to do that, the next variables
-            inside{" "}
+            mappings or information. <br />
+            In order to do that, the next variables inside{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/conf.py"
               target="_blank"
@@ -239,10 +241,12 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             >
               conf.py
             </a>{" "}
-            can be modified for that purpose, being <b>uri</b> a critical one
-            for showing the correct domain in the mappings of your beacon. The{" "}
-            <b>uri_subpath</b> will be added behind this uri variable, in case
-            there is an extension of the domain for your beacon.
+            can be modified for that purpose, being{" "}
+            <span className="custom-code">uri</span> a critical one for showing
+            the correct domain in the mappings of your beacon. The{" "}
+            <span className="custom-code">uri_subpath</span> will be added
+            behind this <span className="custom-code">uri</span> variable, in
+            case there is an extension of the domain for your beacon.
           </p>
           <div className="codeSnippet">
             <pre>
@@ -353,7 +357,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <p>
             If you wish to put a limit on how many queries can a user or a
             certain IP make to your beacon, that is now possible. In order to do
-            that, edit the the variables under <code>Query budget</code> inside{" "}
+            that, edit the variables under{" "}
+            <span className="custom-code">Query budget</span> inside{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/blob/main/beacon/conf/conf.py"
               target="_blank"
@@ -399,17 +404,20 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            The variables <b>query_budget_per_user</b> and{" "}
-            <b>query_budget_per_ip</b> are boolean, and if True, they will
-            restrict the queries per user and ip. These depend on
-            <b>query_budget_amount</b> which will tell the amount allowed per
-            user/ip and <b>query_budge_time_in_seconds</b> which will be the
-            period of time that this amount of queries attempt will last. Bear
-            in mind that activating query budget per user means that if a user
-            is not authenticated, the query will fail unless the query budget
-            per ip is also activated. Both ip and user budgets can be activated
-            at the same time, having preference per user but if unauthenticated,
-            ip queries will also be valid.
+            The variables{" "}
+            <span className="custom-code">query_budget_per_user</span> and{" "}
+            <span className="custom-code">query_budget_per_ip</span> are
+            boolean, and if True, they will restrict the queries per user and
+            IP. These depend on{" "}
+            <span className="custom-code">query_budget_amount</span> which will
+            tell the amount allowed per user/IP and{" "}
+            <span className="custom-code">query_budget_time_in_seconds</span>{" "}
+            which will be the period of time that this amount of query attempts
+            will last. Bear in mind that activating query budget per user means
+            that if a user is not authenticated, the query will fail unless the
+            query budget per IP is also activated. Both IP and user budgets can
+            be activated at the same time, having preference per user but if
+            unauthenticated, IP queries will also be valid.
           </p>
           <h2 className="lessPadding customh2" id="query-rounding">
             Query rounding
@@ -1320,7 +1328,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <br></br>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

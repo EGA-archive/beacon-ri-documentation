@@ -72,8 +72,9 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
           <h3>Beacon 2 Production Implementation API</h3>
           <p>
             In case you want a quick and out of-the-box data Beacon PI instance
-            follow this deployment, which relies on a Bash script and a Makefile
-            and it is only compatible with MongoDB database deployments.
+            follow this deployment, which relies on a <b>Bash script</b> and a{" "}
+            <b>Makefile</b> and it is only compatible with{" "}
+            <b>MongoDB database</b> deployments.
           </p>
           <h2 id="prerequisites">Prerequisites</h2>
           <p>
@@ -104,16 +105,20 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
                   rel="noopener noreferrer"
                 >
                   Data from Beacon RI Tools v2
-                </a>
-                . Please, bear in mind that the datasetId for your records must
-                match the id for the dataset in the /datasets entry type.
+                </a>{" "}
+                <br />
+                Please, bear in mind that the{" "}
+                <span className="custom-code">datasetId</span> for your records
+                must match the <span className="custom-code">id</span> for the
+                dataset in the
+                <span className="custom-code">/datasets</span> entry type.
               </li>
             </ul>
           </p>
           <h2 id="automated-deployment">Automated Deployment</h2>
           <p>
-            This deployment relies on a Bash script and a Makefile and it is
-            only compatible with MongoDB database deployments.
+            This deployment relies on a <b>Bash script</b> and a <b>Makefile</b>{" "}
+            and it is only compatible with <b>MongoDB database</b> deployments.
           </p>
           <h2 id="cloning-repository">Cloning the repository</h2>
           <p>
@@ -177,7 +182,9 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <li>
                 Insert default Beacon-formatted data into your MongoDB instance,
                 using the files located at:{" "}
-                <em>/beacon2-pi-api/beacon/connections/mongo/data</em>
+                <span className="custom-code">
+                  /beacon2-pi-api/beacon/connections/mongo/data
+                </span>
               </li>
             </ul>
           </p>
@@ -218,8 +225,9 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
                 >
                   metadata
                 </a>
-                . Update the <em>/info</em> endpoint with your organization's
-                name, description, version, and contact details.
+                . Update the <span className="custom-code">/info</span> endpoint
+                with your organization's name, description, version, and contact
+                details.
               </li>
               <li>
                 Manage dataset{" "}
@@ -257,7 +265,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
           </p>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>

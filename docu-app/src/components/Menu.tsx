@@ -36,14 +36,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isSmallScreen = useMediaQuery("(max-width: 816px)");
 
-  /* -----------------------------
-     URL → active main menu
-  ------------------------------*/
   useEffect(() => {
     const path = location.pathname;
 
     if (path === "/") {
-      setActiveMenu(null);
+      setActiveMenu("Introduction");
       return;
     }
 
@@ -92,7 +89,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
 
     if (menuItem === "Introduction") {
       navigate("/");
-      setActiveMenu(null);
+      setActiveMenu("Introduction");
       return;
     }
 

@@ -14,7 +14,6 @@ export const useRegisterTextContent = (
     );
 
     if (!isAlreadyRegistered) {
-      // console.log(`Registering content for ${route}:`, text);
       addSearchableContent(route, text, title);
     }
   }, [addSearchableContent, route, text, title, searchableContent]);

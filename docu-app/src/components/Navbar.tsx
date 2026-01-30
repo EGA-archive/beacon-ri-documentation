@@ -15,7 +15,6 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
-    console.log("User Typed:", term);
     setSearchTerm(term);
     onSearch(term);
     setIsSearchResultsVisible(term !== "");
@@ -47,9 +46,10 @@ const Navbar = ({ onSearch }: NavbarProps) => {
   const navigate = useNavigate();
 
   const handleResultClick = (route: string) => {
-    navigate(route);
+    navigate(route, {
+      state: { fromSearch: true, searchTerm },
+    });
     setIsSearchResultsVisible(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const searchResults = searchTerm

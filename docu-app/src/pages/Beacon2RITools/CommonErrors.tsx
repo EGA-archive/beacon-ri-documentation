@@ -568,7 +568,7 @@ measurements.measurementValue.OntologyTerm.value
           <br></br>
         </div>
         <div className="sidebarColumn">
-          <OnThisPage activeId={activeId} root={contentRef.current} />
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>
