@@ -175,7 +175,7 @@ const Models: React.FC<ModelsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/models" className="no-undeline">
+        <a href="/pi-models" className="no-undeline">
           Beacon 2 PI API
         </a>
         <img
@@ -183,7 +183,7 @@ const Models: React.FC<ModelsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/models" className="no-undeline">
+        <a href="/pi-models" className="no-undeline">
           <span className="user-path-title"> Models</span>
         </a>
       </h2>

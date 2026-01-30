@@ -202,7 +202,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration" className="no-undeline">
+        <a href="/pi-configuration" className="no-undeline">
           Beacon 2 PI API
         </a>
 
@@ -211,7 +211,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration" className="no-undeline">
+        <a href="/pi-configuration" className="no-undeline">
           <span className="user-path-title">Configuration</span>
         </a>
       </h2>

@@ -40,7 +40,7 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/updating-records" className="no-undeline">
+        <a href="/ri-tools-updating-records" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -48,7 +48,7 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/updating-records" className="no-undeline">
+        <a href="/ri-tools-updating-records" className="no-undeline">
           <span className="user-path-title">Updating Record(s)</span>
         </a>
       </h2>

@@ -1105,69 +1105,71 @@ genomicVariations.json`}</code>
             beacon endpoints:
           </p>
           <div>
-            <li>
-              <a
-                href="http://localhost:5050/api/datasets"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/datasets
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/analyses"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/analyses
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/runs"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/runs
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/cohorts"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/cohorts
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/biosamples"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/biosamples
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/individuals"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/individuals
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/g_variants"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/g_variants
-              </a>
-            </li>
+            <ul>
+              <li>
+                <a
+                  href="http://localhost:5050/api/datasets"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/datasets
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/analyses"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/analyses
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/runs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/runs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/cohorts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/cohorts
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/biosamples"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/biosamples
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/individuals"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/individuals
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://localhost:5050/api/g_variants"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  http://localhost:5050/api/g_variants
+                </a>
+              </li>
+            </ul>
           </div>
 
           <h1 id="loading-more-data">10. Loading more data</h1>

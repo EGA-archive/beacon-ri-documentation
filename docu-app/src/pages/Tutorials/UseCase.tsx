@@ -2095,7 +2095,7 @@ A total of 0 variants were skipped`}</code>
           <p>
             To know about further settings, please visit the{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org/configuration"
+              href="https://beacon-documentation-demo.ega-archive.org/pi-configuration"
               target="_blank"
               rel="noreferrer"
             >
@@ -2325,7 +2325,7 @@ update_datetime = ''`}</code>
               ontology filtering with descendants and semantic similarities,
               please visit the{" "}
               <a
-                href="https://beacon-documentation-demo.ega-archive.org/filtering-terms"
+                href="https://beacon-documentation-demo.ega-archive.org/pi-filtering-terms"
                 target="_blank"
                 rel="noreferrer"
               >

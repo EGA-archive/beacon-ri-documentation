@@ -35,7 +35,7 @@ const StartingGuide: React.FC<StartingGuideProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/starting-guide" className="no-undeline">
+        <a href="/ri-tools-starting-guide" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -43,7 +43,7 @@ const StartingGuide: React.FC<StartingGuideProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/starting-guide" className="no-undeline">
+        <a href="/ri-tools-starting-guide" className="no-undeline">
           <span className="user-path-title">Starting Guide</span>
         </a>
       </h2>

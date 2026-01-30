@@ -60,7 +60,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/data-linking" className="no-undeline">
+        <a href="/ri-data-linking" className="no-undeline">
           Reference Implementation
         </a>
         <img
@@ -68,7 +68,7 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/data-linking" className="no-undeline">
+        <a href="/ri-data-linking" className="no-undeline">
           <span className="user-path-title">Data Linking</span>
         </a>
       </h2>
@@ -109,7 +109,11 @@ const DataLinking: React.FC<DataLinkingProps> = ({ searchTerm }) => {
                 {copySuccess["linking-ids"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

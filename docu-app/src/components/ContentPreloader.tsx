@@ -30,7 +30,7 @@ import RiToolsTestDataText from "../content/ri_tools_test_data.txt";
 import RiToolsUpdatingRecordsText from "../content/ri_tools_updating_records.txt";
 
 // Beacon Template UI
-// Add intro text here
+import UIIntroductionText from "../content/ui_introduction.txt";
 import UIConfigurationText from "../content/ui_configuration.txt";
 import UIDeploymentText from "../content/ui_deployment.txt";
 import UIQueryingText from "../content/ui_query_logic_results.txt";
@@ -59,12 +59,12 @@ const ContentPreloader = () => {
     "Manual Deployment"
   );
   useRegisterTextContent(
-    "/filtering-terms",
+    "/pi-filtering-terms",
     PiFilteringTermsText,
     "Filtering Terms"
   );
   useRegisterTextContent(
-    "/configuration",
+    "/pi-configuration",
     PiConfigurationText,
     "Configuration"
   );
@@ -74,52 +74,62 @@ const ContentPreloader = () => {
     "Querying the API"
   );
 
-  useRegisterTextContent("/models", PiModelsText, "Models");
+  useRegisterTextContent("/pi-models", PiModelsText, "Models");
 
   // Beacon 2 RI API Tools v2
   useRegisterTextContent(
-    "/starting-guide",
+    "/ri-tools-starting-guide",
     RiToolsStartingGuideText,
     "Starting Guide"
   );
   useRegisterTextContent(
-    "/configuration-file",
+    "/ri-tools-configuration-file",
     RiToolsConfigurationFileText,
     "Configuration File"
   );
 
   useRegisterTextContent(
-    "/conversion-from-csv-to-bff",
+    "/ri-tools-conversion-from-csv-to-bff",
     RiToolsConversionCSVBFFText,
     "Conversion from CSV to BFF"
   );
   useRegisterTextContent(
-    "/conversion-from-vcf-to-bff",
+    "/ri-tools-conversion-from-vcf-to-bff",
     RiToolsConversionVCFBFFText,
     "Conversion from VCF to BFF"
   );
 
   useRegisterTextContent(
-    "/conversion-from-phenopackets-to-bff",
+    "/ri-tools-conversion-from-phenopackets-to-bff",
     RiToolsConversionPhenopacketsBFFText,
     "Conversion from Phenopackets to BFF"
   );
 
   useRegisterTextContent(
-    "/common-errors",
+    "/ri-tools-common-errors",
     RiToolsCommonErrorsText,
     "Common Errors"
   );
 
-  useRegisterTextContent("/test-data", RiToolsTestDataText, "Test Data");
+  useRegisterTextContent(
+    "/ri-tools-test-data",
+    RiToolsTestDataText,
+    "Test Data"
+  );
 
   useRegisterTextContent(
-    "/updating-records",
+    "/ri-tools-updating-records",
     RiToolsUpdatingRecordsText,
     "Updating Records"
   );
 
   // Beacon Template UI
+
+  useRegisterTextContent(
+    "/ui-introduction",
+    UIIntroductionText,
+    "UI Introduction"
+  );
 
   useRegisterTextContent(
     "/ui-configuration",
@@ -151,26 +161,30 @@ const ContentPreloader = () => {
 
   // Reference Implementation (Beacon 2 RI API)
 
-  useRegisterTextContent("/introduction", RiIntroductionText, "Introduction");
+  useRegisterTextContent(
+    "/ri-introduction",
+    RiIntroductionText,
+    "Introduction"
+  );
 
   useRegisterTextContent(
-    "/automated-deployment",
+    "/ri-automated-deployment",
     RiAutomatedDeploymentText,
     "Automated Deployment"
   );
   useRegisterTextContent(
-    "/manual-deployment",
+    "/ri-manual-deployment",
     RiManualDeploymentText,
     "Manual Deployment"
   );
-  useRegisterTextContent("/data-linking", RiDataLinkingText, "Data Linking");
+  useRegisterTextContent("/ri-data-linking", RiDataLinkingText, "Data Linking");
   useRegisterTextContent(
-    "/api-configuration",
+    "/ri-configuration",
     RiConfigurationText,
     "Configuration"
   );
   useRegisterTextContent(
-    "/querying-the-api",
+    "/ri-querying-the-api",
     RiQueryingApiText,
     "Querying the API"
   );

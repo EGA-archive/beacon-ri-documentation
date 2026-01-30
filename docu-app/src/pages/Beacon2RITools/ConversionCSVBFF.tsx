@@ -48,7 +48,7 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/conversion-from-csv-to-bff" className="no-undeline">
+        <a href="/ri-tools-conversion-from-csv-to-bff" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -56,7 +56,7 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/conversion-from-csv-to-bff" className="no-undeline">
+        <a href="/ri-tools-conversion-from-csv-to-bff" className="no-undeline">
           <span className="user-path-title">Conversion from CSV to BFF</span>
         </a>
       </h2>
@@ -486,7 +486,7 @@ labelForHG00001|labelForHG00002`
             </a>{" "}
             (refer to the{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org/api-configuration"
+              href="https://beacon-documentation-demo.ega-archive.org/ri-configuration"
               target="_blank"
               rel="noopener noreferrer"
             >

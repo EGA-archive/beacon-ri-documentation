@@ -40,7 +40,10 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/conversion-from-phenopackets-to-bff" className="no-undeline">
+        <a
+          href="/ri-tools-conversion-from-phenopackets-to-bff"
+          className="no-undeline"
+        >
           Beacon RI Tools v2
         </a>
         <img
@@ -48,7 +51,10 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a
+          href="/ri-tools-conversion-from-phenopackets-to-bff"
+          className="no-undeline"
+        >
           <span className="user-path-title">
             Conversion from Phenopackets to BFF{" "}
           </span>

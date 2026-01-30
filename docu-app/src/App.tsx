@@ -30,6 +30,7 @@ import Models from "./pages/Beacon2PIAPI/Models";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
+
 import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import Resources from "./pages/Resources";
 import UseCase from "./pages/Tutorials/UseCase";
@@ -38,6 +39,7 @@ import ScrollToTop from "./ScrollToTop";
 import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
 import TestData from "./pages/Beacon2RITools/TestData";
 import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
+import BeaconUIIntroduction from "./pages/BeaconUI/BeaconUIIntroduction";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -72,10 +74,8 @@ function App() {
     "Introduction",
     "Beacon 2 PI API",
     "Beacon RI Tools v2",
-    // "Beacon Verifier",
     "Beacon Template UI",
     "Tutorials",
-    // "FAQs",
     "Reference Implementation",
     "Resources",
   ];
@@ -94,7 +94,6 @@ function App() {
       "Automated Deployment",
       "Manual Deployment",
       "Data Linking",
-      // "API Configuration",
       "Configuration",
       "Querying the API",
     ],
@@ -109,13 +108,12 @@ function App() {
       "Updating Records",
     ],
     "Beacon Template UI": [
-      "UI Introduction",
-      "UI Configuration",
-      "UI Deployment",
+      "Introduction",
+      "Configuration File",
+      "Deployment",
       "Query Logic & Results",
       "Versioning",
     ],
-
     Tutorials: ["Create your Beacon", "Example Beacon: Rare Disease Use Case"],
   };
 
@@ -143,8 +141,6 @@ function App() {
                   path="/"
                   element={<LandingPage searchTerm={searchTerm} />}
                 />
-
-                {/* Beacon 2 PI API Routes */}
                 <Route
                   path="/pi-automated-deployment"
                   element={<PiAutomatedDeployment searchTerm={searchTerm} />}
@@ -154,95 +150,86 @@ function App() {
                   element={<PiManualDeployment searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/filtering-terms"
+                  path="/pi-filtering-terms"
                   element={<FilteringTerms searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/configuration"
+                  path="/pi-configuration"
                   element={<PiApiConfiguration searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/pi-querying-the-api"
                   element={<PiQueryingAPI searchTerm={searchTerm} />}
                 />
-
                 <Route
-                  path="/models"
+                  path="/pi-models"
                   element={<Models searchTerm={searchTerm} />}
                 />
-
-                {/* Reference Implementation (Beacon 2 RI API) Routes */}
                 <Route
-                  path="/introduction"
+                  path="/ri-introduction"
                   element={<Introduction searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/automated-deployment"
+                  path="/ri-automated-deployment"
                   element={<AutomatedDeployment searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/manual-deployment"
+                  path="/ri-manual-deployment"
                   element={<ManualDeployment searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/data-linking"
+                  path="/ri-data-linking"
                   element={<DataLinking searchTerm={searchTerm} />}
                 />
-
                 <Route
-                  path="/api-configuration"
+                  path="/ri-configuration"
                   element={<ApiConfiguration searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/querying-the-api"
+                  path="/ri-querying-the-api"
                   element={<QueryingApi searchTerm={searchTerm} />}
                 />
-
-                {/* Beacon RI Tools v2 Routes */}
                 <Route
-                  path="/starting-guide"
+                  path="/ri-tools-starting-guide"
                   element={<StartingGuide searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/configuration-file"
+                  path="/ri-tools-configuration-file"
                   element={<ConfigFileTools searchTerm={searchTerm} />}
                 />
-
                 <Route
-                  path="/conversion-from-csv-to-bff"
+                  path="/ri-tools-conversion-from-csv-to-bff"
                   element={<ConversionCSVBFF searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/conversion-from-vcf-to-bff"
+                  path="/ri-tools-conversion-from-vcf-to-bff"
                   element={<ConversionVCFBFF searchTerm={searchTerm} />}
                 />
-
                 <Route
-                  path="/conversion-from-phenopackets-to-bff"
+                  path="/ri-tools-conversion-from-phenopackets-to-bff"
                   element={
                     <ConversionPhenopacketsBFF searchTerm={searchTerm} />
                   }
                 />
                 <Route
-                  path="/common-errors"
+                  path="/ri-tools-common-errors"
                   element={<CommonErrors searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/test-data"
+                  path="/ri-tools-test-data"
                   element={<TestData searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/updating-records"
+                  path="/ri-tools-updating-records"
                   element={<UpdatingRecords searchTerm={searchTerm} />}
                 />
 
-                {/* Beacon Template UI */}
                 <Route
                   path="/ui-introduction"
-                  element={<BeaconUIDeployment searchTerm={searchTerm} />}
+                  element={<BeaconUIIntroduction searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/ui-configuration"
+                  path="/ui-configuration-file"
                   element={<BeaconUIConfiguration searchTerm={searchTerm} />}
                 />
                 <Route
@@ -253,13 +240,11 @@ function App() {
                   path="/ui-query-logic-&-results"
                   element={<BeaconUIQueries searchTerm={searchTerm} />}
                 />
-
                 <Route
                   path="/ui-versioning"
                   element={<UIVersioning searchTerm={searchTerm} />}
                 />
 
-                {/* Tutorials */}
                 <Route
                   path="/create-your-beacon"
                   element={<CreateYourBeacon searchTerm={searchTerm} />}

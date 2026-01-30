@@ -75,7 +75,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/manual-deployment" className="no-undeline">
+        <a href="/ri-manual-deployment" className="no-undeline">
           Reference Implementation
         </a>
         <img
@@ -83,7 +83,7 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/manual-deployment" className="no-undeline">
+        <a href="/ri-manual-deployment" className="no-undeline">
           <span className="user-path-title"> Manual Deployment</span>
         </a>
       </h2>

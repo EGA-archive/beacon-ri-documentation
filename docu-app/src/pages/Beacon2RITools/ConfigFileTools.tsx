@@ -40,7 +40,7 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/ri-tools-configuration-file" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -48,7 +48,7 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/ri-tools-configuration-file" className="no-undeline">
           <span className="user-path-title">Configuration File</span>
         </a>
       </h2>
@@ -57,12 +57,11 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           <h3>Beacon RI Tools v2</h3>
           <h1>Configuration File</h1>
           <p>
-            In order to use Beacon RI Tools v2 one needs to modify a
+            In order to use <b>Beacon RI Tools v2</b> one needs to modify a
             configuration file with the desired files and options for the
-            different collections.
-          </p>
-          <p>
-            You will find conf.py inside the{" "}
+            different collections. <br />
+            You will find <span className="custom-code">conf.py</span> inside
+            the{" "}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf"
               target="_blank"
@@ -72,6 +71,7 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             </a>
             . Inside this file, you will find the following information:
           </p>
+
           <h2 id="input-output-files-config">
             Input and Output files config parameters
           </h2>

@@ -65,7 +65,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/filtering-terms" className="no-undeline">
+        <a href="/pi-filtering-terms" className="no-undeline">
           Beacon 2 PI API
         </a>
         <img
@@ -73,7 +73,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/filtering-terms" className="no-undeline">
+        <a href="/pi-filtering-terms" className="no-undeline">
           <span className="user-path-title">Filtering Terms</span>
         </a>
       </h2>

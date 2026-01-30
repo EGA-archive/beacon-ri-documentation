@@ -41,7 +41,7 @@ const CommonErrors: React.FC<CommonErrorsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/ri-tools-common-errors" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -49,7 +49,7 @@ const CommonErrors: React.FC<CommonErrorsProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/ri-tools-common-errors" className="no-undeline">
           <span className="user-path-title">Common Errors</span>
         </a>
       </h2>

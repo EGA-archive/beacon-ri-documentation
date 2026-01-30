@@ -47,7 +47,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/conversion-from-vcf-to-bff" className="no-undeline">
+        <a href="/ri-tools-conversion-from-vcf-to-bff" className="no-undeline">
           Beacon RI Tools v2
         </a>
 
@@ -56,7 +56,7 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/conversion-from-vcf-to-bff" className="no-undeline">
+        <a href="/ri-tools-conversion-from-vcf-to-bff" className="no-undeline">
           <span className="user-path-title">Conversion from VCF to BFF</span>
         </a>
       </h2>

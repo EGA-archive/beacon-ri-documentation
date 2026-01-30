@@ -22,6 +22,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
       "docker-version": "docker --version\ndocker compose version",
+      "cd-desktop": "cd Desktop",
       "cd-template": "cd beacon-template-ui",
       "git-clone":
         "git clone https://github.com/EGA-archive/beacon-template-ui.git",
@@ -140,10 +141,12 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             ) to:
             <ul>
               <li>
-                Edit the <b>config.json</b>
+                Edit the <span className="custom-code">config.json</span>
               </li>
               <li>
-                Create and edit your <b>.env</b> file (if login is enabled)
+                Create and edit your
+                <span className="custom-code">.env</span> file (if login is
+                enabled)
               </li>
             </ul>
           </p>
@@ -151,6 +154,28 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           <p>
             Open your <b>terminal </b>and navigate to the folder where you want
             to store the project (for example, your <b>Desktop</b>):
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>cd Desktop</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("cd-desktop")}
+              >
+                {copySuccess["cd-desktop"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Then, <b>clone the Beacon Template UI</b> repository:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -225,15 +250,21 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             <ul className="noBullets">
               <li>
                 <label>
-                  <input type="checkbox" />
-                  <b>config.json</b> (location: client/src/config/config.json)
+                  <input type="checkbox" />{" "}
+                  <span className="custom-code">config.json</span> (location:{" "}
+                  <span className="custom-code">
+                    client/src/config/config.json
+                  </span>
+                  )
                 </label>
               </li>
               <li>
                 <label>
-                  <input type="checkbox" />
-                  <b>client/public/assets/logos</b> is populated with the
-                  correct .svg(s) <br />
+                  <input type="checkbox" />{" "}
+                  <span className="custom-code">
+                    client/public/assets/logos
+                  </span>{" "}
+                  is populated with the correct .svg(s) <br />
                   Remember that you can also use relative URLs if your images
                   are hosted externally.
                 </label>
@@ -244,8 +275,8 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
               <li>
                 <label>
                   <input type="checkbox" />
-                  <b>.env</b> file is added in <b>client</b> folder with the
-                  credentials
+                  <span className="custom-code">.env</span> file is added in{" "}
+                  <b>client</b> folder with the credentials
                 </label>
               </li>
             </ul>
@@ -377,8 +408,10 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             Updating to a new Beacon Template UI Version
           </h1>
           <p>
-            The configuration file (client/src/config/config.json) is designed
-            to be reusable across Beacon Template UI releases. <br />
+            The configuration file (
+            <span className="custom-code">client/src/config/config.json</span>)
+            is designed to be reusable across Beacon Template UI releases.{" "}
+            <br />
             When a new version is published, you do not need to recreate your
             configuration from scratch.
             <br />
@@ -387,8 +420,18 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
               <li>
                 <b>Keep your existing configuration files</b>
                 <ul>
-                  <li>client/src/config/config.json</li>
-                  <li>client/.env (if login is enabled)</li>
+                  <li>
+                    {" "}
+                    <span className="custom-code">
+                      client/src/config/config.json
+                    </span>
+                  </li>
+
+                  <li>
+                    {" "}
+                    <span className="custom-code">client/.env</span> (if login
+                    is enabled)
+                  </li>
                 </ul>
               </li>
               <li>
@@ -398,8 +441,11 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
                   <li>
                     {" "}
                     Either pull the latest changes from the repository (for
-                    example with git fetch/ git pull), or clone the new version
-                    and copy your existing config.json and .env into it.
+                    example with{" "}
+                    <span className="custom-code">git fetch/git pull</span>), or
+                    clone the new version and copy your existing{" "}
+                    <span className="custom-code">config.json</span> and
+                    <span className="custom-code">.env</span> into it.
                   </li>
                 </ul>
               </li>
@@ -466,10 +512,13 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             changes, because the Docker image must be rebuilt to include the
             updated UI.
             <br />
-            As long as your existing config.json matches the schema expected by
-            the new release, it can be reused without modification. If new
-            fields are introduced in future versions, you can compare your
-            configuration with config.example.json and extend it as needed.
+            As long as your existing{" "}
+            <span className="custom-code">config.json</span> matches the schema
+            expected by the new release, it can be reused without modification.
+            If new fields are introduced in future versions, you can compare
+            your configuration with{" "}
+            <span className="custom-code">config.example.json</span> and extend
+            it as needed.
           </p>
         </div>
         <div className="sidebarColumn">

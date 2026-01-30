@@ -41,7 +41,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/test-data" className="no-undeline">
+        <a href="/ri-tools-test-data" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -49,7 +49,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/test-data" className="no-undeline">
+        <a href="/ri-tools-test-data" className="no-undeline">
           <span className="user-path-title">Test Data</span>
         </a>
       </h2>

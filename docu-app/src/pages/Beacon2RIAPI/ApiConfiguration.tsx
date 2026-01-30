@@ -75,7 +75,7 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/api-configuration" className="no-undeline">
+        <a href="/ri-configuration" className="no-undeline">
           Reference Implementation
         </a>
         <img
@@ -83,7 +83,7 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/api-configuration" className="no-undeline">
+        <a href="/ri-configuration" className="no-undeline">
           <span className="user-path-title">Configuration</span>
         </a>
       </h2>

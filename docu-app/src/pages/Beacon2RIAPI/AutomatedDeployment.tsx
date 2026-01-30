@@ -55,7 +55,7 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/automated-deployment" className="no-undeline">
+        <a href="/ri-automated-deployment" className="no-undeline">
           Reference Implementation
         </a>
         <img
@@ -63,7 +63,7 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/automated-deployment" className="no-undeline">
+        <a href="/ri-automated-deployment" className="no-undeline">
           <span className="user-path-title"> Automated Deployment</span>
         </a>
       </h2>

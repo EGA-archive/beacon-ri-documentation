@@ -40,7 +40,7 @@ const QueryingAPI: React.FC<QueryingAPIProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/querying-the-api" className="no-undeline">
+        <a href="/ri-querying-the-api" className="no-undeline">
           {" "}
           Reference Implementation
         </a>
@@ -50,7 +50,7 @@ const QueryingAPI: React.FC<QueryingAPIProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/querying-the-api" className="no-undeline">
+        <a href="/ri-querying-the-api" className="no-undeline">
           <span className="user-path-title">Querying the API</span>
         </a>
       </h2>

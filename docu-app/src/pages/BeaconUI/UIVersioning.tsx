@@ -44,9 +44,11 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
           <ul>
             <li>
               <b>First Release [date]</b>: Template Beacon UI Version 1.0
-              <p className="list-description">
-                Add a description with the main features
-              </p>
+              {/*
+<p className="list-description">
+  Add a description with the main features
+</p>
+*/}
             </li>
           </ul>
 

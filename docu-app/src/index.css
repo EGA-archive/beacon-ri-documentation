@@ -30,6 +30,15 @@ code {
   font-size: 14px;
 }
 
+.custom-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: inherit;
+  color: #065f46;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 li {
   margin-top: 10px;
   font-size: 14px;

@@ -212,7 +212,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <li>
                 Edit your instance’s{" "}
                 <a
-                  href="https://beacon-documentation-demo.ega-archive.org/configuration#editing-beacon-info"
+                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#editing-beacon-info"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -224,7 +224,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <li>
                 Manage dataset{" "}
                 <a
-                  href="https://beacon-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions"
+                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#managing-dataset-permissions"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -235,7 +235,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <li>
                 Enable advanced{" "}
                 <a
-                  href="https://beacon-documentation-demo.ega-archive.org/filtering-terms#extract-terms"
+                  href="https://beacon-documentation-demo.ega-archive.org/pi-filtering-terms#automatically-extract-filtering-terms"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -246,7 +246,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <li>
                 Found more setting options in{" "}
                 <a
-                  href="https://beacon-documentation-demo.ega-archive.org/configuration"
+                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration"
                   target="_blank"
                   rel="noreferrer"
                 >

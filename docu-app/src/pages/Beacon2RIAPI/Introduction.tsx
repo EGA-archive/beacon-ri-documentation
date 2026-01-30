@@ -24,7 +24,7 @@ const Introduction: React.FC<IntroductionProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/automated-deployment" className="no-undeline">
+        <a href="/ri-introduction" className="no-undeline">
           Reference Implementation
         </a>
         <img
@@ -32,7 +32,7 @@ const Introduction: React.FC<IntroductionProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/automated-deployment" className="no-undeline">
+        <a href="/ri-introduction" className="no-undeline">
           <span className="user-path-title">Introduction</span>
         </a>
       </h2>
