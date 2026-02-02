@@ -714,9 +714,11 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
                 alt="Note symbol"
               />
               <div>
-                Note that this is the info that will be shown in the
-                <span className="custom-code">/info </span> endpoint for your
-                beacon.
+                <p className="note-paragraph">
+                  Note that this is the info that will be shown in the
+                  <span className="custom-code">/info </span> endpoint for your
+                  beacon.
+                </p>
               </div>
             </p>
           </div>
@@ -760,16 +762,23 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               datasets_permissions.yml
             </a>{" "}
             and add your dataset you wish to assign the permissions for it.
-            <br></br>The security level (public, registered, or controlled)
-            needs to be the first item under the dataset name. <br></br>After
-            that, depending on the security level you assigned to the dataset,
-            you can set a <b>default_entry_types_granularity</b>, which will set
-            which is the maximum granularity allowed for this dataset, except
-            for the <b>entry_types_exceptions</b>, that can assign a particular
-            granularity for a particular entry type. Beware that the entry type
-            needs to match the entry type id you set for each of the entry type
-            files in their respective <code>conf</code> file: id of analysis,
-            individual, etc.
+            <br></br>
+            The security level (<span className="custom-code">
+              public
+            </span>, <span className="custom-code">registered</span>, or{" "}
+            <span className="custom-code">controlled</span>) needs to be the
+            first item under the dataset name.
+            <br></br>
+            After that, depending on the security level you assigned to the
+            dataset, you can set a{" "}
+            <span className="custom-code">default_entry_types_granularity</span>
+            , which will set which is the maximum granularity allowed for this
+            dataset, except for the{" "}
+            <span className="custom-code">entry_types_exceptions</span>, that
+            can assign a particular granularity for a particular entry type.
+            Beware that the entry type needs to match the entry type id you set
+            for each of the entry type files in their respective{" "}
+            <code>conf</code> file: id of analysis, individual, etc.
           </p>
           <div className="codeSnippet">
             <pre>
@@ -812,9 +821,11 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            If you have assigned a controlled security level then you can assign
-            a particular granularity per user and per entry type per user. You
-            can do that by creating a <b>user-list</b> array with items that
+            If you have assigned a{" "}
+            <span className="custom-code">controlled</span> security level then
+            you can assign a particular <b>granularity</b> per user and per
+            entry type per user. You can do that by creating a{" "}
+            <span className="custom-code">user-list</span> array with items that
             belong to each user and that need to have the following structure:
           </p>
           <div className="codeSnippet">
@@ -864,11 +875,15 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           </h2>
           <p>
             For making any IDP (based on OpenID and Oauthv2) work with beacon,
-            you will need to add the <b>client ID </b>and <b>client secret</b>{" "}
-            for each IDP in a new file you have to create inside
-            auth/idp_providers folder (for each IDP). This file must have a name
-            with an .env extension (e.g. something.env) and needs to have the
-            following variables:
+            you will need to add the{" "}
+            <span className="custom-code">client ID</span> and{" "}
+            <span className="custom-code">client secret</span> for each IDP in a
+            new file you have to create inside the{" "}
+            <span className="custom-code">auth/idp_providers</span> folder (for
+            each IDP). This file must have a name with an{" "}
+            <span className="custom-code">.env</span> extension (e.g.{" "}
+            <span className="custom-code">something.env</span>) and needs to
+            have the following variables:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -919,7 +934,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <p>
             To avoid CORS using beacon and the frontend or a third-party
             authorization site like Keycloak, you will have to include all these
-            URLs inside variable cors_urls in <b>beacon/conf/conf.py file</b>.
+            URLs inside variable cors_urls in{" "}
+            <span className="custom-code">beacon/conf/conf.py</span> file.
             <br></br>
             Example usage:
           </p>
@@ -938,7 +954,11 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
                 {copySuccess["cors-main"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -949,8 +969,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <p>
             Beacon PI can only limit the granularity for all the beacon at the
             moment. If you want to limit the granularity for all users across
-            all datasets, you can point it in <b>becon/conf/conf.py</b>, by
-            editing the next variables:
+            all datasets, you can point it in{" "}
+            <span className="custom-code">beacon/conf/conf.py</span>, by editing
+            the next variables:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -973,9 +994,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             response per dataset.
             <br />
             In any of the cases, you have to modify the{" "}
-            <b>beacon/utils/handovers.py</b> file and you can write your
-            handover there following the Beacon v2 spec response for handovers,
-            e.g.
+            <span className="custom-code">beacon/utils/handovers.py</span> file
+            and you can write your handover there following the Beacon v2 spec
+            response for handovers, e.g.
           </p>
           <div className="codeSnippet custom-codeSnippet">
             <pre>
@@ -1013,7 +1034,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <p>
             After doing that if you want to just show the handover in general
             (not per dataset) you will need to include it in the
-            list_of_handovers array:
+            <span className="custom-code"> list_of_handovers</span> array:
           </p>
           <div className="codeSnippet custom-codeSnippet">
             <pre>
@@ -1033,8 +1054,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           <h4>Handover per dataset</h4>
           <p>
             If you want to add the handover per dataset, then you will need to
-            create first a dictionary per dataset with the handover and the
-            dataset id, like this:
+            create first a dictionary per dataset with the handover and the{" "}
+            <span className="custom-code">datasetId</span>, like this:
           </p>{" "}
           <div className="codeSnippet custom-codeSnippet">
             <pre>
@@ -1071,12 +1092,12 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
           </div>
           <h2 id="configuring-entry-types">Configuring your entry types</h2>
           <p>
-            The entry types configuration now works with <b>yml files</b> inside
-            each model.
-            <br></br>
+            The entry types configuration now works with{" "}
+            <span className="custom-code">.yml</span> files inside each model.
+            <br />
             You can edit the values of the parameters below (the values after
-            the : ).
-            <br></br>
+            the <span className="custom-code">:</span>).
+            <br />
             The keys have to remain the same as shown below.
           </p>
           <div className="codeSnippet">
@@ -1194,8 +1215,9 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            These files are located in their respective folder
-            (beacon/models/conf/entry_types).
+            These files are located in their respective folder (
+            <span className="custom-code">beacon/models/conf/entry_types</span>
+            ).
           </p>
           <p className="note">
             <img
@@ -1204,23 +1226,32 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               alt="Note symbol"
             />
             <div>
-              Bear in mind that the name of the database variable needs to be
-              the exact same name that the name for the folder it corresponds to
-              in beacon/connections.
+              <p className="note-paragraph">
+                Bear in mind that the name of the database variable needs to be
+                the exact same name as the folder it corresponds to in{" "}
+                <span className="custom-code">beacon/connections</span>.
+              </p>
             </div>
           </p>
           <h2 id="setting-logs">Setting the logs</h2>
           <p>
             In this production instance of beacon, you can set the level of the
-            logs you want to output and where do you want to see the output in.{" "}
+            logs you want to output and where do you want to see the output in.
             <br />
             <br />
             All the outputs will be streamed but if you define a path for a log
-            file (file with extension .log) you will be able to have all the
-            history of logs for your beacon saved in this file. <br />
+            file (file with extension <span className="custom-code">.log</span>)
+            you will be able to have all the history of logs for your beacon
+            saved in this file.
             <br />
-            For setting the level of the logs, specify one amongst NOTSET,
-            DEBUG, ERROR, INFO in the variable level (after logging.):
+            <br />
+            For setting the level of the logs, specify one amongst{" "}
+            <span className="custom-code">NOTSET</span>,{" "}
+            <span className="custom-code">DEBUG</span>,{" "}
+            <span className="custom-code">ERROR</span>,{" "}
+            <span className="custom-code">INFO</span> in the variable{" "}
+            <span className="custom-code">level</span> (after{" "}
+            <span className="custom-code">logging.</span>):
           </p>
           <div className="codeSnippet">
             <pre>
@@ -1238,8 +1269,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             </pre>
           </div>
           <p>
-            For setting the path to the file, define it in the variable
-            log_file:
+            For setting the path to the file, define it in the variable{" "}
+            <span className="custom-code">log_file</span>:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -1266,30 +1297,43 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               <p className="note-paragraph">
                 To save the logs in a file out of docker, you will need to
                 create a volume for the file. There is a default log file volume
-                defined in the docker-compose, which is -
-                <b>./beacon/logs/logs.log:/beacon/logs/logs.log </b>, hence no
-                need to create any other volume if you use this same file for
-                logs.
+                defined in the docker-compose, which is{" "}
+                <span className="custom-code">
+                  ./beacon/logs/logs.log:/beacon/logs/logs.log
+                </span>
+                , hence no need to create any other volume if you use this same
+                file for logs.
               </p>
             </div>
           </p>
           <h2 id="TLS-configuration">TLS configuration</h2>
           <p>
-            To enable TLS for the Becaon API set beacon_server_crt and
-            beacon_server_key to the full paht of the server certificate and
-            server key in <b>beacon/conf/conf.py</b> file.
+            To enable TLS for the Beacon API set{" "}
+            <span className="custom-code">beacon_server_crt</span> and{" "}
+            <span className="custom-code">beacon_server_key</span> to the full
+            path of the server certificate and server key in{" "}
+            <span className="custom-code">beacon/conf/conf.py</span> file.
           </p>
           <h2 id="TLS-secured-MongoDB">TLS secured MongoDB</h2>
           <p>
-            Edit the file <b>beacon/connections/mongo/conf.py </b> and
-            set database_certificate to the full path to the client certificate.
-            If a private CA is used also set the database_cafile to the full
-            path to the CA certificate.
+            Edit the file{" "}
+            <span className="custom-code">
+              beacon/connections/mongo/conf.py
+            </span>{" "}
+            and set <span className="custom-code">database_certificate</span> to
+            the full path to the client certificate. If a private CA is used
+            also set the <span className="custom-code">database_cafile</span> to
+            the full path to the CA certificate.
+          </p>
+          <ul>
             <li>
               The MongoDB client certificate should be in the combined PEM
-              format client.key + "\n" + client.crt
+              format{" "}
+              <span className="custom-code">
+                client.key + "\n" + client.crt
+              </span>
             </li>
-          </p>
+          </ul>
           <h2 id="test-mode">Test Mode</h2>
           <p>
             For verifying your beacon, there are datasets that you can reproduce
@@ -1304,7 +1348,8 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
             >
               datasets_conf.yml
             </a>{" "}
-            file and add an <code>isTest</code>: true parameter under the
+            file and add an <span className="custom-code">isTest</span>:{" "}
+            <span className="custom-code">true</span> parameter under the
             dataset desired, like this example:
           </p>
           <div className="codeSnippet">

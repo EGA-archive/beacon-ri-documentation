@@ -62,7 +62,10 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
         <div className="contentColumn" ref={contentRef}>
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Querying the API</h1>
-          <p>Beacon PI accepts two types of request methods: GET and POST.</p>
+          <p>
+            Beacon PI accepts two types of request methods: <b>GET</b> and{" "}
+            <b>POST</b>.
+          </p>
           <p className="note">
             <img
               className="note-symbol"
