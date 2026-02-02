@@ -14,7 +14,6 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string, textToCopy: string) => {

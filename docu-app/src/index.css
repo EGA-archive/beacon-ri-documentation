@@ -29,6 +29,9 @@ code {
     monospace;
   font-size: 14px;
 }
+pre code {
+  font-style: normal !important;
+}
 
 .custom-code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -279,6 +282,11 @@ p.lessMargin {
 .note-paragraph {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.codeSnippet--note {
+  background-color: #e0eeff !important;
+  border: 1px solid #609de4 !important;
 }
 
 .codeSnippet pre {

@@ -14,7 +14,6 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, key: string) => {

@@ -16,7 +16,6 @@ const Resources: React.FC<ResourcesProps> = ({ searchTerm }) => {
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
-  const { activeId } = useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

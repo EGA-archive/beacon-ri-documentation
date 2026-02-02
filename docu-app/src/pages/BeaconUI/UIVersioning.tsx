@@ -11,7 +11,6 @@ interface UIVersioningProps {
 const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
-  const { activeId } = useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

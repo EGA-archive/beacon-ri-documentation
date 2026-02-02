@@ -1,68 +1,67 @@
+Documentation Beacon 2 PI API Configuration
 Beacon 2 Production Implementation API
 Configuration
-
-Beacon2 PI API has two folders where a user can configure their beacons:
-
-conf: general configuration of the beacon
-
-source: configuration of the beacon model (entry types and databases)
+Beacon2 PI API has two folders where a user can configure their beacons: conf for general configuration of the beacon and source for configuring the model of the beacon (e.g. entry types and the databases related to each entry type).
 
 Generic configuration
-
 The beacon needs some configuration in order to show the correct mappings or information.
-These variables inside conf.py can be modified.
-The uri variable is critical for showing the correct domain, and uri_subpath is appended to it.
+In order to do that, the next variables inside conf.py can be modified for that purpose, being uri a critical one for showing the correct domain in the mappings of your beacon. The uri_subpath will be added behind this uri variable, in case there is an extension of the domain for your beacon.
 
-Generic configuration example:
-
-beacon_id = 'org.ega-archive.beacon-ri-demo'
-beacon_name = 'Beacon Reference Implementation demo'
-api_version = 'v2.0.0'
-uri = 'http://localhost:5050
-'
+beacon_id = 'org.ega-archive.beacon-ri-demo' # ID of the Beacon
+beacon_name = 'Beacon Reference Implementation demo' # Name of the Beacon service
+api_version = 'v2.0.0' # Version of the Beacon implementation
+uri = 'http://localhost:5050'
 uri_subpath = '/api'
 complete_url = uri + uri_subpath
 environment = 'test'
-description = "This Beacon is based on synthetic data hosted at the EGA. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."
+description = r"This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."
 version = api_version_yaml['api_version']
-welcome_url = 'https://beacon.ega-archive.org/
-'
-alternative_url = 'https://beacon.ega-archive.org/api
-'
+welcome_url = 'https://beacon.ega-archive.org/'
+alternative_url = 'https://beacon.ega-archive.org/api'
 create_datetime = '2021-11-29T12:00:00.000000'
 update_datetime = ''
-default_beacon_granularity = "record"
+default_beacon_granularity = "record" # boolean, count or record
 security_levels = ['PUBLIC', 'REGISTERED', 'CONTROLLED']
-documentation_url = 'https://b2ri-documentation-demo.ega-archive.org/
-'
+documentation_url = 'https://b2ri-documentation-demo.ega-archive.org/'
 cors_urls = ["http://localhost:3003", "http://localhost:3000"]
 
-Service Info
-
+# Service Info
 ga4gh_service_type_group = 'org.ga4gh'
 ga4gh_service_type_artifact = 'beacon'
 ga4gh_service_type_version = '1.0'
 
-Organization info
-
-org_id = 'EGA'
-org_name = 'European Genome-Phenome Archive (EGA)'
+# Organization info
+org_id = 'EGA' # Id of the organization
+org_name = 'European Genome-Phenome Archive (EGA)' # Full name
 org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'
 org_adress = 'C/ Dr. Aiguader, 88, PRBB Building 08003 Barcelona, Spain'
-org_welcome_url = 'https://ega-archive.org/
-'
-org_contact_url = 'mailto:beacon.ega@crg.eu
-'
-org_logo_url = 'https://legacy.ega-archive.org/images/logo.png
-'
+org_welcome_url = 'https://ega-archive.org/'
+org_contact_url = 'mailto:beacon.ega@crg.eu'
+org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
 org_info = ''
 
+
+Tips for configuring an nginx proxy compatible with BeaconPI conf.py uri and uri_subpath vars
+If you are building an nginx proxy on top of a Beacon PI instance, the configuration of your nginx proxy can be a bit tricky if you don't have in mind what uri and uri_subpath do. First of all, uri sets the root URL of your beacon, and uri_subpath adds an extension to each of the endpoints' routes. This means that if you want to add an nginx proxy with an extension between the root URL and the /api (uri_subpath), you will need to set the extension to the root URL of the localhost, like this:
+location /extension/api/ {
+    proxy_pass http://localhost:5050;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+And your conf.py variables will need to look like:
+uri = "https://<yourdomain>"
+uri_subpath = "/extension/api"
+complete_url = uri + uri_subpath
+
+
 Budget configuration
+If you wish to put a limit on how many queries can a user or a certain IP make to your beacon, that is now possible. In order to do that, edit the variables under Query budget inside conf.py.
 
-You can limit how many queries a user or IP can perform by editing the Query budget variables in conf.py.
-
-Query budget example:
-
+# Query Budget
 query_budget_per_user = False
 query_budget_per_ip = False
 query_budget_amount = 3
@@ -71,238 +70,320 @@ query_budget_database = 'mongo'
 query_budget_db_name = 'beacon'
 query_budget_table = 'budget'
 
-Explanation:
-
-query_budget_per_user and query_budget_per_ip are booleans
-
-query_budget_amount defines the number of allowed queries
-
-query_budget_time_in_seconds defines the time window
-
-If a user is unauthenticated, per-user budgets require per-IP budgets to be enabled as well.
+The variables query_budget_per_user and query_budget_per_ip are boolean, and if True, they will restrict the queries per user and IP. These depend on query_budget_amount which will tell the amount allowed per user/IP and query_budget_time_in_seconds which will be the period of time that this amount of query attempts will last. Bear in mind that activating query budget per user means that if a user is not authenticated, the query will fail unless the query budget per IP is also activated. Both IP and user budgets can be activated at the same time, having preference per user but if unauthenticated, IP queries will also be valid.
 
 Query rounding
+The last thing you can configure inside conf.py is query rounding, editing the variables under that name.
 
-Query rounding is configured in conf.py.
+# Query Rounding
+imprecise_count=0 # If imprecise_count is 0, no modification of the count will be applied. If it's different than 0, count will always be this number when count is smaller than this number.
+round_to_tens=False # If true, the rounding will be done to the immediate superior tenth if the imprecise_count is 0
+round_to_hundreds=False # If true, the rounding will be done to the immediate superior hundredth if the imprecise_count is 0 and the round_to_tens is false
 
-Example:
-
-imprecise_count = 0
-round_to_tens = False
-round_to_hundreds = False
-
-Explanation:
-
-imprecise_count overrides all others
-
-round_to_tens rounds to the next ten
-
-round_to_hundreds rounds to the next hundred
+The variable imprecise_count will override all the others and will tell the Beacon to round the counts to a number equal to or greater than the one assigned to this variable. After that, round_to_tens will take priority if set to true and will round a count to the nearest higher multiple of ten. Finally, round_to_hundreds behaves in the same way, rounding counts up to the nearest higher hundred.
 
 Entry types configuration
+Beacon v2 PI API lets you change the configuration of each of the entry types. For doing that, you have to edit the entry types configuration for each entry type (e.g. analysis.py) and there you will find the next variables:
 
-Each entry type (for example analysis) has its own configuration file.
+endpoint_name="analyses"
+open_api_endpoints_definition='https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json'
+database='mongo' # The name must match the folder's name in connection that belongs to the desired database.
 
-Example entry type configuration:
+# Granularity accepted: boolean, count or record
+granularity='record'
 
-endpoint_name = "analyses"
-open_api_endpoints_definition = "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
-"
-database = "mongo"
+# Entry type configuration
+id='analysis'
+name='Bioinformatics analysis'
+ontology_id='edam:operation_2945'
+ontology_name='Analysis'
+specification='Beacon v2.0.0'
+description='Apply analytical methods to existing data of a specific type.'
+defaultSchema_id='beacon-analysis-v2.0.0'
+defaultSchema_name='Default schema for a bioinformatics analysis'
+defaultSchema_reference_to_schema_definition='https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json'
+defaultSchema_schema_version='v2.0.0'
+aditionally_supported_schemas=[]
+allow_queries_without_filters=True
 
-granularity = "record"
+# Map configuration
+singleEntryUrl=True # True if your beacon enables endpoint analyses/{id}
+biosample_lookup=True # True if your beacon enables endpoint analyses/{id}/biosamples
+cohort_lookup=True # True if your beacon enables endpoint analyses/{id}/cohorts
+dataset_lookup=True # True if your beacon enables endpoint analyses/{id}/datasets
+genomicVariant_lookup=True # True if your beacon enables endpoint analyses/{id}/g_variants
+individual_lookup=True # True if your beacon enables endpoint analyses/{id}/individuals
+run_lookup=True # True if your beacon enables endpoint analyses/{id}/runs
 
-id = "analysis"
-name = "Bioinformatics analysis"
-ontology_id = "edam:operation_2945"
-ontology_name = "Analysis"
-specification = "Beacon v2.0.0"
-description = "Apply analytical methods to existing data of a specific type."
-defaultSchema_id = "beacon-analysis-v2.0.0"
-defaultSchema_name = "Default schema for a bioinformatics analysis"
-defaultSchema_reference_to_schema_definition = "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
-"
-defaultSchema_schema_version = "v2.0.0"
-aditionally_supported_schemas = []
-allow_queries_without_filters = True
+The most importants are the variable endpoint_name, which will change the name of the endpoint that will show the response for analysis type of records, the granularity, which will change the maximum granularity allowed for this particular entry type, the allow_queries_without_filters, which will allow queries without filters if True to that particular endpoint. Also, defaultSchema_id says which is the version of the schema of the records that are stored in this entry type and when receiving a requestedSchema different than this id, the beacon will respond with a bad request, as other schemas are not supported. The variables that are below Map configuration which will activate or deactivate the different endpoints related to this entry type. See explanation next to each of the variables to know more.
 
-Map configuration:
+To show correctly your beacon’s information you will need to edit both conf.py files from beacon and deploy folders.
+To do so, edit the following variables:
 
-singleEntryUrl = True
-biosample_lookup = True
-cohort_lookup = True
-dataset_lookup = True
-genomicVariant_lookup = True
-individual_lookup = True
-run_lookup = True
+beacon_id = 'org.ega-archive.beacon-ri-demo'
+
+beacon_name = 'Beacon Reference Implementation demo'
+
+api_version = 'v2.0.0'
+
+uri = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+org_id = 'EGA'
+
+org_name = 'European Genome-Phenome Archive (EGA)'
+
+org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'
+
+org_adress = 'C/ Dr. Aiguader, 88
+PRBB Building
+08003 Barcelona, Spain'
+
+org_welcome_url = 'https://ega-archive.org/'
+
+org_contact_url = 'mailto:beacon.ega@crg.eu'
+
+org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
+
+org_info = ''
+
+description = "This Beacon is based on synthetic data hosted at the EGA. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."
+version = 'v2.0'
+
+welcome_url = 'https://beacon.ega-archive.org/'
+
+alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+create_datetime = '2021-11-29T12:00:00.000000'
+
+update_datetime = ''
+
+
+Note that this is the info that will be shown in the/info endpoint for your beacon.
+
 
 Managing dataset permissions
+There are 3 possible levels of beacon security for a dataset: public, registered and controlled.
 
-There are three security levels:
-
-public
-
-registered
-
-controlled
-
-Public datasets are accessible without authentication.
-Registered datasets require a valid token.
-Controlled datasets require authentication and authorization.
-
-Example permissions file:
+A public dataset is a dataset that will be returned in a beacon query without an authentication token.
+A registered dataset is a dataset that will be shown after a user sends a valid token (in other words, is logged in).
+A controlled dataset is a dataset that needs a user to send a valid token for authentication and the user needs to be allowed to query that dataset.
+Edit the .yml files inside permissions/datasets
+In order to assign the security level for a dataset in your beacon, please go to datasets_permissions.yml and add your dataset you wish to assign the permissions for it.
+The security level (public, registered, or controlled) needs to be the first item under the dataset name.
+After that, depending on the security level you assigned to the dataset, you can set a default_entry_types_granularity, which will set which is the maximum granularity allowed for this dataset, except for the entry_types_exceptions, that can assign a particular granularity for a particular entry type. Beware that the entry type needs to match the entry type id you set for each of the entry type files in their respective conf file: id of analysis, individual, etc.
 
 CINECA_synthetic_cohort_EUROPE_UK1:
-public:
-default_entry_types_granularity: record
-entry_types_exceptions:
-- cohort: boolean
+  public:
+    default_entry_types_granularity: record
+    entry_types_exceptions:
+      - cohort: boolean
 
 random_dataset:
-registered:
-default_entry_types_granularity: count
-entry_types_exceptions:
-- individual: boolean
+  registered:
+    default_entry_types_granularity: count
+    entry_types_exceptions:
+      - individual: boolean
 
-Controlled dataset example:
+If you have assigned a controlled security level then you can assign a particular granularity per user and per entry type per user. You can do that by creating a user-list array with items that belong to each user and that need to have the following structure:
 
 AV_Dataset:
-controlled:
-default_entry_types_granularity: record
-entry_types_exceptions:
-- individual: boolean
-user-list:
-- user_e-mail: jane.smith@beacon.ga4gh
+  controlled:
+    default_entry_types_granularity: record
+    entry_types_exceptions:
+      - individual: boolean
+    user-list:
+      - user_e-mail: jane.smith@beacon.ga4gh
+        default_entry_types_granularity: count
+        entry_types_exceptions:
+          - individual: record
 
-default_entry_types_granularity: count
-entry_types_exceptions:
-- individual: record
+Supplying AAI credentials for your Identity Provider (IDP)
+For making any IDP (based on OpenID and Oauthv2) work with beacon, you will need to add the client ID and client secret for each IDP in a new file you have to create inside the auth/idp_providers folder (for each IDP). This file must have a name with an .env extension (e.g. something.env) and needs to have the following variables:
 
-Supplying AAI credentials
+CLIENT_ID=beacon 
+CLIENT_SECRET='b26ca0f9-1137-4bee-b453-ee51eefbe7ba' 
+USER_INFO='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/userinfo' 
+INTROSPECTION='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/token/introspect' 
+ISSUER='http://localhost:8080/auth/realms/Beacon' 
+JWKS_URL='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/certs'
 
-Create a .env file for each Identity Provider.
+After that, make sure you build your beacon container again:
 
-Example:
-
-CLIENT_ID=beacon
-CLIENT_SECRET=your_secret
-USER_INFO=http://idp:8080/auth/realms/Beacon/protocol/openid-connect/userinfo
-
-INTROSPECTION=http://idp:8080/auth/realms/Beacon/protocol/openid-connect/token/introspect
-
-ISSUER=http://localhost:8080/auth/realms/Beacon
-
-JWKS_URL=http://idp:8080/auth/realms/Beacon/protocol/openid-connect/certs
-
-Rebuild the beacon container afterward.
+docker-compose up -d --build beaconprod
 
 Handling CORS
+To avoid CORS using beacon and the frontend or a third-party authorization site like Keycloak, you will have to include all these URLs inside variable cors_urls in beacon/conf/conf.py file.
+Example usage:
 
-Add allowed URLs to cors_urls in beacon/conf/conf.py.
-
-Example:
-
-cors_urls = [
-"http://localhost:3000",
-"https://cancer-beacon-demo.ega-archive.org
-",
-"https://beacon-network-demo2.ega-archive.org
-",
-"https://beacon.ega-archive.org
-"
-]
+cors_urls = ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org", "https://beacon-network-demo2.ega-archive.org", "https://beacon.ega-archive.org"]
 
 Setting the default granularity
+Beacon PI can only limit the granularity for all the beacon at the moment. If you want to limit the granularity for all users across all datasets, you can point it in beacon/conf/conf.py, by editing the next variables:
 
 max_beacon_granularity = "record"
 
 Adding beacon handovers
+A handover can be added to the general beacon response or to the response per dataset.
+In any of the cases, you have to modify the beacon/utils/handovers.py file and you can write your handover there following the Beacon v2 spec response for handovers, e.g.
 
-Handovers can be added globally or per dataset.
+handover_1= {
+  "note": "Description of the handover",
+  "url": "Link for the handover",
+  "handoverType": {
+    "id": "NCIT:C189151",
+    "label": "Study Data Repository"   } }
 
-Handover definition:
+General response
+After doing that if you want to just show the handover in general (not per dataset) you will need to include it in the list_of_handovers array:
 
-handover_1 = {
-"note": "Description of the handover",
-"url": "Link for the handover",
-"handoverType": {
-"id": "NCIT:C189151",
-"label": "Study Data Repository"
-}
-}
+list_of_handovers=[handover_1]
 
-General response handover:
+Handover per dataset
+If you want to add the handover per dataset, then you will need to create first a dictionary per dataset with the handover and the datasetId, like this:
 
-list_of_handovers = [handover_1]
+dataset1_handover = { "dataset": dataset1_id, "handover": handover_1 }
 
-Handover per dataset:
+And then you will need to add it in the next array:
 
-dataset1_handover = {
-"dataset": dataset1_id,
-"handover": handover_1
-}
+list_of_handovers_per_dataset=[dataset1_handover]
 
-list_of_handovers_per_dataset = [dataset1_handover]
-
-Configuring your entry types (YAML)
+Configuring your entry types
+The entry types configuration now works with .yml files inside each model.
+You can edit the values of the parameters below (the values after the :).
+The keys have to remain the same as shown below.
 
 analysis:
-entry_type_enabled: True
-max_granularity: record
-endpoint_name: analyses
-open_api_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
+  entry_type_enabled: True
+  max_granularity: record
+  endpoint_name: analyses
+  open_api_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/endpoints.json
+  allow_queries_without_filters: True
+  allow_id_query: True # endpoint_name/{id}
+  response_type: non_collection
+  connection:
+    name: mongo
+    database: beacon
+    table: analyses
+    functions:
+      function_name_assigned: get_phenotypic_endpoint
+      id_query_function_name_assigned: get_phenotypic_endpoint_with_id
+  info:
+    name: Bioinformatics analysis
+    ontology_id: edam:operation_2945
+    ontology_name: Analysis
+    description: Apply analytical methods to existing data of a specific type.
+  schema:
+    specification: Beacon v2
+    default_schema_id: beacon-analysis-v2.0.0
+    default_schema_name: Default schema for a bioinformatics analysis
+    reference_to_default_schema_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
+    default_schema_version: v2.0.0
+    supported_schemas:
+      - beacon-analysis-v2.0.0
+      - beacon-analysis-v2.0.1
+      - beacon-analysis-v2.1.0
+      - beacon-analysis-v2.1.1
+      - beacon-analysis-v2.1.2
+      - beacon-analysis-v2.2.0
+  lookups:
+    biosample:
+      endpoint_name: analyses/{id}/biosamples
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: biosamples
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    cohort:
+      endpoint_name: analyses/{id}/cohorts
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: cohorts
+        functions:
+          function_name_assigned: get_cross_collections
+    dataset:
+      endpoint_name: analyses/{id}/datasets
+      response_type: collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: datasets
+        functions:
+          function_name_assigned: get_cross_collections
+    genomicVariant:
+      endpoint_name: analyses/{id}/g_variants
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: genomicVariations
+        functions:
+          function_name_assigned: get_variants_of_phenotypic_endpoint
+    individual:
+      endpoint_name: analyses/{id}/individuals
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: individuals
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
+    run:
+      endpoint_name: analyses/{id}/runs
+      response_type: non_collection
+      endpoint_enabled: True
+      connection:
+        name: mongo
+        database: beacon
+        table: runs
+        functions:
+          function_name_assigned: get_phenotypic_cross_query
 
-allow_queries_without_filters: True
-allow_id_query: True
-response_type: non_collection
-connection:
-name: mongo
-database: beacon
-table: analyses
-functions:
-function_name_assigned: get_phenotypic_endpoint
-id_query_function_name_assigned: get_phenotypic_endpoint_with_id
-info:
-name: Bioinformatics analysis
-ontology_id: edam:operation_2945
-ontology_name: Analysis
-description: Apply analytical methods to existing data of a specific type.
-schema:
-specification: Beacon v2
-default_schema_id: beacon-analysis-v2.0.0
-default_schema_name: Default schema for a bioinformatics analysis
-reference_to_default_schema_definition: https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/models/json/beacon-v2-default-model/analyses/defaultSchema.json
+These files are located in their respective folder (beacon/models/conf/entry_types).
 
-default_schema_version: v2.0.0
-supported_schemas:
-- beacon-analysis-v2.0.0
-- beacon-analysis-v2.0.1
-- beacon-analysis-v2.1.0
-- beacon-analysis-v2.1.1
-- beacon-analysis-v2.1.2
-- beacon-analysis-v2.2.0
+
+Bear in mind that the name of the database variable needs to be the exact same name as the folder it corresponds to in beacon/connections.
+
 
 Setting the logs
+In this production instance of beacon, you can set the level of the logs you want to output and where do you want to see the output in.
 
-Log level:
+All the outputs will be streamed but if you define a path for a log file (file with extension .log) you will be able to have all the history of logs for your beacon saved in this file.
 
-level = logging.NOTSET
+For setting the level of the logs, specify one amongst NOTSET, DEBUG, ERROR, INFO in the variable level (after logging.):
 
-Log file:
+level=logging.NOTSET
 
-log_file = None
+For setting the path to the file, define it in the variable log_file:
 
-Note:
-To save logs outside Docker, use the default volume:
-./beacon/logs/logs.log:/beacon/logs/logs.log
+log_file=None
 
+
+To save the logs in a file out of docker, you will need to create a volume for the file. There is a default log file volume defined in the docker-compose, which is ./beacon/logs/logs.log:/beacon/logs/logs.log, hence no need to create any other volume if you use this same file for logs.
+
+
+TLS configuration
+To enable TLS for the Beacon API set beacon_server_crt and beacon_server_key to the full path of the server certificate and server key in beacon/conf/conf.py file.
+
+TLS secured MongoDB
+Edit the file beacon/connections/mongo/conf.py and set database_certificate to the full path to the client certificate. If a private CA is used also set the database_cafile to the full path to the CA certificate.
+
+The MongoDB client certificate should be in the combined PEM format client.key + "\n" + client.crt
 Test Mode
-
-Example dataset configuration:
+For verifying your beacon, there are datasets that you can reproduce from the real data ones, that can serve as test but with fake data. When verifying your beacon, the verifiers will test those datasets. Also, for unit testing, there is a test dataset we use. For declaring your dataset a test dataset, you have to edit the datasets_conf.yml file and add an isTest: true parameter under the dataset desired, like this example:
 
 CINECA_synthetic_cohort_EUROPE_UK1:
-isTest: false
-
+  isTest: false
 test:
-isSynthetic: true
-isTest: true
+  isSynthetic: true
+  isTest: true
+
+

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
+import copyIconBlue from "../../assets/copy-symbol-blue.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
@@ -168,6 +169,17 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
 }`,
 
       "handover-dataset-list": `list_of_handovers_per_dataset = [dataset1_handover]`,
+      "nginx-proxy-extension-api": `location /extension/api/ {
+        proxy_pass http://localhost:5050;
+    
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }`,
+      "beacon-uri-and-subpath": `uri = "https://<yourdomain>"
+    uri_subpath = "/extension/api"
+    complete_url = uri + uri_subpath`,
     }[snippetId];
 
     if (textToCopy) {
@@ -185,7 +197,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
                 [snippetId]: false,
               })),
             1500
-          ); // Reset copy success after 1.5 seconds
+          );
         })
         .catch((error) => console.log(error));
     }
@@ -351,6 +363,87 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
               </button>
             </pre>
           </div>
+          <p className="wider-note">
+            <img
+              className="note-symbol-wider"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <b>
+                Tips for configuring an nginx proxy compatible with BeaconPI{" "}
+                conf.py uri and uri_subpath vars
+              </b>
+              <br />
+              If you are building an nginx proxy on top of a Beacon PI instance,
+              the configuration of your nginx proxy can be a bit tricky if you
+              don't have in mind what <span className="custom-code">
+                uri
+              </span>{" "}
+              and <span className="custom-code">uri_subpath</span> do. First of
+              all, <span className="custom-code">uri</span> sets the root URL of
+              your beacon, and <span className="custom-code">uri_subpath</span>{" "}
+              adds an extension to each of the endpoints' routes. This means
+              that if you want to add an nginx proxy with an extension between
+              the root URL and the <span className="custom-code">/api</span> (
+              <span className="custom-code">uri_subpath</span>), you will need
+              to set the extension to the root URL of the{" "}
+              <span className="custom-code">localhost</span>, like this:
+              <div className="codeSnippet">
+                <pre className=" codeSnippet--note">
+                  <code>
+                    {`location /extension/api/ {
+    proxy_pass http://localhost:5050;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}`}
+                  </code>
+                  <button
+                    className="copyButtonCode"
+                    onClick={() => copyToClipboard("nginx-proxy-extension-api")}
+                  >
+                    {copySuccess["nginx-proxy-extension-api"] ? (
+                      "Copied!"
+                    ) : (
+                      <img
+                        className="copySymbol copySymbol-custom"
+                        src={copyIconBlue}
+                        alt="Copy"
+                      />
+                    )}
+                  </button>
+                </pre>
+              </div>
+              And your <span className="custom-code">conf.py</span> variables
+              will need to look like:
+              <div className="codeSnippet">
+                <pre className="codeSnippet--note">
+                  <code>
+                    {`uri = "https://<yourdomain>"
+uri_subpath = "/extension/api"
+complete_url = uri + uri_subpath`}
+                  </code>
+                  <button
+                    className="copyButtonCode"
+                    onClick={() => copyToClipboard("beacon-uri-and-subpath")}
+                  >
+                    {copySuccess["beacon-uri-and-subpath"] ? (
+                      "Copied!"
+                    ) : (
+                      <img
+                        className="copySymbol copySymbol-custom"
+                        src={copyIconBlue}
+                        alt="Copy"
+                      />
+                    )}
+                  </button>
+                </pre>
+              </div>
+            </div>
+          </p>
           <h2 className="lessPadding customh2" id="budget-configuration">
             Budget configuration
           </h2>
