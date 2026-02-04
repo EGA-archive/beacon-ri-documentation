@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface ConversionVCFBFFProps {
   searchTerm: string;
@@ -190,7 +189,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             <pre>
               <code>
                 {`{
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -212,7 +210,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                   copyToClipboard(
                     "genomic-data-extraction",
                     `{
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -252,7 +249,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             <pre>
               <code>
                 {`{
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -274,7 +270,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                   copyToClipboard(
                     "genomic-data-extraction-allele-count",
                     `{
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -315,7 +310,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
             <pre>
               <code>
                 {`{
-  "numberOfPopulations": 2,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -346,7 +340,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                   copyToClipboard(
                     "genomic-data-extraction-multiple-populations",
                     `{
-  "numberOfPopulations": 2,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -423,19 +416,6 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
               Note: If your VCF does not include a specific allele count field,
               leave the corresponding entry empty. <b>Example</b>
               : "alleleCountHeterozygous": "",
-            </div>
-          </p>
-          <p className="note">
-            <img
-              className="note-symbol"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
-            <div>
-              Tip: If numberOfPopulations is greater than 1, you have to add as
-              many populations you have in the populations array, while if
-              populations is 0, then, no allele frequency will be read from this
-              pipeline.
             </div>
           </p>
           <p>
@@ -685,7 +665,11 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["deleteVariants"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -722,7 +706,11 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["exportCaseLevelData"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -746,7 +734,11 @@ const ConversionVCFBFF: React.FC<ConversionVCFBFFProps> = ({ searchTerm }) => {
                 {copySuccess["exportTargets"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

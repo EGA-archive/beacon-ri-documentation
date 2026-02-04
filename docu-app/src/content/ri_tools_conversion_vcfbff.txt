@@ -37,7 +37,6 @@ Example 1: Population with Genotype reads
 For VCF files containing aggregated data (e.g., total population only), your populations.json should look like:
 
 {
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -57,7 +56,6 @@ Example 2: Population with single allele reads
 For VCF files containing aggregated data (e.g., total population only), your populations.json should look like:
 
 {
-  "numberOfPopulations": 1,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -77,7 +75,6 @@ Example 3: Multiple Populations (e.g., by sex) with genotype reads
 For VCFs containing population-stratified annotations:
 
 {
-  "numberOfPopulations": 2,
   "source": "The Genome Aggregation Database (gnomAD)",
   "sourceReference": "https://gnomad.broadinstitute.org/",
   "populations": [
@@ -112,9 +109,6 @@ Note: For all the information to be correctly read, before processing the VCF sp
 
 
 Note: If your VCF does not include a specific allele count field, leave the corresponding entry empty. Example: "alleleCountHeterozygous": "",
-
-
-Tip: If numberOfPopulations is greater than 1, you have to add as many populations you have in the populations array, while if populations is 0, then, no allele frequency will be read from this pipeline.
 
 The template.json file will allow you to map the annotations entries related to the variant type, the aminoacid change, the gene Id or the molecular effects in your vcf:
 

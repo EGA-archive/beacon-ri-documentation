@@ -2,7 +2,6 @@ Documentation Beacon RI Tools v2 Configuration File
 Beacon RI Tools v2
 Configuration File
 In order to use Beacon RI Tools v2 one needs to modify a configuration file with the desired files and options for the different collections.
-
 You will find conf.py inside the conf directory. Inside this file, you will find the following information:
 
 Input and Output files config parameters
@@ -16,21 +15,23 @@ The csv_filename variable sets where the CSV file is and from where the script w
 The output_docs_folder sets the folder where your final BFF (JSON files) will be saved once execution of beacon tools finishes. This folder is mandatory to be always inside output_docs, so only the subdirectory inside output_docscan be modified in this path.
 
 VCF conversion config parameters
-allele_counts=False
+only_process_reads_with_allele_frequency=True
+populations_by_allele_counts=True # Variable to choose if allele frequencies are to be read by single allele or by the whole genotype of the individual, if True the populations.json fields of Homozygous, Heterozygous and Hemizygous counts will be alleleCount, if False, genotype.
 reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
-datasetId='COVID_pop11_fin_2'
+datasetId='test'
 case_level_data=False
-exact_heterozygosity=False
 num_rows=15000000
-verbosity=False
+verbosity=False # This variable, if True, will make the program run slower but give logs about all the skipped variants and the reason why.
 
 The second part of the configuration file pertains to the VCF to BFF conversion. This only needs to be used in case you are using a VCF as a source for the genomic variants collection.
+
+The only_process_reads_with_allele_frequency will only insert variants in case there is a population file with AF tags that are found in the variants, so all the variants inserted will always have at least 1 population with an allele frequency value.
 
 The num_variants is the variable you need to write in case you are executing the VCF conversion (genomicVariations_vcf.py). This will tell the script how many variants will be read and converted from the file(s).
 
 The allele_frequency field lets you set a threshold for the allele frequency (AF) of the variants you want to convert from the VCF file. If you set it at 0.5, all the variants with 0.5 or less AF will be converted to BFF. 1 is the default value (all variants will be converted).
 
-The allele_counts is a variable that, in case populations.json file is active, will read the allele frequencies per allele (if True) or per Genotype (if False).
+The populations_by_allele_counts is a variable that, in case populations.json file is active, will read the allele frequencies per allele (if True) or per Genotype (if False).
 
 The reference_genome is the reference genome the tool will use to map the position of the chromosomes. Make sure to select the same version as the one used to generate your data.
 
@@ -63,7 +64,6 @@ The num_rows  are the aproximate calculation you expect for the total of variant
 The verbosity will give streaming logs with the reason why a variant has been skipped to be inserted. Recommendation is to leave this as False.
 
 Fix for MongoDB exploit (CVE-2025-14847)
-
 Beacon PI repository has been updated so the exploit for MongoDB (CVE-2025-14847) is not an issue anymore. In order to do that, the following points have been implemented:
 Removed exposing ports in docker-compose.yml file
 Built done from a mongod.conf file
@@ -73,10 +73,8 @@ Please, make sure you update your mongoDB instance and rebuild the mongoDB conta
 
 The steps to reproduce this exploit and check that your instance is not vulnerable anymore is to download this repo and insert it in beacon folder.
 Then build the beaconprod container and execute the next command:
+
 docker exec -it beaconprod python beacon/mongobleed-exploit-CVE-2025-14847-main/exploit/mongobleed.py --host mongoprod
 
 If the message is something like this, then it means your instance is safe.
-https://github.com/EGA-archive/beacon-production-prototype/blob/main/ri-tools/files/mongobleed_ok.png
-
 Otherwise, you would get a message similar to this one.
-https://github.com/EGA-archive/beacon2-pi-api/blob/main/ri-tools/files/mongobleed_vuln.png

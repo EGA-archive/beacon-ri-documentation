@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface ConfigFileToolsProps {
   searchTerm: string;
@@ -14,7 +13,6 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
@@ -139,20 +137,33 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
           <div className="codeSnippet">
             <pre>
               <code id="vcf-config">
-                allele_counts=False
+                only_process_reads_with_allele_frequency=True
                 <br />
-                reference_genome='GRCh37' # Choose one between NCBI36, GRCh37,
-                GRCh38
+                populations_by_allele_counts=True{" "}
+                <span style={{ color: "grey" }}>
+                  # Variable to choose if allele frequencies are to be read by
+                  single allele or by the whole genotype of the individual, if
+                  True the populations.json fields of Homozygous, Heterozygous
+                  and Hemizygous counts will be alleleCount, if False, genotype.
+                </span>
                 <br />
-                datasetId='COVID_pop11_fin_2'
+                reference_genome='GRCh37'{" "}
+                <span style={{ color: "grey" }}>
+                  # Choose one between NCBI36, GRCh37, GRCh38
+                </span>
+                <br />
+                datasetId='test'
                 <br />
                 case_level_data=False
                 <br />
-                exact_heterozygosity=False
-                <br />
                 num_rows=15000000
                 <br />
-                verbosity=False
+                verbosity=False{" "}
+                <span style={{ color: "grey" }}>
+                  # This variable, if True, will make the program run slower but
+                  give logs about all the skipped variants and the reason why.
+                </span>
+                <br />
               </code>
               <button
                 className="copyButtonCode"
@@ -167,7 +178,11 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
                 {copySuccess["vcf-config"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -176,6 +191,12 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             The second part of the configuration file pertains to the VCF to BFF
             conversion. This only needs to be used in case you are using a VCF
             as a source for the genomic variants collection.
+          </p>
+          <p>
+            The <i>only_process_reads_with_allele_frequency</i> will only insert
+            variants in case there is a population file with AF tags that are
+            found in the variants, so all the variants inserted will always have
+            at least 1 population with an allele frequency value.
           </p>
           <p>
             The <i>num_variants</i> is the variable you need to write in case
@@ -191,7 +212,7 @@ const ConfigFileTools: React.FC<ConfigFileToolsProps> = ({ searchTerm }) => {
             be converted).
           </p>
           <p>
-            The <i>allele_counts</i> is a variable that, in case
+            The <i>populations_by_allele_counts</i> is a variable that, in case
             populations.json file is active, will read the allele frequencies
             per allele (if True) or per Genotype (if False).
           </p>
