@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 interface ManualDeploymentProps {
   searchTerm: string;
 }
@@ -241,7 +240,11 @@ const ManualDeployment: React.FC<ManualDeploymentProps> = ({ searchTerm }) => {
                 {copySuccess["copy-files"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

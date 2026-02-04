@@ -2,7 +2,6 @@ import "./BeaconUIQueries.css";
 import React, { useRef } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 import results_detailed_table from "../../assets/Beacon Template UI Images/results_detailed_table.png";
 
 interface BeaconUIQueriesProps {
@@ -12,7 +11,6 @@ interface BeaconUIQueriesProps {
 const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
-  const { activeId } = useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">
@@ -54,7 +52,11 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             modal: This message is displayed only when the dataset returns more
             records than the limit configured by the Beacon.
             <br></br>
-            <img src={results_detailed_table} className="ui-beacon-images" />
+            <img
+              src={results_detailed_table}
+              className="ui-beacon-images"
+              alt="screenshot of the results detailed table from the UI"
+            />
             <p></p>
             If the total number of matching records is within the configured
             limit, then all records are displayed.

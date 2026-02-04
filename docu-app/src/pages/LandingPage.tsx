@@ -36,32 +36,34 @@ function LandingPage({ searchTerm }: LandingPageProps) {
           <br />
           The process relies on the following four processes:
         </p>
-        <li>
-          <b>Beacon RI Tools v2.</b> This tool enables the conversion of .csv,
-          .vcf, and phenopacket (.pxf) files into .json files in a Beacon
-          Friendly Format (BFF). It includes all the features required to
-          generate data compatible with the Beacon v2 PI API.
-        </li>
-        <li>
-          <b>Beacon PI API.</b> The API connects to a MongoDB database that
-          stores the .json files, allowing one to query the data following the
-          Beacon v2 standards. Beacon v2 PI is developed for production
-          environments and recommended for improved performance and user
-          experience.
-        </li>
-        <li>
-          <b>Beacon Verifier v2.</b> A tool that checks that the data in the API
-          is compliant with Beacon v2 and provides a verification report. Beacon
-          Verifier is compatible with any Beacon instance, independent of the
-          chosen implementation approach.
-        </li>
-        <li>
-          <b>Beacon Template User Interface.</b> The user-friendly interface for
-          querying the API without needing to worry about the underlying
-          standards. It supports intuitive queries and enables authentication
-          through LifeScience or Keycloak. Template UI is easy to customize in
-          order to fit the needs of each individual Beacon.
-        </li>
+        <ul>
+          <li>
+            <b>Beacon RI Tools v2.</b> This tool enables the conversion of .csv,
+            .vcf, and phenopacket (.pxf) files into .json files in a Beacon
+            Friendly Format (BFF). It includes all the features required to
+            generate data compatible with the Beacon v2 PI API.
+          </li>
+          <li>
+            <b>Beacon PI API.</b> The API connects to a MongoDB database that
+            stores the .json files, allowing one to query the data following the
+            Beacon v2 standards. Beacon v2 PI is developed for production
+            environments and recommended for improved performance and user
+            experience.
+          </li>
+          <li>
+            <b>Beacon Verifier v2.</b> A tool that checks that the data in the
+            API is compliant with Beacon v2 and provides a verification report.
+            Beacon Verifier is compatible with any Beacon instance, independent
+            of the chosen implementation approach.
+          </li>
+          <li>
+            <b>Beacon Template User Interface.</b> The user-friendly interface
+            for querying the API without needing to worry about the underlying
+            standards. It supports intuitive queries and enables authentication
+            through LifeScience or Keycloak. Template UI is easy to customize in
+            order to fit the needs of each individual Beacon.
+          </li>
+        </ul>
         <p>
           In addition to the Production Implementation,{" "}
           <b>Beacon Reference Implementation (B2RI)</b> is also available and
@@ -100,47 +102,53 @@ function LandingPage({ searchTerm }: LandingPageProps) {
         The process to deploy and inject data is the same than in Beacon v2 RI
         API (data comes from Beacon RI Tools v2) but this instance is optimized
         and tested, having the next upgrades from Beacon v2 RI API:
-        <li>Handlers of the endpoints are classes, not functions.</li>
-        <li>
-          Unit testing has been developed for the application, starting with 108
-          unit tests that cover 4000 lines of code approximately (100%).
-        </li>
-        <li>
-          Concurrency testing has been applied for this new beacon instance,
-          showing results of responses for more than 3 million genomic variants
-          splitted in different datasets in less than 100 millisecs, for a total
-          of 1000 requests made by 10 users per second at the same time.{" "}
-        </li>
-        <li>Linking ids to a dataset in a yaml file is not needed anymore. </li>
-        <li>
-          A couple more indexes for mongoDB have been applied, that, in addition
-          to the restructuration of the code, have improved the quickness of the
-          responses.{" "}
-        </li>
-        <li>
-          Authentication/Authorization is now applied as a decorator, not as a
-          different container.{" "}
-        </li>
-        <li>
-          LOGS now show more relevant information about the different processes
-          (from request to response) including transaction id, the time of
-          execution of each function and the initial call and the return call.
-        </li>
-        <li>
-          Exceptions now are raised from the lower layer to the top layer, with
-          information and status for the origin of the exception.{" "}
-        </li>
-        <li>
-          Architecture of the code is not dependent on a particular database,
-          meaning that different types of databases (and more than one) can be
-          potentially applied to this instance (although now only MongoDB is the
-          one developed).{" "}
-        </li>
-        <li>Parameters are sanitized. </li>{" "}
-        <li>
-          Users can manage what entry types want their beacon to show by editing
-          a manage conf file inside source (Endpoint Mapper).{" "}
-        </li>
+        <ul>
+          <li>Handlers of the endpoints are classes, not functions.</li>
+          <li>
+            Unit testing has been developed for the application, starting with
+            108 unit tests that cover 4000 lines of code approximately (100%).
+          </li>
+          <li>
+            Concurrency testing has been applied for this new beacon instance,
+            showing results of responses for more than 3 million genomic
+            variants splitted in different datasets in less than 100 millisecs,
+            for a total of 1000 requests made by 10 users per second at the same
+            time.{" "}
+          </li>
+          <li>
+            Linking ids to a dataset in a yaml file is not needed anymore.{" "}
+          </li>
+          <li>
+            A couple more indexes for mongoDB have been applied, that, in
+            addition to the restructuration of the code, have improved the
+            quickness of the responses.{" "}
+          </li>
+          <li>
+            Authentication/Authorization is now applied as a decorator, not as a
+            different container.{" "}
+          </li>
+          <li>
+            LOGS now show more relevant information about the different
+            processes (from request to response) including transaction id, the
+            time of execution of each function and the initial call and the
+            return call.
+          </li>
+          <li>
+            Exceptions now are raised from the lower layer to the top layer,
+            with information and status for the origin of the exception.{" "}
+          </li>
+          <li>
+            Architecture of the code is not dependent on a particular database,
+            meaning that different types of databases (and more than one) can be
+            potentially applied to this instance (although now only MongoDB is
+            the one developed).{" "}
+          </li>
+          <li>Parameters are sanitized. </li>{" "}
+          <li>
+            Users can manage what entry types want their beacon to show by
+            editing a manage conf file inside source (Endpoint Mapper).{" "}
+          </li>
+        </ul>
       </p>
       <div className="collaborators-div">
         <h3>Collaborators</h3>

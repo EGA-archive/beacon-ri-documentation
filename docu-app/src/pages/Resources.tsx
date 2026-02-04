@@ -1,10 +1,8 @@
 import "./BeaconNetworkUI/NetworkUIQueries.css";
 import qrcode from "../pages/../assets/qrcode.png";
 import React, { useRef, useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../components/OnThisPage";
 import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../hooks/useDocScrollSpy";
 
 interface ResourcesProps {
   searchTerm: string;
@@ -97,7 +95,7 @@ const Resources: React.FC<ResourcesProps> = ({ searchTerm }) => {
                 https://docs.google.com/forms/d/e/1FAIpQLScORwEVRAlsa8qe9SerKZLGy6qjphApjsHXC8-EcaOrUpW8tw/viewform
               </a>
             </li>
-            <img src={qrcode} className="qrcode" />
+            <img src={qrcode} className="qrcode" alt="qrcode" />
           </ul>
         </div>
         <div className="sidebarColumn">

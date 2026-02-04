@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface UpdatingRecordsProps {
   searchTerm: string;
@@ -14,7 +13,6 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {

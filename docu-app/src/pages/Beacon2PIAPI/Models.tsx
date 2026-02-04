@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface ModelsProps {
   searchTerm: string;
@@ -14,7 +13,6 @@ const Models: React.FC<ModelsProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {

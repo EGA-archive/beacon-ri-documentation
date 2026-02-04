@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 interface ApiConfigurationProps {
   searchTerm: string;
 }
@@ -13,7 +12,6 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -284,7 +282,11 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
                 {copySuccess["aai-env"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -372,7 +374,11 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
                 {copySuccess["your-text-here"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -387,37 +393,69 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
           <div className="codeSnippet">
             <pre>
               <code>
-                {`beacon_id = 'org.ega-archive.beacon-ri-demo' # ID of the Beacon`}
+                beacon_id = 'org.ega-archive.beacon-ri-demo'{" "}
+                <span style={{ color: "grey" }}># ID of the Beacon</span>
                 <br />
-                {`beacon_name = 'Beacon Reference Implementation demo' # Name of the Beacon service`}
+                beacon_name = 'Beacon Reference Implementation demo'{" "}
+                <span style={{ color: "grey" }}>
+                  # Name of the Beacon service
+                </span>
                 <br />
-                {`api_version = 'v2.0.0'  # Version of the Beacon implementation`}
+                api_version = 'v2.0.0'{" "}
+                <span style={{ color: "grey" }}>
+                  # Version of the Beacon implementation
+                </span>
                 <br />
-                {`uri = 'https://beacon-apis-demo.ega-archive.org/api/'\n`}
-                {`org_id = 'EGA' # Id of the organization`}
+                uri = 'https://beacon-apis-demo.ega-archive.org/api/'
                 <br />
-                {`org_name = 'European Genome-Phenome Archive (EGA)' # Full name`}
+                org_id = 'EGA'{" "}
+                <span style={{ color: "grey" }}># Id of the organization</span>
                 <br />
-                <>
-                  {`org_description = ('The European Genome-phenome Archive (EGA)'
-            'is a service for permanent archiving and sharing' 
-            'of all types of personally identifiable genetic' 
-            'and phenotypic data resulting from biomedical research projects.')\n`}
-                </>
-                {`org_adress = ('C/ Dr. Aiguader, 88'
-          'PRBB Building'
-          '08003 Barcelona, Spain')\n`}
-                {`org_welcome_url = 'https://ega-archive.org/'\n`}
-                {`org_contact_url = 'mailto:beacon.ega@crg.eu'\n`}
-                {`org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'\n`}
-                {`org_info = ''\n`}
-                {`description = "This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."\n`}
-                {`version = 'v2.0'\n`}
-                {`welcome_url = 'https://beacon.ega-archive.org/'\n`}
-                {`alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'\n`}
-                {`create_datetime = '2021-11-29T12:00:00.000000'\n`}
-                {`update_datetime = ''`}
+                org_name = 'European Genome-Phenome Archive (EGA)'{" "}
+                <span style={{ color: "grey" }}># Full name</span>
+                <br />
+                org_description = ('The European Genome-phenome Archive (EGA)'
+                <br />
+                &nbsp;&nbsp;'is a service for permanent archiving and sharing'
+                <br />
+                &nbsp;&nbsp;'of all types of personally identifiable genetic'
+                <br />
+                &nbsp;&nbsp;'and phenotypic data resulting from biomedical
+                research projects.')
+                <br />
+                org_adress = ('C/ Dr. Aiguader, 88'
+                <br />
+                &nbsp;&nbsp;'PRBB Building'
+                <br />
+                &nbsp;&nbsp;'08003 Barcelona, Spain')
+                <br />
+                org_welcome_url = 'https://ega-archive.org/'
+                <br />
+                org_contact_url = 'mailto:beacon.ega@crg.eu'
+                <br />
+                org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
+                <br />
+                org_info = ''
+                <br />
+                description = "This Beacon is based on synthetic data hosted at
+                the &lt;a
+                href='https://ega-archive.org/datasets/EGAD00001003338'&gt;EGA&lt;/a&gt;.
+                The dataset contains 2504 samples including genetic data based
+                on 1K Genomes data, and 76 individual attributes and phenotypic
+                data derived from UKBiobank."
+                <br />
+                version = 'v2.0'
+                <br />
+                welcome_url = 'https://beacon.ega-archive.org/'
+                <br />
+                alternative_url =
+                'https://beacon-apis-demo.ega-archive.org/api/'
+                <br />
+                create_datetime = '2021-11-29T12:00:00.000000'
+                <br />
+                update_datetime = ''
               </code>
+
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("beacon-info")}
@@ -425,10 +463,15 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
                 {copySuccess["beacon-info"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
+
             <p className="note">
               <img
                 className="note-symbol"
@@ -530,7 +573,11 @@ const ApiConfiguration: React.FC<ApiConfigurationProps> = ({ searchTerm }) => {
                 {copySuccess["beacon-handovers"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

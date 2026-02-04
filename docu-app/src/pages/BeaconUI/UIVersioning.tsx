@@ -2,7 +2,6 @@ import "./BeaconUIQueries.css";
 import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface UIVersioningProps {
   searchTerm: string;
@@ -42,8 +41,15 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
           <h1>Versioning</h1>
           <ul>
             <li>
-              <b>First Release (5 February 2026)</b>: Template Beacon UI Version
-              1.0
+              <b>First Release (4 February 2026)</b>:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.0.0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                Template Beacon UI Version 1.0.0
+              </a>
               {/*
 <p className="list-description">
   Add a description with the main features

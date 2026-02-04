@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import pin from "../../pin.svg";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIIntroductionProps {
   searchTerm: string;
@@ -14,7 +13,6 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
-  const { activeId } = useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

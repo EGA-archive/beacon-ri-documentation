@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface TestDataProps {
   searchTerm: string;
@@ -15,7 +14,6 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (text: string, snippetId: string) => {
@@ -382,6 +380,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
                   <a
                     href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF/rare-disease"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     phenopacket
                   </a>

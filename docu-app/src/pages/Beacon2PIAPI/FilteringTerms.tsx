@@ -3,7 +3,6 @@ import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface FilteringTermsProps {
   searchTerm: string;

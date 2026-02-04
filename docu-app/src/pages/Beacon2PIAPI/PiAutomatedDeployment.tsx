@@ -3,8 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
-
 interface PiAutomatedDeploymentProps {
   searchTerm: string;
 }
@@ -16,7 +14,6 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
     {}
   );
   const contentRef = useRef<HTMLDivElement>(null);
-  const { activeId } = useDocScrollSpy(contentRef);
   useHighlightAndScroll(contentRef, searchTerm);
 
   const copyToClipboard = (snippetId: string) => {
@@ -77,44 +74,42 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <b>MongoDB database</b> deployments.
           </p>
           <h2 id="prerequisites">Prerequisites</h2>
-          <p>
-            You should have installed:
-            <ul>
-              <li>
-                <a
-                  href="https://docs.docker.com/engine/install/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Docker
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://docs.docker.com/compose/install/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Docker Compose
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/EGA-archive/beacon-data-tools"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Data from Beacon RI Tools v2
-                </a>{" "}
-                <br />
-                Please, bear in mind that the{" "}
-                <span className="custom-code">datasetId</span> for your records
-                must match the <span className="custom-code">id</span> for the
-                dataset in the
-                <span className="custom-code">/datasets</span> entry type.
-              </li>
-            </ul>
-          </p>
+          <p>You should have installed:</p>
+          <ul>
+            <li>
+              <a
+                href="https://docs.docker.com/engine/install/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Docker
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://docs.docker.com/compose/install/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Docker Compose
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/EGA-archive/beacon-data-tools"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Data from Beacon RI Tools v2
+              </a>{" "}
+              <br />
+              Please, bear in mind that the{" "}
+              <span className="custom-code">datasetId</span> for your records
+              must match the <span className="custom-code">id</span> for the
+              dataset in the
+              <span className="custom-code">/datasets</span> entry type.
+            </li>
+          </ul>
           <h2 id="automated-deployment">Automated Deployment</h2>
           <p>
             This deployment relies on a <b>Bash script</b> and a <b>Makefile</b>{" "}
@@ -175,19 +170,17 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               </button>
             </pre>
           </div>
-          <p>
-            This script will:
-            <ul>
-              <li>Deploy the Beacon API</li>
-              <li>
-                Insert default Beacon-formatted data into your MongoDB instance,
-                using the files located at:{" "}
-                <span className="custom-code">
-                  /beacon2-pi-api/beacon/connections/mongo/data
-                </span>
-              </li>
-            </ul>
-          </p>
+          <p>This script will:</p>
+          <ul>
+            <li>Deploy the Beacon API</li>
+            <li>
+              Insert default Beacon-formatted data into your MongoDB instance,
+              using the files located at:{" "}
+              <span className="custom-code">
+                /beacon2-pi-api/beacon/connections/mongo/data
+              </span>
+            </li>
+          </ul>
           <p className="note">
             <img
               className="note-symbol"
@@ -213,56 +206,54 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             .
           </p>
           <h2 id="customize-your-beacon">Next Steps: Customize Your Beacon</h2>
-          <p>
-            Make your Beacon your own by following these next steps:
-            <ul>
-              <li>
-                Edit your instance’s{" "}
-                <a
-                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#editing-beacon-info"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  metadata
-                </a>
-                . Update the <span className="custom-code">/info</span> endpoint
-                with your organization's name, description, version, and contact
-                details.
-              </li>
-              <li>
-                Manage dataset{" "}
-                <a
-                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#managing-dataset-permissions"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  permissions
-                </a>
-                . Control which datasets are public or require authentication.
-              </li>
-              <li>
-                Enable advanced{" "}
-                <a
-                  href="https://beacon-documentation-demo.ega-archive.org/pi-filtering-terms#automatically-extract-filtering-terms"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {" "}
-                  filtering
-                </a>
-              </li>
-              <li>
-                Found more setting options in{" "}
-                <a
-                  href="https://beacon-documentation-demo.ega-archive.org/pi-configuration"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Configuration
-                </a>
-              </li>
-            </ul>
-          </p>
+          <p>Make your Beacon your own by following these next steps:</p>
+          <ul>
+            <li>
+              Edit your instance’s{" "}
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#editing-beacon-info"
+                target="_blank"
+                rel="noreferrer"
+              >
+                metadata
+              </a>
+              . Update the <span className="custom-code">/info</span> endpoint
+              with your organization's name, description, version, and contact
+              details.
+            </li>
+            <li>
+              Manage dataset{" "}
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#managing-dataset-permissions"
+                target="_blank"
+                rel="noreferrer"
+              >
+                permissions
+              </a>
+              . Control which datasets are public or require authentication.
+            </li>
+            <li>
+              Enable advanced{" "}
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/pi-filtering-terms#automatically-extract-filtering-terms"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {" "}
+                filtering
+              </a>
+            </li>
+            <li>
+              Found more setting options in{" "}
+              <a
+                href="https://beacon-documentation-demo.ega-archive.org/pi-configuration"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Configuration
+              </a>
+            </li>
+          </ul>
         </div>
         <div className="sidebarColumn">
           <OnThisPage root={contentRef.current} />

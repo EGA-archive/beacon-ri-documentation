@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface UseCaseProps {
   searchTerm: string;
@@ -378,7 +377,6 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
-          <h3></h3>
           <h1 id="introduction">Introduction</h1>
           <p>
             For this example we are going to use the synthetic dataset, hosted
@@ -431,6 +429,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                   <a
                     href="https://metadata.ega-archive.org/datasets/EGAD00001008392"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAD00001008392
                   </a>
@@ -442,6 +441,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                   <a
                     href="https://metadata.ega-archive.org/samples/EGAN00003364605"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAN00003364605
                   </a>
@@ -453,6 +453,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                   <a
                     href="https://metadata.ega-archive.org/runs/EGAR00003021166"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAR00003021166
                   </a>
@@ -464,6 +465,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                   <a
                     href="https://metadata.ega-archive.org/analyses/EGAZ00001744017"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAZ00001744017
                   </a>
@@ -475,6 +477,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                   <a
                     href="https://metadata.ega-archive.org/analyses/EGAZ00001744003"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     EGAZ00001744003
                   </a>
@@ -1918,7 +1921,11 @@ verbosity=False # This variable, if True, will make the program run slower but g
                 {copySuccess["phenopacket-to-bff-case1c-command"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -2028,7 +2035,11 @@ A total of 0 variants were skipped`}</code>
                 {copySuccess["vcf-import-output"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
@@ -2068,7 +2079,11 @@ A total of 0 variants were skipped`}</code>
                 {copySuccess["mongoexport-genomicVariations"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>

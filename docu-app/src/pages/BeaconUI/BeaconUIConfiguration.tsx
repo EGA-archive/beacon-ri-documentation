@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 import beacon_type from "../../assets/Beacon Template UI Images/beacon_type.png";
 import variation_type from "../../assets/Beacon Template UI Images/variation_type.png";
 import assembly_id from "../../assets/Beacon Template UI Images/assembly_id.png";
@@ -35,7 +34,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
 
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
-  const { activeId } = useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -244,9 +242,21 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 </tr>
               </tbody>
             </table>
-            <img src={beacon_type} className="ui-beacon-images" />
-            <img src={assembly_id} className="ui-beacon-images" />
-            <img src={variation_type} className="ui-beacon-images" />
+            <img
+              src={beacon_type}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI beacon type"
+            />
+            <img
+              src={assembly_id}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI showing assembly id"
+            />
+            <img
+              src={variation_type}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI showing variation type"
+            />
           </p>
           <br />
           <br />
@@ -421,15 +431,36 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               </div>
             </p>
           </p>
-          <img src={ui_title} className="ui-beacon-images" />
-          <img src={ui_favicon} className="ui-beacon-images" />
-          <img src={ui_colors_primary} className="ui-beacon-images" />
-          <img src={ui_colors_darkPrimary} className="ui-beacon-images" />
+          <img
+            src={ui_title}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI"
+          />
+          <img
+            src={ui_favicon}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI"
+          />
+          <img
+            src={ui_colors_primary}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI"
+          />
+          <img
+            src={ui_colors_darkPrimary}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI"
+          />
           <div className="ui-beacon-images-row">
-            <img src={ui_logos} className="ui-beacon-images-smaller" />
+            <img
+              src={ui_logos}
+              className="ui-beacon-images-smaller"
+              alt="screenshot from Beacon UI"
+            />
             <img
               src={ui_colors_secondary}
               className="ui-beacon-images-smaller"
+              alt="screenshot from Beacon UI"
             />
           </div>
           <br />
@@ -624,7 +655,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             >
               this section.
             </a>
-            <img src={ui_nav_about} className="ui-beacon-images" />
+            <img
+              src={ui_nav_about}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI"
+            />
           </p>
           <br /> <br />
           <h2 id="login-settings">Login Settings</h2>
@@ -847,7 +882,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               </tr>
             </tbody>
           </table>
-          <img src={ui_login} className="ui-beacon-images-big" />
+          <img
+            src={ui_login}
+            className="ui-beacon-images-big"
+            alt="screenshot from Beacon UI"
+          />
           <br /> <br />
           <h2 id="entry-types-common-filters-and-genomic-annotations-settings">
             Entry Types, Common Filters and Genomic Annotations Settings
@@ -1092,12 +1131,21 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             </tbody>
           </table>
           <br />
-          <img src={ui_entry_types_order} className="ui-beacon-images-big" />
+          <img
+            src={ui_entry_types_order}
+            className="ui-beacon-images-big"
+            alt="screenshot from Beacon UI"
+          />
           <div className="ui-beacon-images-row">
-            <img src={ui_common_filters} className="ui-beacon-imagesr" />
+            <img
+              src={ui_common_filters}
+              className="ui-beacon-images-smaller"
+              alt="screenshot from Beacon UI showing common filters"
+            />
             <img
               src={ui_genomic_categories}
               className="ui-beacon-images-smaller"
+              alt="screenshot from Beacon UI showing genomic categories"
             />
           </div>
           <br /> <br />
@@ -1270,9 +1318,21 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               </div>
             </p>
           </p>
-          <img src={ui_show_base_change} className="ui-beacon-images" />
-          <img src={ui_aminoacid_notation} className="ui-beacon-images" />
-          <img src={ui_chromosome_library} className="ui-beacon-images" />
+          <img
+            src={ui_show_base_change}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI showing base change"
+          />
+          <img
+            src={ui_aminoacid_notation}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI showing aminoacid notation"
+          />
+          <img
+            src={ui_chromosome_library}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI showing chromosome library"
+          />
           <br /> <br />
           <h2 id="login-and-environment-configurations">
             Login and Environment Configuration

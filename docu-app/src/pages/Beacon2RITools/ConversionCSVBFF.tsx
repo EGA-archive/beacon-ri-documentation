@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
-import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface ConversionCSVBFFProps {
   searchTerm: string;
@@ -151,7 +150,11 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
                 {copySuccess["biosample-status-id"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
