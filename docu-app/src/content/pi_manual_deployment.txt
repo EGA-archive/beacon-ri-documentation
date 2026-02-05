@@ -12,6 +12,7 @@ Make sure the next list of ports are free of use in your system:
 5050 → beacon
 8080 → Keycloak (optional)
 9991 → Keycloak SSL (optional)
+3000 → Beacon Template UI
 
 The containers that don’t have an external port, hence you don’t need to free any external port, are:
 mongo

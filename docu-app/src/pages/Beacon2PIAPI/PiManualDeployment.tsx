@@ -139,6 +139,7 @@ const PiManualDeployment: React.FC<PiManualDeploymentProps> = ({
               <li>5050 → beacon</li>
               <li>8080 → Keycloak (optional)</li>
               <li>9991 → Keycloak SSL (optional)</li>
+              <li>3000 → Beacon Template UI</li>
             </ul>
             The containers that don’t have an external port, hence you don’t
             need to free any external port, are:
