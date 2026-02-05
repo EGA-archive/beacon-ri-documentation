@@ -15,3 +15,15 @@ However, a Beacon instance does not need to contain datasets to run the Template
 This documentation describes the configuration, deployment, and customization processes for the Beacon Template UI.
 
 Before diving into the details, it is recommended to watch the walkthrough video to gain a general overview of the UI before exploring the available customization options.
+
+Video timestamps:
+
+0:00 - Introduction to the Beacon Template UI
+0:45 - Result types
+1:21 - Query definition
+1:45 - Genomic Query Builder
+1:58 - All Filtering Terms
+2:06 - Common Filters
+2:21 - Genomic Annotations
+3:00 - Results table
+3:37 - Final notes
