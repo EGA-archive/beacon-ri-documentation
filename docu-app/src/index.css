@@ -53,6 +53,18 @@ li {
   padding-left: 20px;
 }
 
+.video-timestamps {
+  margin: 5px 0 5px;
+}
+
+.video-timestamps a {
+  text-decoration: none;
+}
+
+.video-timestamps a:hover {
+  text-decoration: underline;
+}
+
 a {
   color: #119bff;
 }
