@@ -20,6 +20,9 @@ import ui_login from "../../assets/Beacon Template UI Images/ui_login.png";
 import ui_show_base_change from "../../assets/Beacon Template UI Images/ui_show_base_change.png";
 import ui_aminoacid_notation from "../../assets/Beacon Template UI Images/ui_aminoacid_notation.png";
 import ui_chromosome_library from "../../assets/Beacon Template UI Images/ui_chromosome_library.png";
+import ui_navigation_bar_single_vs_network from "../../assets/Beacon Template UI Images/ui_navigation_bar_single_vs_network.png";
+import ui_banner_single_vs_network from "../../assets/Beacon Template UI Images/ui_banner_single_vs_network.png";
+import ui_results_table_single_vs_network from "../../assets/Beacon Template UI Images/ui_results_table_single_vs_network.png";
 
 interface BeaconUIConfigurationProps {
   searchTerm: string;
@@ -181,6 +184,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <td>
                     Determines whether the UI operates in network or
                     single-beacon mode.
+                    <br />
+                    Find a detailed comparison between Single Beacon and Beacon
+                    Network deployments, in this paragraph.
                   </td>
                 </tr>
 
@@ -1572,6 +1578,90 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <br />
               </p>
             </p>
+          </p>
+          <h2 id="single-beacon-and-beacon-network:-configuration-and-UI-differences">
+            Single Beacon and Beacon Network: Configuration and UI Differences
+          </h2>
+          <p>
+            The Beacon Template UI supports both Single Beacon and Beacon
+            Network.
+            <br />
+            The UI has been architected to allow a seamless transition between
+            the two modes. Switching from one type to the other does not require
+            structural UI changes. The behavior automatically adapts based on
+            configuration.
+          </p>
+          <p>The differences can be grouped into two macro aspects:</p>
+          <ol>
+            <li>Configuration (setup level)</li>
+            <li>User interface (visual and interaction level)</li>
+          </ol>
+          <p>
+            From a setup perspective, the difference is minimal. To switch
+            between a Single Beacon and a Beacon Network, you only need to:
+            <ul>
+              {" "}
+              <li>
+                Set the correct <span className="custom-code">beaconType</span>
+              </li>
+              <li>
+                Provide the correct <span className="custom-code">apiUrl</span>
+              </li>
+            </ul>
+            Example:
+            <pre className="custom-code">
+              {`{
+  "beaconType": "singleBeacon",
+  "apiUrl": "https://your-single-beacon.org/api"
+}`}
+            </pre>
+            or
+            <pre className="custom-code">
+              {`{
+  "beaconType": "networkBeacon",
+  "apiUrl": "https://your-beacon-network.org/api"
+}
+`}
+            </pre>
+          </p>
+          <p>
+            There are no structural changes required in the UI code. The
+            behavior adapts automatically based on the selected{" "}
+            <span className="custom-code">beaconType</span>. While the
+            configuration change is small, the user experience changes
+            significantly. <br />
+            The differences affect:
+          </p>
+          <ul>
+            <li>Main page banner</li>
+
+            <img
+              src={ui_banner_single_vs_network}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network"
+            />
+            <li>Navigation bar</li>
+            <img
+              src={ui_navigation_bar_single_vs_network}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network"
+            />
+            <li>Results table structure and behavior</li>
+            <img
+              src={ui_results_table_single_vs_network}
+              className="ui-beacon-images"
+              alt="screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network"
+            />
+          </ul>
+          <p>
+            The structural differences between Single Beacon and Beacon Network
+            deployments become most visible in the results table. The main
+            differences are seen in the Results Table structure whereby, instead
+            of a flat dataset-centered table for Single Beacon UI, an
+            hierarchical expandable table is displayed for Beacon Network UI.
+            This retrieves information first on Beacons in the network (such as
+            maturity and dataset count) and upon expansion, provides details on
+            datasets within each Beacon.{" "}
           </p>
           <br /> <br />
         </div>

@@ -266,5 +266,36 @@ Client ID: a unique alphanumeric string (typically 30–40 characters long)
 Client Secret: an automatically generated secure key (UUID-like format)
 Use these values in your .env file.
 
+Single Beacon and Beacon Network: Configuration and UI Differences
+The Beacon Template UI supports both Single Beacon and Beacon Network.
+The UI has been architected to allow a seamless transition between the two modes. Switching from one type to the other does not require structural UI changes. The behavior automatically adapts based on configuration.
 
+The differences can be grouped into two macro aspects:
+
+Configuration (setup level)
+User interface (visual and interaction level)
+From a setup perspective, the difference is minimal. To switch between a Single Beacon and a Beacon Network, you only need to:
+Set the correct beaconType
+Provide the correct apiUrl
+Example:
+{
+  "beaconType": "singleBeacon",
+  "apiUrl": "https://your-single-beacon.org/api"
+}
+or
+{
+  "beaconType": "networkBeacon",
+  "apiUrl": "https://your-beacon-network.org/api"
+}
+
+There are no structural changes required in the UI code. The behavior adapts automatically based on the selected beaconType. While the configuration change is small, the user experience changes significantly.
+The differences affect:
+
+Main page banner
+screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network
+Navigation bar
+screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network
+Results table structure and behavior
+screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network
+The structural differences between Single Beacon and Beacon Network deployments become most visible in the results table. The main differences are seen in the Results Table structure whereby, instead of a flat dataset-centered table for Single Beacon UI, an hierarchical expandable table is displayed for Beacon Network UI. This retrieves information first on Beacons in the network (such as maturity and dataset count) and upon expansion, provides details on datasets within each Beacon.
 
