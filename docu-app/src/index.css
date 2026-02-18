@@ -378,10 +378,7 @@ p.lessMargin {
 .onThisPageLink {
   text-decoration: none;
   color: #185177 !important;
-}
-.onThisPageLink.active {
-  font-weight: bold;
-  color: #185177 !important;
+  transition: color 0.2s ease, font-weight 0.2s ease;
 }
 
 .onThisPageLink:hover {
@@ -389,12 +386,8 @@ p.lessMargin {
 }
 
 .onThisPageItem.active .onThisPageLink {
-  font-weight: 700;
-  color: #185177;
-}
-
-.onThisPageLink {
-  transition: color 0.2s ease, font-weight 0.2s ease;
+  font-weight: 700 !important;
+  color: #185177 !important;
 }
 
 .qrcode {
@@ -403,13 +396,12 @@ p.lessMargin {
   height: auto;
 }
 
-/* .relationship-elements {
+.relationship-elements-entry-types {
   width: 100%;
-  max-width: 600px;
-  margin: 14px auto 0 auto;
   display: block;
   min-width: 370.69px;
-} */
+  overflow: visible;
+}
 
 @media (max-width: 880px) {
   table {

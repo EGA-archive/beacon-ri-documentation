@@ -2,6 +2,7 @@ import { useRegisterTextContent } from "../hooks/useRegisterTextContent";
 
 // Introduction
 import IntroductionText from "../content/introduction.txt";
+import BeaconDataModelText from "../content/beacondatamodel.txt";
 
 // Beacon 2 PI API
 import PiAutomatedDeploymentText from "../content/pi_automated_deployment.txt";
@@ -46,6 +47,12 @@ import ResourcesText from "../content/resources.txt";
 const ContentPreloader = () => {
   // Introduction
   useRegisterTextContent("/", IntroductionText, "Introduction");
+
+  useRegisterTextContent(
+    "/beacon-data-model",
+    BeaconDataModelText,
+    "Beacon Data Model"
+  );
 
   // Beacon 2 PI API
   useRegisterTextContent(

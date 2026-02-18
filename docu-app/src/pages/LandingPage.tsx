@@ -14,9 +14,27 @@ function LandingPage({ searchTerm }: LandingPageProps) {
     <div className="landingPage" ref={contentRef}>
       <div>
         {" "}
-        <a href="/" className="no-undeline">
-          <h2>Documentation</h2>
-        </a>
+        <h2 className="user-path">
+          <a href="/" className="no-undeline">
+            Documentation
+          </a>
+          <img
+            src="arrow-right-light.svg"
+            alt="arrow right"
+            className="arrow-icon"
+          />
+          <a href="/" className="no-undeline">
+            Introduction
+          </a>
+          <img
+            src="arrow-right-bold.svg"
+            alt="arrow right"
+            className="arrow-icon"
+          />
+          <a href="/" className="no-undeline">
+            <span className="user-path-title">General Information</span>
+          </a>
+        </h2>
         <h3>CRG Beacon Documentation</h3>
         <p>
           The <b>Beacon v2 Production Implementation (B2PI)</b> is a tool that

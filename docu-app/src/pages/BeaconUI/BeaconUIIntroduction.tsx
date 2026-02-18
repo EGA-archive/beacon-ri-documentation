@@ -127,7 +127,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
           <br />
           <div style={{ position: "relative", paddingTop: "56.25%" }}>
             <iframe
-              src="https://www.youtube.com/embed/EJXCH9CSYXo"
+              src="https://www.youtube.com/embed/nXMr_DXtzI8"
               title="Beacon Template UI walkthrough"
               style={{
                 position: "absolute",
@@ -145,7 +145,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
           <ul className="video-timestamps">
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=0s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=0s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -154,7 +154,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=45s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=45s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -163,7 +163,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=81s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=81s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -172,7 +172,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=105s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=105s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -181,7 +181,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=118s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=118s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -190,7 +190,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=126s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=126s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -199,7 +199,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=141s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=141s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -208,7 +208,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=180s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=180s"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -217,7 +217,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             </li>
             <li>
               <a
-                href="https://www.youtube.com/watch?v=EJXCH9CSYXo&t=217s"
+                href="https://www.youtube.com/watch?v=nXMr_DXtzI8&t=217s"
                 target="_blank"
                 rel="noopener noreferrer"
               >

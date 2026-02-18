@@ -19,6 +19,7 @@ export default function useScrollSpy(
   }: Options = {}
 ) {
   const [activeId, setActiveId] = useState<string | undefined>(undefined);
+  const [manualOverride, setManualOverride] = useState(false);
 
   useEffect(() => {
     const root = container.current;
@@ -32,30 +33,41 @@ export default function useScrollSpy(
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (manualOverride) return;
+
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
         if (visible.length) {
           const id = (visible[0].target as HTMLElement).id;
-          if (id !== activeId) setActiveId(id);
+          setActiveId((prev) => (prev !== id ? id : prev));
         } else {
           const tops = headings
             .map((h) => ({ id: h.id, top: h.getBoundingClientRect().top }))
             .filter((x) => x.top < window.innerHeight * 0.35)
             .sort((a, b) => b.top - a.top);
-          if (tops.length && tops[0].id !== activeId) setActiveId(tops[0].id);
+
+          if (tops.length) {
+            const id = tops[0].id;
+            setActiveId((prev) => (prev !== id ? id : prev));
+          }
         }
       },
-      { root: null, rootMargin, threshold: [0, 0.25, 0.5, 0.75, 1] }
+      {
+        root: null,
+        rootMargin,
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
     );
 
     headings.forEach((h) => observer.observe(h));
     return () => observer.disconnect();
-  }, [container, headingSelector, rootMargin]);
+  }, [container, headingSelector, rootMargin, manualOverride]);
 
   useEffect(() => {
     if (!scrollOnHash) return;
+
     const root = container.current;
     if (!root) return;
 
@@ -72,7 +84,12 @@ export default function useScrollSpy(
       if (!el) return;
 
       const y = el.getBoundingClientRect().top + window.scrollY - topOffset;
-      window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
+
+      window.scrollTo({
+        top: y,
+        behavior: "smooth",
+      });
+
       setActiveId(id);
     };
 
@@ -83,6 +100,7 @@ export default function useScrollSpy(
     const onHashChange = () => {
       if (window.location.hash) scrollToId(window.location.hash);
     };
+
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, [container, topOffset, scrollOnHash]);
@@ -90,11 +108,12 @@ export default function useScrollSpy(
   useEffect(() => {
     if (!replaceUrl) return;
     if (!activeId) return;
+
     const newHash = `#${activeId}`;
     if (window.location.hash !== newHash) {
       window.history.replaceState(null, "", newHash);
     }
   }, [activeId, replaceUrl]);
 
-  return { activeId };
+  return { activeId, setActiveId, setManualOverride };
 }

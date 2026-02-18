@@ -59,9 +59,9 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             This section contains test datasets you can use to explore and
             validate the functionalities of the Beacon v2 Implementation.
           </p>
-          <h1 id="dataset-1-cineca-synthetic-cohort-europe-uk1">
+          <h2 id="dataset-1-cineca-synthetic-cohort-europe-uk1">
             Dataset 1: CINECA Synthetic Cohort EUROPE UK1
-          </h1>
+          </h2>
           <ul>
             <li>
               <strong>Dataset name: </strong>
@@ -217,9 +217,9 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
               </p>
             </div>
           </p>
-          <h1 id="dataset-2-rare-disease-synthetic-dataset">
+          <h2 id="dataset-2-rare-disease-synthetic-dataset">
             Dataset 2: Rare Disease Synthetic Dataset
-          </h1>
+          </h2>
           <ul>
             <li>
               <b>Dataset name:</b> Rare Disease Synthetic Dataset
@@ -476,9 +476,9 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </div>
           </p>
 
-          <h1 id="dataset-3-example-csv-all-fields">
+          <h2 id="dataset-3-example-csv-all-fields">
             Dataset 3: Example CSV with all the fields filled in
-          </h1>
+          </h2>
           <ul>
             <li>
               <b>Dataset name:</b> Dataset with synthetic data for beacon
@@ -543,9 +543,9 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </tbody>
           </table>
 
-          <h1 id="dataset-4-example-csv-mandatory-fields">
+          <h2 id="dataset-4-example-csv-mandatory-fields">
             Dataset 4: Example CSV with only the mandatory fields filled in
-          </h1>
+          </h2>
 
           <h6 className="underline">Included files</h6>
           <table className="dockerTableSimple dockerTableLong">
@@ -582,9 +582,9 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
               </tr>
             </tbody>
           </table>
-          <h1 id="dataset-5-genomicvariations-csvs">
+          <h2 id="dataset-5-genomicvariations-csvs">
             Dataset 5: genomicVariations CSVs
-          </h1>
+          </h2>
           <p>
             You can load genomicVariations data into Beacon using either a VCF
             file or a CSV. Here you’ll find two genomicVariations CSVs examples,

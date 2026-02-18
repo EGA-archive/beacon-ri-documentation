@@ -85,8 +85,11 @@ const OnThisPage: React.FC<OnThisPageProps> = ({
             >
               <a
                 href={`#${h.id}`}
-                className="onThisPageLink"
+                className={`onThisPageLink ${isActive ? "active" : ""}`}
                 aria-current={isActive ? "location" : undefined}
+                onClick={() => {
+                  setActiveId(h.id);
+                }}
               >
                 {h.text}
               </a>

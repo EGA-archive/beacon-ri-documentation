@@ -291,11 +291,21 @@ or
 There are no structural changes required in the UI code. The behavior adapts automatically based on the selected beaconType. While the configuration change is small, the user experience changes significantly.
 The differences affect:
 
-Main page banner
-screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network
-Navigation bar
-screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network
-Results table structure and behavior
-screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network
-The structural differences between Single Beacon and Beacon Network deployments become most visible in the results table. The main differences are seen in the Results Table structure whereby, instead of a flat dataset-centered table for Single Beacon UI, an hierarchical expandable table is displayed for Beacon Network UI. This retrieves information first on Beacons in the network (such as maturity and dataset count) and upon expansion, provides details on datasets within each Beacon.
+Beacon Browser (Main Page)
+When you access the Beacon Browser, the main page displays key information about the Beacon(s) available to you.
 
+If you are browsing a single Beacon, you will see details specific to that Beacon, such as the organization name and URL, as well as the description of the datasets it contains.
+If you are browsing a Beacon Network, the page highlights the participating organizations by displaying their logos. This provides a quick visual overview of which institutions are part of the network.
+screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network
+
+Beacon Network Tab
+When accessing a Beacon Network, an additional tab appears in the navigation bar. Selecting this tab opens a dedicated page with detailed information about each Beacon within the network.
+
+screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network
+
+Results Table
+The most significant changes are reflected in the results table.
+
+In the Single Beacon interface, results are presented in a flat, dataset-centered table.
+In the Beacon Network interface, results are displayed in a hierarchical, expandable table. The table first presents summary information at the Beacon level (such as maturity level and number of datasets). Users can then expand each Beacon to view detailed information about the datasets it contains. This structure provides a clearer overview at the network level while maintaining access to dataset-level detail when needed.
+screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network

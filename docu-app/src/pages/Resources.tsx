@@ -1,4 +1,4 @@
-import "./BeaconNetworkUI/NetworkUIQueries.css";
+import "./BeaconUI/BeaconUIQueries.css";
 import qrcode from "../pages/../assets/qrcode.png";
 import React, { useRef, useState } from "react";
 import OnThisPage from "../components/OnThisPage";

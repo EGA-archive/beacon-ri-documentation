@@ -3,27 +3,40 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
-import LandingPage from "./pages/LandingPage";
 import { SearchableContentProvider } from "./context/SearchableContentContext";
-import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
 import ContentPreloader from "./components/ContentPreloader";
-import Introduction from "./pages/Beacon2RIAPI/Introduction";
+import ScrollToTop from "./ScrollToTop";
+
+// Introduction imports
+import LandingPage from "./pages/LandingPage";
+import BeaconDataModel from "./pages/BeaconDataModel";
+
+// Reference Implementation imports
 import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
 import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
 import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
 import QueryingApi from "./pages/Beacon2RIAPI/QueryingApi";
+import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
+import Introduction from "./pages/Beacon2RIAPI/Introduction";
+
+// RI Tools imports
 import StartingGuide from "./pages/Beacon2RITools/StartingGuide";
 import ConfigFileTools from "./pages/Beacon2RITools/ConfigFileTools";
 import ConversionCSVBFF from "./pages/Beacon2RITools/ConversionCSVBFF";
 import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
+import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
+import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
+import TestData from "./pages/Beacon2RITools/TestData";
+import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
 
 // Beacon Template UI imports
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
 import BeaconUIConfiguration from "./pages/BeaconUI/BeaconUIConfiguration";
 import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
 import UIVersioning from "./pages/BeaconUI/UIVersioning";
+import BeaconUIIntroduction from "./pages/BeaconUI/BeaconUIIntroduction";
 
-// Product Implemenration imports
+// Product Implementation imports
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import Models from "./pages/Beacon2PIAPI/Models";
@@ -31,15 +44,11 @@ import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 
-import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import Resources from "./pages/Resources";
+
+// Tutorials imports
 import UseCase from "./pages/Tutorials/UseCase";
 import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
-import ScrollToTop from "./ScrollToTop";
-import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
-import TestData from "./pages/Beacon2RITools/TestData";
-import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
-import BeaconUIIntroduction from "./pages/BeaconUI/BeaconUIIntroduction";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -81,6 +90,7 @@ function App() {
   ];
 
   const subMenuItems = {
+    Introduction: ["General Information", "Beacon Data Model"],
     "Beacon 2 PI API": [
       "Automated Deployment",
       "Manual Deployment",
@@ -140,6 +150,10 @@ function App() {
                 <Route
                   path="/"
                   element={<LandingPage searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/beacon-data-model"
+                  element={<BeaconDataModel searchTerm={searchTerm} />}
                 />
                 <Route
                   path="/pi-automated-deployment"

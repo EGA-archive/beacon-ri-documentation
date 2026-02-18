@@ -62,7 +62,7 @@ const ConversionCSVBFF: React.FC<ConversionCSVBFFProps> = ({ searchTerm }) => {
         <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
           <h1>Conversion from CSV to BFF</h1>
-          <h1 id="choosing-column-headers">Choosing Column Headers</h1>
+          <h2 id="choosing-column-headers">Choosing Column Headers</h2>
           <p>
             Each type of entry (e.g., analyses, biosamples, individuals, etc.)
             has its own corresponding CSV template located in the{" "}
@@ -223,7 +223,7 @@ EFO:0009655,abnormal sample`
             Each row corresponds to a different biosample, and both the id and
             label must match the values defined in the ontology.
           </p>
-          <h1 id="filling-in-data">Filling in Data</h1>
+          <h2 id="filling-in-data">Filling in Data</h2>
           <p>
             To convert metadata or phenotypic/clinical data into BFF (Beacon
             File Format), you need to create one CSV file per collection type
@@ -455,7 +455,7 @@ labelForHG00001|labelForHG00002`
               file — the Beacon tools will not raise any errors.
             </li>
           </ul>
-          <h1 id="conversion-from-csv-to-bff">Conversion from CSV to BFF</h1>
+          <h2 id="conversion-from-csv-to-bff">Conversion from CSV to BFF</h2>
           <p>
             Before converting your CSV files, ensure that the{" "}
             <a

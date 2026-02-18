@@ -402,9 +402,9 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           </p>
           <br />
 
-          <h1 id="updating-to-a-new-version">
+          <h2 id="updating-to-a-new-version">
             Updating to a new Beacon Template UI Version
-          </h1>
+          </h2>
           <p>
             The configuration file (
             <span className="custom-code">client/src/config/config.json</span>)

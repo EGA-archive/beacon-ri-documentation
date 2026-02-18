@@ -39,7 +39,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   useEffect(() => {
     const path = location.pathname;
 
-    if (path === "/") {
+    if (path === "/" || path.startsWith("/beacon-data-model")) {
       setActiveMenu("Introduction");
       return;
     }
@@ -87,12 +87,6 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const handleMainMenuClick = (menuItem: string) => {
     const subMenus = subMenuItems[menuItem];
 
-    if (menuItem === "Introduction") {
-      navigate("/");
-      setActiveMenu("Introduction");
-      return;
-    }
-
     if (menuItem === "Resources") {
       navigate("/resources");
       setActiveMenu("Resources");
@@ -122,6 +116,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
     let path = "";
+
+    if (parentMenu === "Introduction") {
+      if (subItem === "General Information") path = "/";
+      if (subItem === "Beacon Data Model") path = "/beacon-data-model";
+    }
 
     if (parentMenu === "Beacon 2 PI API") {
       if (subItem === "Automated Deployment") path = "/pi-automated-deployment";
@@ -253,6 +252,12 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                     {subMenuItems[menuItem].map((subItem) => {
                       let expectedPath = "";
 
+                      if (menuItem === "Introduction") {
+                        if (subItem === "General Information")
+                          expectedPath = "/";
+                        if (subItem === "Beacon Data Model")
+                          expectedPath = "/beacon-data-model";
+                      }
                       if (menuItem === "Beacon 2 PI API") {
                         if (subItem === "Automated Deployment")
                           expectedPath = "/pi-automated-deployment";

@@ -186,7 +186,15 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                     single-beacon mode.
                     <br />
                     Find a detailed comparison between Single Beacon and Beacon
-                    Network deployments, in this paragraph.
+                    Network deployments, in{" "}
+                    <a
+                      href="/ui-configuration-file#single-beacon-and-beacon-network:-configuration-and-UI-differences"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      this paragraph
+                    </a>
+                    .
                   </td>
                 </tr>
 
@@ -1589,7 +1597,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             The UI has been architected to allow a seamless transition between
             the two modes. Switching from one type to the other does not require
             structural UI changes. The behavior automatically adapts based on
-            configuration.
+            the <b>chosen configuration</b>.
           </p>
           <p>The differences can be grouped into two macro aspects:</p>
           <ol>
@@ -1598,7 +1606,8 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </ol>
           <p>
             From a setup perspective, the difference is minimal. To switch
-            between a Single Beacon and a Beacon Network, you only need to:
+            between a Single Beacon and a Beacon Network, deployers only need
+            to:
             <ul>
               {" "}
               <li>
@@ -1628,41 +1637,78 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             There are no structural changes required in the UI code. The
             behavior adapts automatically based on the selected{" "}
             <span className="custom-code">beaconType</span>. While the
-            configuration change is small, the user experience changes
+            configuration change is small, the <b>user experience</b> changes
             significantly. <br />
             The differences affect:
           </p>
           <ul>
-            <li>Main page banner</li>
-
+            <li>
+              <b>Beacon Browser (Main Page)</b>
+            </li>
+            <p className="lessMargin">
+              When you access the Beacon Browser, the main page displays key
+              information about the Beacon(s) available to you.
+            </p>
+            <ul>
+              <li>
+                If you are browsing a <b>single Beacon</b>, you will see details
+                specific to that Beacon, such as the organization name and URL,
+                as well as the description of the datasets it contains.
+              </li>
+              <li>
+                If you are browsing a <b>Beacon Network</b>, the page highlights
+                the participating organizations by displaying their logos. This
+                provides a quick visual overview of which institutions are part
+                of the network.
+              </li>
+            </ul>
             <img
               src={ui_banner_single_vs_network}
               className="ui-beacon-images"
               alt="screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network"
             />
-            <li>Navigation bar</li>
+            <br /> <br />
+            <li>
+              <b>Beacon Network Tab</b>
+            </li>
+            <p className="lessMargin">
+              When accessing a <b>Beacon Network</b>, an additional tab appears
+              in the navigation bar. Selecting this tab opens a dedicated page
+              with detailed information about each Beacon within the network.
+            </p>
             <img
               src={ui_navigation_bar_single_vs_network}
               className="ui-beacon-images"
               alt="screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network"
             />
-            <li>Results table structure and behavior</li>
+            <br /> <br />
+            <li>
+              <b>Results Table</b>
+            </li>
+            <p className="lessMargin">
+              The most significant changes are reflected in the results table.
+            </p>
+            <ul>
+              <li>
+                In the <b>Single Beacon interface</b>, results are presented in
+                a flat, dataset-centered table.
+              </li>
+              <li>
+                In the <b>Beacon Network interface</b>, results are displayed in
+                a hierarchical, expandable table. The table first presents
+                summary information at the Beacon level (such as maturity level
+                and number of datasets). Users can then expand each Beacon to
+                view detailed information about the datasets it contains. This
+                structure provides a clearer overview at the network level while
+                maintaining access to dataset-level detail when needed.
+              </li>
+            </ul>
             <img
               src={ui_results_table_single_vs_network}
               className="ui-beacon-images"
               alt="screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network"
             />
           </ul>
-          <p>
-            The structural differences between Single Beacon and Beacon Network
-            deployments become most visible in the results table. The main
-            differences are seen in the Results Table structure whereby, instead
-            of a flat dataset-centered table for Single Beacon UI, an
-            hierarchical expandable table is displayed for Beacon Network UI.
-            This retrieves information first on Beacons in the network (such as
-            maturity and dataset count) and upon expansion, provides details on
-            datasets within each Beacon.{" "}
-          </p>
           <br /> <br />
         </div>
         <div className="sidebarColumn">
