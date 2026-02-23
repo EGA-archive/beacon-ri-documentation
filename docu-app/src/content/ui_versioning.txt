@@ -1,7 +1,7 @@
 Documentation Beacon Template UI Versioning
 Beacon Template UI
 Versioning
-First Release (5 February 2026): Template Beacon UI Version 1.0
+First Release (5 February 2026): Beacon Template UI Version 1.0.0
 Add a description with the main features
 
 Upcoming Iterations

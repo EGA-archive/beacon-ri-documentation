@@ -3,7 +3,7 @@ Beacon Template UI
 Introduction
 The Beacon Template User Interface is a modular and configurable user interface designed for Beacon v2 implementations.
 It enables deployers to easily adapt the front end display to their specific Beacon setup through a configuration file, maximizing adaptability while minimizing code changes. The setup process is straightforward and does not require advanced technical expertise or a dedicated development team.
-The Beacon Template UI works with any Beacon instance that conforms to the GA4GH Beacon v2 specification (Framework + default Models). Note that the Template UI is not a single-page application (SPA), which means that each Template UI instance can be connected to an independent Beacon backend.
+The Beacon Template UI works with any Beacon instance that conforms to the GA4GH Beacon v2 specification (Framework + default Models). Note that the Beacon Template UI is not a single-page application (SPA), which means that each user interface instance can be connected to an independent Beacon backend.
 It can be deployed with the Beacon v2 Production Implementation but is not dependent on it. Compliance with the core spec is the only requirement for compatibility.
 
 
@@ -11,7 +11,7 @@ Important notes
 
 There are two technical prerequisites: having Docker installed, and a code editor, such as Visual Studio Code for editing the configuration and .env files.
 It is important to note that the API endpoint ( apiUrl) defined in the configuration file is essential for the UI’s functionality. It acts as the single access point for fetching Beacon data, and without a valid and functioning API URL, the interface cannot display any results.
-However, a Beacon instance does not need to contain datasets to run the Template UI. It can be deployed even with an empty or dummy Beacon. In that case, the interface will still load correctly, and the results table will simply display “No results found”. This flexibility allows users to test the Template UI before connecting it to a fully configured Beacon instance.
+However, a Beacon instance does not need to contain datasets to run the Beacon Template UI. It can be deployed even with an empty or dummy Beacon. In that case, the interface will still load correctly, and the results table will simply display “No results found”. This flexibility allows users to test the Template UI before connecting it to a fully configured Beacon instance.
 This documentation describes the configuration, deployment, and customization processes for the Beacon Template UI.
 
 Before diving into the details, it is recommended to watch the walkthrough video to gain a general overview of the UI before exploring the available customization options.

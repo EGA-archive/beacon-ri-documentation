@@ -231,7 +231,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             editing the configuration.
           </p>
           <h2 id="3.-edit-and-customize">
-            3. Edit and Customize the Template UI
+            3. Edit and Customize the Beacon Template UI
           </h2>
           <p>
             There is an extended section that you will find by navigating to the{" "}
@@ -433,7 +433,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
                 </ul>
               </li>
               <li>
-                <b>Update the Template UI code</b>
+                <b>Update the Beacon Template UI code</b>
                 <br />
                 <ul className="noBullets">
                   <li>

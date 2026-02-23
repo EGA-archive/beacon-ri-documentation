@@ -78,8 +78,8 @@ function LandingPage({ searchTerm }: LandingPageProps) {
             <b>Beacon Template User Interface.</b> The user-friendly interface
             for querying the API without needing to worry about the underlying
             standards. It supports intuitive queries and enables authentication
-            through LifeScience or Keycloak. Template UI is easy to customize in
-            order to fit the needs of each individual Beacon.
+            through LifeScience or Keycloak. The Beacon Template UI is easy to
+            customize in order to fit the needs of each individual Beacon.
           </li>
         </ul>
         <p>

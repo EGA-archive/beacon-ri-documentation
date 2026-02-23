@@ -25,7 +25,7 @@ Once the cloning process finishes, you can open the app inside your code editor,
 cd beacon-template-ui
 This means you’re in the correct directory and ready to start editing the configuration.
 
-3. Edit and Customize the Template UI
+3. Edit and Customize the Beacon Template UI
 There is an extended section that you will find by navigating to the Configuration File paragraph.
 Before proceeding make sure that the following files are edited:
 config.json (location: client/src/config/config.json)
@@ -60,7 +60,7 @@ To update to a newer version:
 Keep your existing configuration files
 client/src/config/config.json
 client/.env (if login is enabled)
-Update the Template UI code
+Update the Beacon Template UI code
 Either pull the latest changes from the repository (for example with git fetch/ git pull), or clone the new version and copy your existing config.json and .env into it.
 Rebuild and restart the UI
 Run:

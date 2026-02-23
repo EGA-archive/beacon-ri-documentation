@@ -21,7 +21,7 @@ Configuration Table Overview
 Below each table, you’ll find a UI reference map that visually illustrates the interface, helping you configure your own Beacon Template UI correctly.
 
 Core Beacon and Configuration Setting
-This table defined the fundamental connection and data settings required for the Template UI to interact with a Beacon instance. It specifies whether the deployment targets a single Beacon or a Beacon network, the API endpoint URL, supported genome assemblies, and recognized variation types.
+This table defined the fundamental connection and data settings required for the Beacon Template UI to interact with a Beacon instance. It specifies whether the deployment targets a single Beacon or a Beacon network, the API endpoint URL, supported genome assemblies, and recognized variation types.
 These parameters are fundamental to ensure proper communication with the backend and alignment with the Beacon’s configuration.
 Config Field	Description	Valid Formatting	Notes
 beaconType	Defines whether the deployment queries a network of beacons or a single beacon.	"networkBeacon" or "singleBeacon"	Determines whether the UI operates in network or single-beacon mode.
@@ -105,7 +105,7 @@ For more information about logo readability, please refer to this section.
 
 
 Login Settings
-This section contains configuration options for enabling and customizing the login experience in the Template UI. It allows deployers to activate or disable authentication features, and configure OIDC-based login.
+This section contains configuration options for enabling and customizing the login experience in the Beacon Template UI. It allows deployers to activate or disable authentication features, and configure OIDC-based login.
 
 
 Note about upcoming iterations:
@@ -115,7 +115,7 @@ Config Field	Description	Valid Formatting	Notes
 ui.showLogin	Toggles the visibility of the login functionality within the UI.
 When enabled, a login button appears and OIDC-based authentication is activated.	boolean (true / false)	If showLogin: true, another file needs to be filled out. See this section.
 ui.auth	Container for authentication configuration settings. Required whenui.showLogin is enabled.	object	
-ui.auth.providerType	Defines the type of authentication provider used by the Template UI.	string ("private" or "public")	When set to "private", the UI loads OIDC using both clientId and clientSecret (required).
+ui.auth.providerType	Defines the type of authentication provider used by the Beacon Template UI.	string ("private" or "public")	When set to "private", the UI loads OIDC using both clientId and clientSecret (required).
 When set to "public", only clientId is used and any provided clientSecret is ignored (if provided).
 ui.auth.oidc	Includes all parameters needed for initializing OIDC login.	object	Required when ui.showLogin is enabled.
 ui.auth.oidc.authority	URL of the OIDC provider.
@@ -131,7 +131,7 @@ ui.auth.oidc.revokeAccessTokenOnSignout	Determines whether the access token shou
 
 
 Entry Types, Common Filters and Genomic Annotations Settings
-This part defines configuration options that control the content structure and data organization of the Template UI. It specifies how the entry types are ordered, how the example common filters and their categories are displayed in the right side bar and which genomic annotation categories appear.
+This part defines configuration options that control the content structure and data organization of the Beacon Template UI. It specifies how the entry types are ordered, how the example common filters and their categories are displayed in the right side bar and which genomic annotation categories appear.
 
 Config Field	Description	Valid Formatting	Notes
 ui.entryTypesOrder	Defines the display order of entry types (e.g., individuals, biosamples, datasets) in the UI.	array of strings	["individuals", "g_variants", "biosamples", "runs", "analyses", "cohorts", "datasets"]
@@ -220,7 +220,7 @@ Additional guidance on how to complete the login-related fields in config.json i
 Before configuring your environment variables, it is important to understand the authentication mode defined in providerType.
 This field determines which credentials the UI must load and how it connects to the OIDC provider.
 
-The Template UI supports two modes:
+The Beacon Template UI supports two modes:
 providerType: private
 The UI expects and uses both credentials:
 REACT_APP_CLIENT_ID

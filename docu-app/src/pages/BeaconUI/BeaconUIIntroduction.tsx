@@ -62,10 +62,10 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             >
               GA4GH <b>Beacon v2 specification</b>
             </a>{" "}
-            (Framework + default Models). Note that the Template UI is not a
-            single-page application (SPA), which means that each Template UI
-            instance can be connected to an independent Beacon backend. It can
-            be deployed with the{" "}
+            (Framework + default Models). Note that the Beacon Template UI is
+            not a single-page application (SPA), which means that each user
+            interface instance can be connected to an independent Beacon
+            backend. It can be deployed with the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api"
               target="_blank"
@@ -106,11 +106,11 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
                 </li>
                 <li>
                   However, a Beacon instance does not need to contain{" "}
-                  <b>datasets</b> to run the Template UI. It can be deployed
-                  even with an empty or dummy Beacon. In that case, the
+                  <b>datasets</b> to run the Beacon Template UI. It can be
+                  deployed even with an empty or dummy Beacon. In that case, the
                   interface will still load correctly, and the results table
                   will simply display <i>“No results found”</i>. This
-                  flexibility allows users to test the Template UI before
+                  flexibility allows users to test the Beacon Template UI before
                   connecting it to a fully configured Beacon instance.
                 </li>
               </ul>

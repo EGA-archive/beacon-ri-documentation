@@ -153,10 +153,10 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </h2>
           <p>
             This table defined the fundamental connection and data settings
-            required for the Template UI to interact with a Beacon instance. It
-            specifies whether the deployment targets a single Beacon or a Beacon
-            network, the API endpoint URL, supported genome assemblies, and
-            recognized variation types.
+            required for the Beacon Template UI to interact with a Beacon
+            instance. It specifies whether the deployment targets a single
+            Beacon or a Beacon network, the API endpoint URL, supported genome
+            assemblies, and recognized variation types.
             <br />
             These parameters are fundamental to ensure proper communication with
             the backend and alignment with the Beacon’s configuration.
@@ -679,8 +679,8 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           <h2 id="login-settings">Login Settings</h2>
           <p>
             This section contains configuration options for enabling and
-            customizing the login experience in the Template UI. It allows
-            deployers to activate or disable authentication features, and
+            customizing the login experience in the Beacon Template UI. It
+            allows deployers to activate or disable authentication features, and
             configure OIDC-based login.
           </p>
           <p className="note">
@@ -752,7 +752,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.auth.providerType</code>
                 </td>
                 <td>
-                  Defines the type of authentication provider used by the
+                  Defines the type of authentication provider used by the Beacon
                   Template UI.
                 </td>
                 <td>
@@ -907,10 +907,10 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </h2>
           <p>
             This part defines configuration options that control the content
-            structure and data organization of the Template UI. It specifies how
-            the entry types are ordered, how the example common filters and
-            their categories are displayed in the right side bar and which
-            genomic annotation categories appear.
+            structure and data organization of the Beacon Template UI. It
+            specifies how the entry types are ordered, how the example common
+            filters and their categories are displayed in the right side bar and
+            which genomic annotation categories appear.
           </p>
           <table className="UITable">
             <thead>
@@ -1411,7 +1411,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               and how it connects to the OIDC provider.
               <br />
               <br />
-              The Template UI supports two modes:
+              The Beacon Template UI supports two modes:
               <ol>
                 <li>
                   <span className="custom-code">providerType: private</span>

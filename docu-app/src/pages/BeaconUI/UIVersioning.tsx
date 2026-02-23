@@ -48,7 +48,7 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
                 rel="noopener noreferrer"
               >
                 {" "}
-                Template Beacon UI Version 1.0.0
+                Beacon Template UI Version 1.0.0
               </a>
               {/*
 <p className="list-description">
