@@ -61,9 +61,14 @@ Both local and external logos are supported.
 ui.logos.main	Main logo displayed in the header.	string	Example:["/assets/logos/main.svg"]
 
 Prefer .svg for scalability.
-ui.logos.founders	Logos displayed in the “Founders” section.	array of strings	Example: ["/assets/logos/founder1.svg", "/assets/logos/founder2.svg"]
 
-Supports multiple logos.
+ui.logos.founders	
+Logos displayed in the “Founders” section, on the top left corner of the Home page. Each logo can optionally link to the founder’s website.
+array of objects	Example:[ { "src": "/assets/logos/founder1.svg", "url": "https://elixir-europe.org/" }, { "src": "/assets/logos/founder2.svg", "url": "https://www.crg.eu/" } ]
+Each object contains:
+src – path to the logo file
+url – optional link opened when the logo is clicked
+
 
 Note about logos:
 Accepted formats for each logo are a relative path to astatic file included in the UI (reachable at client/public/assets/logos/) or a full HTTPS URL pointing to an external logo (example:https://example.com/logo.svg).

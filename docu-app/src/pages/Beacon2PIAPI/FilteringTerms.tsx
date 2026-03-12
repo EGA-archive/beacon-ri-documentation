@@ -4,6 +4,7 @@ import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
+import useScrollSpy from "../../hooks/useScrollSpy";
 
 interface FilteringTermsProps {
   searchTerm: string;
@@ -15,6 +16,7 @@ const FilteringTerms: React.FC<FilteringTermsProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
   useDocScrollSpy(contentRef);
+  useScrollSpy(contentRef);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {

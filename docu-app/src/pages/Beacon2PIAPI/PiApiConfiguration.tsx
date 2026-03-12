@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import copyIconBlue from "../../assets/copy-symbol-blue.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
+import useScrollSpy from "../../hooks/useScrollSpy";
 
 interface PiApiConfigurationProps {
   searchTerm: string;
@@ -16,9 +17,11 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
   useDocScrollSpy(contentRef);
+  useScrollSpy(contentRef, { replaceUrl: false });
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {

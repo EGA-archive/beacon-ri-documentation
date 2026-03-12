@@ -1,9 +1,10 @@
 import "../Beacon2RIAPI/AutomatedDeployment.css";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
+import useScrollSpy from "../../hooks/useScrollSpy";
 
 interface PiAutomatedDeploymentProps {
   searchTerm: string;
@@ -18,6 +19,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
   useDocScrollSpy(contentRef);
+  useScrollSpy(contentRef, { replaceUrl: false });
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy =
@@ -43,6 +45,19 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
       })
       .catch((error) => console.log(error));
   };
+
+  const initialHashRef = useRef(window.location.hash);
+
+  useEffect(() => {
+    const hash = initialHashRef.current;
+    if (!hash) return;
+
+    const id = hash.replace("#", "");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ block: "start" });
+    }, 100);
+  }, []);
 
   return (
     <div className="deploymentContainer">
