@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
+
 interface PiAutomatedDeploymentProps {
   searchTerm: string;
 }
@@ -15,6 +17,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy =
@@ -211,7 +214,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <li>
               Edit your instance’s{" "}
               <a
-                href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#editing-beacon-info"
+                href="https://beacon-documentation-demo.ega-archive.org/pi-configuration#generic-configuration"
                 target="_blank"
                 rel="noreferrer"
               >

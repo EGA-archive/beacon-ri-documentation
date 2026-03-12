@@ -1,6 +1,6 @@
 import "./BeaconUIConfiguration.css";
 import React, { useRef, useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
+// import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import beacon_type from "../../assets/Beacon Template UI Images/beacon_type.png";
@@ -23,6 +23,7 @@ import ui_chromosome_library from "../../assets/Beacon Template UI Images/ui_chr
 import ui_navigation_bar_single_vs_network from "../../assets/Beacon Template UI Images/ui_navigation_bar_single_vs_network.png";
 import ui_banner_single_vs_network from "../../assets/Beacon Template UI Images/ui_banner_single_vs_network.png";
 import ui_results_table_single_vs_network from "../../assets/Beacon Template UI Images/ui_results_table_single_vs_network.png";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIConfigurationProps {
   searchTerm: string;
@@ -37,6 +38,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
 
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
@@ -306,7 +308,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
 
               <tr>
                 <td>
-                  <code>ui.favicon**</code>
+                  <code>ui.favicon</code>
                 </td>
                 <td>Path to the favicon displayed in the browser tab.</td>
                 <td>string</td>
@@ -398,15 +400,28 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <td>
                   <code>ui.logos.founders</code>
                 </td>
-                <td>Logos displayed in the “Founders” section.</td>
-                <td>array of strings</td>
                 <td>
-                  Example:{" "}
+                  Logos displayed in the “Founders” section, on the top left
+                  corner of the Home page. Each logo can optionally link to the
+                  founder’s website.
+                </td>
+                <td>array of objects</td>
+                <td>
+                  Example:
                   <code>
-                    ["/assets/logos/founder1.svg", "/assets/logos/founder2.svg"]
+                    {`[
+  { "src": "/assets/logos/founder1.svg", "url": "https://elixir-europe.org/" },
+  { "src": "/assets/logos/founder2.svg", "url": "https://www.crg.eu/" }
+]`}
                   </code>
-                  <br /> <br />
-                  Supports multiple logos.
+                  <br />
+                  <br />
+                  Each object contains:
+                  <br />
+                  <code>src</code> – path to the logo file
+                  <br />
+                  <code>url</code> – optional link opened when the logo is
+                  clicked
                 </td>
               </tr>
             </tbody>
@@ -663,7 +678,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           <p>
             For more information about logo readability, please refer to{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org//ui-configuration#styling-and-branding-settings"
+              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration-file#styling-and-branding-settings"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -724,7 +739,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   If <code>showLogin</code>: <code>true</code>, another file
                   needs to be filled out. See{" "}
                   <a
-                    href="https://beacon-documentation-demo.ega-archive.org//ui-configuration#login-and-environment-configurations"
+                    href="https://beacon-documentation-demo.ega-archive.org/ui-configuration-file#login-and-environment-configurations"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -1374,7 +1389,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             In this case, this part can be skipped and the document can continue
             from the{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org//ui-deployment#1.-prerequisites"
+              href="https://beacon-documentation-demo.ega-archive.org/ui-deployment#1.-prerequisites"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -1390,7 +1405,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             Additional guidance on how to complete the login-related fields in{" "}
             <span className="custom-code">config.json</span> is available{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration#login-settings"
+              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration-file#login-settings"
               target="_blank"
               rel="noopener noreferrer"
             >

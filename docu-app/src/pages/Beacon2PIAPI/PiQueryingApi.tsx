@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface PiQueryingAPIProps {
   searchTerm: string;
@@ -14,6 +15,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard

@@ -3,6 +3,7 @@ import copyIcon from "../../assets/copy-symbol.svg";
 import "./StartingGuide.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface StartingGuideProps {
   searchTerm: string;
@@ -14,6 +15,7 @@ const StartingGuide: React.FC<StartingGuideProps> = ({ searchTerm }) => {
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, id: string) => {
     navigator.clipboard.writeText(text).then(() => {

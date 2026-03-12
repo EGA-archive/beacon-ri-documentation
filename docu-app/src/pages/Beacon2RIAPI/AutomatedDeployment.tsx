@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface AutomatedDeploymentProps {
   searchTerm: string;
@@ -16,6 +17,7 @@ const AutomatedDeployment: React.FC<AutomatedDeploymentProps> = ({
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy =

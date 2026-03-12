@@ -1,9 +1,10 @@
 import "../pages/BeaconUI/BeaconUIQueries.css";
 import React, { useRef } from "react";
-import OnThisPage from "../components/OnThisPage";
+// import OnThisPage from "../components/OnThisPage";
 import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
 import relationshipSchema from "../assets/beacon_data_model_relationship.svg";
 import entryTypesSchema from "../assets/beacon_data_model_entry_types.svg";
+import useDocScrollSpy from "../hooks/useDocScrollSpy";
 
 interface BeaconDataModelProps {
   searchTerm: string;
@@ -12,6 +13,7 @@ interface BeaconDataModelProps {
 const BeaconDataModel: React.FC<BeaconDataModelProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

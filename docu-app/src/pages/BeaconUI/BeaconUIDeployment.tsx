@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIDeploymentProps {
   searchTerm: string;
@@ -16,6 +17,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -236,7 +238,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           <p>
             There is an extended section that you will find by navigating to the{" "}
             <a
-              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration"
+              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration-file"
               target="_blank"
               rel="noreferrer"
             >

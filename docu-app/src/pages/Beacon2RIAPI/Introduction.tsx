@@ -2,6 +2,7 @@ import "./AutomatedDeployment.css";
 import React, { useRef } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface IntroductionProps {
   searchTerm: string;
@@ -9,8 +10,8 @@ interface IntroductionProps {
 
 const Introduction: React.FC<IntroductionProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
-
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

@@ -1,6 +1,7 @@
 import "./LandingPage.css";
 import { useRef } from "react";
 import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../hooks/useDocScrollSpy";
 
 interface LandingPageProps {
   searchTerm: string;
@@ -10,6 +11,7 @@ function LandingPage({ searchTerm }: LandingPageProps) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
   return (
     <div className="landingPage" ref={contentRef}>
       <div>

@@ -4,6 +4,7 @@ import copyIconBlue from "../../assets/copy-symbol-blue.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface PiApiConfigurationProps {
   searchTerm: string;
@@ -17,6 +18,7 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {

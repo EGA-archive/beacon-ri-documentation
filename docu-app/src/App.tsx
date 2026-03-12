@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import { SearchableContentProvider } from "./context/SearchableContentContext";
 import ContentPreloader from "./components/ContentPreloader";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 // Introduction imports
 import LandingPage from "./pages/LandingPage";

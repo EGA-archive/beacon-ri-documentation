@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface TestDataProps {
   searchTerm: string;
@@ -15,6 +16,7 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard

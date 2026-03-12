@@ -43,7 +43,7 @@ These settings ensure a cohesive look and feel aligned with the deployer’s ins
 
 Config Field	Description	Valid Formatting	Notes
 ui.title	Display title for the application.	string	
-ui.favicon**	Path to the favicon displayed in the browser tab.	string	The two accepted formats are:
+ui.favicon	Path to the favicon displayed in the browser tab.	string	The two accepted formats are:
 A relative path to a static file included in the UI, placed at:"client/public/assets/logos/favicon.ico"
 A full URL to an external favicon: "https://example.com/my-favicon.ico"
 If this field is left empty, the favicon will not render.

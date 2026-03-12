@@ -3,6 +3,7 @@ import qrcode from "../pages/../assets/qrcode.png";
 import React, { useRef, useState } from "react";
 import OnThisPage from "../components/OnThisPage";
 import useHighlightAndScroll from "../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../hooks/useDocScrollSpy";
 
 interface ResourcesProps {
   searchTerm: string;
@@ -14,6 +15,7 @@ const Resources: React.FC<ResourcesProps> = ({ searchTerm }) => {
   );
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

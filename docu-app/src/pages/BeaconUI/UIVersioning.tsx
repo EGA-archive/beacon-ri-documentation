@@ -1,7 +1,8 @@
 import "./BeaconUIQueries.css";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface UIVersioningProps {
   searchTerm: string;
@@ -10,6 +11,7 @@ interface UIVersioningProps {
 const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">

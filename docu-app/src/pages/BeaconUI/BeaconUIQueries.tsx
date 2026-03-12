@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import results_detailed_table from "../../assets/Beacon Template UI Images/results_detailed_table.png";
+import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIQueriesProps {
   searchTerm: string;
@@ -11,6 +12,7 @@ interface BeaconUIQueriesProps {
 const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useHighlightAndScroll(contentRef, searchTerm);
+  useDocScrollSpy(contentRef);
 
   return (
     <div className="deploymentContainer">
