@@ -52,11 +52,24 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
                 {" "}
                 Beacon Template UI Version 1.0.0
               </a>
-              {/*
-<p className="list-description">
-  Add a description with the main features
-</p>
-*/}
+            </li>
+            <li>
+              <b>Second Release (XX April 2026)</b>:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.0.1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                Beacon Template UI Version 1.0.1
+              </a>
+              <p className="list-description">
+                This release introduces authenticated requests support, enabling
+                secure API interactions via bearer tokens. It also includes UI
+                and UX improvements across the application, such as enhanced
+                genomic query handling, responsive design fixes and
+                configuration updates.
+              </p>
             </li>
           </ul>
 

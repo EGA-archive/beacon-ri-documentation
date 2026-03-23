@@ -2,7 +2,10 @@ Documentation Beacon Template UI Versioning
 Beacon Template UI
 Versioning
 First Release (5 February 2026): Beacon Template UI Version 1.0.0
-Add a description with the main features
+Second Release (XX April 2026): Beacon Template UI Version 1.0.1
+This release introduces authenticated requests support, enabling secure API interactions via bearer tokens. It also includes UI and UX improvements across the application, such as enhanced genomic query handling, responsive design fixes and configuration updates.
+
+
 
 Upcoming Iterations
 It’s important to highlight that the Beacon Template UI is under active development. It evolves alongside updates to the Beacon specification and incorporates usability improvements based on feedback from deployers and users.
