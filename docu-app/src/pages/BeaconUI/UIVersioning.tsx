@@ -54,7 +54,7 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
               </a>
             </li>
             <li>
-              <b>Second Release (26 April 2026)</b>:{" "}
+              <b>Second Release (26 March 2026)</b>:{" "}
               <a
                 href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.0.1"
                 target="_blank"
