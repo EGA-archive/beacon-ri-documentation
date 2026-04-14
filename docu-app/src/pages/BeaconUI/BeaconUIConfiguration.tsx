@@ -1159,7 +1159,30 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               </tr>
             </tbody>
           </table>
-          <br />
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <b>Note on Genomic Annotations Configuration:</b>
+              <br />
+              The configuration allows controlling only the visibility of the
+              main genomic annotation categories via{" "}
+              <code>ui.genomicAnnotations.visibleGenomicCategories</code>. While
+              you can choose which categories are displayed in the UI, the
+              content within each category is currently predefined in the
+              codebase and cannot be modified through the configuration file.
+              <br />
+              <br />
+              Future iterations of the Template UI aim to introduce more
+              flexibility. However, any custom entries will need to follow the
+              correct structure (e.g., <code>queryType</code> and corresponding
+              parameters) to ensure compatibility with the Beacon API and proper
+              query execution.
+            </div>
+          </p>
           <img
             src={ui_entry_types_order}
             className="ui-beacon-images-big"

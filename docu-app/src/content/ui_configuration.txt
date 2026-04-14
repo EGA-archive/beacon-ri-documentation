@@ -180,6 +180,11 @@ ui.genomicAnnotations.visibleGenomicCategories	Lists the annotation categories t
 
 The content inside each category is automatically populated from the UI.
 
+Note on Genomic Annotations Configuration:
+The configuration allows controlling only the visibility of the main genomic annotation categories via ui.genomicAnnotations.visibleGenomicCategories. While you can choose which categories are displayed in the UI, the content within each category is currently predefined in the codebase and cannot be modified through the configuration file.
+
+Future iterations of the Template UI aim to introduce more flexibility. However, any custom entries will need to follow the correct structure (e.g., queryType and corresponding parameters) to ensure compatibility with the Beacon API and proper query execution.
+
 
 
 
