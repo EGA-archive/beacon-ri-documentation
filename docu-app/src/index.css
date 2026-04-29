@@ -53,6 +53,11 @@ li {
   padding-left: 20px;
 }
 
+.contentColumn a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .video-timestamps {
   margin: 5px 0 5px;
 }

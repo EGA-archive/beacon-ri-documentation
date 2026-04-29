@@ -134,6 +134,30 @@ ui.auth.oidc.redirectUri	The URL the user is redirected to after successful auth
 ui.auth.oidc.scope	A separated list of permissions requested from the OIDC provider.	string	Usually includes: "openid profile email .."
 ui.auth.oidc.revokeAccessTokenOnSignout	Determines whether the access token should be explicitly revoked when the user signs out	boolean (true / false)	When set to true, the UI requests token revocation on logout, ensuring cleaner session termination depending on the provider’s capabilities.
 
+Cookie Banner Settings
+This section contains configuration options for enabling and customizing the cookie banner in the Beacon Template UI.
+The cookie banner is provided through a lightweight reusable package that is already included in the UI. Deployers can decide whether to show or hide it through the configuration file and customize the displayed message, button text, and links.
+
+Config Field	Description	Valid Formatting	Notes
+ui.cookies.enabled	Toggles the visibility of the cookie banner.	boolean (true / false)	If set to true, the cookie banner is displayed until the user clicks the acknowledgement button.
+If set to false, the banner is hidden.
+ui.cookies.message	Defines the text displayed in the cookie banner.	string	The text can include words that match the labels defined in ui.cookies.links. Matching labels are automatically converted into clickable links.
+ui.cookies.buttonText	Defines the text displayed inside the acknowledgement button.	string	Example: "I understand".
+ui.cookies.links	Defines the links displayed inside the cookie banner message.	array of objects with:
+{ "label": string, "url": string }	Each label should match the text in the cookie message that should become clickable.
+If no links are needed, this array can be left empty or removed.
+ui.cookies.links.label	The text in the message that should become a hyperlink.	string	Example: "Privacy Notice".
+ui.cookies.links.url	The destination URL opened when the link is clicked.	HTTPS URL	Example: "https://ega-archive.org/data-protection/privacy-notice/ega-website/"
+
+Note on Cookie Banner Customization:
+The cookie banner is optional and can be enabled or disabled through ui.cookies.enabled.
+
+If only one hyperlink is needed, include a single object inside ui.cookies.links. If no hyperlinks are needed, the links array can be removed or left empty.
+
+The links defined in ui.cookies.links.label and ui.cookies.links.url are also reused in the footer of the Beacon Template UI as an additional reminder for users. This means the same privacy or legal links shown in the cookie banner will also remain accessible from the footer section.
+
+Once the user clicks the acknowledgement button, the banner remains hidden for 6 months before appearing again.
+
 
 Entry Types, Common Filters and Genomic Annotations Settings
 This part defines configuration options that control the content structure and data organization of the Beacon Template UI. It specifies how the entry types are ordered, how the example common filters and their categories are displayed in the right side bar and which genomic annotation categories appear.

@@ -23,6 +23,7 @@ import ui_chromosome_library from "../../assets/Beacon Template UI Images/ui_chr
 import ui_navigation_bar_single_vs_network from "../../assets/Beacon Template UI Images/ui_navigation_bar_single_vs_network.png";
 import ui_banner_single_vs_network from "../../assets/Beacon Template UI Images/ui_banner_single_vs_network.png";
 import ui_results_table_single_vs_network from "../../assets/Beacon Template UI Images/ui_results_table_single_vs_network.png";
+import ui_cookies_banner from "../../assets/Beacon Template UI Images/ui_cookies_banner.png";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 
 interface BeaconUIConfigurationProps {
@@ -915,6 +916,145 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             src={ui_login}
             className="ui-beacon-images-big"
             alt="screenshot from Beacon UI"
+          />
+          <br /> <br />
+          <h2 id="cookie-banner-settings">Cookie Banner Settings</h2>
+          <p>
+            This section contains configuration options for enabling and
+            customizing the cookie banner in the Beacon Template UI.
+            <br />
+            The cookie banner is provided through a lightweight reusable package
+            that is already included in the UI. Deployers can decide whether to
+            show or hide it through the configuration file and customize the
+            displayed message, button text, and links.
+          </p>
+          <table className="UITable">
+            <thead>
+              <tr>
+                <th>Config Field</th>
+                <th>Description</th>
+                <th>Valid Formatting</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <code>ui.cookies.enabled</code>
+                </td>
+                <td>Toggles the visibility of the cookie banner.</td>
+                <td>
+                  boolean (<code>true</code> / <code>false</code>)
+                </td>
+                <td>
+                  If set to <code>true</code>, the cookie banner is displayed
+                  until the user clicks the acknowledgement button.
+                  <br />
+                  If set to <code>false</code>, the banner is hidden.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.message</code>
+                </td>
+                <td>Defines the text displayed in the cookie banner.</td>
+                <td>string</td>
+                <td>
+                  The text can include words that match the labels defined in{" "}
+                  <code>ui.cookies.links</code>. Matching labels are
+                  automatically converted into clickable links.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.buttonText</code>
+                </td>
+                <td>
+                  Defines the text displayed inside the acknowledgement button.
+                </td>
+                <td>string</td>
+                <td>
+                  Example: <code>"I understand"</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links</code>
+                </td>
+                <td>
+                  Defines the links displayed inside the cookie banner message.
+                </td>
+                <td>
+                  array of objects with:
+                  <br />
+                  <code>{`{ "label": string, "url": string }`}</code>
+                </td>
+                <td>
+                  Each <code>label</code> should match the text in the cookie
+                  message that should become clickable.
+                  <br />
+                  <br />
+                  You can provide one link, two links, or no links at all. If no
+                  links are needed, this array can be left empty or removed.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links.label</code>
+                </td>
+                <td>The text in the message that should become a hyperlink.</td>
+                <td>string</td>
+                <td>
+                  Example: <code>"Privacy Notice"</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links.url</code>
+                </td>
+                <td>The destination URL opened when the link is clicked.</td>
+                <td>HTTPS URL</td>
+                <td>
+                  Example:{" "}
+                  <code>
+                    "https://ega-archive.org/data-protection/privacy-notice/ega-website/"
+                  </code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <b>Note on Cookie Banner Customization:</b>
+              <br />
+              The cookie banner is optional and can be enabled or disabled
+              through <code>ui.cookies.enabled</code>.
+              <br />
+              The links configured in <code>ui.cookies.links</code> are reused
+              in two places: inside the cookie banner message and in the footer
+              of the Beacon Template UI as a permanent reminder for users.
+              <br />
+              This allows privacy notices, cookie policies, or other legal links
+              to remain accessible even after the banner has been dismissed.
+              <br />
+              Once the user clicks the acknowledgement button, the banner
+              remains hidden for 6 months before appearing again.
+            </div>
+          </p>
+          <img
+            src={ui_cookies_banner}
+            className="ui-beacon-images-big"
+            alt="screenshot from Beacon UI showing cookie banner"
           />
           <br /> <br />
           <h2 id="entry-types-common-filters-and-genomic-annotations-settings">
