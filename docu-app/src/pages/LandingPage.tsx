@@ -90,8 +90,12 @@ function LandingPage({ searchTerm }: LandingPageProps) {
           compatible with the RI Tools v2. B2RI is provided as an{" "}
           <b>example implementation</b> intended for understanding,
           experimentation, and early prototyping. It is not designed for
-          production environments and it is <b>not actively maintained</b>. For
-          the most up-to-date implementation, the use of the Production
+          production environments and it is{" "}
+          <b>
+            not actively maintained and will not receive further feature
+            development or long-term support
+          </b>
+          . For the most up-to-date implementation, the use of the Production
           Implementation is advised instead.
         </p>
         <p>
