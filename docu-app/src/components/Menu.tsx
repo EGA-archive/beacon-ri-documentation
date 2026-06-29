@@ -64,6 +64,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       return;
     }
 
+    if (path.startsWith("/verifier-")) {
+      setActiveMenu("Beacon Verifier");
+      return;
+    }
+
     if (
       path.startsWith("/create-your-beacon") ||
       path.startsWith("/example-beacon")
@@ -108,6 +113,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     if (menuItem === "Reference Implementation") path = "/ri-introduction";
     if (menuItem === "Beacon RI Tools v2") path = "/ri-tools-starting-guide";
     if (menuItem === "Beacon Template UI") path = "/ui-introduction";
+    if (menuItem === "Beacon Verifier") path = "/verifier";
     if (menuItem === "Tutorials") path = "/create-your-beacon";
 
     setActiveMenu(menuItem);
@@ -153,6 +159,13 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       if (subItem === "Common Errors") path = "/ri-tools-common-errors";
       if (subItem === "Test Data") path = "/ri-tools-test-data";
       if (subItem === "Updating Records") path = "/ri-tools-updating-records";
+    }
+
+    if (parentMenu === "Beacon Verifier") {
+      if (subItem === "Introduction") path = "/verifier";
+      if (subItem === "Installation") path = "/verifier-installation";
+      if (subItem === "Using the UI") path = "/verifier-using-the-ui";
+      // if (subItem === "Installation") path = "/verifier-installation";
     }
 
     if (parentMenu === "Beacon Template UI") {
@@ -318,6 +331,15 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                           expectedPath = "/ui-query-logic-&-results";
                         if (subItem === "Versioning")
                           expectedPath = "/ui-versioning";
+                      }
+
+                      if (menuItem === "Beacon Verifier") {
+                        if (subItem === "Introduction")
+                          expectedPath = "/verifier";
+                        if (subItem === "Installation")
+                          expectedPath = "/verifier-installation";
+                        if (subItem === "Using the UI")
+                          expectedPath = "/verifier-using-the-ui";
                       }
 
                       if (menuItem === "Tutorials") {

@@ -91,7 +91,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <b>Makefile</b> and it is only compatible with{" "}
             <b>MongoDB database</b> deployments.
           </p>
-          <h2 id="prerequisites">Prerequisites</h2>
+          <h1 id="prerequisites">Prerequisites</h1>
           <p>You should have installed:</p>
           <ul>
             <li>
@@ -128,12 +128,12 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
               <span className="custom-code">/datasets</span> entry type.
             </li>
           </ul>
-          <h2 id="automated-deployment">Automated Deployment</h2>
+          <h1 id="automated-deployment">Automated Deployment</h1>
           <p>
             This deployment relies on a <b>Bash script</b> and a <b>Makefile</b>{" "}
             and it is only compatible with <b>MongoDB database</b> deployments.
           </p>
-          <h2 id="cloning-repository">Cloning the repository</h2>
+          <h1 id="cloning-repository">Cloning the repository</h1>
           <p>
             First of all, start by cloning the GitHub repository in your system.
           </p>
@@ -168,7 +168,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             <li>27017 → mongo</li>
             <li>5050 → beacon</li>
           </ul>
-          <h2 id="execute-start-script">Execute start script from root</h2>
+          <h1 id="execute-start-script">Execute start script from root</h1>
           <p>
             To quickly deploy your Beacon instance and load initial data, run
             the following command from the root of your project:
@@ -223,7 +223,7 @@ const PiAutomatedDeployment: React.FC<PiAutomatedDeploymentProps> = ({
             </a>
             .
           </p>
-          <h2 id="customize-your-beacon">Next Steps: Customize Your Beacon</h2>
+          <h1 id="customize-your-beacon">Next Steps: Customize Your Beacon</h1>
           <p>Make your Beacon your own by following these next steps:</p>
           <ul>
             <li>

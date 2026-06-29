@@ -29,6 +29,11 @@ import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
 import TestData from "./pages/Beacon2RITools/TestData";
 import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
 
+// Beacon Verifier imports
+import BeaconVerifierIntroduction from "./pages/BeaconVerifier/BeaconVerifierIntroduction";
+import BeaconVerifierInstallation from "./pages/BeaconVerifier/BeaconVerifierInstallation";
+import BeaconVerifierUsingTheUI from "./pages/BeaconVerifier/BeaconVerifierUsingTheUI";
+
 // Beacon Template UI imports
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
 import BeaconUIConfiguration from "./pages/BeaconUI/BeaconUIConfiguration";
@@ -83,6 +88,7 @@ function App() {
     "Introduction",
     "Beacon 2 PI API",
     "Beacon RI Tools v2",
+    "Beacon Verifier",
     "Beacon Template UI",
     "Tutorials",
     "Reference Implementation",
@@ -116,6 +122,12 @@ function App() {
       "Common Errors",
       "Test Data",
       "Updating Records",
+    ],
+    "Beacon Verifier": [
+      "Introduction",
+      "Installation",
+      "Using the UI",
+      "Terminal Usage",
     ],
     "Beacon Template UI": [
       "Introduction",
@@ -257,6 +269,22 @@ function App() {
                 <Route
                   path="/ui-versioning"
                   element={<UIVersioning searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/verifier"
+                  element={
+                    <BeaconVerifierIntroduction searchTerm={searchTerm} />
+                  }
+                />
+                <Route
+                  path="/verifier-installation"
+                  element={
+                    <BeaconVerifierInstallation searchTerm={searchTerm} />
+                  }
+                />
+                <Route
+                  path="/verifier-using-the-ui"
+                  element={<BeaconVerifierUsingTheUI searchTerm={searchTerm} />}
                 />
 
                 <Route
