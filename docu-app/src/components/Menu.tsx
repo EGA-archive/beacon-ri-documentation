@@ -165,7 +165,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       if (subItem === "Introduction") path = "/verifier";
       if (subItem === "Installation") path = "/verifier-installation";
       if (subItem === "Using the UI") path = "/verifier-using-the-ui";
-      // if (subItem === "Installation") path = "/verifier-installation";
+      if (subItem === "Using the Verifier from the Command Line")
+        path = "/verifier-using-from-command-line";
     }
 
     if (parentMenu === "Beacon Template UI") {
@@ -340,6 +341,10 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                           expectedPath = "/verifier-installation";
                         if (subItem === "Using the UI")
                           expectedPath = "/verifier-using-the-ui";
+                        if (
+                          subItem === "Using the Verifier from the Command Line"
+                        )
+                          expectedPath = "/verifier-using-from-command-line";
                       }
 
                       if (menuItem === "Tutorials") {

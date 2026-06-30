@@ -1,0 +1,25 @@
+Documentation Beacon Verifier Installation
+Beacon Verifier
+Installation Guide with Docker
+Remember that you have an instance of Beacon verifier v2 in this official link.
+
+First of all, clone or download the repository to your computer:
+git clone https://github.com/EGA-archive/beacon-verifier-v2.git
+
+Add an .env file inside the folder verifierweb, with the next variables:
+SECRET_KEY="your_django_secret_key"
+OIDC_RP_CLIENT_ID='your_client_id'
+OIDC_RP_CLIENT_SECRET='your_client_secret'
+
+We strongly recommend to modify the variable SECRET_KEY.
+To generate a safe Django SECRET_KEY and copy it to.env file, you can install python django package with pip install Django and generate yours with a script like this:
+from django.core.management.utils import get_random_secret_key  
+get_random_secret_key()
+
+To light up the containers with beacon verifier v2 for development environment, execute the next command inside the root folder (where docker-compose is located at):
+docker-compose up -d --build
+
+To light up the containers for production, execute the next command:
+docker compose -f docker-compose.prod.yml -p django-celery-prod up -d --build
+
+Once the container is up and running you can start using beacon verifier v2, congratulations!

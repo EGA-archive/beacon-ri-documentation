@@ -12,14 +12,6 @@ import PiConfigurationText from "../content/pi_configuration.txt";
 import PiQueryingApiText from "../content/pi_query_api.txt";
 import PiModelsText from "../content/pi_models.txt";
 
-// Referenece Implementation (Beacon 2 RI API)
-import RiIntroductionText from "../content/ri_introduction.txt";
-import RiAutomatedDeploymentText from "../content/ri_automated_deployment.txt";
-import RiManualDeploymentText from "../content/ri_manual_deployment.txt";
-import RiDataLinkingText from "../content/ri_data_linking.txt";
-import RiQueryingApiText from "../content/ri_query_api.txt";
-import RiConfigurationText from "../content/ri_configuration.txt";
-
 // Beacon 2 RI API Tools v2
 import RiToolsStartingGuideText from "../content/ri_tools_starting_guide.txt";
 import RiToolsConfigurationFileText from "../content/ri_tools_configuration_file.txt";
@@ -30,12 +22,26 @@ import RiToolsCommonErrorsText from "../content/ri_tools_common_errors.txt";
 import RiToolsTestDataText from "../content/ri_tools_test_data.txt";
 import RiToolsUpdatingRecordsText from "../content/ri_tools_updating_records.txt";
 
+// Beacon Verifier
+import BeaconVerifierIntroductionText from "../content/verifier_introduction.txt";
+import BeaconVerifierInstallationText from "../content/verifier_installation.txt";
+import BeaconVerifierUsingTheUIText from "../content/verifier_using_the_ui.txt";
+import BeaconVerifierCommandLineText from "../content/verifier_using_from_command_line.txt";
+
 // Beacon Template UI
 import UIIntroductionText from "../content/ui_introduction.txt";
 import UIConfigurationText from "../content/ui_configuration.txt";
 import UIDeploymentText from "../content/ui_deployment.txt";
 import UIQueryingText from "../content/ui_query_logic_results.txt";
 import UIVersioningText from "../content/ui_versioning.txt";
+
+// Referenece Implementation (Beacon 2 RI API)
+import RiIntroductionText from "../content/ri_introduction.txt";
+import RiAutomatedDeploymentText from "../content/ri_automated_deployment.txt";
+import RiManualDeploymentText from "../content/ri_manual_deployment.txt";
+import RiDataLinkingText from "../content/ri_data_linking.txt";
+import RiQueryingApiText from "../content/ri_query_api.txt";
+import RiConfigurationText from "../content/ri_configuration.txt";
 
 // Tutorials
 import TutorialsUseCaseText from "../content/tutorials_use_case.txt";
@@ -54,7 +60,7 @@ const ContentPreloader = () => {
     "Beacon Data Model"
   );
 
-  // Beacon 2 PI API
+  // Beacon 2 PI API (Beacon Product Implementation)
   useRegisterTextContent(
     "/pi-automated-deployment",
     PiAutomatedDeploymentText,
@@ -130,8 +136,32 @@ const ContentPreloader = () => {
     "Updating Records"
   );
 
-  // Beacon Template UI
+  // Beacon Verifier
+  useRegisterTextContent(
+    "/verifier",
+    BeaconVerifierIntroductionText,
+    "Beacon Verifier Introduction"
+  );
 
+  useRegisterTextContent(
+    "/verifier-installation",
+    BeaconVerifierInstallationText,
+    "Beacon Verifier Installation"
+  );
+
+  useRegisterTextContent(
+    "/verifier-using-the-ui",
+    BeaconVerifierUsingTheUIText,
+    "Using the UI"
+  );
+
+  useRegisterTextContent(
+    "/verifier-using-from-command-line",
+    BeaconVerifierCommandLineText,
+    "Using the Verifier from the Command Line"
+  );
+
+  // Beacon Template UI
   useRegisterTextContent(
     "/ui-introduction",
     UIIntroductionText,
@@ -167,7 +197,6 @@ const ContentPreloader = () => {
   );
 
   // Reference Implementation (Beacon 2 RI API)
-
   useRegisterTextContent(
     "/ri-introduction",
     RiIntroductionText,

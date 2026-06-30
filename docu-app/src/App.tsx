@@ -11,13 +11,13 @@ import ScrollToTop from "./hooks/ScrollToTop";
 import LandingPage from "./pages/LandingPage";
 import BeaconDataModel from "./pages/BeaconDataModel";
 
-// Reference Implementation imports
-import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
-import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
-import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
-import QueryingApi from "./pages/Beacon2RIAPI/QueryingApi";
-import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
-import Introduction from "./pages/Beacon2RIAPI/Introduction";
+// Product Implementation imports
+import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
+import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
+import Models from "./pages/Beacon2PIAPI/Models";
+import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
+import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
+import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 
 // RI Tools imports
 import StartingGuide from "./pages/Beacon2RITools/StartingGuide";
@@ -33,6 +33,7 @@ import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
 import BeaconVerifierIntroduction from "./pages/BeaconVerifier/BeaconVerifierIntroduction";
 import BeaconVerifierInstallation from "./pages/BeaconVerifier/BeaconVerifierInstallation";
 import BeaconVerifierUsingTheUI from "./pages/BeaconVerifier/BeaconVerifierUsingTheUI";
+import BeaconVerifierCommandLine from "./pages/BeaconVerifier/BeaconVerifierCommandLine";
 
 // Beacon Template UI imports
 import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
@@ -41,19 +42,20 @@ import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
 import UIVersioning from "./pages/BeaconUI/UIVersioning";
 import BeaconUIIntroduction from "./pages/BeaconUI/BeaconUIIntroduction";
 
-// Product Implementation imports
-import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
-import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
-import Models from "./pages/Beacon2PIAPI/Models";
-import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
-import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
-import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
-
-import Resources from "./pages/Resources";
+// Reference Implementation imports
+import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
+import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
+import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
+import QueryingApi from "./pages/Beacon2RIAPI/QueryingApi";
+import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
+import Introduction from "./pages/Beacon2RIAPI/Introduction";
 
 // Tutorials imports
 import UseCase from "./pages/Tutorials/UseCase";
 import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
+
+// Resources imports
+import Resources from "./pages/Resources";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -127,7 +129,7 @@ function App() {
       "Introduction",
       "Installation",
       "Using the UI",
-      "Terminal Usage",
+      "Using the Verifier from the Command Line",
     ],
     "Beacon Template UI": [
       "Introduction",
@@ -250,6 +252,31 @@ function App() {
                   element={<UpdatingRecords searchTerm={searchTerm} />}
                 />
 
+                {/* Beacon Verifier */}
+                <Route
+                  path="/verifier"
+                  element={
+                    <BeaconVerifierIntroduction searchTerm={searchTerm} />
+                  }
+                />
+                <Route
+                  path="/verifier-installation"
+                  element={
+                    <BeaconVerifierInstallation searchTerm={searchTerm} />
+                  }
+                />
+                <Route
+                  path="/verifier-using-the-ui"
+                  element={<BeaconVerifierUsingTheUI searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/verifier-using-from-command-line"
+                  element={
+                    <BeaconVerifierCommandLine searchTerm={searchTerm} />
+                  }
+                />
+
+                {/* Beacon Template UI */}
                 <Route
                   path="/ui-introduction"
                   element={<BeaconUIIntroduction searchTerm={searchTerm} />}
@@ -270,23 +297,8 @@ function App() {
                   path="/ui-versioning"
                   element={<UIVersioning searchTerm={searchTerm} />}
                 />
-                <Route
-                  path="/verifier"
-                  element={
-                    <BeaconVerifierIntroduction searchTerm={searchTerm} />
-                  }
-                />
-                <Route
-                  path="/verifier-installation"
-                  element={
-                    <BeaconVerifierInstallation searchTerm={searchTerm} />
-                  }
-                />
-                <Route
-                  path="/verifier-using-the-ui"
-                  element={<BeaconVerifierUsingTheUI searchTerm={searchTerm} />}
-                />
 
+                {/* Tutorials */}
                 <Route
                   path="/create-your-beacon"
                   element={<CreateYourBeacon searchTerm={searchTerm} />}
@@ -295,6 +307,8 @@ function App() {
                   path="/example-beacon:-rare-disease-use-case"
                   element={<UseCase searchTerm={searchTerm} />}
                 />
+
+                {/* Resources */}
                 <Route
                   path="/resources"
                   element={<Resources searchTerm={searchTerm} />}

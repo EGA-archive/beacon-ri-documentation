@@ -1,0 +1,8 @@
+Documentation Beacon Verifier Using the Verifier from the Command Line
+Beacon Verifier
+Using the Verifier from the Command Line
+The full-featured Verifier is only available through the UI. There is also a minimalistic script that performs a generic validation of the API framework through the terminal.
+
+To use the Verifier from your computer's terminal, open a command prompt and run the following command, replacing the URL with the one containing the Beacon you want to validate:
+
+docker exec verifier python verifier.py -url http://beacon:5050/api

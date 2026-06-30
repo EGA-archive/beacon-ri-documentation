@@ -65,9 +65,9 @@ const BeaconVerifierIntroduction: React.FC<BeaconVerifierIntroductionProps> = ({
             .
           </p>
         </div>
-        <div className="sidebarColumn">
+        {/* <div className="sidebarColumn">
           <OnThisPage root={contentRef.current} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

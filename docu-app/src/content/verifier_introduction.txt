@@ -1,0 +1,11 @@
+Documentationa Beacon Verifiera Introduction
+
+Beacon Verifier
+
+Introduction
+
+Beacon Verifier v2 is a debugging and testing tool designed to validate Beacon API responses against the official GA4GH Beacon v2 specifications.
+It verifies the responses returned by the available Beacon endpoints and provides detailed validation results for each request.
+These results help identify schema validation issues, server errors and other inconsistencies in a Beacon implementation.
+The verifier can be used through its browser-based interface, which provides the complete verification workflow, or through a minimal command-line script for basic API framework validation.
+A hosted instance of Beacon Verifier v2 is also available at the official verifier URL.
