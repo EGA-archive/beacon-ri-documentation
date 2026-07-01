@@ -169,7 +169,7 @@ const ContentPreloader = () => {
   );
 
   useRegisterTextContent(
-    "/ui-configuration",
+    "/ui-configuration-file",
     UIConfigurationText,
     "UI Configuration"
   );
