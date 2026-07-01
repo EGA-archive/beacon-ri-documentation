@@ -90,8 +90,8 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
 
           <h2 id="pi-get-method">GET Method</h2>
           <p>
-            GET method is a bit more limited as this method only accepts request
-            parameters, three generic parameters and ontology filters.
+            GET method is a bit more limited, as this method only accepts
+            request parameters, five generic parameters and ontology filters.
           </p>
 
           <h6>Query Parameters</h6>
@@ -109,6 +109,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <th>Examples</th>
               </tr>
             </thead>
+
             <tbody>
               <tr>
                 <td>• requestedSchema</td>
@@ -134,10 +135,74 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                   </div>
                 </td>
               </tr>
+
+              <tr>
+                <td>• includeResultsetResponses*</td>
+                <td>
+                  string
+                  <br />
+                  Default: "HIT"
+                  <br />
+                  Enum: "ALL" "HIT" "MISS" "NONE"
+                </td>
+                <td>
+                  <div className="codeSnippet-table">
+                    <code>includeResultsetResponses=HIT</code>
+                    <button
+                      className="copyButtonCode"
+                      onClick={() =>
+                        copyToClipboard(
+                          "includeResultsetResponses=HIT",
+                          "get-includeResultsetResponses"
+                        )
+                      }
+                    >
+                      {copySuccess["get-includeResultsetResponses"] ? (
+                        "Copied!"
+                      ) : (
+                        <img className="copySymbol" src={copyIcon} alt="Copy" />
+                      )}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>• requestedGranularity*</td>
+                <td>
+                  string (Granularity)
+                  <br />
+                  Default: "boolean"
+                  <br />
+                  Enum: "boolean" "count" "record"
+                </td>
+                <td>
+                  <div className="codeSnippet-table">
+                    <code>requestedGranularity=record</code>
+                    <button
+                      className="copyButtonCode"
+                      onClick={() =>
+                        copyToClipboard(
+                          "requestedGranularity=record",
+                          "get-requestedGranularity"
+                        )
+                      }
+                    >
+                      {copySuccess["get-requestedGranularity"] ? (
+                        "Copied!"
+                      ) : (
+                        <img className="copySymbol" src={copyIcon} alt="Copy" />
+                      )}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
               <tr>
                 <td>• skip</td>
                 <td>
-                  integer (Skip) ≥ 0<br />
+                  integer (Skip) ≥ 0
+                  <br />
                   Default: 0
                 </td>
                 <td>
@@ -156,10 +221,12 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                   </div>
                 </td>
               </tr>
+
               <tr>
                 <td>• limit</td>
                 <td>
-                  integer (Limit) ≥ 0<br />
+                  integer (Limit) ≥ 0
+                  <br />
                   Default: 10
                   <br />
                   Max: 100
@@ -182,6 +249,14 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
               </tr>
             </tbody>
           </table>
+
+          <p className="lessMargin">
+            * For more information about{" "}
+            <span className="custom-code">includeResultsetResponses</span> and{" "}
+            <span className="custom-code">requestedGranularity</span>, see the{" "}
+            <a href="/pi-querying-the-api#response-types">Response types</a>{" "}
+            section.
+          </p>
 
           <table>
             <thead>
@@ -525,6 +600,104 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             </tbody>
           </table>
 
+          <h2 id="response-types">Response types</h2>
+          <p className="lessMargin">
+            When it comes to Beacon entry type responses, there are{" "}
+            <b>two parameters</b> that make a response more or less detailed, or
+            split or not per result set.
+            <br />
+            These are:
+          </p>
+
+          <ul>
+            <li>
+              <span className="custom-code">includeResultsetResponses</span>
+            </li>
+            <li>
+              <span className="custom-code">requestedGranularity</span>
+            </li>
+          </ul>
+          <p>
+            The parameter <b>includeResultsetResponses</b> lets you choose how
+            you want the result to be returned, per result set or not, and
+            whether to include only positive results, only negative results, or
+            all of them. Depending on that, you can choose between the following
+            four options:
+          </p>
+
+          <ul>
+            <li>
+              <span className="custom-code">HIT</span>: positive (
+              <span className="custom-code">true</span> and/or{" "}
+              <span className="custom-code">count &gt; 0</span>) result sets
+              included.
+            </li>
+
+            <li>
+              <span className="custom-code">MISS</span>: negative (
+              <span className="custom-code">false</span> and/or{" "}
+              <span className="custom-code">count = 0</span>) result sets
+              included.
+            </li>
+
+            <li>
+              <span className="custom-code">ALL</span>: positive (
+              <span className="custom-code">true</span> and/or{" "}
+              <span className="custom-code">count &gt; 0</span>) and negative (
+              <span className="custom-code">false</span> and{" "}
+              <span className="custom-code">count = 0</span>) result sets
+              included.
+            </li>
+
+            <li>
+              <span className="custom-code">NONE</span>: only a response summary
+              (<span className="custom-code">true</span>/
+              <span className="custom-code">false</span> and/or count), not
+              split per result set.
+            </li>
+          </ul>
+
+          <p>
+            The parameter <b>requestedGranularity</b> lets you choose the level
+            of detail you want to be included in the response. Bear in mind that
+            a Beacon can restrict the granularity you will get in the response.
+            You can see what granularity you are finally getting in the meta
+            part of the response, in{" "}
+            <span className="custom-code">returnedGranularity</span>. You can
+            choose between the following three types of granularity:
+            <ul>
+              <li>
+                <span className="custom-code">record</span>: all the detailed
+                documents matching your query are included.
+              </li>
+
+              <li>
+                <span className="custom-code">count</span>: only the number of
+                documents that match your query.
+              </li>
+
+              <li>
+                <span className="custom-code">boolean</span>: only an{" "}
+                <span className="custom-code">exists</span> (
+                <span className="custom-code">true</span>/
+                <span className="custom-code">false</span>) property in response
+                to your query.
+              </li>
+            </ul>
+          </p>
+
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              The combination <span className="custom-code">NONE + record</span>{" "}
+              does not make sense, so the Beacon will not satisfy this query.
+            </div>
+          </p>
+
           <h2 id="pi-get-examples">GET query examples</h2>
 
           <h5 className="cursive">Beacon Sequence Query</h5>
@@ -688,7 +861,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             </thead>
             <tbody>
               <tr>
-                <td>• includeResultsetResponses</td>
+                <td>• includeResultsetResponses*</td>
                 <td>
                   string <br />
                   Default: "HIT"
@@ -698,21 +871,20 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <td></td>
               </tr>
               <tr>
-                <td>
-                  • pagination object (Pagination) Items:
-                  <li>skip</li>
-                  <li>limit</li>
+                <td rowSpan={2} style={{ verticalAlign: "top" }}>
+                  • pagination object (Pagination)
+                  <br />
+                  Items:
+                  <ul>
+                    <li>skip</li>
+                    <li>limit</li>
+                  </ul>
                 </td>
+
                 <td>
-                  <></>
-                  integer (Skip) ≥ 0<br />
-                  Default: 0 <br />
+                  integer (Skip) ≥ 0
                   <br />
-                  integer (Limit) ≥ 0
-                  <br />
-                  Default: 10
-                  <br />
-                  Max: 100
+                  Default: 0
                 </td>
 
                 <td>
@@ -731,7 +903,19 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                       )}
                     </button>
                   </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  integer (Limit) ≥ 0
                   <br />
+                  Default: 10
+                  <br />
+                  Max: 100
+                </td>
+
+                <td>
                   <div className="codeSnippet-table">
                     <code>limit=10</code>
                     <button
@@ -750,7 +934,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 </td>
               </tr>
               <tr>
-                <td>• requestedGranularity</td>
+                <td>• requestedGranularity*</td>
                 <td>
                   string (Granularity)
                   <br />
@@ -806,6 +990,13 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
               </tr>
             </tbody>
           </table>
+          <p className="lessMargin">
+            * For more information about{" "}
+            <span className="custom-code">includeResultsetResponses</span> and{" "}
+            <span className="custom-code">requestedGranularity</span>, see the{" "}
+            <a href="/pi-querying-the-api#response-types">Response types</a>{" "}
+            section.
+          </p>
           <table>
             <thead>
               <tr>

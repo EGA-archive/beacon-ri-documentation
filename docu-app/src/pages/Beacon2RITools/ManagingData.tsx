@@ -1,20 +1,22 @@
 import "./ConfigFileTools.css";
 import React, { useRef, useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
-// import OnThisPage from "../../components/OnThisPage";
+import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
 import useScrollSpy from "../../hooks/useScrollSpy";
 
-interface UpdatingRecordsProps {
+interface ManagingDataProps {
   searchTerm: string;
 }
 
-const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
+const ManagingData: React.FC<ManagingDataProps> = ({ searchTerm }) => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
+
   const contentRef = useRef<HTMLDivElement>(null);
+
   useHighlightAndScroll(contentRef, searchTerm);
   useDocScrollSpy(contentRef);
   useScrollSpy(contentRef);
@@ -23,9 +25,16 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
+        setCopySuccess((prev) => ({
+          ...prev,
+          [snippetId]: true,
+        }));
+
         setTimeout(() => {
-          setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
+          setCopySuccess((prev) => ({
+            ...prev,
+            [snippetId]: false,
+          }));
         }, 1500);
       })
       .catch((error) => console.error("Failed to copy text: ", error));
@@ -37,27 +46,89 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
         <a href="/" className="no-undeline">
           Documentation
         </a>
+
         <img
           src="arrow-right-light.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/ri-tools-updating-records" className="no-undeline">
+
+        <a href="/ri-tools-managing-data" className="no-undeline">
           Beacon RI Tools v2
         </a>
+
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/ri-tools-updating-records" className="no-undeline">
-          <span className="user-path-title">Updating Record(s)</span>
+
+        <a href="/ri-tools-managing-data" className="no-undeline">
+          <span className="user-path-title">Managing Data</span>
         </a>
       </h2>
+
       <div className="contentWrapper">
         <div className="contentColumn" ref={contentRef}>
           <h3>Beacon RI Tools v2</h3>
-          <h1>Updating Record(s)</h1>
+
+          <h1 id="managing-data">Managing Data</h1>
+
+          <p>
+            Beacon RI Tools v2 provides commands for managing data that has
+            already been loaded into your Beacon database. You can remove an
+            entire dataset from all database collections or update individual
+            records while preserving their existing fields.
+          </p>
+
+          <h2 id="removing-a-dataset">Removing a Dataset</h2>
+
+          <p>
+            To remove a dataset from your entire database, including all
+            collections, execute the following command:
+          </p>
+
+          <div className="codeSnippet">
+            <pre>
+              <code>{`docker exec ri-tools python remove_dataset.py`}</code>
+
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    `docker exec ri-tools python remove_dataset.py`,
+                    "removing-dataset"
+                  )
+                }
+              >
+                {copySuccess["removing-dataset"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <p>
+            The removed dataset will be the one whose identifier is assigned to
+            the <b>datasetId</b> variable in the <b>conf.py</b> configuration
+            file.
+          </p>
+
+          <h3 id="avoiding-duplication-and-incremental-load">
+            Avoiding Duplication and Incremental Load
+          </h3>
+
+          <p>
+            All the scripts have been updated to avoid duplications in the
+            database. The conversion from VCF now also allows an incremental
+            load of case-level data. Variants, however, will prioritise the
+            version that is already present in the database.
+          </p>
+
+          <h2 id="updating-records">Updating Record(s)</h2>
+
           <p>
             After having set the configuration parameters for <b>record_type</b>{" "}
             and <b>collection_name</b> in conf.py (see configuration above), you
@@ -78,9 +149,11 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
             they are not in the updated json. After that, execute the next
             command to update all the records inside the file:
           </p>
+
           <div className="codeSnippet">
             <pre>
               <code>{`docker exec ri-tools python update_record.py`}</code>
+
               <button
                 className="copyButtonCode"
                 onClick={() =>
@@ -98,24 +171,28 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-          <p className="note">
+
+          <div className="note">
             <img
               className="note-symbol"
               src="/note-symbol.png"
               alt="Note symbol"
             />
+
             <div>
               <p className="note-paragraph">
                 Note: If the json doesn't match the Beacon v2 specification, the
                 execution will complain.
               </p>
             </div>
-          </p>
+          </div>
+
           <p>
             You can also add the next command line parameters to set the type of
             records, database collection and file to input by command line after
             the docker exec ri-tools python update_record.py.
           </p>
+
           <div className="codeSnippet">
             <pre>
               <code>
@@ -125,6 +202,7 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
                 {"'-r', '--recordType', default=conf.record_type\n"}
                 {"'-c', '--collection', default=conf.collection_name"}
               </code>
+
               <button
                 className="copyButtonCode"
                 onClick={() =>
@@ -148,10 +226,13 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-          Example:
+
+          <p>Example:</p>
+
           <div className="codeSnippet">
             <pre>
               <code>{`docker exec ri-tools python update_record.py -r genomicVariation`}</code>
+
               <button
                 className="copyButtonCode"
                 onClick={() =>
@@ -169,12 +250,16 @@ const UpdatingRecords: React.FC<UpdatingRecordsProps> = ({ searchTerm }) => {
               </button>
             </pre>
           </div>
-          <br></br>
-          <br></br>
+
+          <br />
+          <br />
+        </div>
+        <div className="sidebarColumn">
+          <OnThisPage root={contentRef.current} />
         </div>
       </div>
     </div>
   );
 };
 
-export default UpdatingRecords;
+export default ManagingData;

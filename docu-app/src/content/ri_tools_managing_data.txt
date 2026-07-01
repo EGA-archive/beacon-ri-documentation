@@ -1,0 +1,33 @@
+Documentation Beacon RI Tools v2 Managing Data
+Beacon RI Tools v2
+Managing Data
+Beacon RI Tools v2 provides commands for managing data that has already been loaded into your Beacon database. You can remove an entire dataset from all database collections or update individual records while preserving their existing fields.
+
+Removing a Dataset
+To remove a dataset from your entire database, including all collections, execute the following command:
+
+docker exec ri-tools python remove_dataset.py
+
+The removed dataset will be the one whose identifier is assigned to the datasetId variable in the conf.py configuration file.
+
+Avoiding Duplication and Incremental Load
+All the scripts have been updated to avoid duplications in the database. The conversion from VCF now also allows an incremental load of case-level data. Variants, however, will prioritise the version that is already present in the database.
+
+Updating Record(s)
+After having set the configuration parameters for record_type and collection_name in conf.py (see configuration above), you need to have a file in json records to update folder called update.json. Inside this file, you can have one record or more (remember to have them in a list between braces) with a valid beacon v2 json with an id and datasetId that matches an id and datasetId that is already in the database. The already existing record in mongoDB will be updated with all the fields that this updated json has and will also keep the remaining fields even if they are not in the updated json. After that, execute the next command to update all the records inside the file:
+
+docker exec ri-tools python update_record.py
+
+
+Note: If the json doesn't match the Beacon v2 specification, the execution will complain.
+
+You can also add the next command line parameters to set the type of records, database collection and file to input by command line after the docker exec ri-tools python update_record.py.
+
+'-f', '--file', default=conf.output_docs_folder+'update.json'
+'-r', '--recordType', default=conf.record_type
+'-c', '--collection', default=conf.collection_name
+
+Example:
+
+docker exec ri-tools python update_record.py -r genomicVariation
+

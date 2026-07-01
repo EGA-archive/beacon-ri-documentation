@@ -811,7 +811,7 @@ complete_url = uri + uri_subpath`}
               />
               <div>
                 <p className="note-paragraph">
-                  Note that this is the info that will be shown in the
+                  Note that this is the info that will be shown in the{" "}
                   <span className="custom-code">/info </span> endpoint for your
                   beacon.
                 </p>

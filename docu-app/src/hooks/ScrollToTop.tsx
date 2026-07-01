@@ -10,7 +10,5 @@ export default function ScrollToTop() {
     document.body.scrollTop = 0;
   }, [pathname]);
 
-  console.log("miao");
-
   return null;
 }

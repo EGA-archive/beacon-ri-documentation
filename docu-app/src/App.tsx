@@ -27,7 +27,7 @@ import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
 import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
 import TestData from "./pages/Beacon2RITools/TestData";
-import UpdatingRecords from "./pages/Beacon2RITools/UpdatingRecords";
+import ManagingData from "./pages/Beacon2RITools/ManagingData";
 
 // Beacon Verifier imports
 import BeaconVerifierIntroduction from "./pages/BeaconVerifier/BeaconVerifierIntroduction";
@@ -123,7 +123,7 @@ function App() {
       "Conversion from Phenopackets to BFF",
       "Common Errors",
       "Test Data",
-      "Updating Records",
+      "Managing Data",
     ],
     "Beacon Verifier": [
       "Introduction",
@@ -248,8 +248,8 @@ function App() {
                   element={<TestData searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/ri-tools-updating-records"
-                  element={<UpdatingRecords searchTerm={searchTerm} />}
+                  path="/ri-tools-managing-data"
+                  element={<ManagingData searchTerm={searchTerm} />}
                 />
 
                 {/* Beacon Verifier */}

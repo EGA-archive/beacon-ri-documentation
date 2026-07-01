@@ -6,7 +6,7 @@ Beacon PI accepts two types of request methods: GET and POST.
 You can find further introduction to Beacon parameters in  Beacon v2 Documentation.
 
 GET Method
-GET method is a bit more limited as this method only accepts request parameters, three generic parameters and ontology filters.
+GET method is a bit more limited, as this method only accepts request parameters, five generic parameters and ontology filters.
 
 Query Parameters
 These are the defined set of parameters (key-value pair) attached to the end of a URL used to provide additional information to a web server when making requests.
@@ -14,6 +14,16 @@ These are the defined set of parameters (key-value pair) attached to the end of 
 Generic parameters	Type	Examples
 • requestedSchema	String	
 requestedSchema=ga4gh-service-info-v1.0
+
+• includeResultsetResponses*	string
+Default: "HIT"
+Enum: "ALL" "HIT" "MISS" "NONE"	
+includeResultsetResponses=HIT
+
+• requestedGranularity*	string (Granularity)
+Default: "boolean"
+Enum: "boolean" "count" "record"	
+requestedGranularity=record
 
 • skip	integer (Skip) ≥ 0
 Default: 0	
@@ -23,6 +33,8 @@ skip=0
 Default: 10
 Max: 100	
 limit=10
+
+* For more information about includeResultsetResponses and requestedGranularity, see the Response types section.
 
 Request parameters	Type	Examples
 • start	integer <int64> ≥ 0
@@ -71,6 +83,28 @@ Filters	Type	Examples
 (comma-separated strings of ontologies)	
 filters=NCIT:C16576,NCIT:C42331
 
+Response types
+When it comes to Beacon entry type responses, there are two parameters that make a response more or less detailed, or split or not per result set.
+These are:
+• includeResultsetResponses
+• requestedGranularity
+
+The parameter includeResultsetResponses lets you choose how you want the result to be returned, per result set or not, and whether to include only positive results, only negative results, or all of them. Depending on that, you can choose between the following four options:
+
+• HIT: positive (true and/or count > 0) result sets included.
+• MISS: negative (false and/or count = 0) result sets included.
+• ALL: positive (true and/or count > 0) and negative (false and count = 0) result sets included.
+• NONE: only a response summary (true/false and/or count), not split per result set.
+
+The parameter requestedGranularity lets you choose the level of detail you want to be included in the response. Bear in mind that a Beacon can restrict the granularity you will get in the response. You can see what granularity you are finally getting in the meta part of the response, in returnedGranularity. You can choose between the following three types of granularity:
+
+• record: all the detailed documents matching your query are included.
+• count: only the number of documents that match your query.
+• boolean: only an exists (true/false) property in response to your query.
+
+Note:
+The combination NONE + record does not make sense, so the Beacon will not satisfy this query.
+
 GET query examples
 Beacon Sequence Query
 http://localhost:5050/api/g_variants?start=16050606&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37
@@ -95,7 +129,7 @@ In POST method requests, the endpoints accept all generic parameters and all the
 
 Query Parameters
 Generic parameters	Type	Examples
-• includeResultsetResponses	string
+• includeResultsetResponses*	string
 Default: "HIT"
 Enum: "ALL" "HIT" "MISS" "NONE"	
 • pagination object (Pagination) Items:
@@ -112,7 +146,7 @@ skip=0
 
 limit=10
 
-• requestedGranularity	string (Granularity)
+• requestedGranularity*	string (Granularity)
 Default: "boolean"
 Enum: "boolean" "count" "record"	
 requestedGranularity="record"
@@ -120,6 +154,8 @@ requestedGranularity="record"
 • testMode	boolean (TestMode)
 Default: false
 testMode=false
+
+* For more information about includeResultsetResponses and requestedGranularity, see the Response types section.
 
 Request parameters	Type	Examples
 • start	integer <int64> ≥ 0

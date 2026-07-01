@@ -21,8 +21,9 @@ Configuration Table Overview
 Below each table, you’ll find a UI reference map that visually illustrates the interface, helping you configure your own Beacon Template UI correctly.
 
 Core Beacon and Configuration Setting
-This table defined the fundamental connection and data settings required for the Beacon Template UI to interact with a Beacon instance. It specifies whether the deployment targets a single Beacon or a Beacon network, the API endpoint URL, supported genome assemblies, and recognized variation types.
-These parameters are fundamental to ensure proper communication with the backend and alignment with the Beacon’s configuration.
+This table defines the fundamental connection, query, and data settings required for the Beacon Template UI to interact with a Beacon instance. It specifies whether the deployment targets a single Beacon or a Beacon network, the API endpoint URL, supported genome assemblies, recognized variation types, and whether genomic query coordinates are interpreted as 0-based or 1-based.
+These parameters ensure proper communication with the backend and keep the UI’s query behaviour aligned with the Beacon configuration.
+
 Config Field	Description	Valid Formatting	Notes
 beaconType	Defines whether the deployment queries a network of beacons or a single beacon.	"networkBeacon" or "singleBeacon"	Determines whether the UI operates in network or single-beacon mode.
 apiUrl	The URL used to query the Beacon v2 API.	string	Only valid URLs are accepted.
@@ -33,6 +34,9 @@ GRC assemblies are expected. Other identifiers are supported only if they map un
 Example:
 "assemblyId": ["GRCh38", "GRCh37", "NCBI36"]
 variationType	Defines the list of variant categories supported by the UI.	array of objects with: { jsonName: string, displayName: string }	The set should reflect the variant types recognized by your Beacon implementation.
+queryCoordinatesAre0Based	Defines whether genomic coordinates entered in the UI are interpreted as 0-based or 1-based.	true or false	When set to true, genomic query coordinates are interpreted as 0-based.
+When set to false, coordinates are interpreted as 1-based and converted by the UI before being sent to the Beacon API.
+The default value is true.
 
 
 
@@ -55,10 +59,12 @@ darkPrimary: a darker variant of the primary color.
 secondary: a contrasting color used for accents and emphasis.
 ui.logos	Paths/URLs for logos used in header and “founders” section.	object:
 
-{ "main": string, "founders": string[] }	Accepted formats for each logo are a relative path to a static file included in the UI (reachable at:"client/public/assets/logos/" ) or a full HTTPS URL pointing to an external logo (example: "https://example.com/logo.svg").
+{ "main": string, "founders": [{ "src": string, "url": string }] }	
+Accepted formats for each logo are a relative path to a static file included in the UI (reachable at:"client/public/assets/logos/" ) or a full HTTPS URL pointing to an external logo (example: "https://example.com/logo.svg").
 
 Both local and external logos are supported.
-ui.logos.main	Main logo displayed in the header.	string	Example:["/assets/logos/main.svg"]
+ui.logos.main	Main logo displayed in the header.	string	
+Example: "/assets/logos/main.svg"
 
 Prefer .svg for scalability.
 
@@ -81,8 +87,8 @@ The same rule applies to any other logo referenced in the config file.
 
 
 
-Navigation Bar and About Page
-This table's section includes configuration options for customizing the navigation bar and the about page. It allows deployers to add external links, manage visibility of informational pages, display institutional logos and funding acknowledgements.
+Navigation, About Page and Download Settings
+This section includes configuration options for customizing the navigation bar, the About page, and the availability of download functionality. It allows deployers to add external links, manage the visibility of informational pages, display institutional logos and funding acknowledgements, and enable or disable downloads from the results interface.
 
 Config Field	Description	Valid Formatting	Notes
 ui.showExternalNavBarLink	Toggles the visibility of an external navigation link in the navbar.	boolean (true / false)	If true, the link defined in ui.externalNavBarLink will be displayed.
@@ -98,13 +104,18 @@ ui.about.logos	List of logo file paths or URLs to display at the top of the “A
 
 Used only if showAboutPage: true
 ui.about.descriptions	Array of text blocks ( HTML) displayed in the “About” section. Allows paragraphs, bold text, or links.	array of strings (HTML allowed)	Used only if showAboutPage: true
-ui.about.fundingOrgs	Defines the Funding Organizations section displayed at the bottom of the About page. The title specifies the section heading, and logos is an array of logo file paths or URLs shown below it.	object with:
-{ "title": "Funding Organizations", "logos": ["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"] }	Used only if showAboutPage: true
-ui.about.fundingOrgs.title	The heading shown above the funding organization logos.	string	Example: "Funding Organizations"
-ui.about.fundingOrgs.logos	Array of file paths or URLs for the organization logos displayed below the title.	array of strings	Example:
-["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"]
+ui.about.fundingOrgs	Defines one or more funding organization sections displayed at the bottom of the About page. Each object contains a section title and an array of logo file paths or URLs.	array of objects with:
+[{ "title": string, "logos": string[] }]	Used only if showAboutPage: true
 
+ui.about.fundingOrgs[].title	The heading shown above the funding organization logos.	string	Example: "Funding Organizations"
+
+ui.about.fundingOrgs[].logos	Array of file paths or URLs for the organization logos displayed below the title.	array of strings	Example:
+["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"]
 Assets must be reachable by the frontend under client/public/assets/logos/
+
+ui.download.enabled	Toggles the availability of the download functionality in the results interface.	boolean (true / false)	When set to true, users can access the available download options from the results page.
+When set to false, the download controls are hidden.
+
 For more information about logo readability, please refer to this section.
 
 
@@ -120,8 +131,11 @@ Config Field	Description	Valid Formatting	Notes
 ui.showLogin	Toggles the visibility of the login functionality within the UI.
 When enabled, a login button appears and OIDC-based authentication is activated.	boolean (true / false)	If showLogin: true, another file needs to be filled out. See this section.
 ui.auth	Container for authentication configuration settings. Required whenui.showLogin is enabled.	object	
-ui.auth.providerType	Defines the type of authentication provider used by the Beacon Template UI.	string ("private" or "public")	When set to "private", the UI loads OIDC using both clientId and clientSecret (required).
-When set to "public", only clientId is used and any provided clientSecret is ignored (if provided).
+ui.auth.providerType	Defines the type of authentication provider used by the Beacon Template UI.	string ("private" or "public")
+When set to "private", the UI uses both the Client ID and Client Secret.
+When set to "public", only the Client ID is used and any provided Client Secret is ignored.
+The authentication credentials are not stored in config.json. Define REACT_APP_CLIENT_ID in client/.env. For private clients, also define REACT_APP_CLIENT_SECRET.
+
 ui.auth.oidc	Includes all parameters needed for initializing OIDC login.	object	Required when ui.showLogin is enabled.
 ui.auth.oidc.authority	URL of the OIDC provider.
 The UI uses this endpoint to initiate login, logout, and token requests.	HTTPS URL	Example:
@@ -152,9 +166,9 @@ ui.cookies.links.url	The destination URL opened when the link is clicked.	HTTPS 
 Note on Cookie Banner Customization:
 The cookie banner is optional and can be enabled or disabled through ui.cookies.enabled.
 
-If only one hyperlink is needed, include a single object inside ui.cookies.links. If no hyperlinks are needed, the links array can be removed or left empty.
+The links configured in ui.cookies.links are reused in two places: inside the cookie banner message and in the footer of the Beacon Template UI as a permanent reminder for users.
 
-The links defined in ui.cookies.links.label and ui.cookies.links.url are also reused in the footer of the Beacon Template UI as an additional reminder for users. This means the same privacy or legal links shown in the cookie banner will also remain accessible from the footer section.
+This allows privacy notices, cookie policies, or other legal links to remain accessible even after the banner has been dismissed.
 
 Once the user clicks the acknowledgement button, the banner remains hidden for 6 months before appearing again.
 
@@ -188,7 +202,7 @@ https://<your-beacon-api>/filtering_terms)
 Example:
 "Cancer": [{ "key": "Breast Cancer", "id": "NCIT:C4872", "type": "ontology" }]
 ui.commonFilters.filterLabels.id	The unique Beacon filtering term ID.	string	Mandatory, in compliance with the Beacon specification. The ID must match the corresponding filtering term identifier in the Beacon instance.
-ui.commonFilters.filterLabels.key	Optional	string	
+ui.commonFilters.filterLabels.key	Optional	string	Used to identify the filter within the UI configuration.
 ui.commonFilters.filterLabels.label	Optional	string	Represents the user-friendly display name of the filtering term shown in the UI.
 This value may differ from the technical id, which is used internally for Beacon queries.
 If no label is provided, the UI will fall back to displaying the id.
@@ -200,7 +214,7 @@ ui.commonFilters.filterLabels.scopes	Optional	Array of strings	This field can be
 ui.genomicAnnotations	Controls which genomic annotation categories are visible in the Genomic Annotations section.	object with:
 visibleGenomicCategories: array of strings	Used to show or hide predefined annotation categories within the UI.
 ui.genomicAnnotations.visibleGenomicCategories	Lists the annotation categories to be displayed.	array of strings	The only available categories are:
-"SNP Examples", "CNV Examples", "Protein Examples", and "Molecular Effect"
+"SNP Examples", "Genomic Variant Examples", "Protein Examples", and "Molecular Effect"
 
 The content inside each category is automatically populated from the UI.
 

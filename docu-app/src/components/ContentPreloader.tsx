@@ -20,7 +20,7 @@ import RiToolsConversionVCFBFFText from "../content/ri_tools_conversion_vcfbff.t
 import RiToolsConversionPhenopacketsBFFText from "../content/ri_tools_conversion_phenopacketsBFF.txt";
 import RiToolsCommonErrorsText from "../content/ri_tools_common_errors.txt";
 import RiToolsTestDataText from "../content/ri_tools_test_data.txt";
-import RiToolsUpdatingRecordsText from "../content/ri_tools_updating_records.txt";
+import RiToolsManagingDataText from "../content/ri_tools_managing_data.txt";
 
 // Beacon Verifier
 import BeaconVerifierIntroductionText from "../content/verifier_introduction.txt";
@@ -131,9 +131,9 @@ const ContentPreloader = () => {
   );
 
   useRegisterTextContent(
-    "/ri-tools-updating-records",
-    RiToolsUpdatingRecordsText,
-    "Updating Records"
+    "/ri-tools-managing-data",
+    RiToolsManagingDataText,
+    "Managing Data"
   );
 
   // Beacon Verifier

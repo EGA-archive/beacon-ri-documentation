@@ -204,9 +204,10 @@ const Models: React.FC<ModelsProps> = ({ searchTerm }) => {
           </ul>
 
           <p>
-            In order to enable or disable a model, you need to edit the
-            <i>conf/models/models_conf.yml</i> file and set their enabled values
-            to True or False as preferred, like shown below:
+            In order to enable or disable a model, you need to edit the{" "}
+            <span className="custom-code">conf/models/models_conf.yml</span>{" "}
+            file and set their enabled values to True or False as preferred,
+            like shown below:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -245,10 +246,9 @@ EUCAIM:
 
           <p>
             Inside the <strong>conf</strong> folder, you must add the{" "}
-            <em>YAML files</em>
-            for each entity of the model inside a folder called{" "}
-            <strong>entry_types</strong>. The name of each file must match the
-            <em>id of the entity</em> (for example,{" "}
+            <em>YAML files</em> for each entity of the model inside a folder
+            called <strong>entry_types</strong>. The name of each file must
+            match the <em>id of the entity</em> (for example,{" "}
             <strong>analysis.yml</strong> will expose <em>analysis</em> as the
             main key).
           </p>

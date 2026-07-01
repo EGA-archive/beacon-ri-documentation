@@ -64,7 +64,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       return;
     }
 
-    if (path.startsWith("/verifier-")) {
+    if (path === "/verifier" || path.startsWith("/verifier-")) {
       setActiveMenu("Beacon Verifier");
       return;
     }
@@ -158,7 +158,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
         path = "/ri-tools-conversion-from-phenopackets-to-bff";
       if (subItem === "Common Errors") path = "/ri-tools-common-errors";
       if (subItem === "Test Data") path = "/ri-tools-test-data";
-      if (subItem === "Updating Records") path = "/ri-tools-updating-records";
+      if (subItem === "Managing Data") path = "/ri-tools-managing-data";
     }
 
     if (parentMenu === "Beacon Verifier") {
@@ -317,8 +317,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                           expectedPath = "/ri-tools-common-errors";
                         if (subItem === "Test Data")
                           expectedPath = "/ri-tools-test-data";
-                        if (subItem === "Updating Records")
-                          expectedPath = "/ri-tools-updating-records";
+                        if (subItem === "Managing Data")
+                          expectedPath = "/ri-tools-managing-data";
                       }
 
                       if (menuItem === "Beacon Template UI") {

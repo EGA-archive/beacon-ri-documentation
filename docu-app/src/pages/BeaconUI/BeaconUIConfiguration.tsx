@@ -155,14 +155,15 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             Core Beacon and Configuration Setting
           </h2>
           <p>
-            This table defined the fundamental connection and data settings
+            This table defines the fundamental connection and data settings
             required for the Beacon Template UI to interact with a Beacon
             instance. It specifies whether the deployment targets a single
             Beacon or a Beacon network, the API endpoint URL, supported genome
-            assemblies, and recognized variation types.
+            assemblies, recognized variation types, and whether genomic query
+            coordinates are interpreted as 0-based or 1-based.
             <br />
-            These parameters are fundamental to ensure proper communication with
-            the backend and alignment with the Beacon’s configuration.
+            These parameters ensure proper communication with the backend and
+            keep the UI’s query behaviour aligned with the Beacon configuration.
             <table className="UITable">
               <thead>
                 <tr>
@@ -255,6 +256,29 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <td>
                     The set should reflect the variant types recognized by your
                     Beacon implementation.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>queryCoordinatesAre0Based</code>
+                  </td>
+                  <td>
+                    Defines whether genomic coordinates entered in the UI are
+                    interpreted as 0-based or 1-based.
+                  </td>
+                  <td>
+                    <code>true</code> or <code>false</code>
+                  </td>
+                  <td>
+                    When set to <code>true</code>, genomic query coordinates are
+                    interpreted as 0-based.
+                    <br />
+                    When set to <code>false</code>, coordinates are interpreted
+                    as 1-based and converted by the UI before being sent to the
+                    Beacon API.
+                    <br />
+                    The default value is <code>true</code>.
+                    <br />
                   </td>
                 </tr>
               </tbody>
@@ -372,7 +396,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <td>
                   object:
                   <br /> <br />
-                  <code>{`{ "main": string, "founders": string[] }`}</code>
+                  <code>
+                    {
+                      '{ "main": string, "founders": [{ "src": string, "url": string }] }'
+                    }
+                  </code>
                 </td>
                 <td>
                   Accepted formats for each logo are a relative path to a static
@@ -391,8 +419,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <td>Main logo displayed in the header.</td>
                 <td>string</td>
                 <td>
-                  Example:
-                  <code>["/assets/logos/main.svg"]</code>
+                  Example: <code>"/assets/logos/main.svg"</code>
                   <br /> <br />
                   Prefer .svg for scalability.
                 </td>
@@ -495,14 +522,16 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </div>
           <br />
           <br />
-          <h2 id="navigation-bar-and-about-page">
-            Navigation Bar and About Page
+          <h2 id="navigation-about-and-download-settings">
+            Navigation, About Page and Download Settings
           </h2>
           <p>
-            This table's section includes configuration options for customizing
-            the navigation bar and the about page. It allows deployers to add
-            external links, manage visibility of informational pages, display
-            institutional logos and funding acknowledgements.
+            This section includes configuration options for customizing the
+            navigation bar, the About page, and the availability of download
+            functionality. It allows deployers to add external links, manage the
+            visibility of informational pages, display institutional logos and
+            funding acknowledgements, and enable or disable downloads from the
+            results interface.
           </p>
           <table className="UITable">
             <thead>
@@ -625,17 +654,14 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.about.fundingOrgs</code>
                 </td>
                 <td>
-                  Defines the Funding Organizations section displayed at the
-                  bottom of the About page. The title specifies the section
-                  heading, and logos is an array of logo file paths or URLs
-                  shown below it.
+                  Defines one or more funding organization sections displayed at
+                  the bottom of the About page. Each object contains a section
+                  title and an array of logo file paths or URLs.
                 </td>
                 <td>
-                  object with:
+                  array of objects with:
                   <br />
-                  <code>
-                    {`{ "title": "Funding Organizations", "logos": ["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"] }`}
-                  </code>
+                  <code>{'[{ "title": string, "logos": string[] }]'}</code>
                 </td>
                 <td>
                   Used only if <code>showAboutPage</code>: <code>true</code>
@@ -644,7 +670,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
 
               <tr>
                 <td>
-                  <code>ui.about.fundingOrgs.title</code>
+                  <code>ui.about.fundingOrgs[].title</code>
                 </td>
                 <td>The heading shown above the funding organization logos.</td>
                 <td>string</td>
@@ -655,7 +681,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
 
               <tr>
                 <td>
-                  <code>ui.about.fundingOrgs.logos</code>
+                  <code>ui.about.fundingOrgs[].logos</code>
                 </td>
                 <td>
                   Array of file paths or URLs for the organization logos
@@ -672,6 +698,25 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <br />
                   Assets must be reachable by the frontend under{" "}
                   <code>client/public/assets/logos/</code>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <code>ui.download.enabled</code>
+                </td>
+                <td>
+                  Toggles the availability of the download functionality in the
+                  results interface.
+                </td>
+                <td>
+                  boolean (<code>true</code> / <code>false</code>)
+                </td>
+                <td>
+                  When set to <code>true</code>, users can access the available
+                  download options from the results page.
+                  <br />
+                  When set to <code>false</code>, the download controls are
+                  hidden.
                 </td>
               </tr>
             </tbody>
@@ -775,13 +820,17 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   string (<code>"private"</code> or <code>"public"</code>)
                 </td>
                 <td>
-                  When set to <code>"private"</code>, the UI loads OIDC using
-                  both <code>clientId</code> and <code>clientSecret</code>{" "}
-                  (required).
+                  When set to <code>"private"</code>, the UI uses both the
+                  Client ID and Client Secret.
                   <br />
-                  When set to <code>"public"</code>, only <code>clientId</code>{" "}
-                  is used and any provided <code>clientSecret</code> is ignored
-                  (if provided).
+                  When set to <code>"public"</code>, only the Client ID is used
+                  and any provided Client Secret is ignored.
+                  <br />
+                  The authentication credentials are not stored in{" "}
+                  <code>config.json</code>. Define{" "}
+                  <code>REACT_APP_CLIENT_ID</code> in <code>client/.env</code>.
+                  For private clients, also define{" "}
+                  <code>REACT_APP_CLIENT_SECRET</code>.
                 </td>
               </tr>
 
@@ -1206,7 +1255,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 </td>
                 <td>Optional</td>
                 <td>string</td>
-                <td></td>
+                <td>
+                  Used to identify the filter within the UI configuration.
+                </td>
               </tr>
 
               <tr>
@@ -1288,9 +1339,10 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <td>
                   The only available categories are:
                   <br />
-                  <code>"SNP Examples"</code>, <code>"CNV Examples"</code>,{" "}
+                  <code>"SNP Examples"</code>,{" "}
+                  <code>"Genomic Variant Examples"</code>,{" "}
                   <code>"Protein Examples"</code>, and{" "}
-                  <code>"Molecular Effect"</code>
+                  <code>"Molecular Effect"</code>.
                   <br />
                   <br />
                   The content inside each category is automatically populated
