@@ -1,12 +1,12 @@
 FROM node:22.19.0
 
-# set working directory
-WORKDIR ./docu-app
+WORKDIR /docu-app
 
-# add _/usr/src/app/node_modules/.bin_ to $PATH
-ENV PATH /docu-app/node_modules/.bin:$PATH
+ENV PATH="/docu-app/node_modules/.bin:$PATH"
 
-# install app dependencies
-COPY . .
+COPY package.json .
+COPY yarn.lock .
+COPY public ./public
+COPY src ./src
 
 RUN yarn install --production
