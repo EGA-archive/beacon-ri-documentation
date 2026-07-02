@@ -2,7 +2,7 @@ FROM node:22.19.0
 
 WORKDIR /docu-app
 
-ENV PATH="/docu-app/node_modules/.bin:$PATH"
+ENV PATH=/docu-app/node_modules/.bin:$PATH
 
 COPY package.json .
 COPY yarn.lock .
