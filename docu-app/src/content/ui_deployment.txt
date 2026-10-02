@@ -28,7 +28,7 @@ This means you’re in the correct directory and ready to start editing the conf
 3. Edit and Customize the Beacon Template UI
 There is an extended section that you will find by navigating to the Configuration File paragraph.
 Before proceeding make sure that the following files are edited:
-config.json (location: client/src/config/config.json)
+config.json (location: client/public/config/config.json)
 client/public/assets/logos is populated with the correct .svg(s)
 Remember that you can also use relative URLs if your images are hosted externally.
 Only if the login is enabled:
@@ -54,11 +54,11 @@ docker compose up -d --build
 
 
 Updating to a new Beacon Template UI Version
-The configuration file (client/src/config/config.json) is designed to be reusable across Beacon Template UI releases.
+The configuration file (client/public/config/config.json) is designed to be reusable across Beacon Template UI releases.
 When a new version is published, you do not need to recreate your configuration from scratch.
 To update to a newer version:
 Keep your existing configuration files
-client/src/config/config.json
+client/public/config/config.json
 client/.env (if login is enabled)
 Update the Beacon Template UI code
 Either pull the latest changes from the repository (for example with git fetch/ git pull), or clone the new version and copy your existing config.json and .env into it.

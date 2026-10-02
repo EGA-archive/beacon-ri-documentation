@@ -85,24 +85,24 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           <p>
             The <span className="custom-code">config.json</span> file is the{" "}
             <b>core customization layer</b> of the Beacon Template UI, allowing
-            deployers to control both UI <b>appearance</b> and functional
-            structure and adapt to a specific Beacon deployment. It defines
-            information that cannot be automatically extracted from the Beacon
-            instance, such as UI colors, available pages, and custom links, as
-            well as data format and standards.
+            deployers to control both UI <b>appearance</b> and{" "}
+            <b>functional structure</b> and <b>adapt</b> to a specific Beacon
+            deployment. It defines information that cannot be automatically
+            extracted from the Beacon instance, such as UI colors, available
+            pages, and custom links, as well as data format and standards.
             <br /> <br />
             Location:
             <ul>
               <li>
                 {" "}
                 <span className="custom-code">
-                  client/src/config/config.json
+                  client/public/config/config.json
                 </span>
               </li>
               <li>
                 Default example version:{" "}
                 <span className="custom-code">
-                  client/src/config/config.example.json
+                  client/config/config.example.json
                 </span>
               </li>
             </ul>
@@ -118,199 +118,64 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </h2>
           <p>
             The configuration file can be edited directly in{" "}
-            <span className="custom-code">client/src/config/config.json</span>.
-            After making changes, save the file and build or restart the
-            application to apply updates.
+            <span className="custom-code">
+              client/public/config/config.json
+            </span>
+            . Changes are loaded at runtime, allowing the application to be
+            configured without rebuilding the frontend.
             <br /> <br />
-            All changes are applied at runtime, meaning no additional backend
-            setup is required. It is recommended to:
+            Before editing the configuration file, it is recommended to:
             <ul>
+              <li>keep a backup or versioned copy of the configuration file</li>
               <li>
-                keep a backup or versioned copy of the configuration file before
-                editing.
+                ensure that URLs and asset paths are accessible in the deployed
+                environment
               </li>
               <li>
-                ensure URLs and asset paths are accessible in the deployed
-                environment.
+                make sure that the configuration follows the expected structure
+                and uses valid values
               </li>
             </ul>
-            <b>
-              {" "}
-              The configurable fields in the config file are as given below in
-              the Configuration Table
-            </b>{" "}
-            (please see the{" "}
-            <span className="custom-code">config.example.json</span> for default
-            examples):
+            The available configuration fields are described in the{" "}
+            <b>Configuration Table</b> below. See{" "}
+            <span className="custom-code">config.example.json</span> for a
+            complete example with default configuration values.
+          </p>
+          <h2 id="configuration-validation">Configuration Validation</h2>
+          <p>
+            Before the Beacon Template UI starts, the runtime{" "}
+            <b>configuration</b> is <b>validated</b> against a predefined{" "}
+            <b>validation schema</b>. The schema checks that configuration
+            fields use the expected structure and data types, and that required
+            or conditionally required fields are provided. For example, some
+            fields are required only when the corresponding feature is enabled.
+            If the configuration is valid, the application starts using the
+            validated configuration. If validation fails, the application does
+            not start normally, and an error message identifying the
+            configuration problem is displayed in the browser console.
           </p>
           <h2 id="configuration-table-overview">
             Configuration Table Overview
           </h2>
           <p>
-            Below each table, you’ll find a UI reference map that visually
-            illustrates the interface, helping you configure your own Beacon
-            Template UI correctly.
+            The configuration options are grouped into sections based on the
+            part of the Beacon Template UI they control. Where relevant, UI
+            reference images are provided below the tables to show where the
+            configured options appear in the interface.
           </p>
           <h2 id="core-beacon-and-configuration-setting">
-            Core Beacon and Configuration Setting
+            Core Beacon and Configuration Settings
           </h2>
           <p>
-            This table defines the fundamental connection and data settings
-            required for the Beacon Template UI to interact with a Beacon
-            instance. It specifies whether the deployment targets a single
-            Beacon or a Beacon network, the API endpoint URL, supported genome
-            assemblies, recognized variation types, and whether genomic query
-            coordinates are interpreted as 0-based or 1-based.
+            This table defines the main connection and data settings used by the
+            Beacon Template UI. It specifies whether the deployment targets a
+            Single Beacon or a Beacon Network, the Beacon API endpoint,
+            supported genome assemblies, variation types, and how genomic query
+            coordinates are interpreted.
             <br />
-            These parameters ensure proper communication with the backend and
-            keep the UI’s query behaviour aligned with the Beacon configuration.
-            <table className="UITable">
-              <thead>
-                <tr>
-                  <th>Config Field</th>
-                  <th>Description</th>
-                  <th>Valid Formatting</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <code>beaconType</code>
-                  </td>
-                  <td>
-                    Defines whether the deployment queries a network of beacons
-                    or a single beacon.
-                  </td>
-                  <td>
-                    <code>"networkBeacon"</code> or <code>"singleBeacon"</code>
-                  </td>
-                  <td>
-                    Determines whether the UI operates in network or
-                    single-beacon mode.
-                    <br />
-                    Find a detailed comparison between Single Beacon and Beacon
-                    Network deployments, in{" "}
-                    <a
-                      href="/ui-configuration-file#single-beacon-and-beacon-network:-configuration-and-UI-differences"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      this paragraph
-                    </a>
-                    .
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <code>apiUrl</code>
-                  </td>
-                  <td>The URL used to query the Beacon v2 API.</td>
-                  <td>string</td>
-                  <td>
-                    Only valid URLs are accepted.
-                    <br />
-                    Example:
-                    <br />
-                    <code>
-                      "apiUrl": "https://beacon-spain.ega-archive.org/api"
-                    </code>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <code>assemblyId</code>
-                  </td>
-                  <td>
-                    Allowed reference genome assemblies exposed in all genomic
-                    query types.
-                  </td>
-                  <td>array of strings</td>
-                  <td>
-                    This field is free text, but values must match valid genome
-                    assembly identifiers for the UI and Beacon queries to work
-                    correctly.
-                    <br />
-                    GRC assemblies are expected. Other identifiers are supported
-                    only if they map unambiguously to a GRC assembly.
-                    <br />
-                    Example:
-                    <br />
-                    <code>"assemblyId": ["GRCh38", "GRCh37", "NCBI36"]</code>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <code>variationType</code>
-                  </td>
-                  <td>
-                    Defines the list of variant categories supported by the UI.
-                  </td>
-                  <td>
-                    array of objects with:{" "}
-                    <code>{"{ jsonName: string, displayName: string }"}</code>
-                  </td>
-                  <td>
-                    The set should reflect the variant types recognized by your
-                    Beacon implementation.
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <code>queryCoordinatesAre0Based</code>
-                  </td>
-                  <td>
-                    Defines whether genomic coordinates entered in the UI are
-                    interpreted as 0-based or 1-based.
-                  </td>
-                  <td>
-                    <code>true</code> or <code>false</code>
-                  </td>
-                  <td>
-                    When set to <code>true</code>, genomic query coordinates are
-                    interpreted as 0-based.
-                    <br />
-                    When set to <code>false</code>, coordinates are interpreted
-                    as 1-based and converted by the UI before being sent to the
-                    Beacon API.
-                    <br />
-                    The default value is <code>true</code>.
-                    <br />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <img
-              src={beacon_type}
-              className="ui-beacon-images"
-              alt="screenshot from Beacon UI beacon type"
-            />
-            <img
-              src={assembly_id}
-              className="ui-beacon-images"
-              alt="screenshot from Beacon UI showing assembly id"
-            />
-            <img
-              src={variation_type}
-              className="ui-beacon-images"
-              alt="screenshot from Beacon UI showing variation type"
-            />
-          </p>
-          <br />
-          <br />
-          <h2 id="styling-and-branding-settings">
-            Styling and Branding Settings
-          </h2>
-          <p>
-            This table defines the visual and branding customization of the
-            Beacon Template UI. It includes options for setting the application
-            title, defining brand color palettes, and configuring logos
-            displayed in the header in the Homepage. <br />
-            These settings ensure a cohesive look and feel aligned with the
-            deployer’s institutional or project identity.{" "}
+            <br />
+            Some genomic settings are optional and are mainly relevant when
+            genomic queries are supported by the connected Beacon.
           </p>
           <table className="UITable">
             <thead>
@@ -321,173 +186,366 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <th>Notes</th>
               </tr>
             </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <code>beaconType</code>
+                </td>
+                <td>
+                  Defines whether the deployment connects to a Single Beacon or
+                  a Beacon Network.
+                </td>
+                <td>
+                  <code>"singleBeacon"</code> or <code>"networkBeacon"</code>
+                </td>
+                <td>
+                  Required.
+                  <br />
+                  <br />
+                  Determines how the UI displays Beacon information and results.
+                  <br />
+                  <br />
+                  Find a detailed comparison between Single Beacon and Beacon
+                  Network deployments in{" "}
+                  {/* Note to self: please check this link, we might add a new section */}
+                  <a
+                    href="/ui-configuration-file#single-beacon-and-beacon-network:-configuration-and-UI-differences"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    this section
+                  </a>
+                  .
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>apiUrl</code>
+                </td>
+                <td>The URL used to query the Beacon v2 API.</td>
+                <td>Valid HTTP or HTTPS URL</td>
+                <td>
+                  Required.
+                  <br />
+                  <br />
+                  Example:
+                  <br />
+                  <br />
+                  <code>
+                    "apiUrl": "https://beacon-spain.ega-archive.org/api"
+                  </code>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>assemblyId</code>
+                </td>
+                <td>
+                  Defines the reference genome assemblies available for genomic
+                  queries.
+                </td>
+                <td>Array containing at least one non-empty string</td>
+                <td>
+                  Optional. Defaults to <code>["GRCh38", "GRCh37"]</code>.
+                  <br />
+                  <br />
+                  This setting is mainly relevant for genomic queries and
+                  genomic annotation examples.
+                  <br />
+                  <br />
+                  Values should match the genome assemblies supported by the
+                  connected Beacon.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>variationType</code>
+                </td>
+                <td>
+                  Defines the variation types available for genomic queries.
+                </td>
+                <td>Array containing at least one variation-type object</td>
+                <td>
+                  Optional and mainly relevant when genomic variants are
+                  supported.
+                  <br />
+                  <br />
+                  Each object must contain <code>jsonName</code>,{" "}
+                  <code>displayName</code>, or both.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>variationType[].jsonName</code>
+                </td>
+                <td>
+                  Defines the value used internally for the variation type.
+                </td>
+                <td>String containing only letters, numbers, or underscores</td>
+                <td>
+                  Optional, but each variation-type object must contain{" "}
+                  <code>jsonName</code>, <code>displayName</code>, or both.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>variationType[].displayName</code>
+                </td>
+                <td>
+                  Defines the user-friendly variation type name displayed in the
+                  UI.
+                </td>
+                <td>Non-empty string</td>
+                <td>
+                  Optional, but each variation-type object must contain{" "}
+                  <code>jsonName</code>, <code>displayName</code>, or both.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>queryCoordinatesAre0Based</code>
+                </td>
+                <td>
+                  Defines whether genomic coordinates entered in the UI are
+                  interpreted as 0-based or 1-based.
+                </td>
+                <td>
+                  <code>true</code> or <code>false</code>
+                </td>
+                <td>
+                  Optional. Defaults to <code>true</code>.
+                  <br />
+                  <br />
+                  When set to <code>true</code>, genomic query coordinates are
+                  interpreted as 0-based.
+                  <br />
+                  <br />
+                  When set to <code>false</code>, coordinates are interpreted as
+                  1-based and converted by the UI before being sent to the
+                  Beacon API.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <img
+            src={beacon_type}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI beacon type"
+          />
+          <img
+            src={assembly_id}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI showing assembly id"
+          />
+          <img
+            src={variation_type}
+            className="ui-beacon-images"
+            alt="screenshot from Beacon UI showing variation type"
+          />
+          <br />
+          <br />
+          <h2 id="styling-and-branding-settings">
+            Styling and Branding Settings
+          </h2>
+          <p>
+            This table defines the visual and branding customization of the
+            Beacon Template UI. It includes options for setting the application
+            title, defining the brand color palette, and configuring the logos
+            displayed in the header and on the Home page.
+            <br />
+            <br />
+            These settings allow the interface to be adapted to the deployer’s
+            institutional or project identity.
+          </p>
+          <table className="UITable">
+            <thead>
+              <tr>
+                <th>Config Field</th>
+                <th>Description</th>
+                <th>Valid Formatting</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+
             <tbody>
               <tr>
                 <td>
                   <code>ui.title</code>
                 </td>
-                <td>Display title for the application.</td>
-                <td>string</td>
-                <td></td>
+                <td>Defines the title displayed for the application.</td>
+                <td>String between 3 and 100 characters</td>
+                <td>Required.</td>
               </tr>
 
               <tr>
                 <td>
                   <code>ui.favicon</code>
                 </td>
-                <td>Path to the favicon displayed in the browser tab.</td>
-                <td>string</td>
+                <td>Defines the favicon displayed in the browser tab.</td>
+                <td>Relative path or valid HTTP/HTTPS URL</td>
                 <td>
-                  The two accepted formats are:
-                  <ul>
-                    <li>
-                      A relative path to a static file included in the UI,
-                      placed at:
-                      <code>"client/public/assets/logos/favicon.ico"</code>{" "}
-                    </li>
-                    <li>
-                      A full URL to an external favicon:
-                      "https://example.com/my-favicon.ico"{" "}
-                    </li>
-                  </ul>
-                  If this field is left empty, the favicon will not render.
+                  Optional.
+                  <br />
+                  <br />A local favicon can be stored in{" "}
+                  <code>client/public/assets/logos/</code> and referenced using
+                  its relative path.
+                  <br />
+                  <br />
+                  Example: <code>"/assets/logos/favicon.ico"</code>
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <code>ui.colors</code>
                 </td>
                 <td>
-                  Brand color palette for theme customization. Used across
-                  buttons, headers, hovers, and accents, etc.
+                  Defines the brand color palette used across the interface.
                 </td>
                 <td>
-                  object with required hex strings: <br />
-                  <br />
-                  <code>{`{ "primary": "#RRGGBB", "darkPrimary": "#RRGGBB", "secondary": "#RRGGBB" }`}</code>
+                  Object containing <code>primary</code>,{" "}
+                  <code>darkPrimary</code> and <code>secondary</code> colors
                 </td>
                 <td>
-                  Color usage guidelines (Beacon team suggestion):
-                  <ul>
-                    <li>
-                      <code>primary</code>: a light or neutral color used as the
-                      main theme color.
-                    </li>
-                    <li>
-                      {" "}
-                      <code>darkPrimary</code>: a darker variant of the primary
-                      color.
-                    </li>
-                    <li>
-                      {" "}
-                      <code>secondary</code>: a contrasting color used for
-                      accents and emphasis.
-                    </li>
-                  </ul>
+                  Optional. If omitted, the default color palette is used.
                 </td>
               </tr>
+
+              <tr>
+                <td>
+                  <code>ui.colors.primary</code>
+                </td>
+                <td>Defines the main theme color.</td>
+                <td>Six-digit hexadecimal color</td>
+                <td>
+                  Optional. Defaults to <code>#3176B1</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.colors.darkPrimary</code>
+                </td>
+                <td>
+                  Defines the darker primary color used for elements requiring
+                  stronger visual emphasis.
+                </td>
+                <td>Six-digit hexadecimal color</td>
+                <td>
+                  Optional. Defaults to <code>#173D5D</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.colors.secondary</code>
+                </td>
+                <td>Defines the secondary accent color.</td>
+                <td>Six-digit hexadecimal color</td>
+                <td>
+                  Optional. Defaults to <code>#FFE4D4</code>.
+                </td>
+              </tr>
+
               <tr>
                 <td>
                   <code>ui.logos</code>
                 </td>
                 <td>
-                  Paths/URLs for logos used in header and “founders” section.
+                  Contains the logo configuration for the header and Founders
+                  section.
                 </td>
+                <td>Object</td>
                 <td>
-                  object:
-                  <br /> <br />
-                  <code>
-                    {
-                      '{ "main": string, "founders": [{ "src": string, "url": string }] }'
-                    }
-                  </code>
-                </td>
-                <td>
-                  Accepted formats for each logo are a relative path to a static
-                  file included in the UI (reachable at:
-                  <code>"client/public/assets/logos/"</code> ) or a full HTTPS
-                  URL pointing to an external logo{" "}
-                  <code>(example: "https://example.com/logo.svg").</code>
-                  <br /> <br />
-                  Both local and external logos are supported.
+                  Required. The object can be empty if no logos are configured.
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <code>ui.logos.main</code>
                 </td>
-                <td>Main logo displayed in the header.</td>
-                <td>string</td>
+                <td>Defines the main logo displayed in the header.</td>
+                <td>Relative path or valid HTTP/HTTPS URL</td>
                 <td>
+                  Optional.
+                  <br />
+                  <br />
                   Example: <code>"/assets/logos/main.svg"</code>
-                  <br /> <br />
-                  Prefer .svg for scalability.
+                  <br />
+                  <br />
+                  SVG is recommended for scalability.
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <code>ui.logos.founders</code>
                 </td>
                 <td>
-                  Logos displayed in the “Founders” section, on the top left
-                  corner of the Home page. Each logo can optionally link to the
-                  founder’s website.
+                  Defines the logos displayed in the Founders section on the
+                  Home page.
                 </td>
-                <td>array of objects</td>
+                <td>Array of founder-logo objects</td>
                 <td>
-                  Example:
-                  <code>
-                    {`[
-  { "src": "/assets/logos/founder1.svg", "url": "https://elixir-europe.org/" },
-  { "src": "/assets/logos/founder2.svg", "url": "https://www.crg.eu/" }
-]`}
-                  </code>
-                  <br />
-                  <br />
-                  Each object contains:
-                  <br />
-                  <code>src</code> – path to the logo file
-                  <br />
-                  <code>url</code> – optional link opened when the logo is
-                  clicked
+                  Optional. A maximum of 3 founder logos can be configured. An
+                  empty array is allowed.
                 </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.logos.founders[].src</code>
+                </td>
+                <td>Defines the image used for a founder logo.</td>
+                <td>Relative path or valid HTTP/HTTPS URL</td>
+                <td>Required when a founder-logo object is added.</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.logos.founders[].url</code>
+                </td>
+                <td>
+                  Defines the optional external link opened when the founder
+                  logo is clicked.
+                </td>
+                <td>Valid HTTP or HTTPS URL</td>
+                <td>Optional.</td>
               </tr>
             </tbody>
           </table>
-          <p>
-            <p className="note">
-              <img
-                className="note-symbol"
-                src="/note-symbol.png"
-                alt="Note symbol"
-              />
-              <div>
-                <b>Note about logos:</b>
-                <br />
-                Accepted formats for each logo are a <b>relative path</b> to a
-                <b>static file</b> included in the UI (reachable at{" "}
-                <span className="custom-code">client/public/assets/logos/</span>
-                ) or a <b>full HTTPS URL</b> pointing to an external logo
-                (example:
-                <span className="custom-code">
-                  https://example.com/logo.svg
-                </span>
-                ). <br />
-                This dual approach was chosen to support the flexible nature of
-                the UI, allowing deployments to use either bundled static assets
-                or externally hosted branding resources. <br />
-                If you prefer to keep your{" "}
-                <span className="custom-code">config.json</span> unchanged,
-                place your logo files inside{" "}
-                <span className="custom-code">client/public/assets/logos</span>{" "}
-                and simply rename them to match the filenames already defined in
-                the configuration. This ensures the UI loads your custom
-                branding without requiring configuration edits. <br />
-                The same rule applies to any other logo referenced in the config
-                file.
-              </div>
-            </p>
-          </p>
+          <div className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+
+            <div>
+              <b>Note about logos:</b>
+              <br />
+              Local logo files should be placed in{" "}
+              <span className="custom-code">client/public/assets/logos/</span>.
+              <br />
+              <br />
+              If you prefer to keep your{" "}
+              <span className="custom-code">config.json</span> unchanged, you
+              can replace the existing logo files with your own while keeping
+              the filenames referenced in the configuration.
+              <br />
+              <br />
+              Alternatively, logo fields can reference an external HTTP or HTTPS
+              URL.
+            </div>
+          </div>
           <img
             src={ui_title}
             className="ui-beacon-images"
@@ -522,16 +580,14 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </div>
           <br />
           <br />
-          <h2 id="navigation-about-and-download-settings">
-            Navigation, About Page and Download Settings
+          <h2 id="navigation-about-and-contact-settings">
+            Navigation, About and Contact Settings
           </h2>
           <p>
-            This section includes configuration options for customizing the
-            navigation bar, the About page, and the availability of download
-            functionality. It allows deployers to add external links, manage the
-            visibility of informational pages, display institutional logos and
-            funding acknowledgements, and enable or disable downloads from the
-            results interface.
+            This section defines configuration options for the navigation bar,
+            About page, and Contact page. It allows deployers to add external
+            navigation links, configure informational content, and provide a
+            contact option for users.
           </p>
           <table className="UITable">
             <thead>
@@ -542,25 +598,21 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <th>Notes</th>
               </tr>
             </thead>
+
             <tbody>
               <tr>
                 <td>
                   <code>ui.showExternalNavBarLink</code>
                 </td>
                 <td>
-                  Toggles the visibility of an external navigation link in the
-                  navbar.
+                  Toggles the visibility of external links in the navigation
+                  bar.
                 </td>
                 <td>
                   boolean (<code>true</code> / <code>false</code>)
                 </td>
                 <td>
-                  If <code>true</code>, the link defined in{" "}
-                  <code>ui.externalNavBarLink</code> will be displayed.
-                  <br />
-                  <br />
-                  Ideal for linking a related Beacon instance or complementary
-                  product directly in the navigation bar.
+                  Optional. Defaults to <code>false</code>.
                 </td>
               </tr>
 
@@ -569,50 +621,70 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.externalNavBarLink</code>
                 </td>
                 <td>
-                  Defines external links shown in the navbar. Each object
-                  contains a visible label and target URL.
+                  Defines the external links displayed in the navigation bar.
                 </td>
-                <td>array of objects</td>
+                <td>Array containing 1 to 2 link objects</td>
                 <td>
-                  <code>{`[{ "label": "AF Browser", "url": "https://..." }]`}</code>
-                  <br />
-                  <br />
-                  Requires <code>showExternalNavBarLink</code>:{" "}
+                  Required when <code>ui.showExternalNavBarLink</code> is{" "}
                   <code>true</code>.
+                  <br />
+                  <br />
+                  It may remain configured when external navigation links are
+                  disabled.
                 </td>
               </tr>
 
               <tr>
                 <td>
-                  <code>ui.externalNavBarLink.label</code>
+                  <code>ui.externalNavBarLink[].label</code>
                 </td>
-                <td>The text displayed in the navbar for the external link.</td>
-                <td>string</td>
                 <td>
-                  Example: <code>"AF Browser"</code>.
+                  The text displayed in the navigation bar for the external
+                  link.
                 </td>
+                <td>Non-empty string, maximum 30 characters</td>
+                <td>Required for each external link.</td>
               </tr>
 
               <tr>
                 <td>
-                  <code>ui.externalNavBarLink.url</code>
+                  <code>ui.externalNavBarLink[].url</code>
                 </td>
-                <td>The destination URL opened when clicking the label.</td>
-                <td>string</td>
-                <td>Use absolute URLs</td>
+                <td>The destination URL opened when the link is clicked.</td>
+                <td>Valid HTTP or HTTPS URL</td>
+                <td>Required for each external link.</td>
               </tr>
 
               <tr>
                 <td>
                   <code>ui.showAboutPage</code>
                 </td>
-                <td>Toggles the visibility of the “About” page.</td>
+                <td>Toggles the visibility of the About page.</td>
                 <td>
                   boolean (<code>true</code> / <code>false</code>)
                 </td>
                 <td>
-                  If <code>true</code>, the content defined in{" "}
-                  <code>ui.about</code> will be displayed as a standalone page.
+                  Optional. Defaults to <code>false</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.about</code>
+                </td>
+                <td>Contains the content displayed on the About page.</td>
+                <td>Object</td>
+                <td>
+                  Required when <code>ui.showAboutPage</code> is{" "}
+                  <code>true</code>.
+                  <br />
+                  <br />
+                  When enabled, at least one of <code>logos</code>,{" "}
+                  <code>descriptions</code>, or <code>fundingOrgs</code> must be
+                  provided.
+                  <br />
+                  <br />
+                  It may remain configured when the About page is disabled.
                 </td>
               </tr>
 
@@ -621,17 +693,12 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.about.logos</code>
                 </td>
                 <td>
-                  List of logo file paths or URLs to display at the top of the
-                  “About” page.
+                  Defines the logos displayed at the top of the About page.
                 </td>
-                <td>array of strings</td>
+                <td>Array of relative paths or valid HTTP/HTTPS URLs</td>
                 <td>
-                  <code>
-                    {`["/assets/logos/about1.svg", "/assets/logos/about2.svg"]`}
-                  </code>
-                  <br />
-                  <br />
-                  Used only if <code>showAboutPage</code>: <code>true</code>
+                  Optional. If provided, the array must contain at least one
+                  logo.
                 </td>
               </tr>
 
@@ -640,13 +707,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.about.descriptions</code>
                 </td>
                 <td>
-                  Array of text blocks ( HTML) displayed in the “About” section.
-                  Allows paragraphs, bold text, or links.
+                  Defines the text blocks displayed on the About page. HTML can
+                  be used for formatting and links.
                 </td>
-                <td>array of strings (HTML allowed)</td>
-                <td>
-                  Used only if <code>showAboutPage</code>: <code>true</code>
-                </td>
+                <td>Array containing at least one non-empty string</td>
+                <td>Optional.</td>
               </tr>
 
               <tr>
@@ -654,17 +719,13 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.about.fundingOrgs</code>
                 </td>
                 <td>
-                  Defines one or more funding organization sections displayed at
-                  the bottom of the About page. Each object contains a section
-                  title and an array of logo file paths or URLs.
+                  Defines funding organization sections displayed on the About
+                  page.
                 </td>
+                <td>Array of funding-organization objects</td>
                 <td>
-                  array of objects with:
-                  <br />
-                  <code>{'[{ "title": string, "logos": string[] }]'}</code>
-                </td>
-                <td>
-                  Used only if <code>showAboutPage</code>: <code>true</code>
+                  Optional. If provided, the array must contain at least one
+                  object.
                 </td>
               </tr>
 
@@ -672,11 +733,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <td>
                   <code>ui.about.fundingOrgs[].title</code>
                 </td>
-                <td>The heading shown above the funding organization logos.</td>
-                <td>string</td>
                 <td>
-                  Example: <code>"Funding Organizations"</code>
+                  The heading displayed above the funding organization logos.
                 </td>
+                <td>Non-empty string</td>
+                <td>Required for each funding organization object.</td>
               </tr>
 
               <tr>
@@ -684,43 +745,50 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <code>ui.about.fundingOrgs[].logos</code>
                 </td>
                 <td>
-                  Array of file paths or URLs for the organization logos
-                  displayed below the title.
+                  Defines the logos displayed for the funding organization.
                 </td>
-                <td>array of strings</td>
                 <td>
-                  Example:
-                  <br />
-                  <code>
-                    {`["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"]`}
-                  </code>
-                  <br />
-                  <br />
-                  Assets must be reachable by the frontend under{" "}
-                  <code>client/public/assets/logos/</code>
+                  Array containing at least one relative path or valid
+                  HTTP/HTTPS URL
                 </td>
+                <td>Required for each funding organization object.</td>
               </tr>
+
               <tr>
                 <td>
-                  <code>ui.download.enabled</code>
+                  <code>ui.showContactPage</code>
                 </td>
-                <td>
-                  Toggles the availability of the download functionality in the
-                  results interface.
-                </td>
+                <td>Toggles the visibility of the Contact page.</td>
                 <td>
                   boolean (<code>true</code> / <code>false</code>)
                 </td>
                 <td>
-                  When set to <code>true</code>, users can access the available
-                  download options from the results page.
-                  <br />
-                  When set to <code>false</code>, the download controls are
-                  hidden.
+                  Optional. Defaults to <code>false</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.contactEmail</code>
+                </td>
+                <td>
+                  Defines the recipient email address used by the Contact form.
+                </td>
+                <td>Valid email address</td>
+                <td>
+                  Required when <code>ui.showContactPage</code> is{" "}
+                  <code>true</code>.
                 </td>
               </tr>
             </tbody>
           </table>
+          <img
+            src={ui_nav_about}
+            className="ui-beacon-images"
+            alt="Beacon Template UI navigation and About page configuration"
+          />
+          <br />
+          <br />
           <p>
             For more information about logo readability, please refer to{" "}
             <a
@@ -737,6 +805,210 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             />
           </p>
           <br /> <br />
+          <br />
+          <br />
+          <h2 id="download-settings">Download Settings</h2>
+          <p>
+            This section defines the download functionality available in the
+            Beacon Template UI. Deployers can enable or disable downloads and
+            configure the maximum number of records that can be downloaded at
+            once.
+          </p>
+          <table className="UITable">
+            <thead>
+              <tr>
+                <th>Config Field</th>
+                <th>Description</th>
+                <th>Valid Formatting</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <code>ui.download</code>
+                </td>
+                <td>Contains the configuration for download functionality.</td>
+                <td>Object</td>
+                <td>
+                  Optional. If omitted, the default download settings are used.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.download.enabled</code>
+                </td>
+                <td>Toggles the availability of download functionality.</td>
+                <td>
+                  boolean (<code>true</code> / <code>false</code>)
+                </td>
+                <td>
+                  Optional. Defaults to <code>true</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.download.maxRecordsDownloadableLimit</code>
+                </td>
+                <td>
+                  Defines the maximum number of records that can be downloaded
+                  at once.
+                </td>
+                <td>Whole number greater than or equal to 1</td>
+                <td>
+                  Optional. Defaults to <code>10000</code>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <br />
+          <h2 id="cookie-banner-settings">Cookie Banner Settings</h2>
+          <p>
+            This section contains configuration options for enabling and
+            customizing the cookie banner in the Beacon Template UI.
+            <br />
+            <br />
+            The cookie banner is provided through a lightweight reusable package
+            already included in the UI. Deployers can decide whether to show or
+            hide it and customize the displayed message, button text, and links.
+          </p>
+          <table className="UITable">
+            <thead>
+              <tr>
+                <th>Config Field</th>
+                <th>Description</th>
+                <th>Valid Formatting</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <code>ui.cookies</code>
+                </td>
+                <td>Contains the cookie consent configuration.</td>
+                <td>Object</td>
+                <td>
+                  Optional. If omitted, the default cookie configuration is
+                  used.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.enabled</code>
+                </td>
+                <td>Toggles the visibility of the cookie banner.</td>
+                <td>
+                  boolean (<code>true</code> / <code>false</code>)
+                </td>
+                <td>
+                  Optional. Defaults to <code>true</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.message</code>
+                </td>
+                <td>Defines the text displayed in the cookie banner.</td>
+                <td>Non-empty string</td>
+                <td>
+                  Optional. If omitted, the default message is used.
+                  <br />
+                  <br />
+                  Text matching labels defined in <code>
+                    ui.cookies.links
+                  </code>{" "}
+                  is automatically converted into clickable links.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.buttonText</code>
+                </td>
+                <td>
+                  Defines the text displayed inside the acknowledgement button.
+                </td>
+                <td>Non-empty string</td>
+                <td>
+                  Optional. Defaults to <code>"I understand"</code>.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links</code>
+                </td>
+                <td>
+                  Defines the links available from the cookie banner message.
+                </td>
+                <td>Array of link objects</td>
+                <td>
+                  Optional. Defaults to an empty array.
+                  <br />
+                  <br />
+                  Each label should match the text in the cookie message that
+                  should become clickable.
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links[].label</code>
+                </td>
+                <td>
+                  The text in the cookie message that becomes a hyperlink.
+                </td>
+                <td>Non-empty string</td>
+                <td>Required for each configured link.</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <code>ui.cookies.links[].url</code>
+                </td>
+                <td>The destination URL opened when the link is clicked.</td>
+                <td>Valid HTTP or HTTPS URL</td>
+                <td>Required for each configured link.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <b>Note on Cookie Banner Customization:</b>
+              <br />
+              The links configured in <code>ui.cookies.links</code> are reused
+              in two places: inside the cookie banner message and in the footer
+              of the Beacon Template UI.
+              <br />
+              <br />
+              This keeps privacy notices, cookie policies, or other legal links
+              accessible even after the banner has been dismissed.
+              <br />
+              <br />
+              Once the user clicks the acknowledgement button, the banner
+              remains hidden for 6 months before appearing again.
+            </div>
+          </div>
+          <img
+            src={ui_cookies_banner}
+            className="ui-beacon-images-big"
+            alt="screenshot from Beacon UI showing cookie banner"
+          />
+          <br />
+          <br />
           <h2 id="login-settings">Login Settings</h2>
           <p>
             This section contains configuration options for enabling and
@@ -966,146 +1238,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             className="ui-beacon-images-big"
             alt="screenshot from Beacon UI"
           />
-          <br /> <br />
-          <h2 id="cookie-banner-settings">Cookie Banner Settings</h2>
-          <p>
-            This section contains configuration options for enabling and
-            customizing the cookie banner in the Beacon Template UI.
-            <br />
-            The cookie banner is provided through a lightweight reusable package
-            that is already included in the UI. Deployers can decide whether to
-            show or hide it through the configuration file and customize the
-            displayed message, button text, and links.
-          </p>
-          <table className="UITable">
-            <thead>
-              <tr>
-                <th>Config Field</th>
-                <th>Description</th>
-                <th>Valid Formatting</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <code>ui.cookies.enabled</code>
-                </td>
-                <td>Toggles the visibility of the cookie banner.</td>
-                <td>
-                  boolean (<code>true</code> / <code>false</code>)
-                </td>
-                <td>
-                  If set to <code>true</code>, the cookie banner is displayed
-                  until the user clicks the acknowledgement button.
-                  <br />
-                  If set to <code>false</code>, the banner is hidden.
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code>ui.cookies.message</code>
-                </td>
-                <td>Defines the text displayed in the cookie banner.</td>
-                <td>string</td>
-                <td>
-                  The text can include words that match the labels defined in{" "}
-                  <code>ui.cookies.links</code>. Matching labels are
-                  automatically converted into clickable links.
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code>ui.cookies.buttonText</code>
-                </td>
-                <td>
-                  Defines the text displayed inside the acknowledgement button.
-                </td>
-                <td>string</td>
-                <td>
-                  Example: <code>"I understand"</code>.
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code>ui.cookies.links</code>
-                </td>
-                <td>
-                  Defines the links displayed inside the cookie banner message.
-                </td>
-                <td>
-                  array of objects with:
-                  <br />
-                  <code>{`{ "label": string, "url": string }`}</code>
-                </td>
-                <td>
-                  Each <code>label</code> should match the text in the cookie
-                  message that should become clickable.
-                  <br />
-                  <br />
-                  You can provide one link, two links, or no links at all. If no
-                  links are needed, this array can be left empty or removed.
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code>ui.cookies.links.label</code>
-                </td>
-                <td>The text in the message that should become a hyperlink.</td>
-                <td>string</td>
-                <td>
-                  Example: <code>"Privacy Notice"</code>.
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <code>ui.cookies.links.url</code>
-                </td>
-                <td>The destination URL opened when the link is clicked.</td>
-                <td>HTTPS URL</td>
-                <td>
-                  Example:{" "}
-                  <code>
-                    "https://ega-archive.org/data-protection/privacy-notice/ega-website/"
-                  </code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p className="note">
-            <img
-              className="note-symbol"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
-            <div>
-              <b>Note on Cookie Banner Customization:</b>
-              <br />
-              The cookie banner is optional and can be enabled or disabled
-              through <code>ui.cookies.enabled</code>.
-              <br />
-              The links configured in <code>ui.cookies.links</code> are reused
-              in two places: inside the cookie banner message and in the footer
-              of the Beacon Template UI as a permanent reminder for users.
-              <br />
-              This allows privacy notices, cookie policies, or other legal links
-              to remain accessible even after the banner has been dismissed.
-              <br />
-              Once the user clicks the acknowledgement button, the banner
-              remains hidden for 6 months before appearing again.
-            </div>
-          </p>
-          <img
-            src={ui_cookies_banner}
-            className="ui-beacon-images-big"
-            alt="screenshot from Beacon UI showing cookie banner"
-          />
-          <br /> <br />
           <h2 id="entry-types-common-filters-and-genomic-annotations-settings">
             Entry Types, Common Filters and Genomic Annotations Settings
           </h2>

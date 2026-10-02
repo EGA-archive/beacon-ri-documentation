@@ -2,20 +2,25 @@ Documentation Beacon Template UI Configuration UI
 Beacon Template UI
 Configuration
 Configuration File
+
 The config.json file is the core customization layer of the Beacon Template UI, allowing deployers to control both UI appearance and functional structure and adapt to a specific Beacon deployment. It defines information that cannot be automatically extracted from the Beacon instance, such as UI colors, available pages, and custom links, as well as data format and standards.
 
 Location:
-client/src/config/config.json
-Default example version: client/src/config/config.example.json
+client/public/config/config.json
+Default example version: client/config/config.example.json
+
 It is recommended to keep the config.example.json file unchanged and use it as a reference guide when filling out the actual config.json. This ensures that all required fields remain visible and that updates to the example configuration can be easily tracked in future releases.
 
 Editing the Configuration File
-The configuration file can be edited directly in client/src/config/config.json. After making changes, save the file and build or restart the application to apply updates.
+The configuration file can be edited directly in client/public/config/config.json. Changes are loaded at runtime, allowing the application to be configured without rebuilding the frontend.
 
-All changes are applied at runtime, meaning no additional backend setup is required. It is recommended to:
-keep a backup or versioned copy of the configuration file before editing.
-ensure URLs and asset paths are accessible in the deployed environment.
-The configurable fields in the config file are as given below in the Configuration Table (please see the config.example.json for default examples):
+Before editing the configuration file, it is recommended to:
+- keep a backup or versioned copy of the configuration file
+- ensure that URLs and asset paths are accessible in the deployed environment
+- make sure that the configuration follows the expected structure and uses valid values
+
+The available configuration fields are described in the Configuration Table below. See config.example.json for a complete example with default configuration values.
+
 
 Configuration Table Overview
 Below each table, you’ll find a UI reference map that visually illustrates the interface, helping you configure your own Beacon Template UI correctly.

@@ -253,7 +253,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
                   <input type="checkbox" />{" "}
                   <span className="custom-code">config.json</span> (location:{" "}
                   <span className="custom-code">
-                    client/src/config/config.json
+                    client/public/config/config.json
                   </span>
                   )
                 </label>
@@ -409,8 +409,10 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           </h2>
           <p>
             The configuration file (
-            <span className="custom-code">client/src/config/config.json</span>)
-            is designed to be reusable across Beacon Template UI releases.{" "}
+            <span className="custom-code">
+              client/public/config/config.json
+            </span>
+            ) is designed to be reusable across Beacon Template UI releases.{" "}
             <br />
             When a new version is published, you do not need to recreate your
             configuration from scratch.
@@ -423,7 +425,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
                   <li>
                     {" "}
                     <span className="custom-code">
-                      client/src/config/config.json
+                      client/public/config/config.json
                     </span>
                   </li>
 
