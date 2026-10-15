@@ -214,7 +214,7 @@ filters: [
 ]
 
 POST query examples
-Note symbol
+
 You can either make a query with a scope field for each of the filters or just not insert the scope in the filter object. If scope is not stated, then, the scope of the filter will be the same than the endpoint being queried.
 
 Beacon Range Query
@@ -427,7 +427,7 @@ curl \
   }
 }' \
   http://localhost:5050/api/g_variants
-Copy
+
 Join Individuals Query
 curl \
   -H 'Content-Type: application/json' \
@@ -455,7 +455,7 @@ curl \
   }
 }' \
   http://localhost:5050/api/individuals
-Copy
+
 Query with Access Token
 curl \
   -H 'Content-Type: application/json' \
@@ -474,7 +474,8 @@ curl \
   }
 }' \
   http://localhost:5050/api/individuals
-Copy
+
+
 List of endpoints
 Endpoints that accept all query parameters
 /api/g_variants

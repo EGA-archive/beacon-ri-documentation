@@ -25,7 +25,7 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/ui-query-logic-&-results" className="no-undeline">
+        <a href="/ui-introduction" className="no-undeline">
           Beacon Template UI
         </a>
 

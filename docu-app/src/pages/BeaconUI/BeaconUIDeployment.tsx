@@ -28,8 +28,8 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
         "git clone https://github.com/EGA-archive/beacon-template-ui.git",
       "docker-compose": "docker compose up -d --build",
       "docker-ps": "docker ps",
-      "docker-output": `CONTAINER ID   IMAGE                           COMMAND                  STATUS          PORTS
-      123abc456def   beacon-template-ui-client:latest "node /opt/yarn..."      Up 10 seconds   0.0.0.0:3025->3000/tcp`,
+      "docker-output": `CONTAINER ID   IMAGE                              COMMAND                  STATUS          PORTS                    NAMES
+      123abc456def   beacon-template-ui-client:latest   "/docker-entrypoint..."   Up 10 seconds   0.0.0.0:3000->80/tcp     template-ui`,
       "docker-compose-down": "docker compose down",
       "docker-compose-build": "docker compose up -d --build",
       "docker-compose-down-update": "docker compose down",
@@ -68,7 +68,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/ui-deployment" className="no-undeline">
+        <a href="/ui-introduction" className="no-undeline">
           Beacon Template UI
         </a>
 
@@ -91,7 +91,7 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
               <b>Docker</b>
             </li>
           </ul>
-          <p>
+          <p className="lessMargin">
             Make sure Docker and Docker Compose are installed on your machine.
             <br></br>
             You can verify this by opening up the terminal on your computer and
@@ -141,12 +141,8 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             ) to:
             <ul>
               <li>
-                Edit the <span className="custom-code">config.json</span>
-              </li>
-              <li>
-                Create and edit your
-                <span className="custom-code">.env</span> file (if login is
-                enabled)
+                Edit the <span className="custom-code">config.json</span>{" "}
+                (located at: client/public/config/config.json)
               </li>
             </ul>
           </p>
@@ -236,292 +232,272 @@ const BeaconUIDeployment: React.FC<BeaconUIDeploymentProps> = ({
             3. Edit and Customize the Beacon Template UI
           </h2>
           <p>
-            There is an extended section that you will find by navigating to the{" "}
-            <a
-              href="https://beacon-documentation-demo.ega-archive.org/ui-configuration-file"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Configuration File paragraph
-            </a>
-            . <br />
-            Before proceeding make sure that the following files are edited:{" "}
-            <br />
-            <ul className="noBullets">
-              <li>
-                <label>
-                  <input type="checkbox" />{" "}
-                  <span className="custom-code">config.json</span> (location:{" "}
-                  <span className="custom-code">
-                    client/public/config/config.json
-                  </span>
-                  )
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" />{" "}
-                  <span className="custom-code">
-                    client/public/assets/logos
-                  </span>{" "}
-                  is populated with the correct .svg(s) <br />
-                  Remember that you can also use relative URLs if your images
-                  are hosted externally.
-                </label>
-              </li>
-            </ul>
-            Only if the login is enabled:
-            <ul className="noBullets">
-              <li>
-                <label>
-                  <input type="checkbox" />
-                  <span className="custom-code">.env</span> file is added in{" "}
-                  <b>client</b> folder with the credentials
-                </label>
-              </li>
-            </ul>
+            Before starting the application, review the{" "}
+            <a href="/configuration-ui#configuration-file">
+              Configuration File
+            </a>{" "}
+            section and verify the following:
           </p>
+          <ul className="noBullets">
+            <li>
+              <label>
+                <input type="checkbox" /> Configure{" "}
+                <span className="custom-code">
+                  client/public/config/config.json
+                </span>{" "}
+                for your Beacon deployment.
+              </label>
+            </li>
+
+            <li>
+              <label>
+                <input type="checkbox" /> Verify that all configured logos and
+                image assets are accessible.
+              </label>
+              <p className="lessMargin">
+                Local assets can be placed in{" "}
+                <span className="custom-code">
+                  client/public/assets/logos/{" "}
+                </span>
+                , or image fields can reference external HTTP/HTTPS URLs.
+                <br />
+                Check the favicon, main logo, founder logos, About page logos,
+                and funding organization logos where configured. SVG is
+                recommended but not mandatory.{" "}
+              </p>
+            </li>
+          </ul>
           <h2 id="4.-start-the-application-with-docker">
             4. Start the application with Docker
           </h2>
+          <p> In your terminal run:</p>
+
+          <div className="codeSnippet">
+            <pre>
+              docker compose up -d --build
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("docker-compose-build")}
+              >
+                {copySuccess["docker-compose-build"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
           <p>
-            In your terminal run:
-            <div className="codeSnippet">
-              <pre>
-                docker compose up -d --build
-                <button
-                  className="copyButtonCode"
-                  onClick={() => copyToClipboard("docker-compose-build")}
-                >
-                  {copySuccess["docker-compose-build"] ? (
-                    "Copied!"
-                  ) : (
-                    <img
-                      className="copySymbol copySymbol-custom"
-                      src={copyIcon}
-                      alt="Copy"
-                    />
-                  )}
-                </button>
-              </pre>
-            </div>
             Docker will automatically build the image and start the UI
             container.
           </p>
           <h2 id="5.-verify-the-container">5. Verify the Container</h2>
           <p>
-            To confirm the container is running:{" "}
-            <div className="codeSnippet">
-              <pre>
-                docker ps
-                <button
-                  className="copyButtonCode"
-                  onClick={() => copyToClipboard("docker-ps")}
-                >
-                  {copySuccess["docker-ps"] ? (
-                    "Copied!"
-                  ) : (
-                    <img
-                      className="copySymbol copySymbol-custom"
-                      src={copyIcon}
-                      alt="Copy"
-                    />
-                  )}
-                </button>
-              </pre>
-            </div>
-            Expected output:
-            <div className="codeSnippet">
-              <pre>
-                CONTAINER ID IMAGE COMMAND STATUS PORTS 123abc456def
-                beacon-template-ui-client:latest "node /opt/yarn..." Up 10
-                seconds 0.0.0.0:3025-&gt;3000/tcp
-                <button
-                  className="copyButtonCode"
-                  onClick={() => copyToClipboard("docker-output")}
-                >
-                  {copySuccess["docker-output"] ? (
-                    "Copied!"
-                  ) : (
-                    <img
-                      className="copySymbol copySymbol-custom"
-                      src={copyIcon}
-                      alt="Copy"
-                    />
-                  )}
-                </button>
-              </pre>
-            </div>
-            If it’s visible, the UI is running locally at:{" "}
-            <a href="http://localhost:3000" target="_blank" rel="noreferrer">
+            To confirm that the application container is running, execute the
+            following command:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              docker ps
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("docker-ps")}
+              >
+                {copySuccess["docker-ps"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Look for a running container named <code>template-ui</code>. The
+            output should be similar to:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`CONTAINER ID   IMAGE                              COMMAND                  STATUS          PORTS                    NAMES
+123abc456def   beacon-template-ui-client:latest   "/docker-entrypoint..."   Up 10 seconds   0.0.0.0:3000->80/tcp     template-ui`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("docker-output")}
+              >
+                {copySuccess["docker-output"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Container details may vary depending on the environment. Once the
+            container is running, open{" "}
+            <a
+              href="http://localhost:3000"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               http://localhost:3000
-            </a>
+            </a>{" "}
+            to verify that the application loads correctly.
           </p>
           <h2 id="6.-stop-or-restart-the-application">
             6. Stop or Restart the Application
           </h2>
           <p>
-            To stop the container:
-            <div className="codeSnippet">
-              <pre>
-                docker compose down
-                <button
-                  className="copyButtonCode"
-                  onClick={() => copyToClipboard("docker-compose-down")}
-                >
-                  {copySuccess["docker-compose-down"] ? (
-                    "Copied!"
-                  ) : (
-                    <img
-                      className="copySymbol copySymbol-custom"
-                      src={copyIcon}
-                      alt="Copy"
-                    />
-                  )}
-                </button>
-              </pre>
-            </div>
-            To rebuild and restart after modifying files:
-            <div className="codeSnippet">
-              <pre>
-                docker compose up -d --build
-                <button
-                  className="copyButtonCode"
-                  onClick={() => copyToClipboard("docker-compose-build")}
-                >
-                  {copySuccess["docker-compose-build"] ? (
-                    "Copied!"
-                  ) : (
-                    <img
-                      className="copySymbol copySymbol-custom"
-                      src={copyIcon}
-                      alt="Copy"
-                    />
-                  )}
-                </button>
-              </pre>
-            </div>
+            To stop the application and remove its Docker container, run the
+            following command from the project directory:
           </p>
-          <br />
-
-          <h2 id="updating-to-a-new-version">
-            Updating to a new Beacon Template UI Version
-          </h2>
+          <div className="codeSnippet">
+            <pre>
+              docker compose down
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("docker-compose-down")}
+              >
+                {copySuccess["docker-compose-down"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
           <p>
-            The configuration file (
+            To start the application again, or rebuild it after modifying the
+            frontend source code or bundled assets, run:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              docker compose up -d --build
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("docker-compose-build")}
+              >
+                {copySuccess["docker-compose-build"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Changes to{" "}
             <span className="custom-code">
               client/public/config/config.json
-            </span>
-            ) is designed to be reusable across Beacon Template UI releases.{" "}
-            <br />
-            When a new version is published, you do not need to recreate your
-            configuration from scratch.
-            <br />
-            To update to a newer version:
-            <ol>
-              <li>
-                <b>Keep your existing configuration files</b>
-                <ul>
-                  <li>
-                    {" "}
-                    <span className="custom-code">
-                      client/public/config/config.json
-                    </span>
-                  </li>
-
-                  <li>
-                    {" "}
-                    <span className="custom-code">client/.env</span> (if login
-                    is enabled)
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <b>Update the Beacon Template UI code</b>
-                <br />
-                <ul className="noBullets">
-                  <li>
-                    {" "}
-                    Either pull the latest changes from the repository (for
-                    example with{" "}
-                    <span className="custom-code">git fetch/git pull</span>), or
-                    clone the new version and copy your existing{" "}
-                    <span className="custom-code">config.json</span> and
-                    <span className="custom-code">.env</span> into it.
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <b>Rebuild and restart the UI</b>
-                <br />
-                <ul className="noBullets">
-                  <li>Run:</li>
-                  <ul className="noBullets">
-                    {" "}
-                    <li>
-                      {" "}
-                      <div className="codeSnippet">
-                        <pre>
-                          docker compose down
-                          <button
-                            className="copyButtonCode"
-                            onClick={() =>
-                              copyToClipboard("docker-compose-down-update")
-                            }
-                          >
-                            {copySuccess["docker-compose-down-update"] ? (
-                              "Copied!"
-                            ) : (
-                              <img
-                                className="copySymbol copySymbol-custom"
-                                src={copyIcon}
-                                alt="Copy"
-                              />
-                            )}
-                          </button>
-                        </pre>
-                      </div>
-                    </li>
-                    <li>
-                      {" "}
-                      <div className="codeSnippet">
-                        <pre>
-                          docker compose up -d --build
-                          <button
-                            className="copyButtonCode"
-                            onClick={() =>
-                              copyToClipboard("docker-compose-build-update")
-                            }
-                          >
-                            {copySuccess["docker-compose-build-update"] ? (
-                              "Copied!"
-                            ) : (
-                              <img
-                                className="copySymbol copySymbol-custom"
-                                src={copyIcon}
-                                alt="Copy"
-                              />
-                            )}
-                          </button>
-                        </pre>
-                      </div>
-                    </li>
-                  </ul>
-                </ul>
-              </li>
-            </ol>
-            This step is required every time the Beacon Template UI code
-            changes, because the Docker image must be rebuilt to include the
-            updated UI.
-            <br />
-            As long as your existing{" "}
-            <span className="custom-code">config.json</span> matches the schema
-            expected by the new release, it can be reused without modification.
-            If new fields are introduced in future versions, you can compare
-            your configuration with{" "}
-            <span className="custom-code">config.example.json</span> and extend
-            it as needed.
+            </span>{" "}
+            do not require rebuilding or restarting the container. Reload the
+            application in your browser to apply the updated configuration.
           </p>
+          <h2 id="updating-to-a-new-version">
+            Updating to a New Beacon Template UI Version
+          </h2>
+          <p>
+            The runtime <span className="custom-code">config.json</span> can be
+            reused across releases, provided it remains compatible with the new
+            version's validation schema.
+            <br />
+            <br />
+            To update the Beacon Template UI:
+          </p>
+          <ol>
+            <li>
+              <p>
+                <b>Back up your configuration</b>
+                <br />
+                Save a copy of{" "}
+                <span className="custom-code">
+                  client/public/config/config.json
+                </span>{" "}
+                and any customized assets.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>Update the source code</b>
+                <br />
+                Pull the latest changes from the repository or check out the
+                desired release. Compare your configuration with the new{" "}
+                <span className="custom-code">config.example.json </span> and
+                validation schema, updating it if necessary.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>Rebuild and restart the application</b>
+                <br />
+                Run the following command from the project directory:
+              </p>
+
+              <div className="codeSnippet">
+                <pre>
+                  docker compose up -d --build
+                  <button
+                    className="copyButtonCode"
+                    onClick={() =>
+                      copyToClipboard("docker-compose-build-update")
+                    }
+                  >
+                    {copySuccess["docker-compose-build-update"] ? (
+                      "Copied!"
+                    ) : (
+                      <img
+                        className="copySymbol copySymbol-custom"
+                        src={copyIcon}
+                        alt="Copy"
+                      />
+                    )}
+                  </button>
+                </pre>
+              </div>
+            </li>
+          </ol>
+          <div className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+
+            <div>
+              <b>Note:</b>
+              <br />
+              <br />
+              Changes to frontend source code or bundled assets require
+              rebuilding the Docker image.
+              <br />
+              <br />
+              Changes to <span className="custom-code">config.json</span> do not
+              require a rebuild when the runtime configuration directory is
+              mounted as described in this guide. Reload the application to
+              apply the updated settings.
+            </div>
+          </div>
         </div>
         <div className="sidebarColumn">
           <OnThisPage root={contentRef.current} />

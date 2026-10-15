@@ -79,7 +79,7 @@ Cohorts	id, name, cohortType
 Datasets	id, name
 Individuals	id, sex
 Runs	id, biosampleId, runDate
-Note symbol
+
 For more information about each field, refer to the default schemas and the Beacon v2 specification.
 
 Additional Notes

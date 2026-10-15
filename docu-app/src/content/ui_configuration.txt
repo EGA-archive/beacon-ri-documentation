@@ -1,346 +1,1181 @@
-Documentation Beacon Template UI Configuration UI
+Documentation tBeacon Template UI tConfiguration UI
 Beacon Template UI
 Configuration
 Configuration File
 
-The config.json file is the core customization layer of the Beacon Template UI, allowing deployers to control both UI appearance and functional structure and adapt to a specific Beacon deployment. It defines information that cannot be automatically extracted from the Beacon instance, such as UI colors, available pages, and custom links, as well as data format and standards.
+The config.json file is the main configuration file for the Beacon Template UI. It allows deployers to customize the application's appearance, available features, and genomic query settings without modifying the frontend source code.
 
-Location:
-client/public/config/config.json
-Default example version: client/config/config.example.json
+The configuration also defines deployment-specific information, including the Beacon API endpoint, deployment type, supported genome assemblies, and authentication settings.
 
-It is recommended to keep the config.example.json file unchanged and use it as a reference guide when filling out the actual config.json. This ensures that all required fields remain visible and that updates to the example configuration can be easily tracked in future releases.
+Configuration file locations:
+
+Runtime configuration: client/public/config/config.json
+Example configuration: client/config/config.example.json
+It is recommended to keep config.example.json unchanged and use it as a reference when creating or updating the runtime configuration.
+
+The example file illustrates the configuration structure. The authoritative validation rules and default values are defined in the application's validation schema.
 
 Editing the Configuration File
-The configuration file can be edited directly in client/public/config/config.json. Changes are loaded at runtime, allowing the application to be configured without rebuilding the frontend.
+The Beacon Template UI loads its configuration at runtime from /config/config.json. This allows deployers to update configuration values without rebuilding the frontend application.
 
-Before editing the configuration file, it is recommended to:
-- keep a backup or versioned copy of the configuration file
-- ensure that URLs and asset paths are accessible in the deployed environment
-- make sure that the configuration follows the expected structure and uses valid values
+The configuration is loaded when the application initializes. Changes to the configuration file are therefore picked up when the application is loaded again, provided the updated file is available at the configured location.
 
-The available configuration fields are described in the Configuration Table below. See config.example.json for a complete example with default configuration values.
+Before modifying the configuration, it is recommended to:
 
+Keep a backup or versioned copy of the configuration file.
+Ensure that configured URLs and asset paths are accessible in the deployed environment.
+Use the correct JSON structure and data types.
+Check that configuration values are compatible with the connected Beacon implementation.
+The available properties and their validation requirements are described in the configuration tables below.
+
+Configuration Validation
+Before the Beacon Template UI starts, the application loads config.json and validates its contents against a predefined Joi validation schema.
+
+The schema checks configuration structure, data types, required properties, accepted values, and conditional dependencies between configuration fields.
+
+During validation, the application also applies the default values defined by the schema where applicable.
+
+Validation uses strict data types. For example, a Boolean property must contain true or false, rather than the strings "true" or "false".
+
+The initial validation collects all detected schema errors rather than stopping at the first error.
+
+If the configuration is valid, the application initializes its authentication settings, stores the validated configuration, and loads the React application.
+
+If configuration loading, validation, or another startup operation fails, the application does not start normally. The error is logged in the browser console, and the following message is displayed:
+
+The application could not start because its configuration is invalid or could not be loaded.
+When troubleshooting a startup error, open the browser's developer console for additional information.
+
+The validation schema verifies configuration consistency. It does not verify that external services are reachable or that every configured feature is supported by the connected Beacon backend.
 
 Configuration Table Overview
-Below each table, you’ll find a UI reference map that visually illustrates the interface, helping you configure your own Beacon Template UI correctly.
+The following tables describe the available configuration properties, grouped by the application features they control.
 
-Core Beacon and Configuration Setting
-This table defines the fundamental connection, query, and data settings required for the Beacon Template UI to interact with a Beacon instance. It specifies whether the deployment targets a single Beacon or a Beacon network, the API endpoint URL, supported genome assemblies, recognized variation types, and whether genomic query coordinates are interpreted as 0-based or 1-based.
-These parameters ensure proper communication with the backend and keep the UI’s query behaviour aligned with the Beacon configuration.
+Each table includes the property name, its purpose, accepted formatting, and additional validation requirements such as default values, optional properties, and conditional dependencies.
+
+Where relevant, screenshots illustrate how the corresponding configuration settings relate to the user interface.
+
+Core Beacon and Configuration Settings
+This section defines the core settings used to connect the Beacon Template UI to a Beacon API and configure genomic query options. These settings specify the deployment type, the API endpoint, supported reference genome assemblies, available variant types, and genomic coordinate conventions.
+
+Some genomic settings are optional and are primarily relevant when genomic queries are supported by the connected Beacon.
 
 Config Field	Description	Valid Formatting	Notes
-beaconType	Defines whether the deployment queries a network of beacons or a single beacon.	"networkBeacon" or "singleBeacon"	Determines whether the UI operates in network or single-beacon mode.
-apiUrl	The URL used to query the Beacon v2 API.	string	Only valid URLs are accepted.
+beaconType	Defines whether the deployment connects to a Single Beacon or a Beacon Network.	"singleBeacon" or "networkBeacon"	Required.
+
+The selected type determines which Beacon-specific interface structure is used.
+
+For a comparison of both deployment types, see Single Beacon and Beacon Network: Configuration and UI Differences.
+apiUrl	Defines the base URL of the Beacon API endpoint used by the application.	Valid HTTP or HTTPS URL.	Required.
+
+The URL must point to the appropriate Beacon API or Beacon Network endpoint for the selected deployment.
+
 Example:
-"apiUrl": "https://beacon-spain.ega-archive.org/api"
-assemblyId	Allowed reference genome assemblies exposed in all genomic query types.	array of strings	This field is free text, but values must match valid genome assembly identifiers for the UI and Beacon queries to work correctly.
-GRC assemblies are expected. Other identifiers are supported only if they map unambiguously to a GRC assembly.
+
+"apiUrl": "https://your-beacon.org/api"
+assemblyId	Defines the reference genome assemblies available for genomic queries.	Array containing at least one non-empty string.	Optional.
+
+Defaults to ["GRCh38", "GRCh37"].
+
+Deployers can customize the array to include assemblies supported by their Beacon implementation.
+
 Example:
+
 "assemblyId": ["GRCh38", "GRCh37", "NCBI36"]
-variationType	Defines the list of variant categories supported by the UI.	array of objects with: { jsonName: string, displayName: string }	The set should reflect the variant types recognized by your Beacon implementation.
-queryCoordinatesAre0Based	Defines whether genomic coordinates entered in the UI are interpreted as 0-based or 1-based.	true or false	When set to true, genomic query coordinates are interpreted as 0-based.
-When set to false, coordinates are interpreted as 1-based and converted by the UI before being sent to the Beacon API.
-The default value is true.
 
+Assembly identifiers used by genomic annotation examples must also be included in this array.
+variantType	Defines the variant types available for selection in the Genomic Query Builder.	Array of strings.
 
+Each value may contain only letters, numbers, and underscores.	Optional.
 
+If omitted, the following default values are used:
+
+["SNP", "DEL", "DUP", "INV", "INS", "CNV", "BND"]
+
+Deployers can replace this list with the variant types supported by their Beacon implementation.
+
+An empty array [] is also valid and can be used when no variant-type options should be available.
+
+Unlike earlier configurations, variant types are defined directly as strings rather than objects with separatejsonName and displayName properties.
+queryCoordinatesAre0Based	Specifies whether genomic query coordinates use zero-based indexing.	Boolean:
+true or false	Optional.
+
+Defaults to true.
+
+When true, genomic query coordinates are configured as 0-based.
+
+When false, genomic query coordinates are configured as 1-based.
+Beacon Template UI deployment typeAvailable reference genome assembliesVariant types in the Genomic Query Builder
 
 Styling and Branding Settings
-This table defines the visual and branding customization of the Beacon Template UI. It includes options for setting the application title, defining brand color palettes, and configuring logos displayed in the header in the Homepage.
-These settings ensure a cohesive look and feel aligned with the deployer’s institutional or project identity.
+This section defines the visual and branding customization options available in the Beacon Template UI. It includes the application title, favicon, color palette, and logos displayed throughout the interface.
+
+These settings allow deployers to adapt the application's appearance to their institutional or project identity without modifying the frontend source code.
 
 Config Field	Description	Valid Formatting	Notes
-ui.title	Display title for the application.	string	
-ui.favicon	Path to the favicon displayed in the browser tab.	string	The two accepted formats are:
-A relative path to a static file included in the UI, placed at:"client/public/assets/logos/favicon.ico"
-A full URL to an external favicon: "https://example.com/my-favicon.ico"
-If this field is left empty, the favicon will not render.
-ui.colors	Brand color palette for theme customization. Used across buttons, headers, hovers, and accents, etc.	object with required hex strings:
+ui.title	Defines the title displayed for the application.	String containing between 3 and 100 characters, excluding surrounding whitespace.	Required.
 
-{ "primary": "#RRGGBB", "darkPrimary": "#RRGGBB", "secondary": "#RRGGBB" }	Color usage guidelines (Beacon team suggestion):
-primary: a light or neutral color used as the main theme color.
-darkPrimary: a darker variant of the primary color.
-secondary: a contrasting color used for accents and emphasis.
-ui.logos	Paths/URLs for logos used in header and “founders” section.	object:
-
-{ "main": string, "founders": [{ "src": string, "url": string }] }	
-Accepted formats for each logo are a relative path to a static file included in the UI (reachable at:"client/public/assets/logos/" ) or a full HTTPS URL pointing to an external logo (example: "https://example.com/logo.svg").
-
-Both local and external logos are supported.
-ui.logos.main	Main logo displayed in the header.	string	
-Example: "/assets/logos/main.svg"
-
-Prefer .svg for scalability.
-
-ui.logos.founders	
-Logos displayed in the “Founders” section, on the top left corner of the Home page. Each logo can optionally link to the founder’s website.
-array of objects	Example:[ { "src": "/assets/logos/founder1.svg", "url": "https://elixir-europe.org/" }, { "src": "/assets/logos/founder2.svg", "url": "https://www.crg.eu/" } ]
-Each object contains:
-src – path to the logo file
-url – optional link opened when the logo is clicked
-
-
-Note about logos:
-Accepted formats for each logo are a relative path to astatic file included in the UI (reachable at client/public/assets/logos/) or a full HTTPS URL pointing to an external logo (example:https://example.com/logo.svg).
-This dual approach was chosen to support the flexible nature of the UI, allowing deployments to use either bundled static assets or externally hosted branding resources.
-If you prefer to keep your config.json unchanged, place your logo files inside client/public/assets/logos and simply rename them to match the filenames already defined in the configuration. This ensures the UI loads your custom branding without requiring configuration edits.
-The same rule applies to any other logo referenced in the config file.
-
-
-
-
-
-
-Navigation, About Page and Download Settings
-This section includes configuration options for customizing the navigation bar, the About page, and the availability of download functionality. It allows deployers to add external links, manage the visibility of informational pages, display institutional logos and funding acknowledgements, and enable or disable downloads from the results interface.
-
-Config Field	Description	Valid Formatting	Notes
-ui.showExternalNavBarLink	Toggles the visibility of an external navigation link in the navbar.	boolean (true / false)	If true, the link defined in ui.externalNavBarLink will be displayed.
-
-Ideal for linking a related Beacon instance or complementary product directly in the navigation bar.
-ui.externalNavBarLink	Defines external links shown in the navbar. Each object contains a visible label and target URL.	array of objects	[{ "label": "AF Browser", "url": "https://..." }]
-
-Requires showExternalNavBarLink: true.
-ui.externalNavBarLink.label	The text displayed in the navbar for the external link.	string	Example: "AF Browser".
-ui.externalNavBarLink.url	The destination URL opened when clicking the label.	string	Use absolute URLs
-ui.showAboutPage	Toggles the visibility of the “About” page.	boolean (true / false)	If true, the content defined in ui.about will be displayed as a standalone page.
-ui.about.logos	List of logo file paths or URLs to display at the top of the “About” page.	array of strings	["/assets/logos/about1.svg", "/assets/logos/about2.svg"]
-
-Used only if showAboutPage: true
-ui.about.descriptions	Array of text blocks ( HTML) displayed in the “About” section. Allows paragraphs, bold text, or links.	array of strings (HTML allowed)	Used only if showAboutPage: true
-ui.about.fundingOrgs	Defines one or more funding organization sections displayed at the bottom of the About page. Each object contains a section title and an array of logo file paths or URLs.	array of objects with:
-[{ "title": string, "logos": string[] }]	Used only if showAboutPage: true
-
-ui.about.fundingOrgs[].title	The heading shown above the funding organization logos.	string	Example: "Funding Organizations"
-
-ui.about.fundingOrgs[].logos	Array of file paths or URLs for the organization logos displayed below the title.	array of strings	Example:
-["/assets/logos/organization1.svg", "/assets/logos/organization2.svg"]
-Assets must be reachable by the frontend under client/public/assets/logos/
-
-ui.download.enabled	Toggles the availability of the download functionality in the results interface.	boolean (true / false)	When set to true, users can access the available download options from the results page.
-When set to false, the download controls are hidden.
-
-For more information about logo readability, please refer to this section.
-
-
-
-Login Settings
-This section contains configuration options for enabling and customizing the login experience in the Beacon Template UI. It allows deployers to activate or disable authentication features, and configure OIDC-based login.
-
-
-Note about upcoming iterations:
-Additional authentication options will be provided for greater flexibility.
-
-Config Field	Description	Valid Formatting	Notes
-ui.showLogin	Toggles the visibility of the login functionality within the UI.
-When enabled, a login button appears and OIDC-based authentication is activated.	boolean (true / false)	If showLogin: true, another file needs to be filled out. See this section.
-ui.auth	Container for authentication configuration settings. Required whenui.showLogin is enabled.	object	
-ui.auth.providerType	Defines the type of authentication provider used by the Beacon Template UI.	string ("private" or "public")
-When set to "private", the UI uses both the Client ID and Client Secret.
-When set to "public", only the Client ID is used and any provided Client Secret is ignored.
-The authentication credentials are not stored in config.json. Define REACT_APP_CLIENT_ID in client/.env. For private clients, also define REACT_APP_CLIENT_SECRET.
-
-ui.auth.oidc	Includes all parameters needed for initializing OIDC login.	object	Required when ui.showLogin is enabled.
-ui.auth.oidc.authority	URL of the OIDC provider.
-The UI uses this endpoint to initiate login, logout, and token requests.	HTTPS URL	Example:
-"authority": "https://login.aai.lifescience-ri.eu/oidc"
-ui.auth.oidc.autoSignIn	Determines whether the user should be automatically redirected to the login screen if not already authenticated.	boolean (true / false)	
-ui.auth.oidc.responseType	Specifies the OIDC response mode used during authentication.	string, usually "code"	
-ui.auth.oidc.automaticSilentRenew	Controls whether the UI should automatically refresh the user’s session in the background before tokens expire.	boolean (true / false)	When set to true, users remain logged in seamlessly as long as the provider allows silent token renewal.
-ui.auth.oidc.redirectUri	The URL the user is redirected to after successful authentication.	valid URL (HTTP allowed for localhost)	Example:
-"redirectUri": "http://localhost:3000/"
-ui.auth.oidc.scope	A separated list of permissions requested from the OIDC provider.	string	Usually includes: "openid profile email .."
-ui.auth.oidc.revokeAccessTokenOnSignout	Determines whether the access token should be explicitly revoked when the user signs out	boolean (true / false)	When set to true, the UI requests token revocation on logout, ensuring cleaner session termination depending on the provider’s capabilities.
-
-Cookie Banner Settings
-This section contains configuration options for enabling and customizing the cookie banner in the Beacon Template UI.
-The cookie banner is provided through a lightweight reusable package that is already included in the UI. Deployers can decide whether to show or hide it through the configuration file and customize the displayed message, button text, and links.
-
-Config Field	Description	Valid Formatting	Notes
-ui.cookies.enabled	Toggles the visibility of the cookie banner.	boolean (true / false)	If set to true, the cookie banner is displayed until the user clicks the acknowledgement button.
-If set to false, the banner is hidden.
-ui.cookies.message	Defines the text displayed in the cookie banner.	string	The text can include words that match the labels defined in ui.cookies.links. Matching labels are automatically converted into clickable links.
-ui.cookies.buttonText	Defines the text displayed inside the acknowledgement button.	string	Example: "I understand".
-ui.cookies.links	Defines the links displayed inside the cookie banner message.	array of objects with:
-{ "label": string, "url": string }	Each label should match the text in the cookie message that should become clickable.
-If no links are needed, this array can be left empty or removed.
-ui.cookies.links.label	The text in the message that should become a hyperlink.	string	Example: "Privacy Notice".
-ui.cookies.links.url	The destination URL opened when the link is clicked.	HTTPS URL	Example: "https://ega-archive.org/data-protection/privacy-notice/ega-website/"
-
-Note on Cookie Banner Customization:
-The cookie banner is optional and can be enabled or disabled through ui.cookies.enabled.
-
-The links configured in ui.cookies.links are reused in two places: inside the cookie banner message and in the footer of the Beacon Template UI as a permanent reminder for users.
-
-This allows privacy notices, cookie policies, or other legal links to remain accessible even after the banner has been dismissed.
-
-Once the user clicks the acknowledgement button, the banner remains hidden for 6 months before appearing again.
-
-
-Entry Types, Common Filters and Genomic Annotations Settings
-This part defines configuration options that control the content structure and data organization of the Beacon Template UI. It specifies how the entry types are ordered, how the example common filters and their categories are displayed in the right side bar and which genomic annotation categories appear.
-
-Config Field	Description	Valid Formatting	Notes
-ui.entryTypesOrder	Defines the display order of entry types (e.g., individuals, biosamples, datasets) in the UI.	array of strings	["individuals", "g_variants", "biosamples", "runs", "analyses", "cohorts", "datasets"]
-
-The values must match valid Beacon v2 entry types returned by /map.
-
-If entryTypesOrder is not provided (or is empty), entry types are displayed in the order returned by /map.
-
-If it is provided, matching entry types are displayed first in the configured order, while any remaining entry types returned by /map but not listed are appended afterwards.
-
-Values that do not match entry types returned by /map are ignored.
-ui.commonFilters	Configures the set of predefined filtering terms available in the sidebar. These are grouped by thematic categories called filterCategories.	object containing:
-filterCategories: array of category names
-filterLabels: object mapping each category to its filter definitions	Used to populate Common Filters. If not defined, the UI hides the filter panel.
-ui.commonFilters.filterCategories	Lists the main filter groups shown in the sidebar (example: Demographics, Cancer, Covid). Each group title corresponds to one section in the filter UI.	array of strings	["Demographics", "Cancer", "Covid"]
-
-This field is free text. You may define and add filter categories as needed, with a maximum of 3 filter categories.
-ui.commonFilters.filterLabels	Defines the filtering terms available under each category. Each filter includes metadata such as its Beacon ID, label, type, scopes.	object mapping each category to an array of filters	Each filter category can include up to 6 filters.
-
-The filter values must match valid filtering terms supported by the Beacon. Each filter’s id and scope should correspond to the terms configured in the Beacon.
-
-Available terms can be retrieved from the Beacon /filtering_terms endpoint (e.g.,
-https://<your-beacon-api>/filtering_terms)
+The value must not be empty.
 
 Example:
-"Cancer": [{ "key": "Breast Cancer", "id": "NCIT:C4872", "type": "ontology" }]
-ui.commonFilters.filterLabels.id	The unique Beacon filtering term ID.	string	Mandatory, in compliance with the Beacon specification. The ID must match the corresponding filtering term identifier in the Beacon instance.
-ui.commonFilters.filterLabels.key	Optional	string	Used to identify the filter within the UI configuration.
-ui.commonFilters.filterLabels.label	Optional	string	Represents the user-friendly display name of the filtering term shown in the UI.
-This value may differ from the technical id, which is used internally for Beacon queries.
-If no label is provided, the UI will fall back to displaying the id.
-ui.commonFilters.filterLabels.type	Mandatory	string	Specifies the type of filtering term, which must comply with the Beacon specification.
-Valid values are: "ontology", "alphanumeric", or "custom".
 
-Deployers must ensure this value correctly matches the expected type for the filtering term in the Beacon instance.
-ui.commonFilters.filterLabels.scopes	Optional	Array of strings	This field can be left empty. However, if scopes are specified, they must match the ones defined in the Beacon instance to ensure proper query construction and compatibility.
-ui.genomicAnnotations	Controls which genomic annotation categories are visible in the Genomic Annotations section.	object with:
-visibleGenomicCategories: array of strings	Used to show or hide predefined annotation categories within the UI.
-ui.genomicAnnotations.visibleGenomicCategories	Lists the annotation categories to be displayed.	array of strings	The only available categories are:
-"SNP Examples", "Genomic Variant Examples", "Protein Examples", and "Molecular Effect"
+"title": "EGA Beacon Template UI"
+ui.favicon	Defines the favicon used in the browser tab.	Relative path or valid HTTP/HTTPS URL.	Optional.
 
-The content inside each category is automatically populated from the UI.
+A local favicon can be stored in client/public/assets/logos/ and referenced using its path relative to the application's public directory.
 
-Note on Genomic Annotations Configuration:
-The configuration allows controlling only the visibility of the main genomic annotation categories via ui.genomicAnnotations.visibleGenomicCategories. While you can choose which categories are displayed in the UI, the content within each category is currently predefined in the codebase and cannot be modified through the configuration file.
+Example:
 
-Future iterations of the Template UI aim to introduce more flexibility. However, any custom entries will need to follow the correct structure (e.g., queryType and corresponding parameters) to ensure compatibility with the Beacon API and proper query execution.
+"favicon": "/assets/logos/favicon.ico"
+
+An external HTTP or HTTPS URL is also accepted.
+ui.colors	Contains the color settings used to customize the interface.	Object containing the following optional properties:
+
+primary
+darkPrimary
+secondary	Optional.
+
+If the object or any individual color property is omitted, the corresponding default value defined in the validation schema is used.
+
+All provided colors must use a valid six-digit hexadecimal format.
+ui.colors.primary	Defines the primary color used by the application's theme.	Six-digit hexadecimal color string.
+
+Example: "#3176B1"	Optional.
+
+Defaults to #3176B1.
+
+The value must begin with #, followed by exactly six hexadecimal characters (0-9, A-F).
+
+Uppercase and lowercase hexadecimal letters are accepted.
+ui.colors.darkPrimary	Defines the darker primary color available to interface elements requiring stronger visual emphasis.	Six-digit hexadecimal color string.
+
+Example: "#173D5D"	Optional.
+
+Defaults to #173D5D.
+
+The value must follow the same hexadecimal formatting rules as ui.colors.primary.
+ui.colors.secondary	Defines the secondary accent color available to the application's theme.	Six-digit hexadecimal color string.
+
+Example: "#FFE4D4"	Optional.
+
+Defaults to #FFE4D4.
+
+The value must follow the same hexadecimal formatting rules as ui.colors.primary.
+ui.logos	Contains the configuration for the main application logo and the founder logos.	Object containing:
+
+main
+founders	Required.
+
+Both properties are optional within the object.
+
+An empty object {} is valid when no logos are configured.
+ui.logos.main	Defines the main application logo displayed in the header.	Relative path or valid HTTP/HTTPS URL.	Optional.
+
+Example:
+
+"main": "/assets/logos/main.svg"
+
+SVG is recommended for scalability, although the validation schema does not require a particular image extension.
+ui.logos.founders	Defines the logos configured for the Founders section on the Home page.	Array of founder-logo objects.
+
+Each object supports:
+src
+url	Optional.
+
+A maximum of 6 founder logos can be configured.
+
+An empty array [] is valid.
+
+Each configured object must include a validsrc property.
+ui.logos.founders[].src	Defines the image source for an individual founder logo.	Relative path or valid HTTP/HTTPS URL.	Required for each founder-logo object.
+
+Example:
+
+"src": "/assets/logos/founder1.svg"
+ui.logos.founders[].url	Defines an optional external URL associated with the founder logo.	Valid HTTP or HTTPS URL.	Optional.
+
+Example:
+
+"url": "https://elixir-europe.org/"
+
+The property may be omitted when no external destination is required.
+
+Note about logos:
+
+Local logo files can be placed in client/public/assets/logos/.
+
+To replace an existing logo without modifying config.json, deployers can replace the corresponding image file while retaining the filename and path already referenced in the configuration.
+
+Alternatively, logo fields can reference an external HTTP or HTTPS URL.
+
+Ensure that local files and external URLs are accessible from the deployed application.
+Application title configurationBrowser favicon configurationPrimary theme colorDark primary theme color
+Main and founder logosSecondary theme color
 
 
+Navigation, About and Contact Settings
+This section defines the configuration options for the navigation bar, About page, and Contact page in the Beacon Template UI.
 
+Deployers can configure external navigation links, customize the information displayed on the About page, and provide a contact email address for users.
+
+These features can be enabled or disabled independently. Some configuration fields become required only when the corresponding feature is enabled.
+
+Config Field	Description	Valid Formatting	Notes
+ui.showExternalNavBarLink	Controls whether configured external links are displayed in the navigation bar.	Boolean:
+true or false	Optional.
+
+Defaults to false.
+
+When true, the configuration must include between 1 and 2 external navigation links.
+
+When false, configured links are not displayed but may remain in the configuration file.
+ui.externalNavBarLink	Defines the external links available in the navigation bar.	Array of link objects.
+
+Each object must contain:
+label
+url	Required when ui.showExternalNavBarLink is true.
+
+When enabled, the array must contain between 1 and 2 link objects.
+
+When disabled, the property is optional, and an empty array is allowed. A maximum of 2 links is supported in either case.
+
+Example:
+
+"externalNavBarLink": [ { "label": "AF Browser", "url": "https://af-beacon.ega-archive.org/" } ]
+ui.externalNavBarLink[].label	Defines the text displayed for an external navigation link.	Non-empty string containing a maximum of 30 characters.	Required for each configured link object.
+
+The label must contain at least one character and cannot consist only of whitespace.
+
+Example: "AF Browser"
+ui.externalNavBarLink[].url	Defines the destination of an external navigation link.	Valid HTTP or HTTPS URL.	Required for each configured link object.
+
+Example:
+
+"https://af-beacon.ega-archive.org/"
+
+The URL must include the http:// or https:// scheme.
+ui.showAboutPage	Controls whether the About page is available in the Beacon Template UI.	Boolean:
+true or false	Optional.
+
+Defaults to false.
+
+When true, the ui.about object becomes required.
+
+When false, the About page is disabled, but its configuration may remain in the file.
+ui.about	Contains the content configured for the About page.	Object supporting:
+
+logos
+descriptions
+fundingOrgs	Required when ui.showAboutPage is true.
+
+When the About page is enabled, at least one of the three content properties must be provided.
+
+The three properties are individually optional, meaning deployers can configure only the sections they need.
+
+When the About page is disabled, this object is optional.
+ui.about.logos	Defines the logos configured for the About page.	Array of relative image paths or valid HTTP/HTTPS URLs.	Optional.
+
+If provided, the array must contain at least one logo. An empty array is not valid.
+
+Each logo can reference a local asset or an external image URL.
+
+Example:
+
+"logos": [ "/assets/logos/about1.svg", "/assets/logos/about2.svg" ]
+ui.about.descriptions	Defines the textual content configured for the About page.	Array containing at least one non-empty string.	Optional.
+
+If provided, the array must contain at least one description.
+
+Each description must be a non-empty string.
+
+Example:
+
+"descriptions": [ "Information about the Beacon implementation.", "Additional information about the project." ]
+
+The current example configuration includes HTML formatting within description strings. The validation schema checks the string values but does not validate the HTML markup.
+ui.about.fundingOrgs	Defines the funding organization sections configured for the About page.	Array of funding-organization objects.
+
+Each object must contain:
+title
+logos	Optional.
+
+If provided, the array must contain at least one funding-organization object.
+
+Each object must include a non-empty title and an array containing at least one logo.
+
+Example:
+
+"fundingOrgs": [ { "title": "Funding Organizations", "logos": [ "/assets/logos/organization1.svg" ] } ]
+ui.about.fundingOrgs[].title	Defines the heading associated with a funding organization section.	Non-empty string.	Required for each funding-organization object.
+
+Example:
+
+"Funding Organizations"
+ui.about.fundingOrgs[].logos	Defines the logos associated with a funding organization section.	Array of relative image paths or valid HTTP/HTTPS URLs.	Required for each funding-organization object.
+
+The array must contain at least one logo.
+
+Every logo must be provided as a relative path or a valid HTTP/HTTPS URL.
+ui.showContactPage	Controls whether the Contact page is available in the Beacon Template UI.	Boolean:
+true or false	Optional.
+
+Defaults to false.
+
+When true, a valid ui.contactEmail must be provided.
+
+When false, the Contact page is disabled, but the contact email may remain configured.
+ui.contactEmail	Defines the recipient email address configured for the Contact form.	Valid email address.	Required when ui.showContactPage is true.
+
+Optional when the Contact page is disabled.
+
+Example:
+
+"contactEmail": "contact@example.org"
+Beacon Template UI navigation bar and About page configuration
+
+Download Settings
+This section defines the configuration options for download functionality in the Beacon Template UI.
+
+Deployers can enable or disable downloads and configure the maximum number of records that users are permitted to download in a single operation.
+
+Config Field	Description	Valid Formatting	Notes
+ui.download	Contains the configuration options for download functionality.	Object supporting:
+
+enabled
+maxRecordsDownloadableLimit	Optional.
+
+If omitted, the default download configuration is used.
+
+Both properties are optional within the object and have their own default values.
+
+Example:
+
+"download": { "enabled": true, "maxRecordsDownloadableLimit": 10000 }
+ui.download.enabled	Controls whether download functionality is enabled in the Beacon Template UI.	Boolean:
+true or false	Optional.
+
+Defaults to true.
+
+Set to true to enable download functionality, or false to disable it.
+
+Only Boolean values are accepted. Strings such as "true" and "false" are not valid.
+ui.download.maxRecordsDownloadableLimit	Defines the maximum number of records permitted in a single download operation.	Positive integer greater than or equal to 1.	Optional.
+
+Defaults to 10000.
+
+The value must be a whole number. Decimal values, zero, and negative numbers are not accepted.
+
+Example:
+
+"maxRecordsDownloadableLimit": 5000
+
+The validation schema does not define a fixed upper limit.
+
+
+Cookie Banner Settings
+This section defines the configuration options for the cookie banner in the Beacon Template UI.
+
+Deployers can enable or disable the banner, customize its message and acknowledgement button, and provide links to relevant documents such as privacy notices and terms of use.
+
+The cookie configuration is optional. If it is omitted, the validation schema provides the default settings.
+
+Config Field	Description	Valid Formatting	Notes
+ui.cookies	Contains the configuration options for the cookie banner.	Object supporting:
+
+enabled
+message
+buttonText
+links	Optional.
+
+If omitted, the default cookie configuration is used.
+
+The banner is enabled by default, and default values are provided for its message, button text, and links.
+ui.cookies.enabled	Controls whether the cookie banner is enabled.	Boolean:
+true or false	Optional.
+
+Defaults to true.
+
+Set to true to enable the cookie banner, or false to disable it.
+
+Only Boolean values are accepted.
+ui.cookies.message	Defines the text displayed in the cookie banner.	Non-empty string.	When ui.cookies.enabled is true, a message is required, but the schema supplies a default if the property is omitted.
+
+When the banner is disabled, this property is optional.
+
+Default message:
+
+"This website uses cookies and limited processing of personal data in order to function."
+
+Deployers can replace the default text with a custom message appropriate for their deployment.
+
+An explicitly provided value must not be empty or consist only of whitespace.
+ui.cookies.buttonText	Defines the text displayed on the cookie banner's acknowledgement button.	Non-empty string.	When ui.cookies.enabled is true, this property uses a default if omitted.
+
+When the banner is disabled, the property is optional.
+
+Defaults to "I understand".
+
+Example:
+
+"buttonText": "Accept and continue"
+ui.cookies.links	Defines the links configured for the cookie banner.	Array of link objects.
+
+Each object must contain:
+label
+url	Optional.
+
+Defaults to an empty array [].
+
+The schema does not impose a minimum or maximum number of links.
+
+Every configured link must contain both a non-empty label and a valid HTTP or HTTPS URL.
+
+Example:
+
+"links": [ { "label": "Privacy Notice", "url": "https://example.org/privacy" }, { "label": "Terms of Use", "url": "https://example.org/terms" } ]
+ui.cookies.links[].label	Defines the text associated with an individual cookie banner link.	Non-empty string.	Required for each configured link object.
+
+The label cannot be empty or contain only whitespace.
+
+Example:
+
+"Privacy Notice"
+ui.cookies.links[].url	Defines the destination URL associated with an individual cookie banner link.	Valid HTTP or HTTPS URL.	Required for each configured link object.
+
+The URL must include either the http:// or https:// scheme.
+
+Example:
+
+"https://example.org/privacy"
+
+Note on Cookie Banner Customization:
+
+Deployers can customize the cookie banner message, acknowledgement button text, and associated links through ui.cookies.
+
+If links are configured, every link must include a non-empty label and a valid url.
+
+The validation schema checks the structure and formatting of these values but does not verify that external URLs are accessible or that the linked documents are up to date.
+
+It is recommended to review the configured URLs and message content before deploying the application.
+Cookie banner in the Beacon Template UI
+
+Login Settings
+This section defines the authentication settings available in the Beacon Template UI. Deployers can enable or disable login and configure authentication through an OpenID Connect (OIDC) provider.
+
+Login is disabled by default. When enabled, the application requires a valid OIDC configuration, including a client identifier, provider authority URL, and redirect URI.
+
+Additional OIDC settings are optional and allow deployers to customize authentication behavior according to their identity provider and deployment requirements.
+
+Config Field	Description	Valid Formatting	Notes
+ui.showLogin	Controls whether OIDC-based login functionality is enabled in the Beacon Template UI.	Boolean:
+true or false	Optional.
+
+Defaults to false.
+
+When true, a valid ui.auth.oidc configuration is required.
+
+When false, the authentication configuration is optional and may remain in the configuration file.
+
+Only Boolean values are accepted.
+ui.auth	Contains the authentication configuration for the application.	Object containing:
+
+oidc	Required when ui.showLogin is true.
+
+Optional when login is disabled.
+
+Authentication settings are configured directly in config.json under this object.
+ui.auth.oidc	Contains the settings used to configure the OpenID Connect authentication client.	Object containing OIDC configuration properties.	Required when ui.showLogin is true.
+
+When login is enabled, the following properties must be provided:
+
+clientId
+authority
+redirectUri
+
+The remaining OIDC settings are optional.
+ui.auth.oidc.clientId	Defines the client identifier assigned to the application by the OIDC provider.	Non-empty string.	Required when ui.showLogin is true.
+
+The value must match the client identifier registered with the identity provider.
+
+Example:
+
+"clientId": "your-registered-client-id"
+
+A Client ID identifies an application and is not the same as a Client Secret.
+ui.auth.oidc.authority	Defines the authority URL of the OIDC identity provider.	Valid HTTPS URL.	Required when ui.showLogin is true.
+
+The URL must use HTTPS.
+
+Example:
+
+"authority": "https://login.aai.lifescience-ri.eu/oidc"
+
+Deployers can use Life Science Login or another compatible OIDC provider.
+ui.auth.oidc.redirectUri	Defines the URL to which the identity provider redirects the browser after authentication.	Valid HTTP or HTTPS URL.	Required when ui.showLogin is true.
+
+The URL must match a redirect URI registered with the identity provider.
+
+HTTP is accepted by the schema for local development. HTTPS should be used in production.
+
+Example:
+
+"redirectUri": "http://localhost:3000"
+ui.auth.oidc.autoSignIn	Controls the automatic sign-in setting passed to the OIDC authentication provider.	Boolean:
+true or false	Optional.
+
+The validation schema does not assign a default. However, the application defaults this setting to false when it is omitted.
+
+Set to true to enable the OIDC provider's automatic sign-in behavior.
+
+Independently of this setting, visiting the /login page automatically starts the authentication process when the user is not already authenticated.
+
+Example:
+
+"autoSignIn": false
+ui.auth.oidc.scope	Defines the OIDC scopes requested during authentication.	Non-empty string containing space-separated scope identifiers.	Optional.
+
+If omitted, the following default is used:
+
+"openid profile email ga4gh_passport_v1 offline_access"
+
+Deployers can customize the requested scopes according to those supported by their identity provider.
+
+The schema validates the value as a non-empty string but does not verify individual scope names.
+ui.auth.oidc.automaticSilentRenew	Controls whether the authentication client attempts to renew tokens automatically.	Boolean:
+true or false	Optional.
+
+When true, automatic token renewal is enabled through the authentication client.
+
+Successful renewal depends on the authentication provider and the supported renewal mechanism.
+
+The schema does not assign a default value.
+ui.auth.oidc.silentRedirectUri	Defines an optional callback URL used for silent authentication renewal.	Valid HTTP or HTTPS URL.	Optional.
+
+This property can be configured when the selected OIDC integration requires a dedicated silent renewal callback.
+
+The URL should be registered with the provider when required by its configuration.
+
+No default is defined by the schema.
+ui.auth.oidc.postLogoutRedirectUri	Defines the URL to which users may be redirected after signing out.	Valid HTTP or HTTPS URL.	Optional.
+
+The redirect destination should be compatible with the logout configuration of the identity provider.
+
+Example:
+
+"postLogoutRedirectUri": "https://your-beacon.org/"
+
+No default is defined by the schema.
+ui.auth.oidc.loadUserInfo	Controls whether the authentication client requests additional identity information from the provider's UserInfo endpoint.	Boolean:
+true or false	Optional.
+
+Availability of additional user information depends on the identity provider, its supported claims, and the requested scopes.
+
+No default is defined by the schema.
+ui.auth.oidc.autoSignOut	Controls whether the authentication client automatically redirects users to the identity provider when silent renewal fails.	Boolean:
+true or false	Optional.
+
+The schema accepts either Boolean value but does not assign a default.
+
+The resulting behavior depends on the authentication library and provider.
+ui.auth.oidc.popupRedirectUri	Defines an optional callback URL for authentication initiated through a popup window.	Valid HTTP or HTTPS URL.	Optional.
+
+This setting is relevant when popup-based authentication is used.
+
+No default is defined by the schema.
+ui.auth.oidc.popupWindowTarget	Defines the window target used for popup-based authentication.	Non-empty string.	Optional.
+
+The schema requires a non-empty string when this property is provided, without restricting it to a fixed list of values.
+
+No default is defined by the schema.
+ui.auth.oidc.extraQueryParams	Defines additional query parameters supplied to the OIDC authorization endpoint.	Object containing string keys and string values.	Optional.
+
+Property names must be non-empty strings. Every value must be a string.
+
+The supported parameter names and their effects depend on the selected identity provider.
+
+No default is defined by the schema.
+ui.auth.oidc.metadata	Allows additional OIDC provider metadata to be supplied through the configuration.	Object.	Optional.
+
+The schema allows additional properties inside this object without validating their individual structure.
+
+Deployers should ensure that any supplied metadata is compatible with the selected OIDC provider and authentication library.
+
+No default is defined by the schema.
+
+Note on OIDC Configuration:
+
+The Beacon Template UI uses OIDC configuration properties under ui.auth.oidc.
+
+When login is enabled, deployers must provide a registered Client ID, an HTTPS authority URL, and an HTTP or HTTPS redirect URI.
+
+The OIDC client configuration does not define a Client Secret property. Client Secrets must not be exposed through publicly accessible frontend configuration or browser code.
+
+The validation schema checks configuration formats and required fields. It does not verify that credentials are registered with the provider, that callback URLs are authorized, or that the provider supports every configured option.
+Example OIDC Configuration
+
+The following example shows the minimum required authentication properties when login is enabled, along with an optional setting for automatic sign-in.
+
+"showLogin": true,
+"auth": {
+  "oidc": {
+    "clientId": "your-registered-client-id",
+    "authority": "https://login.aai.lifescience-ri.eu/oidc",
+    "redirectUri": "http://localhost:3000",
+    "autoSignIn": false
+  }
+}
+The example represents the contents of the ui object in config.json. For production deployments, use the appropriate registered redirect URI, normally with HTTPS.
+
+Login functionality in the Beacon Template UI
+
+Entry Types, Common Filters and Genomic Annotations Settings
+This section describes how deployers can configure the preferred order of Beacon entry types and customize the Common Filters and Genomic Annotations sections in the Beacon Template UI.
+
+Entry type identifiers must be compatible with the connected Beacon. Common Filters allow deployers to organize predefined filtering terms into categories, while Genomic Annotations allow configurable genomic query examples to be grouped into categories.
+
+The validation schema defines the accepted formats, maximum numbers of configurable entries, and relationships between these settings.
+
+Config Field	Description	Valid Formatting	Notes
+ui.entryTypesOrder	Defines the preferred display order of Beacon entry types in the user interface.	Array of unique, non-empty strings.	Optional.
+
+If omitted, the following preferred order is used:
+
+["g_variants", "individuals", "biosamples", "analyses", "cohorts", "datasets", "runs"]
+
+Deployers can customize the list using entry type identifiers supported by their Beacon implementation.
+
+The schema does not impose a fixed list of identifiers or a maximum number of entries. Duplicate values are not allowed, but an empty array is accepted.
+
+Entry type identifiers are defined by the backend. The schema does not verify them against the Beacon's /map response.
+
+When a recognized genomic variation entry type, such as "g_variants", is configured, ui.genomicQueries becomes required, with at least one genomic query type enabled.
+ui.commonFilters	Configures the predefined filtering terms and their categories in the Common Filters section.	Object containing:
+
+filterCategories
+filterLabels	Optional.
+
+When this object is provided, both properties are required.
+
+At least one actual filtering term must be configured across all categories.
+
+Filtering term identifiers, types, and scopes should be compatible with the connected Beacon.
+ui.commonFilters.filterCategories	Defines the names and preferred order of categories containing predefined filtering terms.	Array containing 1 to 3 unique, non-empty strings.
+
+Each category name may contain a maximum of 20 characters.	Required when ui.commonFilters is configured.
+
+A maximum of 3 categories is supported.
+
+Example:
+
+["Demographics", "Metabolic Diseases", "Mental Diseases"]
+
+Category names are customizable, but they must be unique. Every key in filterLabels must match a name declared in this array.
+ui.commonFilters.filterLabels	Associates each configured filter category with its predefined filtering terms.	Object mapping category names to arrays of filter objects.
+
+Each filter object contains:
+id
+type
+key
+label
+scopes (optional)	Required when ui.commonFilters is configured.
+
+A maximum of 6 filters per category is supported.
+
+Every category key must also appear in filterCategories. Not every declared category needs its own entry in filterLabels.
+
+An individual category may contain an empty array, but at least one category must contain a filtering term.
+ui.commonFilters.filterLabels[category][].id	Defines the identifier of a configured filtering term.	Non-empty string.	Required for every filter object.
+
+The identifier should correspond to a filtering term supported by the connected Beacon.
+
+Example:
+
+"NCIT:C16576"
+ui.commonFilters.filterLabels[category][].type	Defines the type of filtering term.	One of:
+
+"ontology"
+"alphanumeric"
+"ontologyTerm"
+"customTerm"
+"custom"	Required for every filter object.
+
+Only the five listed values are accepted by the schema.
+
+The configured value should match the filtering term type supported by the connected Beacon.
+ui.commonFilters.filterLabels[category][].key	Defines the key used to identify a filtering term in the UI configuration.	Non-empty string, maximum 100 characters.	Required for every filter object.
+
+Example:
+
+"female"
+
+The value cannot be empty or contain only whitespace.
+ui.commonFilters.filterLabels[category][].label	Defines the user-friendly label associated with a predefined filtering term.	Non-empty string, maximum 100 characters.	Required for every filter object.
+
+Example:
+
+"female"
+
+The label may differ from the technical id, but it must be explicitly provided.
+ui.commonFilters.filterLabels[category][].scopes	Defines the scopes associated with a filtering term.	Array of non-empty strings.	Optional.
+
+An empty array is accepted.
+
+Example:
+
+["individual", "cohort", "individuals"]
+
+When provided, scope values should correspond to those supported by the connected Beacon. The schema does not validate the values against the Beacon API.
+ui.genomicAnnotations	Configures the categories and genomic query examples available in the Genomic Annotations section.	Object containing:
+
+annotationCategories
+annotationLabels	Optional.
+
+When this object is provided, annotationCategories is required.
+
+The annotationLabels property contains deployer-defined genomic query examples.
+
+The special "Molecular Effects" category is populated through application/backend logic rather than manually configured examples.
+ui.genomicAnnotations.annotationCategories	Defines the names and preferred order of genomic annotation categories.	Array containing 1 to 4 unique, non-empty strings.
+
+Each category name may contain a maximum of 50 characters.	Required when ui.genomicAnnotations is configured.
+
+A maximum of 3 user-configurable categories is supported, plus the optional "Molecular Effects" category.
+
+Example:
+
+["SNP Examples", "Genomic Variant Examples", "Protein Examples", "Molecular Effects"]
+
+Category names are customizable, except that "Molecular Effects" has special behavior.
+
+Every user-configurable category must have a corresponding entry in annotationLabels.
+ui.genomicAnnotations.annotationLabels	Defines the genomic query examples associated with each user-configurable annotation category.	Object mapping category names to arrays of genomic annotation examples.	Optional as a schema property, but required in practice when user-configurable categories are declared.
+
+Each user-configurable category must contain between 1 and 6 examples.
+
+Every category key must appear in annotationCategories.
+
+The reserved category "Molecular Effects" must not be included as a key in this object.
+
+Duplicate examples within the same category are not allowed when they have the same query type and equivalent serialized query parameters.
+ui.genomicAnnotations.annotationLabels[category][].label	Defines an optional custom display label for an individual genomic annotation example.	Non-empty string.	Optional.
+
+When provided, the custom label can be used to identify the example in the interface.
+
+The configuration design also supports examples without a custom label, allowing the application to derive a label from the query parameters.
+
+Example:
+
+"BRCA1 example"
+ui.genomicAnnotations.annotationLabels[category][].queryType	Identifies the genomic query type used by an individual annotation example.	One of:
+
+"Gene ID"
+"Sequence Query"
+"Range Query"
+"Bracket Query"
+"Genomic Allele Query (HGVS)"	Required for every annotation example.
+
+The selected query type must also be enabled in ui.genomicQueries.genomicQueryTypes.
+
+Each supported query type has its own requiredqueryParams structure.
+
+The query type labels must match the supported values exactly.
+ui.genomicAnnotations.annotationLabels[category][].queryParams	Contains the parameters used to construct a genomic annotation query example.	Object with fields determined by the selected queryType.	Required for every annotation example.
+
+The supported structures are:
+
+Gene ID: requires geneId. Optional amino-acid change information consists of refAa, aaPosition, and altAa, which must be provided together. The amino-acid position must be a positive integer or a string of digits representing a positive integer.
+
+Sequence Query: requires assemblyId, referenceName, start (an array containing one non-negative integer), referenceBases, and alternateBases.
+
+Range Query: requires assemblyId, referenceName, start (one non-negative integer), and end (one positive integer). The start coordinate cannot exceed the end coordinate.
+
+Bracket Query: requires assemblyId, referenceName, start (two non-negative integers), and end (two positive integers). Each pair must be ordered from minimum to maximum.
+
+Genomic Allele Query (HGVS): requires genomicAlleleShortForm as a non-empty string.
+
+Note on Genomic Annotation Validation:
+
+Genomic annotation examples must be compatible with the genomic query configuration.
+
+The following relationships are checked by the validation schema:
+ui.genomicQueries is required whenever deployer-defined genomic annotation examples are configured.
+Each example's queryType must be enabled in ui.genomicQueries.genomicQueryTypes.
+Configured assemblyId values must exist in the top-level assemblyId array.
+Configured referenceName values must match an entry in ui.genomicQueries.chromosomeLibrary. This comparison ignores case and an optional chr prefix.
+Amino-acid change examples require ui.genomicQueries.queryByAminoacidChange to be enabled. The reference and alternate amino-acid values must exist in ui.genomicQueries.aminoAcidNotation.
+Sequence query bases must use uppercase IUPAC nucleotide codes, excluding U. A standalone period or hyphen is also accepted.
+The schema validates the configuration structure and the relationships above. It does not guarantee that a particular query will return results from the connected Beacon.
+Example: Common Filters Configuration
+
+The following example defines one category containing an ontology filtering term.
+
+"commonFilters": {
+  "filterCategories": ["Demographics"],
+  "filterLabels": {
+    "Demographics": [
+      {
+        "key": "female",
+        "id": "NCIT:C16576",
+        "label": "female",
+        "type": "ontology",
+        "scopes": ["individuals"]
+      }
+    ]
+  }
+}
+Example: Genomic Annotations Configuration
+
+The following example defines a custom genomic annotation category and includes the special "Molecular Effects" category.
+
+"genomicAnnotations": {
+  "annotationCategories": [
+    "Genomic Variant Examples",
+    "Molecular Effects"
+  ],
+  "annotationLabels": {
+    "Genomic Variant Examples": [
+      {
+        "queryType": "Gene ID",
+        "queryParams": {
+          "geneId": "BRCA1"
+        }
+      }
+    ]
+  }
+}
+These examples represent the relevant properties inside the ui object in config.json. The Genomic Annotations example also requires a compatible ui.genomicQueries configuration with the Gene ID query type enabled.
+
+Beacon Template UI entry type ordering
+Common Filters categories and filtering termsGenomic Annotations categories and examples
 
 
 Genomic Query Builder Settings
-This section of the table defines all configuration options related to the Genomic Query Builder in the Beacon Template UI.
-These fields control which genomic inputs are displayed to the user (e.g., alternate bases, amino acid changes) and specify the accepted notation systems and chromosome identifiers to ensure consistency with the connected Beacon instance.
+This section describes the configuration options for genomic queries in the Beacon Template UI, including the Genomic Query Builder, genomic search input, and genomic annotation examples.
+
+Deployers can configure which genomic query types are available, define supported chromosome identifiers, enable or disable amino-acid change queries, and customize the accepted amino-acid notation values.
+
+These settings are defined directly under ui.genomicQueries in config.json. They should be configured according to the genomic query capabilities supported by the connected Beacon.
 
 Config Field	Description	Valid Formatting	Notes
-ui.genomicQueries.genomicQueryTypes	Configures which genomic query type are visible in the UI	object with boolean fields (true / false):
-{ sequenceQuery: boolean, geneId: boolean, rangeQuery: boolean, bracketQuery: boolean, hgvsQuery: boolean }	Each flag enables or disables its corresponding query type in the Query Builder UI.
+ui.genomicQueries	Contains the configuration settings shared across genomic-query features in the Beacon Template UI.	Object supporting:
 
-These settings do not change the backend behavior; they only control which query interfaces appear in the UI.
-ui.genomicQueries.genomicQueryBuilder	Configures the Genomic Query Builder, defining which input fields and dropdowns are visible and which notation systems are allowed.	object containing:
-showAlternateBases: boolean
-showAminoacidChange: boolean
-aminoAcidNotation: array of allowed amino acid codes
-chromosomeLibrary: array of valid chromosome values	
-ui.genomicQueries.genomicQueryBuilder.showAlternateBases	Toggles the visibility of the Alternate Bases input field in the Genomic Query Builder.	boolean (true / false)	If true, the Alternate Bases field will be displayed in the form.
-ui.genomicQueries.genomicQueryBuilder.showAminoacidChange	Toggles the visibility of the Amino Acid Change input field in the Genomic Query Builder.	boolean (true / false)	If true, the Amino Acid Change field will be displayed in the form.
-ui.genomicQueries.genomicQueryBuilder.aminoAcidNotation	Defines the set of allowed amino acid codes for validation and dropdown selection.
-Typically follows the IUPAC 3-letter amino acid notation.	array of strings	Used by the Genomic Query Builder when validating amino acid inputs. Values should match the ones in the Beacon.
+chromosomeLibrary
+queryByAminoacidChange
+aminoAcidNotation
+genomicQueryTypes
+searchInputExample	Conditionally required.
 
-The amino acid value can be read from the annotated VCF.
-It is extracted from the VEP annotation field under hgvsp. Alternatively, it can be provided through a custom VCF info entry following RI Tools.
-ui.genomicQueries.genomicQueryBuilder.chromosomeLibrary	Defines the list of accepted chromosome identifiers available in the Genomic Query Builder.	array of strings	Used to validate chromosome inputs. Values should match the ones in the Beacon.
+This object is required when ui.entryTypesOrder contains a recognized genomic variation entry type, including "g_variants", "genomicVariations", or "genomicVariation".
 
-Note on Chromosome Library Formats:
-If your Beacon is deployed using RI Tools + PI or another implementation that automatically translates between these formats, you can omit this field. In such cases, the backend handles the normalization internally.
+It is also required when configurable genomic annotation examples are provided under ui.genomicAnnotations.annotationLabels.
+
+When the object is configured, chromosomeLibrary and genomicQueryTypes are required.
+ui.genomicQueries.chromosomeLibrary	Defines the supported chromosome or reference-name identifiers used by genomic-query features.	Array containing at least one unique, non-empty string.	Required whenever ui.genomicQueriesis configured.
+
+The array must contain at least one value. Duplicate values are not accepted.
+
+Example:
+
+"chromosomeLibrary": [ "1", "2", "3", "X", "Y", "MT" ]
+
+The complete list can be customized according to the connected Beacon implementation.
+
+Reference names used in genomic annotation examples and the genomic search input example must match a value in this library.
+
+For this cross-field validation, comparison is case-insensitive and an optional chr prefix is ignored.
+ui.genomicQueries.queryByAminoacidChange	Controls whether amino-acid change query inputs are enabled.	Boolean:
+true or false	Optional.
+
+Defaults to true.
+
+This setting is shared by the Genomic Query Builder and genomic annotation examples.
+
+When false, genomic annotation examples cannot include amino-acid change parameters such as refAa and altAa.
+
+When true, the supported amino-acid values are determined by ui.genomicQueries.aminoAcidNotation.
+ui.genomicQueries.aminoAcidNotation	Defines the amino-acid notation values supported by the Genomic Query Builder and genomic annotation examples.	Array of unique, non-empty strings.	Optional.
+
+When amino-acid change queries are enabled and this property is omitted, the schema provides a default list.
+
+The default includes standard one-letter and three-letter amino-acid codes, as well as "Ter" and "*"for stop codons.
+
+Example of a customized list:
+
+"aminoAcidNotation": [ "Ala", "Gly", "Ser", "Ter", "A", "G", "S", "*" ]
+
+Deployers can customize the list according to the amino-acid annotations supported by their data. The schema also permits custom notation values.
+
+If provided, the array must contain at least one value and must not contain duplicates.
+
+When queryByAminoacidChange is false, this property is optional and no default notation list is applied by this conditional schema rule.
+
+Amino-acid values used in configured annotation examples must be present in this array.
+ui.genomicQueries.genomicQueryTypes	Defines which genomic query types are enabled in the Beacon Template UI.	Object containing Boolean properties:
+
+sequenceQuery
+geneId
+rangeQuery
+bracketQuery
+hgvsQuery	Required whenever ui.genomicQueriesis configured.
+
+All five properties are optional within the object and individually default to true.
+
+Example:
+
+"genomicQueryTypes": { "sequenceQuery": true, "geneId": true, "rangeQuery": true, "bracketQuery": true, "hgvsQuery": true }
+
+When a recognized genomic variation entry type is configured in ui.entryTypesOrder, at least one query type must be enabled.
+
+Genomic annotation examples may only use query types enabled in this object.
+ui.genomicQueries.genomicQueryTypes.sequenceQuery	Controls the availability of Sequence Query functionality.	Boolean:
+true or false	Optional. Defaults to true.
+
+This setting also determines whether configured annotation examples of type "Sequence Query" are permitted.
+ui.genomicQueries.genomicQueryTypes.geneId	Controls the availability of Gene ID query functionality.	Boolean:
+true or false	Optional. Defaults to true.
+
+This setting also determines whether configured annotation examples of type "Gene ID" are permitted.
+ui.genomicQueries.genomicQueryTypes.rangeQuery	Controls the availability of Range Query functionality.	Boolean:
+true or false	Optional. Defaults to true.
+
+This setting also determines whether configured annotation examples of type "Range Query" are permitted.
+ui.genomicQueries.genomicQueryTypes.bracketQuery	Controls the availability of Bracket Query functionality.	Boolean:
+true or false	Optional. Defaults to true.
+
+This setting also determines whether configured annotation examples of type "Bracket Query" are permitted.
+ui.genomicQueries.genomicQueryTypes.hgvsQuery	Controls the availability of genomic allele queries using HGVS notation.	Boolean:
+true or false	Optional. Defaults to true.
+
+This setting also determines whether configured annotation examples of type "Genomic Allele Query (HGVS)" are permitted.
+ui.genomicQueries.searchInputExample	Defines an example genomic variant for the genomic search input.	Object containing:
+
+referenceName
+position
+referenceBases
+alternateBases	Optional.
+
+When provided, all four properties are required. Partial example objects are not accepted.
+
+Example:
+
+"searchInputExample": { "referenceName": "22", "position": 16050527, "referenceBases": "C", "alternateBases": "A" }
+
+The example must use a reference name configured in chromosomeLibrary and valid nucleotide values.
+ui.genomicQueries.searchInputExample.referenceName	Defines the chromosome or reference identifier used by the example variant.	Non-empty string.	Required when searchInputExampleis provided.
+
+The value must match an entry in ui.genomicQueries.chromosomeLibrary.
+
+The cross-field comparison is case-insensitive and ignores an optional chr prefix.
+
+Example: "22"
+ui.genomicQueries.searchInputExample.position	Defines the genomic position used by the example variant.	Non-negative integer, greater than or equal to 0.	Required when searchInputExampleis provided.
+
+Decimal and negative values are not accepted.
+
+Example:
+
+16050527
+
+Coordinate indexing for genomic queries is separately configured through the top-level queryCoordinatesAre0Based setting.
+ui.genomicQueries.searchInputExample.referenceBases	Defines the reference nucleotide sequence used by the example variant.	Uppercase IUPAC nucleotide sequence, excluding U.
+
+A standalone "." or "-" is also accepted.	Required when searchInputExampleis provided.
+
+Lowercase nucleotide characters are not accepted by the schema.
+
+The supported sequence characters are:
+
+ACGTRYSWKMBDHVN
+
+Example: "C"
+ui.genomicQueries.searchInputExample.alternateBases	Defines the alternate nucleotide sequence used by the example variant.	Uppercase IUPAC nucleotide sequence, excluding U.
+
+A standalone "." or "-" is also accepted.	Required when searchInputExampleis provided.
+
+The same nucleotide validation rules used for referenceBases apply.
+
+Example: "A"
+
+Note on Genomic Query Configuration:
+
+The chromosome library, amino-acid notation values, and genomic query type settings are shared across related genomic-query features.
+
+When configuring these settings, ensure that they are compatible with the connected Beacon implementation.
+
+Important validation rules:
+chromosomeLibrary is required whenever ui.genomicQueries is configured.
+At least one genomic query type must be enabled when a recognized genomic variation entry type is configured.
+Genomic annotation examples cannot use query types that are disabled.
+Amino-acid change examples require queryByAminoacidChange to be enabled.
+Amino-acid values used in annotation examples must be included in aminoAcidNotation.
+Reference names and assembly identifiers used by genomic annotation examples must match the corresponding configuration values.
+These validation rules check configuration consistency. They do not guarantee that every configured query is supported by the backend or will return results.
+Example: Genomic Query Configuration
+
+The following example shows the structure of the genomicQueries object inside ui in config.json.
+
+"genomicQueries": {
+  "chromosomeLibrary": [
+    "1", "2", "3", "22", "X", "Y", "MT"
+  ],
+  "queryByAminoacidChange": true,
+  "aminoAcidNotation": [
+    "Ala", "Gly", "Ser", "Ter",
+    "A", "G", "S", "*"
+  ],
+  "genomicQueryTypes": {
+    "sequenceQuery": true,
+    "geneId": true,
+    "rangeQuery": true,
+    "bracketQuery": true,
+    "hgvsQuery": true
+  },
+  "searchInputExample": {
+    "referenceName": "22",
+    "position": 16050527,
+    "referenceBases": "C",
+    "alternateBases": "A"
+  }
+}
+The example uses a shortened chromosome library and amino-acid notation list for readability. Deployers can provide a more complete list according to their Beacon implementation.
+
+Genomic Query Builder input fieldsAmino-acid notation configurationChromosome library configuration
+
+OIDC Login Setup
+The Beacon Template UI supports authentication through an OpenID Connect (OIDC) identity provider.
+
+Authentication is optional and is controlled by the ui.showLogin property in config.json. When login is disabled, the application starts without initializing the OIDC authentication provider.
+
+When login is enabled, deployers must configure an OIDC client and register the appropriate application URLs with their chosen identity provider.
+
+1. Enable OIDC Authentication
+Set ui.showLogin to true and provide the required properties inside ui.auth.oidc.
+
+The following configuration is an excerpt from the ui object, rather than a complete config.json file.
+
+"showLogin": true,
+"auth": {
+  "oidc": {
+    "clientId": "your-registered-client-id",
+    "authority": "https://your-oidc-provider.org",
+    "redirectUri": "https://your-beacon.org/",
+    "autoSignIn": false,
+    "automaticSilentRenew": true,
+    "scope": "openid profile email"
+  }
+}
+The required OIDC properties are:
+
+clientId: the client identifier registered with the identity provider.
+authority: the HTTPS URL of the OIDC provider.
+redirectUri: the application's authentication callback URL, which must be registered with the provider.
+The remaining properties in this example are optional. Detailed validation rules are available in the Login Settings section.
+
+2. Register the Application with an OIDC Provider
+Before enabling authentication, register the Beacon Template UI as an OIDC client with a compatible identity provider.
+
+Life Science Login is one possible provider, but it is not required. Deployers can use another OIDC provider compatible with the authentication library.
+
+During registration, ensure that:
+
+The registered Client ID matches ui.auth.oidc.clientId.
+The configured authority points to the correct OIDC provider.
+The registered redirect URI matches ui.auth.oidc.redirectUri.
+The provider supports the requested authentication scopes.
+The provider supports the authorization code response type used by the application.
+
+Note on Client Credentials:
+
+The current OIDC configuration is created using the properties defined in ui.auth.oidc.
+
+The authentication configuration uses a Client ID but does not include a Client Secret.
+
+A Client ID is a public application identifier. Client Secrets must not be placed in publicly accessible frontend configuration files, environment variables embedded into browser bundles, or client-side JavaScript.
+3. Authentication Initialization
+The application loads and validates the runtime configuration before initializing React.
+
+When ui.showLogin is true, the application creates the OIDC configuration and initializes the authentication provider.
+
+When login is disabled, the application starts without the OIDC authentication provider.
+
+The supported configuration properties are described in the Login Settings section.
+
+The authentication response type is set internally to "code" and cannot be changed through config.json.
+
+The supported OIDC properties defined in the validation schema are forwarded to the authentication provider when login is enabled.
+
+Optional settings include silent token renewal, logout redirects, user information retrieval, popup authentication settings, and provider-specific parameters.
+
+Their availability and behavior depend on the identity provider and authentication library. Configuring popup settings does not automatically enable popup login in the current interface.
+
+The application also defines a callback to redirect users to their previously requested page after successful authentication.
+
+4. Authentication Callback and Redirect
+When login is enabled, routes protected by ProtectedRoute require an authenticated user.
+
+If an unauthenticated user requests a protected page, the application saves the original local URL in session storage and redirects the user to /login.
+
+The saved URL includes the pathname, query parameters, and URL fragment, allowing users to return to the exact location they originally requested.
+
+Currently, the Dataset Detailed Table (/dataset-detailed-table) and Allele Frequency (/allele-frequency) pages use ProtectedRoute.
+
+Other main application routes are not protected by this component. Frontend route protection does not replace backend API authorization.
+
+When the identity provider redirects the browser to the application with both code and state query parameters, the application displays a loading indicator while authentication is being processed.
+
+The Login page automatically initiates the OIDC authentication process when the user is not already authenticated.
+
+While the authentication session is being checked or the browser is being redirected to the provider, the following message is displayed:
+
+You will be redirected to the login shortly
+
+No additional login button interaction is required on this page.
 
 
+Authentication Callback Message:
+
+Completing log in...
+
+You will be redirected to the requested page shortly.
+After successful authentication, the application retrieves the saved local return path and redirects the browser to that location.
+
+If no valid local return path is available, the application redirects to the home page at /.
+
+The stored return path is removed after it is read.
+
+5. Validate the Authentication Setup
+After updating config.json, reload the application and verify that authentication initializes correctly.
+
+If the required OIDC configuration is missing or invalid, application startup fails and an error is logged in the browser console.
+
+Configuration validation does not verify that the identity provider is reachable or that the registered callback URLs and scopes are accepted by the provider. These should be tested against the configured authentication service.
 
 
-Login and Environment Configuration
-This section is relevant only if the showLogin parameter in the configuration file is set to true.
-If showLogin is set to false, authentication is not required to run searches or access data.
-In this case, this part can be skipped and the document can continue from the Deployment paragraph.
-
-This section outlines the steps required to enable authentication in the user interface, including the environment variables and OIDC settings that must be provided.
-Additional guidance on how to complete the login-related fields in config.json is available here.
-
-1. Authentication Types (providerType)
-Before configuring your environment variables, it is important to understand the authentication mode defined in providerType.
-This field determines which credentials the UI must load and how it connects to the OIDC provider.
-
-The Beacon Template UI supports two modes:
-providerType: private
-The UI expects and uses both credentials:
-REACT_APP_CLIENT_ID
-REACT_APP_CLIENT_SECRET
-
-providerType: public
-The UI uses only the Client ID:
-REACT_APP_CLIENT_ID
-Any secret in the .env file is ignored.
-
-
-Note on Public vs Private OIDC Clients:
-Although the user experience is identical and the login screen behaves the same, identity providers handle public and private clients differently. The Beacon Template UI supports both models, allowing deployers to align the authentication setup with the requirements of their specific OIDC environment.
-
-
-2. Authentication Environment File (.env)
-After updating the login-related fields in config.json, one additional file must be configured:
-.env — located in client/.env
-
-This file stores the environment variables required for authentication (such as the Client ID and, if applicable, the Client Secret).
-You need to create this file manually.
-A template file (example.txt) is provided within the auth folder. Copy its content to your .env file and replace the placeholders with your Client ID and Client Secret.
-For security reasons, the .env file is already included in .gitignore and must never be committed to the repository.
-Example .env file:
-REACT_APP_CLIENT_ID="your-client-id"
-REACT_APP_CLIENT_SECRET="your-client-secret"
-Formatting rules:
-Values must be enclosed in quotes " "
-Each variable goes on a separate line
-
-Note on Public vs Private OIDC Clients:
-The Client ID and Client Secret are security credentials issued by the Identity Provider (for example, Life Science Login) to identify your application. They enable the UI to authenticate users securely and must be kept private.
-
-
-3. Obtaining credentials from Life Science Login (example):
-You are not required to use Life Science Login, but you must use an OIDC provider.
-To use Life Science Login:
-Create a user: How to get and use a Life Science ID
-Register a new service: Life Science Service Registry (OIDC)
-Once the service is approved, access your Life Science RI AAI profile here
-The registry will give you:
-Client ID: a unique alphanumeric string (typically 30–40 characters long)
-Client Secret: an automatically generated secure key (UUID-like format)
-Use these values in your .env file.
 
 Single Beacon and Beacon Network: Configuration and UI Differences
 The Beacon Template UI supports both Single Beacon and Beacon Network.
-The UI has been architected to allow a seamless transition between the two modes. Switching from one type to the other does not require structural UI changes. The behavior automatically adapts based on configuration.
+The UI has been architected to allow a seamless transition between the two modes. Switching from one type to the other does not require structural UI changes. The behavior automatically adapts based on the chosen configuration.
 
 The differences can be grouped into two macro aspects:
 
 Configuration (setup level)
 User interface (visual and interaction level)
-From a setup perspective, the difference is minimal. To switch between a Single Beacon and a Beacon Network, you only need to:
+From a setup perspective, the difference is minimal. To switch between a Single Beacon and a Beacon Network, deployers only need to:
+
 Set the correct beaconType
 Provide the correct apiUrl
 Example:
+
 {
   "beaconType": "singleBeacon",
   "apiUrl": "https://your-single-beacon.org/api"
 }
 or
+
 {
   "beaconType": "networkBeacon",
   "apiUrl": "https://your-beacon-network.org/api"
 }
-
 There are no structural changes required in the UI code. The behavior adapts automatically based on the selected beaconType. While the configuration change is small, the user experience changes significantly.
 The differences affect:
 
@@ -349,16 +1184,14 @@ When you access the Beacon Browser, the main page displays key information about
 
 If you are browsing a single Beacon, you will see details specific to that Beacon, such as the organization name and URL, as well as the description of the datasets it contains.
 If you are browsing a Beacon Network, the page highlights the participating organizations by displaying their logos. This provides a quick visual overview of which institutions are part of the network.
-screenshot from Beacon UI showing the difference between home page abnner of single beacon vs beacon network
-
+Comparison of the Single Beacon and Beacon Network home pages
 Beacon Network Tab
 When accessing a Beacon Network, an additional tab appears in the navigation bar. Selecting this tab opens a dedicated page with detailed information about each Beacon within the network.
 
-screenshot from Beacon UI showing the difference between navigation bar of single beacon vs beacon network
-
+Navigation bar comparison between Single Beacon and Beacon Network
 Results Table
 The most significant changes are reflected in the results table.
 
 In the Single Beacon interface, results are presented in a flat, dataset-centered table.
 In the Beacon Network interface, results are displayed in a hierarchical, expandable table. The table first presents summary information at the Beacon level (such as maturity level and number of datasets). Users can then expand each Beacon to view detailed information about the datasets it contains. This structure provides a clearer overview at the network level while maintaining access to dataset-level detail when needed.
-screenshot from Beacon UI showing the difference between results table of single beacon vs beacon network
+Results table comparison between Single Beacon and Beacon Network
