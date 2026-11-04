@@ -5,7 +5,7 @@ Configuration File
 
 The config.json file is the main configuration file for the Beacon Template UI. It allows deployers to customize the application's appearance, available features, and genomic query settings without modifying the frontend source code.
 
-The configuration also defines deployment-specific information, including the Beacon API endpoint, deployment type, supported genome assemblies, and authentication settings.
+The configuration also defines deployment-specific information, including the Beacon API endpoint, supported genome assemblies, and authentication settings.
 
 Configuration file locations:
 

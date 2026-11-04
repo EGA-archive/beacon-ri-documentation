@@ -6,6 +6,7 @@ import Menu from "./components/Menu";
 import { SearchableContentProvider } from "./context/SearchableContentContext";
 import ContentPreloader from "./components/ContentPreloader";
 import ScrollToTop from "./hooks/ScrollToTop";
+import { CookieBanner } from "@ega/beacon-cookie-consent";
 
 // Introduction imports
 import LandingPage from "./pages/LandingPage";
@@ -75,6 +76,23 @@ function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+
+  const cookieConfig = {
+    enabled: true,
+    message:
+      "This website requires cookies, and the limited processing of your personal data in order to function. By using the site you agree to this as outlined in our Privacy Notice and Terms of Use.",
+    buttonText: "I understand",
+    links: [
+      {
+        label: "Privacy Notice",
+        url: "https://ega-archive.org/data-protection/privacy-notice/ega-website/",
+      },
+      {
+        label: "Terms of Use",
+        url: "https://ega-archive.org/legal-notice/",
+      },
+    ],
+  };
 
   const toggleSubmenu = () => {
     setIsSubmenuOpen(!isSubmenuOpen);
@@ -318,6 +336,7 @@ function App() {
           </div>
         </div>
       </Router>
+      <CookieBanner config={cookieConfig} />
     </SearchableContentProvider>
   );
 }

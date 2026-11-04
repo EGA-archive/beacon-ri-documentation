@@ -43,68 +43,68 @@ const UIVersioning: React.FC<UIVersioningProps> = ({ searchTerm }) => {
           <h1>Versioning</h1>
           <ul>
             <li>
-              <b>First Release (4 February 2026)</b>:{" "}
+              <b>Version 2.0.0 (Planned for 1 November 2026)</b>
+              <p className="list-description">
+                This major release introduces a more flexible runtime
+                configuration system with built-in validation, allowing
+                deployers to customize query options, filters, genomic examples,
+                and download settings without rebuilding the UI. Genomic search
+                and query building have also been improved with clearer
+                suggestions, better input validation, and enhanced support for
+                genomic annotations and amino acid changes.
+              </p>
+              <p className="list-description">
+                The results experience has been expanded with dedicated detailed
+                records pages, improved table navigation, keyword highlighting,
+                configurable data downloads, and clearer data visibility
+                information. The release also includes improvements to
+                authentication, responsive layouts, accessibility of UI
+                controls, and deployment, including a new container health check
+                endpoint.
+              </p>
+            </li>
+
+            <li>
+              <b>Version 1.1.0 (26 March 2026)</b>:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.1.0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Beacon Template UI Version 1.1.0
+              </a>
+              <p className="list-description">
+                This release introduces support for authenticated API requests
+                using bearer tokens and ARM64 Docker images. It also includes
+                improvements to genomic query handling, responsive layouts, and
+                configuration options.
+              </p>
+            </li>
+
+            <li>
+              <b>Version 1.0.0 (4 February 2026)</b>:{" "}
               <a
                 href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.0.0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {" "}
                 Beacon Template UI Version 1.0.0
               </a>
-            </li>
-            <li>
-              <b>Second Release (26 March 2026)</b>:{" "}
-              <a
-                href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/1.0.1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {" "}
-                Beacon Template UI Version 1.1.0
-              </a>
               <p className="list-description">
-                This release introduces support for authenticated requests,
-                enabling secure API interactions via bearer tokens, and adds
-                ARM64 image publishing support. It also includes UI and UX
-                improvements across the application, such as enhanced genomic
-                query handling, responsive design fixes, and configuration
-                updates.
-              </p>
-            </li>
-            <li>
-              <b>Third Release (01 November 2026)</b>:{" "}
-              <a
-                href="https://github.com/EGA-archive/beacon-template-ui/releases/tag/2.0.0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {" "}
-                Beacon Template UI Version 2.0.0
-              </a>
-              <p className="list-description">
-                This release introduces support for authenticated requests,
-                enabling secure API interactions via bearer tokens, and adds
-                ARM64 image publishing support. It also includes UI and UX
-                improvements across the application, such as enhanced genomic
-                query handling, responsive design fixes, and configuration
-                updates.
+                The first official release of the Beacon Template UI, providing
+                a configurable interface for single Beacons and Beacon Networks,
+                including genomic queries, filtering terms, and results
+                visualization.
               </p>
             </li>
           </ul>
-
           <h2 id="upcoming-iterations">Upcoming Iterations</h2>
           <p>
-            It’s important to highlight that the Beacon Template UI is under
-            active development. It evolves alongside updates to the Beacon
-            specification and incorporates usability improvements based on
-            feedback from deployers and users. <br></br>
-            Upcoming iterations of the UI will expand configuration options for
-            key areas such as the contact form and privacy-related settings.
-            These updates will allow deployers to customize form fields,
-            submission behavior, and recipient information.
+            Future releases of the Beacon Template UI will continue to introduce
+            new features and improvements based on feedback from users and
+            deployers. Additional functionality will be announced as it becomes
+            available.
           </p>
-
           <p>
             The documentation is continuously updated to reflect new features
             and improvements.

@@ -75,8 +75,8 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             <br />
             <br />
             The configuration also defines deployment-specific information,
-            including the Beacon API endpoint, deployment type, supported genome
-            assemblies, and authentication settings.
+            including the Beacon API endpoint, supported genome assemblies, and
+            authentication settings.
           </p>
           <p>Configuration file locations:</p>
           <ul>
@@ -98,7 +98,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             <span className="custom-code">config.example.json</span> unchanged
             and use it as a reference when creating or updating the runtime
             configuration.
-            <br />
             <br />
             The example file illustrates the configuration structure. The
             authoritative validation rules and default values are defined in the
