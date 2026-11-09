@@ -101,7 +101,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             server when making requests.
           </p>
 
-          <table>
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Generic parameters</th>
@@ -111,140 +111,89 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             </thead>
 
             <tbody>
+              {/* Requested schema */}
               <tr>
-                <td>• requestedSchema</td>
+                <td>
+                  <code>requestedSchema</code>
+                </td>
                 <td>String</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>requestedSchema=ga4gh-service-info-v1.0</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "requestedSchema=ga4gh-service-info-v1.0",
-                          "requestedSchema"
-                        )
-                      }
-                    >
-                      {copySuccess["requestedSchema"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>requestedSchema=ga4gh-service-info-v1.0</code>
                 </td>
               </tr>
 
+              {/* Resultset response inclusion */}
               <tr>
-                <td>• includeResultsetResponses*</td>
+                <td>
+                  <code>includeResultsetResponses</code>
+                </td>
                 <td>
                   string
                   <br />
-                  Default: "HIT"
                   <br />
-                  Enum: "ALL" "HIT" "MISS" "NONE"
+                  Default: <code>"HIT"</code>
+                  <br />
+                  <br />
+                  Enum: <code>"ALL"</code>, <code>"HIT"</code>,{" "}
+                  <code>"MISS"</code>, <code>"NONE"</code>
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>includeResultsetResponses=HIT</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "includeResultsetResponses=HIT",
-                          "get-includeResultsetResponses"
-                        )
-                      }
-                    >
-                      {copySuccess["get-includeResultsetResponses"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>includeResultsetResponses=HIT</code>
                 </td>
               </tr>
 
+              {/* Requested granularity */}
               <tr>
-                <td>• requestedGranularity*</td>
+                <td>
+                  <code>requestedGranularity</code>
+                </td>
                 <td>
                   string (Granularity)
                   <br />
-                  Default: "boolean"
                   <br />
-                  Enum: "boolean" "count" "record"
+                  Default: <code>"boolean"</code>
+                  <br />
+                  <br />
+                  Enum: <code>"boolean"</code>, <code>"count"</code>,{" "}
+                  <code>"record"</code>
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>requestedGranularity=record</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "requestedGranularity=record",
-                          "get-requestedGranularity"
-                        )
-                      }
-                    >
-                      {copySuccess["get-requestedGranularity"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>requestedGranularity=record</code>
                 </td>
               </tr>
 
+              {/* Pagination offset */}
               <tr>
-                <td>• skip</td>
+                <td>
+                  <code>skip</code>
+                </td>
                 <td>
                   integer (Skip) ≥ 0
                   <br />
-                  Default: 0
+                  <br />
+                  Default: <code>0</code>
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>skip=0</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("skip=0", "skip")}
-                    >
-                      {copySuccess["skip"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>skip=0</code>
                 </td>
               </tr>
 
+              {/* Pagination limit */}
               <tr>
-                <td>• limit</td>
+                <td>
+                  <code>limit</code>
+                </td>
                 <td>
                   integer (Limit) ≥ 0
                   <br />
-                  Default: 10
                   <br />
-                  Max: 100
+                  Default: <code>10</code>
+                  <br />
+                  <br />
+                  Max: <code>100</code>
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>limit=10</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("limit=10", "limit")}
-                    >
-                      {copySuccess["limit"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>limit=10</code>
                 </td>
               </tr>
             </tbody>
@@ -258,7 +207,7 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             section.
           </p>
 
-          <table>
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Request parameters</th>
@@ -266,301 +215,166 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <th>Examples</th>
               </tr>
             </thead>
+
             <tbody>
+              {/* Start position */}
               <tr>
-                <td>• start</td>
                 <td>
-                  integer &lt;int64&gt; ≥ 0<br />
+                  <code>start</code>
+                </td>
+                <td>
+                  integer &lt;int64&gt; ≥ 0
+                  <br />
+                  <br />
                   (or comma-separated integers)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>start=16050074</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("start=16050074", "start")}
-                    >
-                      {copySuccess["start"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>start=16050074</code>
                 </td>
               </tr>
+
+              {/* End position */}
               <tr>
-                <td>• end</td>
                 <td>
-                  integer &lt;int64&gt; ≥ 0<br />
+                  <code>end</code>
+                </td>
+                <td>
+                  integer &lt;int64&gt; ≥ 0
+                  <br />
+                  <br />
                   (or comma-separated integers)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>end=16052080</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("end=16052080", "end")}
-                    >
-                      {copySuccess["end"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>end=16052080</code>
                 </td>
               </tr>
+
+              {/* Reference genome assembly */}
               <tr>
-                <td>• assemblyId</td>
+                <td>
+                  <code>assemblyId</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>assemblyId=GRCh38</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("assemblyId=GRCh38", "assemblyId")
-                      }
-                    >
-                      {copySuccess["assemblyId"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>assemblyId=GRCh38</code>
                 </td>
               </tr>
+
+              {/* Reference sequence */}
               <tr>
-                <td>• referenceName</td>
+                <td>
+                  <code>referenceName</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>referenceName=22</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("referenceName=22", "referenceName")
-                      }
-                    >
-                      {copySuccess["referenceName"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>referenceName=22</code>
                 </td>
               </tr>
+
+              {/* Reference bases */}
               <tr>
-                <td>• referenceBases</td>
+                <td>
+                  <code>referenceBases</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>referenceBases=G</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("referenceBases=G", "referenceBases")
-                      }
-                    >
-                      {copySuccess["referenceBases"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>referenceBases=G</code>
                 </td>
               </tr>
+
+              {/* Alternate bases */}
               <tr>
-                <td>• alternateBases</td>
+                <td>
+                  <code>alternateBases</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>alternateBases=A</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("alternateBases=A", "alternateBases")
-                      }
-                    >
-                      {copySuccess["alternateBases"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>alternateBases=A</code>
                 </td>
               </tr>
+
+              {/* Minimum variant length */}
               <tr>
-                <td>• variantMinLength</td>
+                <td>
+                  <code>variantMinLength</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantMinLength=5</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "variantMinLength=5",
-                          "variantMinLength"
-                        )
-                      }
-                    >
-                      {copySuccess["variantMinLength"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantMinLength=5</code>
                 </td>
               </tr>
+
+              {/* Maximum variant length */}
               <tr>
-                <td>• variantMaxLength</td>
+                <td>
+                  <code>variantMaxLength</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantMaxLength=2</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "variantMaxLength=2",
-                          "variantMaxLength"
-                        )
-                      }
-                    >
-                      {copySuccess["variantMaxLength"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantMaxLength=2</code>
                 </td>
               </tr>
+
+              {/* Gene identifier */}
               <tr>
-                <td>• geneId</td>
+                <td>
+                  <code>geneId</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>geneId=CCNL2</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("geneId=CCNL2", "geneId")}
-                    >
-                      {copySuccess["geneId"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>geneId=CCNL2</code>
                 </td>
               </tr>
+
+              {/* Amino acid change */}
               <tr>
-                <td>• aminoacidChange</td>
+                <td>
+                  <code>aminoacidChange</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>aminoacidChange=p.Thr130Met</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "aminoacidChange=p.Thr130Met",
-                          "aminoacidChange"
-                        )
-                      }
-                    >
-                      {copySuccess["aminoacidChange"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>aminoacidChange=p.Thr130Met</code>
                 </td>
               </tr>
+
+              {/* Variant type */}
               <tr>
-                <td>• variantType</td>
+                <td>
+                  <code>variantType</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantType=SNP</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("variantType=SNP", "variantType")
-                      }
-                    >
-                      {copySuccess["variantType"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantType=SNP</code>
                 </td>
               </tr>
+
+              {/* Genomic allele short form */}
               <tr>
-                <td>• genomicAlleleShortForm</td>
+                <td>
+                  <code>genomicAlleleShortForm</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>
-                      genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
-                    </code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G",
-                          "genomicAlleleShortForm"
-                        )
-                      }
-                    >
-                      {copySuccess["genomicAlleleShortForm"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>
+                    genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
+                  </code>
                 </td>
               </tr>
+
+              {/* Clinical relevance */}
               <tr>
-                <td>• clinicalRelevance</td>
+                <td>
+                  <code>clinicalRelevance</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>clinicalRelevance=pathogenic</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "clinicalRelevance=pathogenic",
-                          "clinicalRelevance"
-                        )
-                      }
-                    >
-                      {copySuccess["clinicalRelevance"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>clinicalRelevance=pathogenic</code>
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <table>
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Filters</th>
@@ -568,33 +382,21 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <th>Examples</th>
               </tr>
             </thead>
+
             <tbody>
+              {/* Filters */}
               <tr>
-                <td>• filters</td>
+                <td>
+                  <code>filters</code>
+                </td>
                 <td>
                   string
+                  <br />
                   <br />
                   (comma-separated strings of ontologies)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>filters=NCIT:C16576,NCIT:C42331</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "filters=NCIT:C16576,NCIT:C42331",
-                          "filters"
-                        )
-                      }
-                    >
-                      {copySuccess["filters"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>filters=NCIT:C16576,NCIT:C42331</code>
                 </td>
               </tr>
             </tbody>
@@ -851,7 +653,8 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             and all the filters, apart from the request parameters.
           </p>
           <h6 className="underline">Query Parameters</h6>
-          <table className="codeSnippet">
+          {/* Here */}
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Generic parameters</th>
@@ -861,7 +664,10 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             </thead>
             <tbody>
               <tr>
-                <td>• includeResultsetResponses*</td>
+                <td>
+                  {" "}
+                  <code>includeResultsetResponses *</code>
+                </td>
                 <td>
                   string <br />
                   Default: "HIT"
@@ -870,14 +676,20 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 </td>
                 <td></td>
               </tr>
+              {/* Here */}
               <tr>
                 <td rowSpan={2} style={{ verticalAlign: "top" }}>
-                  • pagination object (Pagination)
+                  <code>pagination</code> object (Pagination)
+                  <br />
                   <br />
                   Items:
                   <ul>
-                    <li>skip</li>
-                    <li>limit</li>
+                    <li>
+                      <code>skip</code>
+                    </li>
+                    <li>
+                      <code>limit</code>
+                    </li>
                   </ul>
                 </td>
 
@@ -934,7 +746,11 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 </td>
               </tr>
               <tr>
-                <td>• requestedGranularity*</td>
+                <td>
+                  {" "}
+                  <code>requestedGranularity *</code>
+                </td>
+
                 <td>
                   string (Granularity)
                   <br />
@@ -964,7 +780,9 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 </td>
               </tr>
               <tr>
-                <td>• testMode</td>
+                <td>
+                  <code>testMode</code>
+                </td>
                 <td>
                   boolean (TestMode)
                   <br />
@@ -997,7 +815,8 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
             <a href="/pi-querying-the-api#response-types">Response types</a>{" "}
             section.
           </p>
-          <table>
+
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Request parameters</th>
@@ -1005,301 +824,166 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <th>Examples</th>
               </tr>
             </thead>
+
             <tbody>
+              {/* Start position */}
               <tr>
-                <td>• start</td>
                 <td>
-                  integer &lt;int64&gt; ≥ 0<br />
+                  <code>start</code>
+                </td>
+                <td>
+                  integer &lt;int64&gt; ≥ 0
+                  <br />
+                  <br />
                   (or comma-separated integers)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>start=16050074</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("start=16050074", "start")}
-                    >
-                      {copySuccess["start"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>start=16050074</code>
                 </td>
               </tr>
+
+              {/* End position */}
               <tr>
-                <td>• end</td>
                 <td>
-                  integer &lt;int64&gt; ≥ 0<br />
+                  <code>end</code>
+                </td>
+                <td>
+                  integer &lt;int64&gt; ≥ 0
+                  <br />
+                  <br />
                   (or comma-separated integers)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>end=16052080</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("end=16052080", "end")}
-                    >
-                      {copySuccess["end"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>end=16052080</code>
                 </td>
               </tr>
+
+              {/* Reference genome assembly */}
               <tr>
-                <td>• assemblyId</td>
+                <td>
+                  <code>assemblyId</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>assemblyId=GRCh38</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("assemblyId=GRCh38", "assemblyId")
-                      }
-                    >
-                      {copySuccess["assemblyId"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>assemblyId=GRCh38</code>
                 </td>
               </tr>
+
+              {/* Reference sequence */}
               <tr>
-                <td>• referenceName</td>
+                <td>
+                  <code>referenceName</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>referenceName=22</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("referenceName=22", "referenceName")
-                      }
-                    >
-                      {copySuccess["referenceName"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>referenceName=22</code>
                 </td>
               </tr>
+
+              {/* Reference bases */}
               <tr>
-                <td>• referenceBases</td>
+                <td>
+                  <code>referenceBases</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>referenceBases=G</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("referenceBases=G", "referenceBases")
-                      }
-                    >
-                      {copySuccess["referenceBases"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>referenceBases=G</code>
                 </td>
               </tr>
+
+              {/* Alternate bases */}
               <tr>
-                <td>• alternateBases</td>
+                <td>
+                  <code>alternateBases</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>alternateBases=A</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("alternateBases=A", "alternateBases")
-                      }
-                    >
-                      {copySuccess["alternateBases"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>alternateBases=A</code>
                 </td>
               </tr>
+
+              {/* Minimum variant length */}
               <tr>
-                <td>• variantMinLength</td>
+                <td>
+                  <code>variantMinLength</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantMinLength=5</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "variantMinLength=5",
-                          "variantMinLength"
-                        )
-                      }
-                    >
-                      {copySuccess["variantMinLength"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantMinLength=5</code>
                 </td>
               </tr>
+
+              {/* Maximum variant length */}
               <tr>
-                <td>• variantMaxLength</td>
+                <td>
+                  <code>variantMaxLength</code>
+                </td>
                 <td>integer &lt;int64&gt; ≥ 0</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantMaxLength=2</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "variantMaxLength=2",
-                          "variantMaxLength"
-                        )
-                      }
-                    >
-                      {copySuccess["variantMaxLength"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantMaxLength=2</code>
                 </td>
               </tr>
+
+              {/* Gene identifier */}
               <tr>
-                <td>• geneId</td>
+                <td>
+                  <code>geneId</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>geneId=CCNL2</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() => copyToClipboard("geneId=CCNL2", "geneId")}
-                    >
-                      {copySuccess["geneId"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>geneId=CCNL2</code>
                 </td>
               </tr>
+
+              {/* Amino acid change */}
               <tr>
-                <td>• aminoacidChange</td>
+                <td>
+                  <code>aminoacidChange</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>aminoacidChange=p.Thr130Met</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "aminoacidChange=p.Thr130Met",
-                          "aminoacidChange"
-                        )
-                      }
-                    >
-                      {copySuccess["aminoacidChange"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>aminoacidChange=p.Thr130Met</code>
                 </td>
               </tr>
+
+              {/* Variant type */}
               <tr>
-                <td>• variantType</td>
+                <td>
+                  <code>variantType</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>variantType=SNP</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard("variantType=SNP", "variantType")
-                      }
-                    >
-                      {copySuccess["variantType"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>variantType=SNP</code>
                 </td>
               </tr>
+
+              {/* Genomic allele short form */}
               <tr>
-                <td>• genomicAlleleShortForm</td>
+                <td>
+                  <code>genomicAlleleShortForm</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>
-                      genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
-                    </code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G",
-                          "genomicAlleleShortForm"
-                        )
-                      }
-                    >
-                      {copySuccess["genomicAlleleShortForm"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>
+                    genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
+                  </code>
                 </td>
               </tr>
+
+              {/* Clinical relevance */}
               <tr>
-                <td>• clinicalRelevance</td>
+                <td>
+                  <code>clinicalRelevance</code>
+                </td>
                 <td>string</td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>clinicalRelevance=pathogenic</code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          "clinicalRelevance=pathogenic",
-                          "clinicalRelevance"
-                        )
-                      }
-                    >
-                      {copySuccess["clinicalRelevance"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>clinicalRelevance=pathogenic</code>
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <table>
+          <table className="UITable">
             <thead>
               <tr>
                 <th>Filters</th>
@@ -1307,49 +991,34 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
                 <th>Examples</th>
               </tr>
             </thead>
+
             <tbody>
+              {/* Filters */}
               <tr>
-                <td>• filters</td>
                 <td>
-                  Array of OntologyFilter <br />
-                  (object) or <br />
-                  AlphanumericFilter (object) <br />
-                  or CustomFilter (object) <br />
+                  <code>filters</code>
+                </td>
+                <td>
+                  Array of OntologyFilter
+                  <br />
+                  (object) or
+                  <br />
+                  AlphanumericFilter (object)
+                  <br />
+                  or CustomFilter (object)
+                  <br />
                   (Filtering Term Element)
                 </td>
                 <td>
-                  <div className="codeSnippet-table">
-                    <code>
-                      {"filters: ["}
-                      <br />
-                      &nbsp;&nbsp;{"{"}
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;{`"id": "geographicOrigin",`}
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;{`"operator": "!",`}
-                      <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;{`"value": "England"`}
-                      <br />
-                      &nbsp;&nbsp;{"}"}
-                      <br />
-                      {"]"}
-                    </code>
-                    <button
-                      className="copyButtonCode"
-                      onClick={() =>
-                        copyToClipboard(
-                          `"filters": [\n  {\n    "id": "geographicOrigin",\n    "operator": "!",\n    "value": "England"\n  }\n]`,
-                          "filters-example"
-                        )
-                      }
-                    >
-                      {copySuccess["filters-example"] ? (
-                        "Copied!"
-                      ) : (
-                        <img className="copySymbol" src={copyIcon} alt="Copy" />
-                      )}
-                    </button>
-                  </div>
+                  <code>
+                    <pre>{`filters: [
+  {
+    "id": "geographicOrigin",
+    "operator": "!",
+    "value": "England"
+  }
+]`}</pre>
+                  </code>
                 </td>
               </tr>
             </tbody>
