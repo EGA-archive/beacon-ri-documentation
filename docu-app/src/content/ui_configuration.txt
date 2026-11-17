@@ -97,15 +97,8 @@ Deployers can replace this list with the variant types supported by their Beacon
 An empty array [] is also valid and can be used when no variant-type options should be available.
 
 Unlike earlier configurations, variant types are defined directly as strings rather than objects with separatejsonName and displayName properties.
-queryCoordinatesAre0Based	Specifies whether genomic query coordinates use zero-based indexing.	Boolean:
-true or false	Optional.
 
-Defaults to true.
-
-When true, genomic query coordinates are configured as 0-based.
-
-When false, genomic query coordinates are configured as 1-based.
-Beacon Template UI deployment typeAvailable reference genome assembliesVariant types in the Genomic Query Builder
+enableZeroBasedQueryInput	Controls whether genomic query input uses 0-based or 1-based genomic coordinates.	Boolean: true or false	Optional. Defaults to false. When true, genomic query input uses 0-based coordinates, and the interface displays the "0-based genomic coordinates" label. When false, genomic query input uses 1-based coordinates, and no coordinate system label is displayed.
 
 Styling and Branding Settings
 This section defines the visual and branding customization options available in the Beacon Template UI. It includes the application title, favicon, color palette, and logos displayed throughout the interface.
@@ -976,7 +969,8 @@ Example:
 
 16050527
 
-Coordinate indexing for genomic queries is separately configured through the top-level queryCoordinatesAre0Based setting.
+Coordinate indexing for genomic query input is configured through the top-level enableZeroBasedQueryInput setting. By default, the interface uses 1-based genomic coordinates.
+
 ui.genomicQueries.searchInputExample.referenceBases	Defines the reference nucleotide sequence used by the example variant.	Uppercase IUPAC nucleotide sequence, excluding U.
 
 A standalone "." or "-" is also accepted.	Required when searchInputExampleis provided.

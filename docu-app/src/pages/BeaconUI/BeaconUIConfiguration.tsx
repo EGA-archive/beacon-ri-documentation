@@ -365,11 +365,11 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               {/* Genomic coordinate convention */}
               <tr>
                 <td>
-                  <code>queryCoordinatesAre0Based</code>
+                  <code>enableZeroBasedQueryInput</code>
                 </td>
                 <td>
-                  Specifies whether genomic query coordinates use zero-based
-                  indexing.
+                  Controls whether genomic query input uses 0-based or 1-based
+                  genomic coordinates.
                 </td>
                 <td>
                   Boolean:
@@ -380,15 +380,16 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   Optional.
                   <br />
                   <br />
-                  Defaults to <code>true</code>.
+                  Defaults to <code>false</code>.
                   <br />
                   <br />
-                  When <code>true</code>, genomic query coordinates are
-                  configured as 0-based.
+                  When <code>true</code>, genomic query input uses 0-based
+                  coordinates, and the interface displays the "0-based genomic
+                  coordinates" label.
                   <br />
                   <br />
-                  When <code>false</code>, genomic query coordinates are
-                  configured as 1-based.
+                  When <code>false</code>, genomic query input uses 1-based
+                  coordinates, and no coordinate system label is displayed.
                 </td>
               </tr>
             </tbody>
@@ -3360,7 +3361,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   <br />
                   Coordinate indexing for genomic queries is separately
                   configured through the top-level{" "}
-                  <code>queryCoordinatesAre0Based</code> setting.
+                  <code>enableZeroBasedQueryInput</code> setting.
                 </td>
               </tr>
 
