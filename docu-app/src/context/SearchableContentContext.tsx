@@ -23,7 +23,10 @@ export const SearchableContentProvider: React.FC<{
   >([]);
 
   const addSearchableContent = (route: string, text: string, title: string) => {
-    setSearchableContent((prev) => [...prev, { route, text, title }]);
+    setSearchableContent((prev) => [
+      ...prev.filter((item) => item.route !== route),
+      { route, text, title },
+    ]);
   };
 
   return (

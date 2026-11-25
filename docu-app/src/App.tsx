@@ -43,6 +43,9 @@ import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
 import UIVersioning from "./pages/BeaconUI/UIVersioning";
 import BeaconUIIntroduction from "./pages/BeaconUI/BeaconUIIntroduction";
 
+// Beacon Admin UI imports
+import BeaconAdminUIIntroduction from "./pages/BeaconAdminUI/BeaconAdminUIIntroduction";
+
 // Reference Implementation imports
 import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
 import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
@@ -111,6 +114,7 @@ function App() {
     "Beacon RI Tools v2",
     "Beacon Verifier",
     "Beacon Template UI",
+    "Beacon Admin UI",
     "Tutorials",
     "Reference Implementation",
     "Resources",
@@ -157,6 +161,7 @@ function App() {
       "Query Logic & Results",
       "Versioning",
     ],
+    "Beacon Admin UI": ["Coming Soon"],
     Tutorials: [
       "Create your Beacon",
       "Example Beacon: Rare Disease Use Case",
@@ -319,6 +324,14 @@ function App() {
                 <Route
                   path="/ui-versioning"
                   element={<UIVersioning searchTerm={searchTerm} />}
+                />
+
+                {/* Beacon Admin UI */}
+                <Route
+                  path="/admin-ui-introduction"
+                  element={
+                    <BeaconAdminUIIntroduction searchTerm={searchTerm} />
+                  }
                 />
 
                 {/* Tutorials */}

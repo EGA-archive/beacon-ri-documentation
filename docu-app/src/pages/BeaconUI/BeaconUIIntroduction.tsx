@@ -1,6 +1,5 @@
 import "./BeaconUIQueries.css";
-import React, { useRef, useState } from "react";
-// import OnThisPage from "../../components/OnThisPage";
+import React, { useRef } from "react";
 import pin from "../../pin.svg";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
@@ -30,7 +29,6 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
         <a href="/ui-introduction" className="no-undeline">
           Beacon Template UI
         </a>
-
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
@@ -45,18 +43,21 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
           <h3>Beacon Template UI</h3>
           <h1>Introduction</h1>
           <p>
-            The <b>Beacon Template User Interface</b> is a modular and
-            configurable user interface designed for{" "}
-            <b>Beacon v2 implementations</b>. <br />
-            It enables deployers to easily adapt the front end display to their
-            specific Beacon setup through a configuration file, maximizing
-            adaptability while minimizing code changes. The setup process is
-            straightforward and does not require advanced technical expertise or
-            a dedicated development team.
-            <br />
-            The Beacon Template UI works with any <b>
-              Beacon instance
-            </b> that <b>conforms</b> to the{" "}
+            The <b>Beacon Template UI</b> is a modular and configurable web
+            interface designed for <b>Beacon v2 implementations</b>. It can be
+            used with both <b>Single Beacon</b> and <b>Beacon Network</b>{" "}
+            deployments, depending on the connected API and runtime
+            configuration.
+          </p>
+          <p>
+            The UI enables deployers to customize its appearance, functionality
+            and connection to the Beacon API through a{" "}
+            <b>runtime configuration file</b>, without requiring changes to the
+            application source code for supported settings.
+          </p>
+          <p>
+            The Beacon Template UI is designed to work with implementations
+            conforming to the{" "}
             <a
               href="https://github.com/ga4gh-beacon/beacon-v2/"
               target="_blank"
@@ -64,20 +65,28 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             >
               GA4GH <b>Beacon v2 specification</b>
             </a>{" "}
-            (Framework + default Models). Note that the Beacon Template UI is
-            not a single-page application (SPA), which means that each user
-            interface instance can be connected to an independent Beacon
-            backend. It can be deployed with the{" "}
+            (Framework and default Models). It can be deployed with the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api"
               target="_blank"
               rel="noopener noreferrer"
             >
               Beacon v2 Production Implementation
-            </a>{" "}
-            but is not dependent on it. Compliance with the core spec is the{" "}
-            <b>only requirement</b> for compatibility.
+            </a>
+            , but is not dependent on it.
           </p>
+
+          <h2 id="development-and-collaboration">
+            Development and Collaboration
+          </h2>
+          <p>
+            The Beacon Template UI has been developed by the{" "}
+            <b>European Genome-phenome Archive (EGA)</b> team at the{" "}
+            <b>Centre for Genomic Regulation (CRG)</b>, building on the
+            framework developed in collaboration with the{" "}
+            <b>Barcelona Supercomputing Center (BSC)</b>.
+          </p>
+
           <div className="stepsSection">
             <img src={pin} alt="pin" className="pin-logo" />
             <div>
@@ -86,44 +95,51 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
               </p>
               <ul>
                 <li>
-                  There are two technical prerequisites: having <b>Docker</b>{" "}
-                  installed, and a <b>code editor</b>, such as{" "}
+                  The recommended deployment method requires{" "}
+                  <b>Docker, Docker Compose and Git</b>. A code editor, such as{" "}
                   <a
                     href="https://code.visualstudio.com/download"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     Visual Studio Code
-                  </a>{" "}
-                  for editing the configuration and{" "}
-                  <span className="custom-code">.env</span> files.
+                  </a>
+                  , is recommended for editing the runtime configuration file.
                 </li>
                 <li>
-                  It is important to note that the <b>API endpoint</b> ({" "}
-                  <span className="custom-code">apiUrl</span>) defined in the
-                  configuration file is essential for the UI’s functionality. It
-                  acts as the single access point for fetching Beacon data, and
-                  without a valid and functioning API URL, the interface cannot
-                  display any results.
+                  A valid and accessible <b>Beacon API endpoint</b> is required
+                  to retrieve data and perform queries. The API connection is
+                  defined in the runtime configuration file.
                 </li>
                 <li>
-                  However, a Beacon instance does not need to contain{" "}
-                  <b>datasets</b> to run the Beacon Template UI. It can be
-                  deployed even with an empty or dummy Beacon. In that case, the
-                  interface will still load correctly, and the results table
-                  will simply display <i>“No results found”</i>. This
-                  flexibility allows users to test the Beacon Template UI before
-                  connecting it to a fully configured Beacon instance.
+                  A Beacon instance does not need to contain datasets for the UI
+                  to be deployed. An empty Beacon can be used for testing and
+                  customization purposes, although no matching records will be
+                  returned when performing queries against an empty dataset
+                  collection.
+                </li>
+                <li>
+                  Changes to the runtime{" "}
+                  <span className="custom-code">config.json</span> file do not
+                  require rebuilding or restarting the application when the
+                  configuration directory is mounted using the provided Docker
+                  Compose setup. Reload the application in your browser to apply
+                  the updated settings.
                 </li>
               </ul>
             </div>
           </div>
           <p>
-            This documentation describes the configuration, deployment, and
-            customization processes for the Beacon Template UI. Before diving
-            into the details, it is recommended to watch the{" "}
-            <b>walkthrough video</b> to gain a general overview of the UI before
-            exploring the available customization options.
+            This documentation describes the{" "}
+            <a href="/ui-configuration-file">configuration</a>,{" "}
+            <a href="/ui-deployment">deployment</a> and customization of the
+            Beacon Template UI, as well as its{" "}
+            <a href="/ui-query-logic-&-results">query logic and results</a>.
+          </p>
+          <p>
+            Before exploring the available configuration options, we recommend
+            watching the following <b>walkthrough video</b> to gain a general
+            overview of the interface and its functionality.
           </p>
 
           <br />
@@ -143,7 +159,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
               allowFullScreen
             />
           </div>
-          <p> Video timestamps:</p>
+          <p>Video timestamps:</p>
           <ul className="video-timestamps">
             <li>
               <a

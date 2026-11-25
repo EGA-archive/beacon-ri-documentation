@@ -64,6 +64,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       return;
     }
 
+    if (path.startsWith("/admin-ui-")) {
+      setActiveMenu("Beacon Admin UI");
+      return;
+    }
+
     if (path === "/verifier" || path.startsWith("/verifier-")) {
       setActiveMenu("Beacon Verifier");
       return;
@@ -114,6 +119,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     if (menuItem === "Reference Implementation") path = "/ri-introduction";
     if (menuItem === "Beacon RI Tools v2") path = "/ri-tools-starting-guide";
     if (menuItem === "Beacon Template UI") path = "/ui-introduction";
+    if (menuItem === "Beacon Admin UI") path = "/admin-ui-introduction";
     if (menuItem === "Beacon Verifier") path = "/verifier";
     if (menuItem === "Tutorials") path = "/create-your-beacon";
 
@@ -177,6 +183,10 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       if (subItem === "Query Logic & Results")
         path = "/ui-query-logic-&-results";
       if (subItem === "Versioning") path = "/ui-versioning";
+    }
+
+    if (parentMenu === "Beacon Admin UI") {
+      if (subItem === "Coming Soon") path = "/admin-ui-introduction";
     }
 
     if (parentMenu === "Tutorials") {
@@ -334,6 +344,11 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                           expectedPath = "/ui-query-logic-&-results";
                         if (subItem === "Versioning")
                           expectedPath = "/ui-versioning";
+                      }
+
+                      if (menuItem === "Beacon Admin UI") {
+                        if (subItem === "Coming Soon")
+                          expectedPath = "/admin-ui-introduction";
                       }
 
                       if (menuItem === "Beacon Verifier") {

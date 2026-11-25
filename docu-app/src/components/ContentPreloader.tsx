@@ -35,6 +35,9 @@ import UIDeploymentText from "../content/ui_deployment.txt";
 import UIQueryingText from "../content/ui_query_logic_results.txt";
 import UIVersioningText from "../content/ui_versioning.txt";
 
+// Beacon Admin UI
+import AdminUIIntroductionText from "../content/admin_ui_introduction.txt";
+
 // Referenece Implementation (Beacon 2 RI API)
 import RiIntroductionText from "../content/ri_introduction.txt";
 import RiAutomatedDeploymentText from "../content/ri_automated_deployment.txt";
@@ -184,6 +187,13 @@ const ContentPreloader = () => {
   );
 
   useRegisterTextContent("/ui-versioning", UIVersioningText, "Versioning");
+
+  // Beacon Admin UI
+  useRegisterTextContent(
+    "/admin-ui-introduction",
+    AdminUIIntroductionText,
+    "Admin UI Introduction"
+  );
 
   // Tutorials
   useRegisterTextContent(
