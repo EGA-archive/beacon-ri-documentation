@@ -105,6 +105,22 @@ The parameter requestedGranularity lets you choose the level of detail you want 
 Note:
 The combination NONE + record does not make sense, so the Beacon will not satisfy this query.
 
+Response granularity per dataset
+When a Beacon contains multiple datasets, the granularity of the returned results may differ between datasets within the same response.
+
+The granularity of each result set depends on the requested granularity, the Beacon configuration, the queried entry type, the dataset permissions and the user's access rights.
+
+For example, when querying a Beacon with requestedGranularity=record and includeResultsetResponses=HIT, the response may include datasets with different levels of granularity:
+
+Dataset	Granularity	Returned information
+Dataset A	record	Detailed matching records and their count.
+Dataset B	count	Number of matching records.
+Dataset C	boolean	Whether matching records exist.
+This allows a Beacon to provide different levels of data visibility within a single response while respecting the access restrictions of each dataset.
+
+For more information on how to configure granularity at dataset level, see the Managing dataset permissions section.
+
+
 GET query examples
 Beacon Sequence Query
 http://localhost:5050/api/g_variants?start=16050606&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37

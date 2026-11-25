@@ -143,11 +143,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             <span className="custom-code"> config.json</span> and validates its
             contents against a predefined Joi validation schema.
             <br />
-            <br />
             The schema checks configuration structure, data types, required
             properties, accepted values, and conditional dependencies between
             configuration fields.
-            <br />
             <br />
             During validation, the application also applies the default values
             defined by the schema where applicable.
@@ -157,7 +155,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             must contain <code>true</code> or <code>false</code>, rather than
             the strings <code>"true"</code> or <code>"false"</code>.
             <br />
-            <br />
             The initial validation collects all detected schema errors rather
             than stopping at the first error.
           </p>
@@ -165,7 +162,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             If the configuration is valid, the application initializes its
             authentication settings, stores the validated configuration, and
             loads the React application.
-            <br />
             <br />
             If configuration loading, validation, or another startup operation
             fails, the application does not start normally. The error is logged
@@ -187,7 +183,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             When troubleshooting a startup error, open the browser's developer
             console for additional information.
             <br />
-            <br />
             The validation schema verifies configuration consistency. It does
             not verify that external services are reachable or that every
             configured feature is supported by the connected Beacon backend.
@@ -200,11 +195,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             The following tables describe the available configuration
             properties, grouped by the application features they control.
             <br />
-            <br />
             Each table includes the property name, its purpose, accepted
             formatting, and additional validation requirements such as default
             values, optional properties, and conditional dependencies.
-            <br />
             <br />
             Where relevant, screenshots illustrate how the corresponding
             configuration settings relate to the user interface.
@@ -2207,6 +2200,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           />
           <br />
           <br />
+          {/* Here */}
           <h2 id="entry-types-common-filters-and-genomic-annotations-settings">
             Entry Types, Common Filters and Genomic Annotations Settings
           </h2>
@@ -2234,10 +2228,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                 <th>Notes</th>
               </tr>
             </thead>
-
             <tbody>
-              {/* ENTRY TYPES */}
-
               <tr>
                 <td>
                   <code>ui.entryTypesOrder</code>
@@ -2281,9 +2272,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
                   one genomic query type enabled.
                 </td>
               </tr>
-
               {/* COMMON FILTERS */}
-
               <tr>
                 <td>
                   <code>ui.commonFilters</code>
@@ -2749,10 +2738,74 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
               </tr>
             </tbody>
           </table>
+          {/* Molecular Effects description */}
+          <p>
+            <b>Molecular Effects</b>
+            <br />
+            <br />
+            Molecular effects describe the{" "}
+            <b>functional consequences of genomic variations</b> at the
+            molecular level, such as missense, synonymous, frameshift or
+            splice-site variants. In the Beacon v2 data model, these annotations
+            are represented by the <code>molecularEffects</code> property within{" "}
+            <code>molecularAttributes</code>.
+            <br />
+            The Molecular Effects category allows users to search for genomic
+            variants based on these annotations, which are applied as{" "}
+            <b>ontology filters</b>.
+            <br />
+            <br />
+            Unlike other Genomic Annotations categories, which contain
+            predefined genomic query examples configured by the deployer,
+            Molecular Effects is <b>populated dynamically</b> using the
+            filtering terms retrieved from the <code>/filtering_terms</code>{" "}
+            endpoint of the connected Beacon API.
+            <br />
+            The Beacon Template UI maintains an{" "}
+            <b>internal list of supported molecular effect identifiers</b> and
+            prioritizes predefined molecular effects when they are available
+            from the backend. If fewer than two predefined effects are
+            available, the application selects additional supported effects,
+            when available.
+            <br />
+            If no supported molecular effects are returned by the API,{" "}
+            <b>the category is automatically hidden</b>.
+            <br />
+            <br />
+            <b>Enabling Molecular Effects</b>
+            <br />
+            <br />
+            To enable this category, <b>include</b>{" "}
+            <code>"Molecular Effects"</code> in{" "}
+            <code>ui.genomicAnnotations.annotationCategories</code> in the{" "}
+            <code>config.json</code> file.
+            <br />
+            As this is a <b>reserved category</b> handled internally by the
+            application, its name must not be modified and no corresponding
+            entry should be defined in <code>annotationLabels</code>.
+          </p>
+          <pre className="custom-code">
+            {`"genomicAnnotations": {
+  "annotationCategories": ["Molecular Effects"]
+}`}
+          </pre>
+          <p>
+            <br />
+            <b>Disabling Molecular Effects</b>
+            <br />
+            <br />
+            To disable the category, remove <code>
+              "Molecular Effects"
+            </code>{" "}
+            from the <code>annotationCategories</code> array. If no other
+            genomic annotation categories are configured, the entire{" "}
+            <code>genomicAnnotations</code> object can be omitted.
+          </p>
+          <br />
           {/* Validation rules shared across genomic annotation examples */}
-          <div className="note">
+          <div className="wider-note">
             <img
-              className="note-symbol"
+              className="note-symbol-wider"
               src="/note-symbol.png"
               alt="Note symbol"
             />
@@ -2880,6 +2933,7 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
           </div>
           <br />
           <br />
+          {/* Here */}
           {/* Genomic Query Builder Settings */}
           <h2 id="genomic-query-builder-settings">
             Genomic Query Builder Settings
@@ -3661,11 +3715,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             The application loads and validates the runtime configuration before
             initializing React.
             <br />
-            <br />
             When <code>ui.showLogin</code> is <code>true</code>, the application
             creates the OIDC configuration and initializes the authentication
             provider.
-            <br />
             <br />
             When login is disabled, the application starts without the OIDC
             authentication provider.
@@ -3674,11 +3726,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             The supported configuration properties are described in the{" "}
             <a href="#login-settings">Login Settings</a> section.
             <br />
-            <br />
             The authentication response type is set internally to{" "}
             <code>"code"</code> and cannot be changed through
             <code> config.json</code>.
-            <br />
             <br />
             The supported OIDC properties defined in the validation schema are
             forwarded to the authentication provider when login is enabled.
@@ -3688,11 +3738,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             user information retrieval, popup authentication settings, and
             provider-specific parameters.
             <br />
-            <br />
             Their availability and behavior depend on the identity provider and
             authentication library. Configuring popup settings does not
             automatically enable popup login in the current interface.
-            <br />
             <br />
             The application also defines a callback to redirect users to their
             previously requested page after successful authentication.
@@ -3702,11 +3750,9 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             When login is enabled, routes protected by{" "}
             <code>ProtectedRoute</code> require an authenticated user.
             <br />
-            <br />
             If an unauthenticated user requests a protected page, the
             application saves the original local URL in session storage and
             redirects the user to <code>/login</code>.
-            <br />
             <br />
             The saved URL includes the pathname, query parameters, and URL
             fragment, allowing users to return to the exact location they
@@ -3769,7 +3815,6 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             If no valid local return path is available, the application
             redirects to the home page at <code>/</code>.
             <br />
-            <br />
             The stored return path is removed after it is read.
           </p>
           <h3>5. Validate the Authentication Setup</h3>
@@ -3777,18 +3822,15 @@ const BeaconUIConfiguration: React.FC<BeaconUIConfigurationProps> = ({
             After updating <code>config.json</code>, reload the application and
             verify that authentication initializes correctly.
             <br />
-            <br />
             If the required OIDC configuration is missing or invalid,
             application startup fails and an error is logged in the browser
             console.
-            <br />
             <br />
             Configuration validation does not verify that the identity provider
             is reachable or that the registered callback URLs and scopes are
             accepted by the provider. These should be tested against the
             configured authentication service.
           </p>
-          <br />
           <br />
           <h2 id="single-beacon-and-beacon-network:-configuration-and-UI-differences">
             Single Beacon and Beacon Network: Configuration and UI Differences

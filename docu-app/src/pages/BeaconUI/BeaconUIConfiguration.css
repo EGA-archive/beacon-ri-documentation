@@ -43,6 +43,56 @@
   overflow-wrap: anywhere;
 }
 
+.dockerCommandsTable td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+.dockerCommandsTable th:first-child {
+  width: 60%;
+}
+
+.dockerCommandsTable th:last-child {
+  width: 40%;
+}
+
+.dockerCommand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  background-color: #f6f6f6;
+  border: 1px solid #dedede;
+  border-radius: 6px;
+}
+
+.dockerCommand code {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.dockerCommand .copyButtonCode {
+  position: static;
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 4px;
+}
+
 @media (max-width: 800px) {
   .beaconUIConfigurationContainer {
     padding-right: 16px;

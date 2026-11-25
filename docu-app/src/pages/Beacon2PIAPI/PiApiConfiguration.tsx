@@ -52,8 +52,11 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
 
       "method-2-start":
         "docker exec beacon-permissions bash permissions/permissions-ui/start.sh",
-      "aai-env": `LSAAI_CLIENT_ID='your_lsaai_client_id'\nLSAAI_CLIENT_SECRET='your_lsaai_client_secret'\nKEYCLOAK_CLIENT_ID='your_keycloak_client_id'\nKEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'`,
-      "beacon-rebuild": "cd deploy && docker-compose up -d --build beacon",
+      "aai-env": `CLIENT_ID='beacon'
+WELL_KNOWN_ENDPOINT='https://keycloak.example.org/realms/Beacon/.well-known/openid-configuration'
+ISSUER='https://keycloak.example.org/realms/Beacon'
+MUST_INCLUDE_BEACON_URL_IN_AUDIENCE=true`,
+      "beacon-rebuild": "docker-compose up -d --build beaconprod",
       "cors-main": `cors_urls = ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org", "https://beacon-network-demo2.ega-archive.org", "https://beacon.ega-archive.org"]`,
       "cors-routes": `for route in list(beacon.router.routes()):\n        cors.add(route, {\n        "your_URL":\n            aiohttp_cors.ResourceOptions(allow_credentials=True,\n            expose_headers="*",\n            allow_methods=("POST", "PATCH", "GET", "OPTIONS"),\n            allow_headers=DEFAULT_ALLOW_HEADERS)`,
       "beacon-info": `beacon_id = 'org.ega-archive.beacon-ri-demo'\nbeacon_name = 'Beacon Reference Implementation demo'\napi_version = 'v2.0.0'\nuri = 'https://beacon-apis-demo.ega-archive.org/api/'\norg_id = 'EGA'\norg_name = 'European Genome-Phenome Archive (EGA)'\norg_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'\norg_adress = 'C/ Dr. Aiguader, 88\nPRBB Building\n08003 Barcelona, Spain'\norg_welcome_url = 'https://ega-archive.org/'\norg_contact_url = 'mailto:beacon.ega@crg.eu'\norg_logo_url = 'https://legacy.ega-archive.org/images/logo.png'\norg_info = ''\ndescription = "This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."\nversion = 'v2.0'\nwelcome_url = 'https://beacon.ega-archive.org/'\nalternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'\ncreate_datetime = '2021-11-29T12:00:00.000000'\nupdate_datetime = ''`,
@@ -180,6 +183,34 @@ const PiApiConfiguration: React.FC<PiApiConfigurationProps> = ({
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }`,
+      testMode: `test_dataset: 
+                  isTest: true 
+                  isSynthetic: true 
+                  isDeprecated: false`,
+      "test-mode-get": `GET /api/individuals?testMode=true`,
+
+      "test-mode-post": `{
+  "meta": {
+    "apiVersion": "2.0"
+  },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "start": [16050074],
+      "end": [16050568],
+      "referenceName": "22",
+      "assemblyId": "GRCh37"
+    },
+    "includeResultsetResponses": "HIT",
+    "pagination": {
+      "skip": 0,
+      "limit": 10
+    },
+    "testMode": true,
+    "requestedGranularity": "record"
+  }
+}`,
       "beacon-uri-and-subpath": `uri = "https://<yourdomain>"
     uri_subpath = "/extension/api"
     complete_url = uri + uri_subpath`,
@@ -966,9 +997,130 @@ complete_url = uri + uri_subpath`}
               </button>
             </pre>
           </div>
-          <h2 id="supplying-aai-credentials">
-            Supplying AAI credentials for your Identity Provider (IDP)
-          </h2>
+          <h2 id="test-mode">Test Mode</h2>
+          <p>
+            The <span className="custom-code">testMode</span> parameter allows
+            users and external tools, such as the Beacon Verifier, to validate a
+            Beacon instance’s compliance with the Beacon v2 specification
+            without requiring authentication. To enable a dataset for testing,
+            set <span className="custom-code">isTest: true</span> under the
+            corresponding dataset ID in the{" "}
+            <span className="custom-code">datasets_conf.yml</span> configuration
+            file.
+            <div className="codeSnippet">
+              <pre>
+                <code>
+                  test_dataset: <br />
+                  isTest: true <br />
+                  isSynthetic: true <br />
+                  isDeprecated: false
+                  <br />
+                </code>
+
+                <button
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("testMode")}
+                >
+                  {copySuccess["testMode"] ? (
+                    "Copied!"
+                  ) : (
+                    <img
+                      className="copySymbol copySymbol-custom"
+                      src={copyIcon}
+                      alt="Copy"
+                    />
+                  )}
+                </button>
+              </pre>
+            </div>
+            When a request includes{" "}
+            <span className="custom-code">testMode=true</span>, only datasets
+            designated for testing are queried. <br />A test dataset does not
+            necessarily contain synthetic data. The{" "}
+            <span className="custom-code">isTest</span> and{" "}
+            <span className="custom-code">isSynthetic</span>
+            properties are independent. <br />
+            However, since test mode does not require authentication, only
+            synthetic or non-sensitive data should be made available for
+            testing. <br />
+            The <span className="custom-code">datasets_conf.yml</span>{" "}
+            configuration file also includes the{" "}
+            <span className="custom-code">isDeprecated</span> property, which
+            can be used to flag datasets that were previously available but are
+            no longer queryable. Currently, this property is used for internal
+            tracking purposes only and has no functional effect on query
+            execution. <br />
+            <p>
+              By default, <span className="custom-code">testMode</span> is set
+              to <span className="custom-code">false</span>. Test mode can be
+              activated in both GET and POST requests, as shown in the examples
+              below:
+            </p>
+          </p>
+          <h5 className="cursive">GET request</h5>
+          <div className="codeSnippet">
+            <pre>
+              <code>GET /api/individuals?testMode=true</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("test-mode-get")}
+              >
+                {copySuccess["test-mode-get"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <h5 className="cursive">POST request</h5>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`{
+  "meta": {
+    "apiVersion": "2.0"
+  },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "start": [16050074],
+      "end": [16050568],
+      "referenceName": "22",
+      "assemblyId": "GRCh37"
+    },
+    "includeResultsetResponses": "HIT",
+    "pagination": {
+      "skip": 0,
+      "limit": 10
+    },
+    "testMode": true,
+    "requestedGranularity": "record"
+  }
+}`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("test-mode-post")}
+              >
+                {copySuccess["test-mode-post"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <br /> <br />
           <p>
             For making any IDP (based on OpenID and Oauthv2) work with beacon,
             you will need to add the{" "}
@@ -981,17 +1133,28 @@ complete_url = uri + uri_subpath`}
             <span className="custom-code">something.env</span>) and needs to
             have the following variables:
           </p>
+          <h2 id="supplying-aai-credentials">
+            Supplying AAI credentials for your Identity Provider (IDP)
+          </h2>
+          <p>
+            To integrate an <b>Identity Provider (IDP)</b> based on OpenID
+            Connect (OIDC) and OAuth 2.0 with your Beacon, you need to create a
+            configuration file for each IDP inside the{" "}
+            <span className="custom-code">auth/idp_providers</span> folder.
+          </p>
+          <p>
+            Each configuration file must have an{" "}
+            <span className="custom-code">.env</span> extension (e.g.{" "}
+            <span className="custom-code">keycloak.env</span>) and must include
+            the following variables:
+          </p>
           <div className="codeSnippet">
             <pre>
               <code>
-                CLIENT_ID=beacon <br />
-                CLIENT_SECRET='b26ca0f9-1137-4bee-b453-ee51eefbe7ba' <br />
-                USER_INFO='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/userinfo'{" "}
-                <br />
-                INTROSPECTION='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/token/introspect'{" "}
-                <br />
-                ISSUER='http://localhost:8080/auth/realms/Beacon' <br />
-                JWKS_URL='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/certs'
+                {`CLIENT_ID='beacon'
+WELL_KNOWN_ENDPOINT='https://keycloak.example.org/realms/Beacon/.well-known/openid-configuration'
+ISSUER='https://keycloak.example.org/realms/Beacon'
+MUST_INCLUDE_BEACON_URL_IN_AUDIENCE=true`}
               </code>
 
               <button
@@ -1010,10 +1173,68 @@ complete_url = uri + uri_subpath`}
               </button>
             </pre>
           </div>
-          <p>After that, make sure you build your beacon container again:</p>
+          <p>
+            These variables are used to configure the Identity Provider and its
+            access token validation:
+          </p>
+          <ul>
+            <li>
+              <span className="custom-code">CLIENT_ID</span>: the client
+              identifier registered with the Identity Provider.
+            </li>
+            <li>
+              <span className="custom-code">WELL_KNOWN_ENDPOINT</span>: the URL
+              of the OpenID Connect discovery endpoint.
+            </li>
+            <li>
+              <span className="custom-code">ISSUER</span>: the expected issuer
+              of the access token.
+            </li>
+            <li>
+              <span className="custom-code">
+                MUST_INCLUDE_BEACON_URL_IN_AUDIENCE
+              </span>
+              : determines whether the Beacon URL must be included in the
+              audience claim of the access token.
+            </li>
+          </ul>
+          <h4 id="keycloak-configuration">Keycloak-specific configuration</h4>
+          <p>
+            When using <b>Keycloak</b> as an Identity Provider (IDP), additional
+            configuration may be required to ensure that the Beacon API
+            correctly validates access tokens.
+          </p>
+          <p>
+            In particular, the access token must include the{" "}
+            <span className="custom-code">aud</span> (Audience) claim, which
+            identifies the intended recipient of the token.
+          </p>
+          <p>To configure this in Keycloak:</p>
+          <ol>
+            <li>
+              Open the <b>Keycloak Admin Console</b> and select the
+              corresponding realm.
+            </li>
+            <li>
+              Navigate to <b>Clients</b> and select the relevant client.
+            </li>
+            <li>
+              Under <b>Client scopes</b>, configure an <b>Audience</b> protocol
+              mapper in a scope assigned to the client.
+            </li>
+            <li>Set the audience to the value expected by the Beacon API.</li>
+            <li>
+              Enable <b>Add to access token</b> and save the configuration.
+            </li>
+          </ol>
+          <p>
+            Once the configuration is complete, rebuild your Beacon container to
+            apply the changes:
+          </p>
           <div className="codeSnippet">
             <pre>
               <code>docker-compose up -d --build beaconprod</code>
+
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("beacon-rebuild")}
@@ -1026,6 +1247,34 @@ complete_url = uri + uri_subpath`}
               </button>
             </pre>
           </div>
+          <h4 id="authentication-troubleshooting">
+            Troubleshooting authentication issues
+          </h4>
+          <p>
+            If authentication issues persist, verify that the following settings
+            are correctly configured:
+          </p>
+          <ul>
+            <li>
+              <span className="custom-code">CLIENT_ID</span>
+            </li>
+            <li>
+              <span className="custom-code">WELL_KNOWN_ENDPOINT</span>
+            </li>
+            <li>
+              <span className="custom-code">ISSUER</span>
+            </li>
+            <li>
+              <span className="custom-code">
+                MUST_INCLUDE_BEACON_URL_IN_AUDIENCE
+              </span>
+            </li>
+            <li>
+              The <span className="custom-code">aud</span> claim in the newly
+              generated access token.
+            </li>
+            <li>Dataset access permissions.</li>
+          </ul>
           <h2 id="handling-cors">Handling CORS</h2>
           <p>
             To avoid CORS using beacon and the frontend or a third-party
@@ -1430,7 +1679,6 @@ complete_url = uri + uri_subpath`}
               </span>
             </li>
           </ul>
-          <h2 id="test-mode">Test Mode</h2>
           <p>
             For verifying your beacon, there are datasets that you can reproduce
             from the real data ones, that can serve as test but with fake data.

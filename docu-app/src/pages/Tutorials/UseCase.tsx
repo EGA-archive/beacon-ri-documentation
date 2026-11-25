@@ -156,133 +156,147 @@ verbosity=False # This variable, if True, will make the program run slower but g
 21	9411949	.	T	C	55.77	.	BaseQRankSum=1.914;ClippingRankSum=0.000;DP=29;ExcessHet=3.0103;LikelihoodRankSum=-0.063;MLEAC=1,0;MLEAF=0.500,0.00;MQ0=0;MQRankSum=-3.040;RAW_MQ=73991.00;ReadPosRankSum=-1.787	GT:AD:DP:GQ:PGT:PID:PL:SB	0/1:25,4,0:29:84:0|1:9411931_G_A:84,0,1132,168,1144,1312:12,13,0,4
 21	9411965	.	T	C	0.01	.	BaseQRankSum=0.337;ClippingRankSum=0.000;DP=30;ExcessHet=3.0103;LikelihoodRankSum=-1.995;MLEAC=0,0;MLEAF=0.00,0.00;MQ0=0;MQRankSum=-2.589;RAW_MQ=90291.00;ReadPosRankSum=-2.080	GT:AD:DP:GQ:PGT:PID:PL:SB	0/0:28,2,0:30:0:0|1:9411931_G_A:0,0,1105,84,1111,1195:11,17,0,2`,
       "phenopacket-snippet": `{
-        "id": "P0007498",
-        "subject": {
-          "id": "P0007498",
-          "dateOfBirth": "2013-01-01T00:00:00Z",
-          "sex": "MALE"
-        },
-        "phenotypicFeatures": [
-          {
-            "excluded": true,
-            "type": {
-              "id": "HP:0001249",
-              "label": "Intellectual disability"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0000467",
-              "label": "Neck muscle weakness"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0001252",
-              "label": "Muscular hypotonia"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0001319",
-              "label": "Neonatal hypotonia"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0001374",
-              "label": "Congenital hip dislocation"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0002540",
-              "label": "Inability to walk"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0002783",
-              "label": "Recurrent lower respiratory tract infections"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0002804",
-              "label": "Arthrogryposis multiplex congenita"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0003202",
-              "label": "Skeletal muscle atrophy"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0005684",
-              "label": "Distal arthrogryposis"
-            }
-          },
-          {
-            "type": {
-              "id": "HP:0030319",
-              "label": "Weakness of facial musculature"
-            }
-          }
-        ],
-        "diseases": [
-          {
-            "term": {
-              "id": "Orphanet:97245",
-              "label": "Congenital myopathy"
-            }
-          },
-          {
-            "term": {
-              "id": "OMIM:117000",
-              "label": "CENTRAL CORE DISEASE OF MUSCLE"
-            }
-          }
-        ],
-        "meta_data": {
-          "created": "2021-04-21T09:32:38.488Z",
-          "resources": [
-            {
-              "id": "hp",
-              "name": "Human Phenotype Ontology",
-              "url": "http://purl.obolibrary.org/obo/hp.owl",
-              "version": "2020-12-07",
-              "namespacePrefix": "HP",
-              "iriPrefix": "http://purl.obolibrary.org/obo/HP_"
-            },
-            {
-              "id": "orphanet",
-              "name": "Orphanet Rare Disease Ontology",
-              "url": "http://orpha.net/ontology/ORDO_en_3.1.owl",
-              "version": "3.1",
-              "namespacePrefix": "Orphanet",
-              "iriPrefix": "http://www.orpha.net/ORDO/Orphanet_"
-            },
-            {
-              "id": "hgnc",
-              "name": "HUGO Gene Nomenclature Committee",
-              "url": "https://www.genenames.org",
-              "version": "2021-01-13",
-              "namespacePrefix": "HGNC",
-              "iriPrefix": "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/"
-            },
-            {
-              "id": "mim",
-              "name": "Online Mendelian Inheritance in Man",
-              "url": "https://omim.org/",
-              "version": "2021-01-21",
-              "namespacePrefix": "OMIM",
-              "iriPrefix": "https://omim.org/entry/"
-            }
-          ]
-        }
-      }`,
+"id": "P0007498",
+  "subject": {
+    "id": "P0007498",
+    "dateOfBirth": "2013-01-01T00:00:00Z",
+    "sex": "MALE"
+  },
+  "phenotypicFeatures": [
+    {
+      "excluded": true,
+      "type": {
+        "id": "HP:0001249",
+        "label": "Intellectual disability"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0000467",
+        "label": "Neck muscle weakness"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0001252",
+        "label": "Muscular hypotonia"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0001319",
+        "label": "Neonatal hypotonia"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0001374",
+        "label": "Congenital hip dislocation"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0002540",
+        "label": "Inability to walk"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0002783",
+        "label": "Recurrent lower respiratory tract infections"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0002804",
+        "label": "Arthrogryposis multiplex congenita"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0003202",
+        "label": "Skeletal muscle atrophy"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0005684",
+        "label": "Distal arthrogryposis"
+      }
+    },
+    {
+      "type": {
+        "id": "HP:0030319",
+        "label": "Weakness of facial musculature"
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "term": {
+        "id": "Orphanet:97245",
+        "label": "Congenital myopathy"
+      }
+    },
+    {
+      "term": {
+        "id": "OMIM:117000",
+        "label": "CENTRAL CORE DISEASE OF MUSCLE"
+      }
+    }
+  ],
+  "meta_data": {
+    "created": "2021-04-21T09:32:38.488Z",
+    "resources": [
+      {
+        "id": "hp",
+        "name": "Human Phenotype Ontology",
+        "url": "http://purl.obolibrary.org/obo/hp.owl",
+        "version": "2020-12-07",
+        "namespacePrefix": "HP",
+        "iriPrefix": "http://purl.obolibrary.org/obo/HP_"
+      },
+      {
+        "id": "orphanet",
+        "name": "Orphanet Rare Disease Ontology",
+        "url": "http://orpha.net/ontology/ORDO_en_3.1.owl",
+        "version": "3.1",
+        "namespacePrefix": "Orphanet",
+        "iriPrefix": "http://www.orpha.net/ORDO/Orphanet_"
+      },
+      {
+        "id": "hgnc",
+        "name": "HUGO Gene Nomenclature Committee",
+        "url": "https://www.genenames.org",
+        "version": "2021-01-13",
+        "namespacePrefix": "HGNC",
+        "iriPrefix": "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/"
+      },
+      {
+        "id": "mim",
+        "name": "Online Mendelian Inheritance in Man",
+        "url": "https://omim.org/",
+        "version": "2021-01-21",
+        "namespacePrefix": "OMIM",
+        "iriPrefix": "https://omim.org/entry/"
+      }
+    ]
+  },
+  "biosamples": [
+    {
+      "id": "Case1C",
+      "individualId": "P0007498",
+      "materialSample": {
+        "id": "NCIT:C12434",
+        "label": "Blood"
+      },
+      "sampleType": {
+        "id": "SNOMED:258566005",
+        "label": "Deoxyribonucleic acid sample (specimen)"
+      }
+    }
+  ]
+}`,
       "docker-ps": `docker ps`,
       "img-ri-tools": "ghcr.io/ega-archive/beacon2-ri-tools-v2:latest",
       "name-ri-tools": "ri-tools",
@@ -413,15 +427,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             chromosome 21 VCF, the phenopacket and all the rest of information
             available using CSV templates.
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Object Type</b>
-                </th>
-                <th>
-                  <b>Identifier</b>
-                </th>
+                <th>Object Type</th>
+                <th>Identifier</th>
               </tr>
             </thead>
             <tbody>
@@ -541,16 +551,12 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             .
           </p>
           <p>EGA metadata about EGAD00001008392:</p>
-          <table className="dockerTableSimple">
+
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Metadata field</b>
-                </th>
-                <th>
-                  {" "}
-                  <b>Content</b>
-                </th>
+                <th>Metadata field</th>
+                <th>Content</th>
               </tr>
             </thead>
             <tbody>
@@ -589,7 +595,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
                 <td>{'{"Illumina HiSeq 2000"}'}</td>
               </tr>
               <tr>
-                <td>Number of samples </td>
+                <td>Number of samples</td>
                 <td>18</td>
               </tr>
               <tr>
@@ -623,32 +629,24 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p>
             The mapping between our data and the beacon model would look like: 
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
                 <th>
-                  <b>
-                    Dataset Beacon
-                    <br />
-                    Model Term
-                  </b>
+                  Dataset Beacon
+                  <br />
+                  Model Term
                 </th>
                 <th>
                   {" "}
-                  <b>
-                    Property <br />
-                    Type
-                  </b>
+                  Property <br />
+                  Type
                 </th>
                 <th>
-                  <b>
-                    EGA Metadata <br />
-                    field
-                  </b>
+                  EGA Metadata <br />
+                  field
                 </th>
-                <th>
-                  <b>Content</b>
-                </th>
+                <th>Content</th>
               </tr>
             </thead>
             <tbody>
@@ -760,21 +758,13 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             that means Data may be used freely for non-commercial research and
             educational activities. We’ll choose:
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Term</b>
-                </th>
-                <th>
-                  <b>Label</b>
-                </th>
-                <th>
-                  <b>Definition</b>
-                </th>
-                <th>
-                  <b>Version</b>
-                </th>
+                <th>Term</th>
+                <th>Label</th>
+                <th>Definition</th>
+                <th>Version</th>
               </tr>
             </thead>
             <tbody>
@@ -827,16 +817,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p>
             Now, let’s focus on the information we’ve got about EGAZ00001744017.
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Metadata field</b>
-                </th>
-                <th>
-                  {" "}
-                  <b>Content</b>
-                </th>
+                <th>Metadata field</th>
+                <th> Content</th>
               </tr>
             </thead>
             <tbody>
@@ -889,32 +874,24 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             </a>
             :
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
                 <th>
-                  <b>
-                    Dataset Beacon
-                    <br />
-                    Model Term
-                  </b>
+                  Dataset Beacon
+                  <br />
+                  Model Term
                 </th>
                 <th>
                   {" "}
-                  <b>
-                    Property <br />
-                    Type
-                  </b>
+                  Property <br />
+                  Type
                 </th>
                 <th>
-                  <b>
-                    EGA Metadata <br />
-                    field
-                  </b>
+                  EGA Metadata <br />
+                  field
                 </th>
-                <th>
-                  <b>Content</b>
-                </th>
+                <th>Content</th>
               </tr>
             </thead>
             <tbody>
@@ -962,16 +939,11 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             This is the information we have available regarding the procedures
             used for sequencing a biosample.{" "}
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Metadata field</b>
-                </th>
-                <th>
-                  {" "}
-                  <b>Content</b>
-                </th>
+                <th>Metadata field</th>
+                <th> Content</th>
               </tr>
             </thead>
             <tbody>
@@ -1010,32 +982,24 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             It seems we’ll have enough data to include Runs into our beacon
             instance:{" "}
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
                 <th>
-                  <b>
-                    Dataset Beacon
-                    <br />
-                    Model Term
-                  </b>
+                  Dataset Beacon
+                  <br />
+                  Model Term
                 </th>
                 <th>
                   {" "}
-                  <b>
-                    Property <br />
-                    Type
-                  </b>
+                  Property <br />
+                  Type
                 </th>
                 <th>
-                  <b>
-                    EGA Metadata <br />
-                    field
-                  </b>
+                  EGA Metadata <br />
+                  field
                 </th>
-                <th>
-                  <b>Content</b>
-                </th>
+                <th>Content</th>
               </tr>
             </thead>
             <tbody>
@@ -1069,32 +1033,24 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             But there are other terms from Runs that we can fill with the
             metadata we have available now, for example, from Dataset:
           </p>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
                 <th>
-                  <b>
-                    Dataset Beacon
-                    <br />
-                    Model Term
-                  </b>
+                  Dataset Beacon
+                  <br />
+                  Model Term
                 </th>
                 <th>
                   {" "}
-                  <b>
-                    Property <br />
-                    Type
-                  </b>
+                  Property <br />
+                  Type
                 </th>
                 <th>
-                  <b>
-                    EGA Metadata <br />
-                    field
-                  </b>
+                  EGA Metadata <br />
+                  field
                 </th>
-                <th>
-                  <b>Content</b>
-                </th>
+                <th>Content</th>
               </tr>
             </thead>
             <tbody>
@@ -1124,34 +1080,53 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             </a>{" "}
             with all this information.
           </p>
-          <h1 id="individual-model-from-phenopacket">
-            Individual model from phenopacket
+          <h1 id="individual-and-biosamples-models-from-phenopacket">
+            Individual and Biosample models from Phenopacket
           </h1>
           <p>
-            In{" "}
+            The following Phenopacket was adapted from{" "}
             <a
               href="https://metadata.ega-archive.org/analyses/EGAZ00001744003"
               target="_blank"
               rel="noreferrer"
             >
-              {" "}
               EGAZ00001744003
-            </a>{" "}
-            we have a phenopacket with the following information: <br></br>{" "}
-            Please save it to a file named{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/phenopackets-to-BFF/rare-disease/case1c.json"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {" "}
-              Case1C.json.
             </a>
+            .
           </p>
+          <p>
+            The Phenopacket-to-BFF conversion tool supports the conversion of{" "}
+            <b>Phenopacket v2</b> data into the Beacon v2{" "}
+            <b>Individual and Biosample models</b>.
+          </p>
+          <p>
+            The original Phenopacket did not contain biosample information. To
+            provide a more complete example, a biosample has been added and
+            linked to the individual through the <code>individualId</code>{" "}
+            property.
+          </p>
+          <p>
+            This example demonstrates how individual, biosample and genomic
+            variation records can be linked within a Beacon instance.
+          </p>
+          <p>
+            Please save the following JSON content to a file named{" "}
+            <b>
+              <a
+                href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/phenopackets-to-BFF/rare-disease/case1c.json"
+                target="_blank"
+              >
+                {" "}
+                Case1C.json
+              </a>
+            </b>
+            .
+          </p>
+
           <div className="codeSnippet">
             <pre>
               <code>{`{
-  "id": "P0007498",
+"id": "P0007498",
   "subject": {
     "id": "P0007498",
     "dateOfBirth": "2013-01-01T00:00:00Z",
@@ -1276,7 +1251,21 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
         "iriPrefix": "https://omim.org/entry/"
       }
     ]
-  }
+  },
+  "biosamples": [
+    {
+      "id": "Case1C",
+      "individualId": "P0007498",
+      "materialSample": {
+        "id": "NCIT:C12434",
+        "label": "Blood"
+      },
+      "sampleType": {
+        "id": "SNOMED:258566005",
+        "label": "Deoxyribonucleic acid sample (specimen)"
+      }
+    }
+  ]
 }`}</code>
               <button
                 className="copyButtonCode"
@@ -1294,15 +1283,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </button>
             </pre>
           </div>
-          <p>
-            Phenopackets v2 and the beacon schemas are only compatible for the
-            biosamples and individual models. 
-          </p>
-          <p>
-            In this example, this phenopacket contains only information for
-            individuals, because the three mandatory terms for biosamples (id,
-            biosampleStatus, sampleOriginType) are not present.
-          </p>
+
           <h1 id="genomicVariations-model-from-VCF">
             genomicVariations model from VCF
           </h1>
@@ -1414,8 +1395,8 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </button>
             </pre>
           </div>
-          <h1 id="conversion-of-CSV-penopacket-and-VCF-to-BFF">
-            Conversion of CSV, Penopacket and VCF to BFF
+          <h1 id="conversion-of-CSV-phenopacket-and-VCF-to-BFF">
+            Conversion of CSV, Phenopacket and VCF to BFF
           </h1>
           <p>
             At this point we have information ready to create 4 beacon models: 
@@ -1542,7 +1523,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             This command will show all the running containers in your computer.
             You should have built: 
           </p>
-          <table className="dockerTable">
+          <table className="UITable dockerCommandsTable">
             <thead>
               <tr>
                 <th>Image</th>
@@ -1550,244 +1531,69 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-tools-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-ri-tools")}
-                      >
-                        {copySuccess["img-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>ri-tools</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-ri-tools")}
-                      >
-                        {copySuccess["name-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/phenopackets-to-bff:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-phenopackets")}
-                      >
-                        {copySuccess["img-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>phenopackets-to-BFF</code>
-
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-phenopackets")}
-                      >
-                        {copySuccess["name-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>mongo-express</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-mongo-express")}
-                      >
-                        {copySuccess["img-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-mongo-express-1</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-mongo-express")}
-                      >
-                        {copySuccess["name-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-postgres-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-postgres")}
-                      >
-                        {copySuccess["img-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>idp-db</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-postgres")}
-                      >
-                        {copySuccess["name-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-beaconprod")}
-                      >
-                        {copySuccess["img-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-beaconprod")}
-                      >
-                        {copySuccess["name-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
+              {[
+                {
+                  id: "ri-tools",
+                  image: "ghcr.io/ega-archive/beacon2-ri-tools-v2:latest",
+                  name: "ri-tools",
+                },
+                {
+                  id: "phenopackets",
+                  image: "ghcr.io/ega-archive/phenopackets-to-bff:latest",
+                  name: "phenopackets-to-BFF",
+                },
+                {
+                  id: "mongo-express",
+                  image: "mongo-express",
+                  name: "beacon2-pi-api-mongo-express-1",
+                },
+                {
+                  id: "postgres",
+                  image: "ghcr.io/ega-archive/beacon2-ri-postgres-v2:latest",
+                  name: "idp-db",
+                },
+                {
+                  id: "beaconprod",
+                  image: "beacon2-pi-api-beaconprod",
+                  name: "beaconprod",
+                },
+              ].map(({ id, image, name }) => (
+                <tr key={id}>
+                  {[
+                    { key: `img-${id}`, value: image },
+                    { key: `name-${id}`, value: name },
+                  ].map(({ key, value }) => (
+                    <td key={key}>
+                      <div className="dockerCommand">
+                        <code>{value}</code>
+                        <button
+                          type="button"
+                          className="copyButtonCode"
+                          aria-label={`Copy ${value}`}
+                          onClick={() => copyToClipboard(key)}
+                        >
+                          {copySuccess[key] ? (
+                            "Copied!"
+                          ) : (
+                            <img
+                              src={copyIcon}
+                              alt="Copy"
+                              className="copySymbol"
+                            />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
           <h6 className="sub-title">Setting up conf.py</h6>
-
           <p>
             This will be the content that you find in
             beacon2-ri-tools-v2/conf/conf.py:
           </p>
-
           <div className="codeSnippet">
             <pre>
               <code>
@@ -2192,7 +1998,6 @@ update_datetime = ''`}</code>
               </button>
             </pre>
           </div>
-
           <h6 className="sub-title">Managing dataset permissions</h6>
           <p>
             There are 3 possible levels of beacon security for a dataset:
@@ -2283,7 +2088,6 @@ update_datetime = ''`}</code>
               </button>
             </pre>
           </div>
-
           <p>
             If the operation is successful, you will have your beacon up and
             running at{" "}
@@ -2296,7 +2100,6 @@ update_datetime = ''`}</code>
             </a>
             .
           </p>
-
           <img
             className="relationship-elements"
             alt="Relationship-elements"
@@ -2350,7 +2153,6 @@ update_datetime = ''`}</code>
               section.
             </div>
           </p>
-
           <h1>Acknowledgments</h1>
           <p>
             We acknowledge the use of data from the{" "}
@@ -2366,7 +2168,6 @@ update_datetime = ''`}</code>
             as the Generalitat de Catalunya VEIS project (grant number
             001-P-001647).
           </p>
-
           <br></br>
           <br></br>
         </div>

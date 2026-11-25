@@ -499,7 +499,77 @@ const PiQueryingAPI: React.FC<PiQueryingAPIProps> = ({ searchTerm }) => {
               does not make sense, so the Beacon will not satisfy this query.
             </div>
           </p>
+          <h4 id="response-granularity-per-dataset">
+            Response granularity per dataset
+          </h4>
 
+          <p>
+            When a Beacon contains multiple datasets, the granularity of the
+            returned results may differ between datasets within the same
+            response.
+          </p>
+
+          <p>
+            The <b>granularity of each result set</b> depends on the requested
+            granularity, the Beacon configuration, the queried entry type, the
+            dataset permissions and the user's access rights.
+          </p>
+
+          <p>
+            For example, when querying a Beacon with{" "}
+            <span className="custom-code">requestedGranularity=record</span> and{" "}
+            <span className="custom-code">includeResultsetResponses=HIT</span>,
+            the response may include datasets with different levels of
+            granularity:
+          </p>
+
+          <table className="UITable">
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Granularity</th>
+                <th>Returned information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dataset A</td>
+                <td>
+                  <code>record</code>
+                </td>
+                <td>Detailed matching records and their count.</td>
+              </tr>
+              <tr>
+                <td>Dataset B</td>
+                <td>
+                  <code>count</code>
+                </td>
+                <td>Number of matching records.</td>
+              </tr>
+              <tr>
+                <td>Dataset C</td>
+                <td>
+                  <code>boolean</code>
+                </td>
+                <td>Whether matching records exist.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            This allows a Beacon to provide{" "}
+            <b>different levels of data visibility</b> within a single response
+            while respecting the access restrictions of each dataset.
+          </p>
+
+          <p>
+            For more information on how to configure granularity at dataset
+            level, see the{" "}
+            <a href="/pi-configuration#managing-dataset-permissions">
+              Managing dataset permissions
+            </a>{" "}
+            section.
+          </p>
           <h2 id="pi-get-examples">GET query examples</h2>
 
           <h5 className="cursive">Beacon Sequence Query</h5>

@@ -197,19 +197,93 @@ AV_Dataset:
         entry_types_exceptions:
           - individual: record
 
-Supplying AAI credentials for your Identity Provider (IDP)
+
+Test Mode
+The testMode parameter allows users and external tools, such as the Beacon Verifier, to validate a Beacon instance’s compliance with the Beacon v2 specification without requiring authentication. To enable a dataset for testing, set isTest: true under the corresponding dataset ID in the datasets_conf.yml configuration file.
+test_dataset: 
+isTest: true 
+isSynthetic: true 
+isDeprecated: false
+
+When a request includes testMode=true, only datasets designated for testing are queried.
+A test dataset does not necessarily contain synthetic data. The isTest and isSyntheticproperties are independent.
+However, since test mode does not require authentication, only synthetic or non-sensitive data should be made available for testing.
+The datasets_conf.yml configuration file also includes the isDeprecated property, which can be used to flag datasets that were previously available but are no longer queryable. Currently, this property is used for internal tracking purposes only and has no functional effect on query execution.
+By default, testMode is set to false. Test mode can be activated in both GET and POST requests, as shown in the examples below:
+
+
+GET request
+GET /api/individuals?testMode=true
+
+POST request
+{
+  "meta": {
+    "apiVersion": "2.0"
+  },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "start": [16050074],
+      "end": [16050568],
+      "referenceName": "22",
+      "assemblyId": "GRCh37"
+    },
+    "includeResultsetResponses": "HIT",
+    "pagination": {
+      "skip": 0,
+      "limit": 10
+    },
+    "testMode": true,
+    "requestedGranularity": "record"
+  }
+}
+
 For making any IDP (based on OpenID and Oauthv2) work with beacon, you will need to add the client ID and client secret for each IDP in a new file you have to create inside the auth/idp_providers folder (for each IDP). This file must have a name with an .env extension (e.g. something.env) and needs to have the following variables:
 
-CLIENT_ID=beacon 
-CLIENT_SECRET='b26ca0f9-1137-4bee-b453-ee51eefbe7ba' 
-USER_INFO='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/userinfo' 
-INTROSPECTION='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/token/introspect' 
-ISSUER='http://localhost:8080/auth/realms/Beacon' 
-JWKS_URL='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/certs'
+Supplying AAI credentials for your Identity Provider (IDP)
+To integrate an Identity Provider (IDP) based on OpenID Connect (OIDC) and OAuth 2.0 with your Beacon, you need to create a configuration file for each IDP inside the auth/idp_providers folder.
 
-After that, make sure you build your beacon container again:
+Each configuration file must have an .env extension (e.g. keycloak.env) and must include the following variables:
+
+CLIENT_ID='beacon'
+WELL_KNOWN_ENDPOINT='https://keycloak.example.org/realms/Beacon/.well-known/openid-configuration'
+ISSUER='https://keycloak.example.org/realms/Beacon'
+MUST_INCLUDE_BEACON_URL_IN_AUDIENCE=true
+
+These variables are used to configure the Identity Provider and its access token validation:
+
+CLIENT_ID: the client identifier registered with the Identity Provider.
+WELL_KNOWN_ENDPOINT: the URL of the OpenID Connect discovery endpoint.
+ISSUER: the expected issuer of the access token.
+MUST_INCLUDE_BEACON_URL_IN_AUDIENCE: determines whether the Beacon URL must be included in the audience claim of the access token.
+Keycloak-specific configuration
+When using Keycloak as an Identity Provider (IDP), additional configuration may be required to ensure that the Beacon API correctly validates access tokens.
+
+In particular, the access token must include the aud (Audience) claim, which identifies the intended recipient of the token.
+
+To configure this in Keycloak:
+
+Open the Keycloak Admin Console and select the corresponding realm.
+Navigate to Clients and select the relevant client.
+Under Client scopes, configure an Audience protocol mapper in a scope assigned to the client.
+Set the audience to the value expected by the Beacon API.
+Enable Add to access token and save the configuration.
+Once the configuration is complete, rebuild your Beacon container to apply the changes:
 
 docker-compose up -d --build beaconprod
+
+Troubleshooting authentication issues
+If authentication issues persist, verify that the following settings are correctly configured:
+
+CLIENT_ID
+WELL_KNOWN_ENDPOINT
+ISSUER
+MUST_INCLUDE_BEACON_URL_IN_AUDIENCE
+The aud claim in the newly generated access token.
+Dataset access permissions.
+
+
 
 Handling CORS
 To avoid CORS using beacon and the frontend or a third-party authorization site like Keycloak, you will have to include all these URLs inside variable cors_urls in beacon/conf/conf.py file.

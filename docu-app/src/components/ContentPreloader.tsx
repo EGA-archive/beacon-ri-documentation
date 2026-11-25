@@ -46,6 +46,7 @@ import RiConfigurationText from "../content/ri_configuration.txt";
 // Tutorials
 import TutorialsUseCaseText from "../content/tutorials_use_case.txt";
 import TutorialsCreateYourBeaconText from "../content/tutorials_create_your_beacon.txt";
+import TutorialsPhenopacketExamples from "../content/tutorials_phenopacket_examples.txt";
 
 // Resources
 import ResourcesText from "../content/resources.txt";
@@ -194,6 +195,11 @@ const ContentPreloader = () => {
     "/create-your-beacon",
     TutorialsCreateYourBeaconText,
     "Create Your Beacon"
+  );
+  useRegisterTextContent(
+    "/phenopacket-examples",
+    TutorialsPhenopacketExamples,
+    "Phenopacket Examples"
   );
 
   // Reference Implementation (Beacon 2 RI API)

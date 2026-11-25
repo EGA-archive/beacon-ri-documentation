@@ -54,6 +54,7 @@ import Introduction from "./pages/Beacon2RIAPI/Introduction";
 // Tutorials imports
 import UseCase from "./pages/Tutorials/UseCase";
 import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
+import PhenopacketExamples from "./pages/Tutorials/PhenopacketExamples";
 
 // Resources imports
 import Resources from "./pages/Resources";
@@ -156,7 +157,11 @@ function App() {
       "Query Logic & Results",
       "Versioning",
     ],
-    Tutorials: ["Create your Beacon", "Example Beacon: Rare Disease Use Case"],
+    Tutorials: [
+      "Create your Beacon",
+      "Example Beacon: Rare Disease Use Case",
+      "Phenopacket Examples",
+    ],
   };
 
   return (
@@ -324,6 +329,10 @@ function App() {
                 <Route
                   path="/example-beacon:-rare-disease-use-case"
                   element={<UseCase searchTerm={searchTerm} />}
+                />
+                <Route
+                  path="/phenopacket-examples"
+                  element={<PhenopacketExamples searchTerm={searchTerm} />}
                 />
 
                 {/* Resources */}

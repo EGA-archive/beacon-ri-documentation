@@ -372,15 +372,11 @@ labelForHG00001|labelForHG00002`
             if preferred.
           </p>
           <h4 className="no-underline">Required Fields per Collection</h4>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Collection</b>
-                </th>
-                <th>
-                  <b>Required Fields</b>
-                </th>
+                <th>Collection</th>
+                <th>Required Fields</th>
               </tr>
             </thead>
             <tbody>

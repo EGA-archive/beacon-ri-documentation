@@ -183,15 +183,11 @@ dataUseConditions.duoDataUse.description
             fields—including description.
           </p>
           <h6 className="underline">How to fix it</h6>
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Property</b>
-                </th>
-                <th>
-                  <b>Value</b>
-                </th>
+                <th>Property</th>
+                <th>Value</th>
               </tr>
             </thead>
             <tbody>
@@ -424,18 +420,12 @@ measurements.measurementValue.OntologyTerm.value
             Now, let’s take a look to the headers of the CSV for{" "}
             <em>measurementValue</em> and how we have filled them in:
           </p>
-          <table className="dockerTableSimple dockerTableLong">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>Property</b>
-                </th>
-                <th>
-                  <b>Value</b>
-                </th>
-                <th>
-                  <b>Schema</b>
-                </th>
+                <th>Property</th>
+                <th>Value</th>
+                <th>Schema</th>
               </tr>
             </thead>
             <tbody>

@@ -110,18 +110,12 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </div>
           </p>
           <h6 className="underline">Included files</h6>
-          <table className="dockerTableSimple dockerTableLong">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>File/Folder</b>
-                </th>
-                <th>
-                  <b>Description</b>
-                </th>
-                <th>
-                  <b>Where to find</b>
-                </th>
+                <th>File/Folder</th>
+                <th>Description</th>
+                <th>Where to find</th>
               </tr>
             </thead>
             <tbody>
@@ -257,18 +251,12 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </div>
           </p>
 
-          <table className="dockerTableSimple">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>File/Folder</b>
-                </th>
-                <th>
-                  <b>Description</b>
-                </th>
-                <th>
-                  <b>Where to find</b>
-                </th>
+                <th>File/Folder</th>
+                <th>Description</th>
+                <th>Where to find</th>
               </tr>
             </thead>
             <tbody>
@@ -496,18 +484,12 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </li>
           </ul>
           <h6 className="underline">Included files</h6>
-          <table className="dockerTableSimple dockerTableLong">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>File/Folder</b>
-                </th>
-                <th>
-                  <b>Description</b>
-                </th>
-                <th>
-                  <b>Where to find</b>
-                </th>
+                <th>File/Folder</th>
+                <th>Description</th>
+                <th>Where to find</th>
               </tr>
             </thead>
             <tbody>
@@ -552,18 +534,12 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
           </h2>
 
           <h6 className="underline">Included files</h6>
-          <table className="dockerTableSimple dockerTableLong">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>File/Folder</b>
-                </th>
-                <th>
-                  <b>Description</b>
-                </th>
-                <th>
-                  <b>Where to find</b>
-                </th>
+                <th>File/Folder</th>
+                <th>Description</th>
+                <th>Where to find</th>
               </tr>
             </thead>
             <tbody>
@@ -609,18 +585,12 @@ const TestData: React.FC<TestDataProps> = ({ searchTerm }) => {
             </ul>
           </p>
           <h6 className="underline">Included files</h6>
-          <table className="dockerTableSimple dockerTableLong">
+          <table className="UITable">
             <thead>
               <tr>
-                <th>
-                  <b>File/Folder</b>
-                </th>
-                <th>
-                  <b>Description</b>
-                </th>
-                <th>
-                  <b>Where to find</b>
-                </th>
+                <th>File/Folder</th>
+                <th>Description</th>
+                <th>Where to find</th>
               </tr>
             </thead>
             <tbody>

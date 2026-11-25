@@ -786,6 +786,28 @@ Bracket Query: requires assemblyId, referenceName, start (two non-negative integ
 
 Genomic Allele Query (HGVS): requires genomicAlleleShortForm as a non-empty string.
 
+Molecular Effects
+
+Molecular effects describe the functional consequences of genomic variations at the molecular level, such as missense, synonymous, frameshift or splice-site variants. In the Beacon v2 data model, these annotations are represented by the molecularEffects property within molecularAttributes.
+The Molecular Effects category allows users to search for genomic variants based on these annotations, which are applied as ontology filters.
+
+Unlike other Genomic Annotations categories, which contain predefined genomic query examples configured by the deployer, Molecular Effects is populated dynamically using the filtering terms retrieved from the /filtering_terms endpoint of the connected Beacon API.
+The Beacon Template UI maintains an internal list of supported molecular effect identifiers and prioritizes predefined molecular effects when they are available from the backend. If fewer than two predefined effects are available, the application selects additional supported effects, when available.
+If no supported molecular effects are returned by the API, the category is automatically hidden.
+
+Enabling Molecular Effects
+
+To enable this category, include "Molecular Effects" in ui.genomicAnnotations.annotationCategories in the config.json file.
+As this is a reserved category handled internally by the application, its name must not be modified and no corresponding entry should be defined in annotationLabels.
+
+"genomicAnnotations": {
+  "annotationCategories": ["Molecular Effects"]
+}
+
+Disabling Molecular Effects
+
+To disable the category, remove "Molecular Effects" from the annotationCategories array. If no other genomic annotation categories are configured, the entire genomicAnnotations object can be omitted.
+
 Note on Genomic Annotation Validation:
 
 Genomic annotation examples must be compatible with the genomic query configuration.

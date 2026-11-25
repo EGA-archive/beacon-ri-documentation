@@ -264,7 +264,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             This command will show all the running containers in your computer.
             You should have built: 
           </p>
-          <table className="dockerTable">
+          <table className="UITable dockerCommandsTable">
             <thead>
               <tr>
                 <th>Image</th>
@@ -272,235 +272,62 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-tools-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-ri-tools")}
-                      >
-                        {copySuccess["img-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>ri-tools</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-ri-tools")}
-                      >
-                        {copySuccess["name-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/phenopackets-to-bff:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-phenopackets")}
-                      >
-                        {copySuccess["img-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>phenopackets-to-BFF</code>
-
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-phenopackets")}
-                      >
-                        {copySuccess["name-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>mongo-express</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-mongo-express")}
-                      >
-                        {copySuccess["img-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-mongo-express-1</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-mongo-express")}
-                      >
-                        {copySuccess["name-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-postgres-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-postgres")}
-                      >
-                        {copySuccess["img-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>idp-db</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-postgres")}
-                      >
-                        {copySuccess["name-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-beaconprod")}
-                      >
-                        {copySuccess["img-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-beaconprod")}
-                      >
-                        {copySuccess["name-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
+              {[
+                {
+                  id: "ri-tools",
+                  image: "ghcr.io/ega-archive/beacon2-ri-tools-v2:latest",
+                  name: "ri-tools",
+                },
+                {
+                  id: "phenopackets",
+                  image: "ghcr.io/ega-archive/phenopackets-to-bff:latest",
+                  name: "phenopackets-to-BFF",
+                },
+                {
+                  id: "mongo-express",
+                  image: "mongo-express",
+                  name: "beacon2-pi-api-mongo-express-1",
+                },
+                {
+                  id: "postgres",
+                  image: "ghcr.io/ega-archive/beacon2-ri-postgres-v2:latest",
+                  name: "idp-db",
+                },
+                {
+                  id: "beaconprod",
+                  image: "beacon2-pi-api-beaconprod",
+                  name: "beaconprod",
+                },
+              ].map(({ id, image, name }) => (
+                <tr key={id}>
+                  {[
+                    { key: `img-${id}`, value: image },
+                    { key: `name-${id}`, value: name },
+                  ].map(({ key, value }) => (
+                    <td key={key}>
+                      <div className="dockerCommand">
+                        <code>{value}</code>
+                        <button
+                          type="button"
+                          className="copyButtonCode"
+                          aria-label={`Copy ${value}`}
+                          onClick={() => copyToClipboard(key)}
+                        >
+                          {copySuccess[key] ? (
+                            "Copied!"
+                          ) : (
+                            <img
+                              src={copyIcon}
+                              alt="Copy"
+                              className="copySymbol"
+                            />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
           <h1 id="understanding-beacon-data-models">

@@ -71,7 +71,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
 
     if (
       path.startsWith("/create-your-beacon") ||
-      path.startsWith("/example-beacon")
+      path.startsWith("/example-beacon") ||
+      path.startsWith("/phenopacket-examples")
     ) {
       setActiveMenu("Tutorials");
       return;
@@ -182,6 +183,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       if (subItem === "Create your Beacon") path = "/create-your-beacon";
       if (subItem === "Example Beacon: Rare Disease Use Case")
         path = "/example-beacon:-rare-disease-use-case";
+      if (subItem === "Phenopacket Examples") path = "/phenopacket-examples";
     }
 
     navigate(path);
@@ -353,6 +355,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                         if (subItem === "Example Beacon: Rare Disease Use Case")
                           expectedPath =
                             "/example-beacon:-rare-disease-use-case";
+                        if (subItem === "Phenopacket Examples")
+                          expectedPath = "/phenopacket-examples";
                       }
 
                       const isSelected = location.pathname === expectedPath;
