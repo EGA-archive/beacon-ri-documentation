@@ -70,9 +70,8 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <p>
             In a <b>Single Beacon</b> deployment, the interface connects
             directly to one Beacon instance. The homepage presents information
-            about Beacon and its datasets, while query results are displayed at
-            the dataset level, allowing users to explore the datasets that
-            respond to their searches.
+            about the Beacon and, where available, its datasets. Query results
+            are presented primarily at the dataset level.
           </p>
           <p>
             In a <b>Beacon Network</b> deployment, the interface connects to a
@@ -96,8 +95,21 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             structures without modifying its core code.
           </p>
           <p>
-            <i>[Image Here]</i>
+            <b>Beacon Network</b>
           </p>
+          <img
+            src={genomic_query_results_network}
+            alt="Beacon Network results table displaying genomic query parameters and results grouped by Beacon, with an expanded row showing dataset-level results."
+            style={{ width: "100%", height: "auto" }}
+          />
+          <p>
+            <b>Single Beacon</b>
+          </p>
+          <img
+            src={genomic_query_results_single_beacon}
+            alt="Single Beacon results table displaying genomic query parameters and dataset-level results, including data visibility, result counts, and available Details and AF buttons."
+            style={{ width: "100%", height: "auto" }}
+          />
           <h2 id="building-and-submitting-queries">
             Building and Submitting Queries
           </h2>
@@ -111,8 +123,9 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             Users begin by selecting an <b>Entry Type (Result Type)</b>, which
             determines the type of data being queried, such as genomic variants,
             individuals, biosamples, or datasets. The available Entry Types are
-            retrieved from the connected Beacon API and may vary between
-            deployments.
+            determined from the endpoints exposed through the connected Beacon
+            API's <span className="custom-code">/map</span> endpoint and may
+            vary between deployments.
           </p>
           <p>
             <b>
@@ -141,10 +154,9 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           </p>
           <h2>2. Genomic Search and Genomic Query Builder</h2>
           <p>
-            When querying genomic variants, users can use the{" "}
-            <b>Genomic Search</b> input to enter sequence-based queries. The
-            interface provides suggestions and examples to help users enter
-            queries using supported formats.
+            Users can use the <b>Genomic Search</b> input to enter genomic
+            queries directly. The interface provides suggestions and examples to
+            help users enter queries using supported formats.
           </p>
           <p>
             <img
@@ -174,10 +186,6 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             query fields.
           </p>
           <p>
-            The availability of genomic query types depends on the deployment
-            configuration.
-          </p>
-          <p>
             <video
               src={genomic_query_builder}
               autoPlay
@@ -188,6 +196,15 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
               aria-label="Genomic Query Builder demonstrating query type selection, predefined examples and parameter configuration"
               style={{ width: "100%", height: "auto" }}
             />
+          </p>
+          <p>
+            The availability of genomic query types depends on the deployment
+            configuration. Deployers can enable or disable individual query
+            types through the{" "}
+            <span className="custom-code">
+              ui.genomicQueries.genomicQueryTypes
+            </span>{" "}
+            configuration parameter.
           </p>
           <p>
             <video
@@ -203,9 +220,10 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           </p>
           <h2>3. Genomic Annotations and Molecular Effects</h2>
           <p>
-            The interface can also display <b>Genomic Annotations</b>, which
-            provide predefined genomic query examples configured by the deployer
-            through <span className="custom-code">config.json</span>.
+            The interface can also display a <b>Genomic Annotations</b>
+            section, which provides access to predefined genomic query examples
+            and, when enabled and available, Molecular Effects filtering
+            options.
           </p>
           <p>
             These annotations allow users to build queries without manually
@@ -239,11 +257,21 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             Molecular Effects can be combined with that query or other Filtering
             Terms to further refine the results.
           </p>
-          <img
-            src={genomic_annotations_molecular_effects}
-            alt="Genomic Annotations tab with the Molecular Effects section expanded, displaying available molecular effect filters."
-            style={{ width: "100%", height: "auto" }}
-          />
+          <p>
+            The Molecular Effects section can be enabled through the{" "}
+            <span className="custom-code">
+              ui.genomicAnnotations.annotationCategories
+            </span>{" "}
+            configuration parameter. The available Molecular Effects are
+            retrieved dynamically from the connected Beacon API.
+          </p>
+          <p>
+            <img
+              src={genomic_annotations_molecular_effects}
+              alt="Genomic Annotations tab with the Molecular Effects section expanded, displaying available molecular effect filters."
+              style={{ width: "100%", height: "auto" }}
+            />
+          </p>
           <h2>4. Filtering Terms, Common Filters, and All Filtering Terms</h2>
           <p>
             Users can refine their searches by adding <b>Filtering Terms</b>,
@@ -262,31 +290,30 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <p>
             The interface provides three ways to find and select Filtering
             Terms:
-            <ul>
-              <li>
-                <b>Filtering Terms Search</b>: Users can simply start typing the
-                name or identifier of the desired filter. Matching Filtering
-                Terms appear in a dropdown, allowing users to select and add
-                them to their query.
-              </li>
-              <li>
-                {" "}
-                <b>Common Filters</b>: Provides quick access to a selection of
-                Filtering Terms organized into categories defined by the
-                deployer through the UI configuration.
-              </li>
-              <li>
-                {" "}
-                <b>All Filtering Terms</b>: Displays the complete list of
-                Filtering Terms made available by the connected Beacon API in a
-                searchable, paginated table. This is particularly useful for
-                users exploring the available filtering options or who are
-                unsure which filter to apply. The table provides additional
-                information, including term identifiers, labels, types, and
-                available scopes.
-              </li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              <b>Filtering Terms Search</b>: Users can simply start typing the
+              name or identifier of the desired filter. Matching Filtering Terms
+              appear in a dropdown, allowing users to select and add them to
+              their query.
+            </li>
+            <li>
+              {" "}
+              <b>Common Filters</b>: Provides quick access to a selection of
+              Filtering Terms organized into categories defined by the deployer
+              through the UI configuration.
+            </li>
+            <li>
+              <b>All Filtering Terms</b>: Displays the Filtering Terms retrieved
+              from the connected Beacon API in a searchable, paginated table.
+              This is particularly useful for users exploring the available
+              filtering options or who are unsure which filter to apply. The
+              table provides additional information, including term identifiers,
+              labels, types, and available scopes, where provided.
+            </li>
+          </ul>
+
           <p>
             Filtering Terms can be ontology-based, alphanumeric, or custom
             terms, depending on what the connected Beacon supports.
@@ -305,8 +332,8 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <p>
             Unlike ontology-based filters, which can generally be selected
             directly, <b>alphanumeric filters</b> require users to specify a
-            value and a comparison operator. Depending on the selected filter,
-            the available operators may include greater than{" "}
+            value and an operator. Depending on the selected filter, the
+            available operators may include greater than{" "}
             <span className="custom-code">(&gt;)</span>, equal to{" "}
             <span className="custom-code">(=)</span>, not equal to{" "}
             <span className="custom-code">(≠)</span>, contains, or does not
@@ -314,7 +341,7 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           </p>
           <p>
             For example, if <b>Medical History</b> is available as a text-based
-            filter, users could select the operator contains and enter{" "}
+            filter, users could select the <b>contains</b> operator and enter{" "}
             <span className="custom-code">cancer</span> to search for records
             containing that term in the relevant field.
           </p>
@@ -406,31 +433,40 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             connected Beacon API and displays the returned results according to
             the available response granularity.
           </p>
+          <p>
+            If users modify the query parameters after submitting a search, the
+            previous results remain visible until a new search is submitted. A{" "}
+            <b>Query modified</b> indicator informs users that the displayed
+            results correspond to the previously submitted query rather than the
+            current search criteria.
+          </p>
           <h2 id="example:-building-a-genomic-query">
             Example: Building a Genomic Query
           </h2>
           <p>
             For example, a user interested in genomic variants associated with
-            the <span className="custom-code">BRAF</span> gene can:
-            <ul>
-              <li>
-                Select <b>Genomic Variants</b> as the Entry Type.
-              </li>
-              <li>
-                Open the Genomic Query Builder, select Gene ID, and enter{" "}
-                <span className="custom-code">BRAF</span>.
-              </li>
-              <li>
-                Optionally add one or more Filtering Terms to refine the search.
-              </li>
-              <li>
-                Review the selected criteria in <b>Query Applied</b>.
-              </li>
-              <li>
-                Click <b>Search</b> to submit the query.
-              </li>
-            </ul>
+            the <span className="custom-code">BRAF</span> gene can:{" "}
           </p>
+          <ul>
+            <li>
+              Select <b>Genomic Variants</b> as the Entry Type.
+            </li>
+            <li>
+              Open the Genomic Query Builder, select Gene ID, and enter{" "}
+              <span className="custom-code">BRAF</span>.
+            </li>
+            <li>Add the genomic query to the search.</li>
+            <li>
+              Optionally add one or more Filtering Terms to refine the search.
+            </li>
+            <li>
+              Review the selected criteria in <b>Query Applied</b>.
+            </li>
+            <li>
+              Click <b>Search</b> to submit the query.
+            </li>
+          </ul>
+
           <p>
             The Results Table then displays the response returned by the
             connected Beacon API. The available information depends on the
@@ -460,63 +496,66 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             and datasets.
           </p>
           <p>
-            In a <b>Single Beacon</b>, the main columns include:
-            <ul>
-              <li>
-                <b>Dataset</b>: Identifies the dataset associated with the
-                response.
-              </li>
-              <li>
-                {" "}
-                <b>Data Visibility</b>: Indicates the level of information
-                available for that dataset.
-              </li>
-              <li>
-                {" "}
-                <b>Search Results</b>: Displays whether matching data exists or
-                the number of matching results, depending on the response.
-              </li>
-              <li>
-                {" "}
-                <b>Contact</b>: Allows users to contact the Beacon owner for
-                further information or data access.
-              </li>
-            </ul>
+            In a <b>Single Beacon</b>, the main columns include:{" "}
           </p>
+          <ul>
+            <li>
+              <b>Dataset</b>: Identifies the dataset associated with the
+              response.
+            </li>
+            <li>
+              {" "}
+              <b>Data Visibility</b>: Indicates the level of information
+              available for that dataset.
+            </li>
+            <li>
+              {" "}
+              <b>Search Results</b>: Displays whether matching data exists or
+              the number of matching results, depending on the response.
+            </li>
+            <li>
+              {" "}
+              <b>Contact</b>: Allows users to contact the Beacon owner for
+              further information or data access.
+            </li>
+          </ul>
+
           <p>
-            In a <b>Beacon Network</b>, the table also includes:
-            <ul>
-              <li>
-                <b>Beacon / Dataset</b>: Identifies each responding Beacon and
-                its associated datasets.
-              </li>
-              <li>
-                {" "}
-                <b>Beacon Maturity</b>: Indicates whether the Beacon instance is
-                in Production or Non-production.
-              </li>
-              <li>
-                {" "}
-                <b>Number of Datasets</b>: Displays the number of datasets
-                associated with the Beacon response.
-              </li>
-            </ul>
+            In a <b>Beacon Network</b>, the Dataset column is replaced by the
+            Beacon / Dataset column. The table also retains the Data Visibility,
+            Search Results, and Contact columns, and provides the following
+            network-specific columns:
           </p>
+          <ul>
+            <li>
+              <b>Beacon / Dataset</b>: Identifies each responding Beacon and its
+              associated datasets.
+            </li>
+            <li>
+              {" "}
+              <b>Beacon Maturity</b>: Indicates whether the Beacon instance is
+              in Production or Non-production.
+            </li>
+            <li>
+              {" "}
+              <b>Number of Datasets</b>: Displays the number of datasets
+              associated with the Beacon response.
+            </li>
+          </ul>
           <p>
             The <b>Beacon Maturity</b> column distinguishes between:
-            <ul>
-              <li>
-                <b>Production</b>: A stable Beacon instance that meets
-                production-level standards and contains real data.
-              </li>
-              <li>
-                {" "}
-                <b>Non-production</b>: A Beacon instance in development or
-                testing, which may be unstable or contain data unsuitable for
-                real-world queries.
-              </li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              <b>Production</b>: A Beacon instance identified as being in
+              production.
+            </li>
+            <li>
+              <b>Non-production</b>: A Beacon instance identified as not being
+              in production, for example an instance used for development,
+              testing, or demonstration purposes.
+            </li>
+          </ul>
           <p>
             The <b>Search Results</b> column also displays the queried Entry
             Type beneath its heading, helping users identify the type of data
@@ -524,22 +563,6 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             Some secondary columns are automatically hidden on smaller screens
             to keep the table readable.
           </p>
-          <p>
-            <b>Beacon Network</b>
-          </p>
-          <img
-            src={genomic_query_results_network}
-            alt="Beacon Network results table displaying genomic query parameters and results grouped by Beacon, with an expanded row showing dataset-level results."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <p>
-            <b>Single Beacon</b>
-          </p>
-          <img
-            src={genomic_query_results_single_beacon}
-            alt="Single Beacon results table displaying genomic query parameters and dataset-level results, including data visibility, result counts, and available Details and AF buttons."
-            style={{ width: "100%", height: "auto" }}
-          />
           <h2>Understanding Data Visibility and Response Granularity</h2>
           <p>
             Beacon responses are provided at different levels of detail,
@@ -549,20 +572,20 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <p>
             The <b>Data Visibility</b> column indicates the level of information
             available:
-            <ul>
-              <li>
-                <b>Presence (Boolean)</b>: Indicates whether matching data
-                exists without revealing the number of matching records.
-              </li>
-              <li>
-                <b>Count</b>: Provides the number of matching results.
-              </li>
-              <li>
-                <b>Detailed Records</b>: Allows users to access individual
-                matching records returned by the API.
-              </li>
-            </ul>
           </p>
+          <ul>
+            <li>
+              <b>Presence only (Boolean)</b>: Indicates whether matching data
+              exists without revealing the number of matching records.
+            </li>
+            <li>
+              <b>Count</b>: Provides the number of matching results.
+            </li>
+            <li>
+              <b>Detailed Records</b>: Provides access to individual matching
+              records returned by the API.
+            </li>
+          </ul>
           <p>
             In a Single Beacon deployment, Data Visibility is displayed for each
             dataset. In a Beacon Network, the main Beacon row summarizes the
@@ -572,6 +595,10 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
           <p>
             The level of detail available depends on the connected Beacon, the
             submitted query, and the applicable access permissions.
+          </p>
+          <p>
+            Dataset-level information may not always be available, depending on
+            the configuration and response provided by the connected Beacon.
           </p>
           <h2>Exploring the Results</h2>
           <p>
@@ -607,10 +634,7 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             controls
             style={{ width: "100%", height: "auto" }}
           />
-          <h2
-            id="dataset-details-and-expanded-results
-"
-          >
+          <h2 id="dataset-details-and-expanded-results">
             Dataset Details and Expanded Results
           </h2>
           <p>
@@ -636,41 +660,43 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             Entry Type and the information provided by the connected Beacon API.
           </p>
           <p>
-            At the top of the page, users can see the selected dataset, the
-            associated Beacon (for Network deployments), and the{" "}
-            <b>Applied Query</b>. <b>A Contact Owner</b> option is also
-            available when contact information is provided.
+            At the top of the page, users can review information about the
+            associated Beacon, the selected dataset, and the{" "}
+            <b>Applied Query</b>. When contact information is available, the{" "}
+            <b>Contact Owner</b> button allows users to contact the
+            corresponding owner.
           </p>
           <p>
             The table provides several features to help users explore the
             results:
-            <ul>
-              <li>
-                <b>Pagination</b>: Navigate through the loaded records, with the
-                option to display 5, 10, or 20 rows per page.
-              </li>
-              <li>
-                <b>Column selection</b>: Choose which attributes to display
-                using the <b>Select Columns</b> dropdown, including options to
-                select or deselect all columns.
-              </li>
-              <li>
-                <b>Keyword search</b>: Use the <b>Search Keywords</b> field to
-                search within the loaded records. Only matching rows are
-                displayed, and matching text is highlighted to make relevant
-                information easier to identify.
-              </li>
-              <li>
-                <b>Sorting</b>: Sort records in ascending or descending order by
-                clicking the sorting icon next to a column heading.
-              </li>
-              <li>
-                <b>Downloads</b>: Export results in CSV format using the
-                available download options, subject to the configured limits.
-              </li>
-            </ul>
           </p>
-          <p className="note">
+          <ul>
+            <li>
+              <b>Pagination</b>: Navigate through the loaded records, with the
+              option to display 5, 10, or 20 rows per page.
+            </li>
+            <li>
+              <b>Column selection</b>: Choose which attributes to display using
+              the <b>Select Columns</b> dropdown, including options to select or
+              deselect all columns.
+            </li>
+            <li>
+              <b>Keyword search</b>: Use the <b>Search Keywords</b> field to
+              search within the loaded records. Only matching rows are
+              displayed, and matching text is highlighted to make relevant
+              information easier to identify.
+            </li>
+            <li>
+              <b>Sorting</b>: Sort records in ascending or descending order by
+              clicking the sorting icon next to a column heading.
+            </li>
+            <li>
+              <b>Downloads</b>: Export results in CSV format using the available
+              download options, subject to the configured limits.
+            </li>
+          </ul>
+
+          <div className="note">
             <img
               className="note-symbol"
               src="/note-symbol.png"
@@ -683,7 +709,8 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
               original Beacon query or trigger additional requests to the Beacon
               API.
             </div>
-          </p>
+          </div>
+          <br />
           <video
             src={dataset_detailed_table_features}
             aria-label="Demonstration of column selection, keyword search with highlighted matches, and rows-per-page selection in the Dataset Detailed Table."
@@ -694,25 +721,15 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             controls
             style={{ width: "100%", height: "auto" }}
           />
-          <h2>Understanding the Displayed Records</h2>
           <p>
-            The total number of matching results reported by the Beacon may be
-            greater than the number of detailed records currently loaded into
-            the table.
-          </p>{" "}
-          <p>
-            When this happens, the interface indicates how many detailed records
-            have been returned. Pagination allows users to navigate through
-            those loaded records.
-          </p>{" "}
-          <p>
-            For more information about result limits and the available export
-            options, refer to <b>Results Display Limits and Downloads</b>.
+            For more information about the number of records displayed,
+            pagination, and available export options, refer to{" "}
+            <a href="#results-display-limits-and-downloads">
+              Results Display Limits and Downloads
+            </a>
+            .
           </p>
-          <h2
-            id="allele-frequency-results
-"
-          >
+          <h2 id="allele-frequency-results">
             Allele Frequency Results (When Available)
           </h2>
           <p>
@@ -721,16 +738,18 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             this information is available in the returned data.
           </p>
           <p>
-            Allele frequency describes how frequently a particular genetic
-            variant occurs within a population. This information can help users
-            explore the distribution of genomic variants across different
-            population groups and datasets.
+            Allele frequency describes the proportion of observed alleles at a
+            given genomic locus that correspond to a particular allele within a
+            population. This information can help users explore the distribution
+            of genetic variation across different population groups and
+            datasets.
           </p>
           <p>
-            When allele frequency information is available, the interface
-            provides access to a dedicated <b>Allele Frequency</b> view
-            containing tables and graphical visualizations of the returned
-            values.
+            When allele frequency information is available, users can access the
+            dedicated <b>Allele Frequency</b> view through the corresponding
+            button in the Results Table or Dataset Detailed Table, where
+            available. This view presents the returned frequency information
+            through tables and graphical visualizations.
           </p>
           <p>
             The tables present the available frequency information, while the
@@ -847,6 +866,7 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
               the connected Beacon API.
             </div>
           </div>
+          <br />
           <video
             src={dataset_detailed_table_download_options}
             autoPlay
@@ -857,6 +877,9 @@ const BeaconUIQueries: React.FC<BeaconUIQueriesProps> = ({ searchTerm }) => {
             style={{ width: "100%", height: "auto" }}
             aria-label="Demonstration of the Download All workflow, including the download limit notification, progress indicator and CSV export completion"
           />
+          <p className="image-caption">
+            <i>Download progress accelerated for demonstration purposes.</i>
+          </p>
           <p>
             The number of records available for export ultimately depends on the
             connected Beacon API, the submitted query, and any applicable access
