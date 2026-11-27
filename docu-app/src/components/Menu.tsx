@@ -180,8 +180,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       if (subItem === "Introduction") path = "/ui-introduction";
       if (subItem === "Configuration File") path = "/ui-configuration-file";
       if (subItem === "Deployment") path = "/ui-deployment";
-      if (subItem === "Query Logic & Results")
-        path = "/ui-query-logic-&-results";
+      if (subItem === "Features & Functionality")
+        path = "/ui-features-&-functionality";
       if (subItem === "Versioning") path = "/ui-versioning";
     }
 
@@ -340,8 +340,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                           expectedPath = "/ui-configuration-file";
                         if (subItem === "Deployment")
                           expectedPath = "/ui-deployment";
-                        if (subItem === "Query Logic & Results")
-                          expectedPath = "/ui-query-logic-&-results";
+                        if (subItem === "Features & Functionality")
+                          expectedPath = "/ui-features-&-functionality";
                         if (subItem === "Versioning")
                           expectedPath = "/ui-versioning";
                       }

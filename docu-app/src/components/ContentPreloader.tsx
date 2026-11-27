@@ -181,9 +181,9 @@ const ContentPreloader = () => {
   useRegisterTextContent("/ui-deployment", UIDeploymentText, "Deployment");
 
   useRegisterTextContent(
-    "/ui-query-logic-&-results",
+    "/ui-features-&-functionality",
     UIQueryingText,
-    "Query Logic & Results"
+    "Features & Functionality"
   );
 
   useRegisterTextContent("/ui-versioning", UIVersioningText, "Versioning");

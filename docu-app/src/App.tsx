@@ -158,7 +158,7 @@ function App() {
       "Introduction",
       "Configuration File",
       "Deployment",
-      "Query Logic & Results",
+      "Features & Functionality",
       "Versioning",
     ],
     "Beacon Admin UI": ["Coming Soon"],
@@ -318,7 +318,7 @@ function App() {
                   element={<BeaconUIDeployment searchTerm={searchTerm} />}
                 />
                 <Route
-                  path="/ui-query-logic-&-results"
+                  path="/ui-features-&-functionality"
                   element={<BeaconUIQueries searchTerm={searchTerm} />}
                 />
                 <Route

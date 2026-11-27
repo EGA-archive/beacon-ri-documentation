@@ -134,7 +134,7 @@ const BeaconUIIntroduction: React.FC<BeaconUIIntroductionProps> = ({
             <a href="/ui-configuration-file">configuration</a>,{" "}
             <a href="/ui-deployment">deployment</a> and customization of the
             Beacon Template UI, as well as its{" "}
-            <a href="/ui-query-logic-&-results">query logic and results</a>.
+            <a href="/ui-features-&-functionality">query logic and results</a>.
           </p>
           <p>
             Before exploring the available configuration options, we recommend

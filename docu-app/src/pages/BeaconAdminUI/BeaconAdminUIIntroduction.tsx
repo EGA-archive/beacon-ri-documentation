@@ -1,7 +1,5 @@
 import "../Beacon2RIAPI/ApiConfiguration.css";
-import pin from "../../pin.svg";
 import React, { useRef, useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 import useHighlightAndScroll from "../../hooks/useHighlightAndScroll";
 import useDocScrollSpy from "../../hooks/useDocScrollSpy";
